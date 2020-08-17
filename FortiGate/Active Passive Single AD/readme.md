@@ -16,7 +16,7 @@ Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/4271
 
 ## How to deploy
 
-1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl 
+1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl  // find the file in question, click on it, and then click “View Raw”, “Download...
 
 2. Add Two BYOL FG License files name them as: fgt1.lic  &  fgt2.lic
 3. Compress the folder in a .zip file 
