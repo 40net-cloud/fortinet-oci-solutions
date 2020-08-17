@@ -25,7 +25,7 @@ Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/4271
 6. Apply the Terraform State 
 
 **_Note: This will deploy FortiGate by default in "eu-frankfurt-1" & FG in v.6.4.2_.**
-However, you can change the region name in the: "Region" and the and "VM_IMAGE_OCID" variable fields with required region:
+However, you can change the region name in the: "Region" and the "VM_IMAGE_OCID" variable fields with required region:
 Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
 
 ## Requirements and limitations
