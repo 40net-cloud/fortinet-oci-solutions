@@ -18,7 +18,7 @@ The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single A
 5. Fill all the variable fields (all are mandatory) as per your requirements 
 6. Apply the Terraform State 
 
-**_Note: This will deploy FortiGate by default in "eu-frankfurt-1" & FG in v.6.4.2.**
+**_Note: This will deploy FortiGate by default in "eu-frankfurt-1" & FG in v.6.4.2_.**
 However, you can change the region name in the: "Region" and the and "VM_IMAGE_OCID" variable fields with required region:
 Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
 
