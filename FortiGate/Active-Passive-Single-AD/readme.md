@@ -28,5 +28,6 @@ Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
 
 ## Design
 
+Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/427168/deploying-fortigate-vm-ha-on-oci-within-one-ad - automatic!
 
 ## Requirements and limitations
