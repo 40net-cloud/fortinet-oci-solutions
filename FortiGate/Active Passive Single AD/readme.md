@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Terraform template deploys a High Availability pair of FortiGate Next-Generation Firewallis accompanied by the required infrastructure.
+This Terraform template VERSION.0.12x deploys a High Availability pair of FortiGate Next-Generation Firewallis accompanied by the required infrastructure.
 The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single Availability domains with Dual Fault domains.
 This also requires an additional OCI configuration for the OCI Fabric connector using IAM roles.
 
