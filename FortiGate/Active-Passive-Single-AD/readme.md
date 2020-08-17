@@ -12,11 +12,11 @@ The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single A
 
 1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl 
 
-2. Add Two BYOL FG License files name them as: fgt1.lic  &  fgt2.lic 2
-3. Compress the folder in a .zip file 3 
-4. Upload the .zip file in OCI Stack 4
-5. Fill all the variable fields (all are mandatory) as per your requirements 5
-6. Apply the Terraform State 6
+2. Add Two BYOL FG License files name them as: fgt1.lic  &  fgt2.lic
+3. Compress the folder in a .zip file 
+4. Upload the .zip file in OCI Stack
+5. Fill all the variable fields (all are mandatory) as per your requirements 
+6. Apply the Terraform State 
 
 **_Note: This will deploy FortiGate by default in "eu-frankfurt-1" & FG in v.6.4.2.**
 However, you can change the region name in the: "Region" and the and "VM_IMAGE_OCID" variable fields with required region:
