@@ -8,6 +8,11 @@ The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single A
 **_Note: Region, Subnet & FG version can be modified_**.
 
 
+
+https://user-images.githubusercontent.com/64405031/90371151-91372480-e07f-11ea-915e-9abc0a595418.png
+
+
+
 ## How to deploy
 
 1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl 
