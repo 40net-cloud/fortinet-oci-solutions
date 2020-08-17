@@ -10,7 +10,7 @@ The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single A
 
 ## How to deploy
 
-1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl 1
+1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl 
 
 2. Add Two BYOL FG License files name them as: fgt1.lic  &  fgt2.lic 2
 3. Compress the folder in a .zip file 3 
