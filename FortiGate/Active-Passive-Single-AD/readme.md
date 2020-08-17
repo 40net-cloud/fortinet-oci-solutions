@@ -4,6 +4,7 @@
 
 This Terraform template deploys a High Availability pair of FortiGate Next-Generation Firewallis accompanied by the required infrastructure.
 The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single Availability domains with Dual Fault domains.
+This also requires an additional OCI configuration for the OCI Fabric connector using IAM roles.
 
 **_Note: Region, Subnet & FG version can be modified_**.
 
@@ -31,3 +32,7 @@ Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
 Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/427168/deploying-fortigate-vm-ha-on-oci-within-one-ad - automatic!
 
 ## Requirements and limitations
+
+For the Failover to work automatically: Addtional configuration is required to use the IAM role provided by and configurable in the OCI environment for authentication. The IAM role includes permissions that you can give to the instance, so that FortiOS can implicitly access metadata information and communicate to the Fabric connector on its own private internal network without further authentication.
+
+https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/562317/configuring-an-oci-fabric-connector-using-iam-roles - automatic!
