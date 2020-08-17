@@ -8,9 +8,11 @@ This also requires an additional OCI configuration for the OCI Fabric connector 
 
 **_Note: Region, Subnet & FG version can be modified_**.
 
+## Design
+
+Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/427168/deploying-fortigate-vm-ha-on-oci-within-one-ad 
 
 ![GitHub Logo](https://user-images.githubusercontent.com/64405031/90371151-91372480-e07f-11ea-915e-9abc0a595418.png)
-
 
 ## How to deploy
 
@@ -25,11 +27,6 @@ This also requires an additional OCI configuration for the OCI Fabric connector 
 **_Note: This will deploy FortiGate by default in "eu-frankfurt-1" & FG in v.6.4.2_.**
 However, you can change the region name in the: "Region" and the and "VM_IMAGE_OCID" variable fields with required region:
 Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
-
-
-## Design
-
-Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/427168/deploying-fortigate-vm-ha-on-oci-within-one-ad 
 
 ## Requirements and limitations
 
