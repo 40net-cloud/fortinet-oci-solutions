@@ -1,3 +1,3 @@
-Active/Passive High Available FortiGate pair Regional Subnet with New VCN & Dual FD. 
+# Active/Passive High Available FortiGate pair Regional Subnet with New VCN & Dual FD. 
 
 
