@@ -1,4 +1,4 @@
-# Active/Passive High Available FortiGate pair Regional Subnet with New VCN, Single AD & Dual FD. 
+# Active/Passive High Available FortiGate pair Regional Subnet with New VCN, New four Subnets, Single AD & Dual FD. 
 
 ## Introduction
 
