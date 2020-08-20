@@ -22,8 +22,8 @@ Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/4271
 3. Compress the folder in a .zip file .
 4. Upload the .zip file in OCI Stack.
 5. Fill all the variable fields (all are mandatory) as per your requirements.
-6. Fill exisiting VCN OCID.
-6. Apply the Terraform State.
+6. ***Fill exisiting VCN OCID.
+7. Apply the Terraform State.
 
 **_Note: This will deploy FortiGate-HA by default in "eu-frankfurt-1" Region & FG-v.6.2.3_.**
 However, you can replace the region name in the: "Region" and the "VM_IMAGE_OCID" variable fields with required region name (During Step .5 above):
