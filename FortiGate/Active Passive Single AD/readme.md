@@ -3,7 +3,7 @@
 ## Introduction
 
 This Terraform template VERSION.0.12x deploys a High Availability pair of FortiGate Next-Generation Firewallis accompanied by the required infrastructure.
-The Template deploys new OCI VCN, with FGv6.4.2 in A/P Regional Subnet, Single Availability domains with Dual Fault domains.
+The Template deploys new OCI VCN, with FGv6.2.3 in A/P Regional Subnet, Single Availability domains with Dual Fault domains.
 This also requires an additional OCI configuration for the OCI Fabric connector using IAM roles.
 
 **_Note: Region, Subnet & FG version can be modified_**.
@@ -24,7 +24,7 @@ Refer to: https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/4271
 5. Fill all the variable fields (all are mandatory) as per your requirements 
 6. Apply the Terraform State 
 
-**_Note: This will deploy FortiGate-HA by default in "me-jeddah-1" Region & FG-v.6.4.2_.**
+**_Note: This will deploy FortiGate-HA by default in "eu-frankfurt-1" Region & FG-v.6.2.3_.**
 However, you can replace the region name in the: "Region" and the "VM_IMAGE_OCID" variable fields with required region name (During Step .5 above):
 Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
 
