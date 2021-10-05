@@ -189,6 +189,7 @@ data "template_file" "vm-a_userdata" {
     priority = "250"
     hostname = "FGTA" 
     tenancy_ocid = var.tenancy_ocid
+    user_ocid = var.user_ocid
     compartment_ocid = var.compartment_ocid
     sdn_region_ocid = var.region
     sdn_oci_certificate_name = var.sdn_oci_certificate_name
@@ -199,7 +200,7 @@ data "template_file" "vm-a_userdata" {
 ### FGTB
 resource "oci_core_instance" "vm-b" {
   availability_domain = lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1],"name")
-   fault_domain = "FAULT-DOMAIN-2"
+  fault_domain = "FAULT-DOMAIN-2"
   compartment_id      = var.compartment_ocid
   display_name        = "vm-b"
   shape               = var.instance_shape
@@ -328,6 +329,7 @@ data "template_file" "vm-b_userdata" {
     hostname = "FGTB"
     priority = "100"
     tenancy_ocid = var.tenancy_ocid
+    user_ocid = var.user_ocid
     compartment_ocid = var.compartment_ocid
     sdn_region_ocid = var.region
     sdn_oci_certificate_name = var.sdn_oci_certificate_name

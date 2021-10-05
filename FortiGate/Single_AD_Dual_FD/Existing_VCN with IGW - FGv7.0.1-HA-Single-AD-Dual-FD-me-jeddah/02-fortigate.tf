@@ -189,6 +189,7 @@ data "template_file" "vm-a_userdata" {
     priority = "250"
     hostname = "FGTA" 
     tenancy_ocid = var.tenancy_ocid
+    user_ocid = var.user_ocid
     compartment_ocid = var.compartment_ocid
     sdn_region_ocid = var.region
     sdn_oci_certificate_name = var.sdn_oci_certificate_name
@@ -328,6 +329,7 @@ data "template_file" "vm-b_userdata" {
     hostname = "FGTB"
     priority = "100"
     tenancy_ocid = var.tenancy_ocid
+    user_ocid = var.user_ocid
     compartment_ocid = var.compartment_ocid
     sdn_region_ocid = var.region
     sdn_oci_certificate_name = var.sdn_oci_certificate_name

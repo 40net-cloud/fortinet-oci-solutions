@@ -30,8 +30,17 @@ variable "tenancy_ocid" {
 variable "compartment_ocid" {
   default = ""
 }
+variable "user_ocid" {
+  default = ""
+}
+variable "fingerprint" {
+  default = ""
+}
+variable "private_key_path" {
+  default = ""
+}
 variable "region" {
-  default = "eu-frankfurt-1"
+  default = "me-jeddah-1"
 }
 
 variable "vcn_id" {
@@ -43,6 +52,9 @@ default = "existingvcnid"
 ###################################
 provider "oci" {
   tenancy_ocid = var.tenancy_ocid
+  user_ocid = var.user_ocid
+  fingerprint = var.fingerprint
+  private_key_path = var.private_key_path
   region = var.region
 }
 
@@ -150,7 +162,7 @@ variable "vm_image_ocid" {
   type = map
 
   default = {
-   eu-frankfurt-1 = "ocid1.image.oc1..aaaaaaaaxyhftjifo6rjz4i76tv2odlcczxhlmfkacd5cap6f6luuhbksiua"
+   me-jeddah-1 = "ocid1.image.oc1..aaaaaaaabu6hszx2yexxqddvekarvsmpdltvp6sqqmrmlgqilpxuxjtqvyla"
   }
 }
 
