@@ -4,6 +4,12 @@ resource "oci_core_instance" "vm-b" {
   compartment_id      = var.compartment_ocid
   display_name        = "vm-b"
   shape               = var.instance_shape
+  // Uncomment and addapt if you are yousing newer instance types like VM.Standard.E3.Flex
+#  shape_config {
+#    memory_in_gbs = "16"
+#    ocpus         = "4"
+#  }
+
 
   create_vnic_details {
     subnet_id        = oci_core_subnet.mgmt_subnet.id
@@ -89,7 +95,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_hb_b" {
 
 data "template_file" "vm-b_userdata" {
   template = file(var.bootstrap_vm-b)
-  
+
   vars = {
     mgmt_ip = var.mgmt_private_ip_primary_b
     mgmt_ip_mask = "255.255.255.0"
@@ -108,11 +114,11 @@ data "template_file" "vm-b_userdata" {
     vcn_cidr = var.vcn_cidr
     trust_subnet_gw = var.trust_subnet_gateway
     mgmt_subnet_gw = var.mgmt_subnet_gateway
- 
+
     tenancy_ocid = var.tenancy_ocid
     //oci_user_ocid = var.oci_user_ocid
     compartment_ocid = var.compartment_ocid
-   
+
     license_file_b = file(var.license_vm-b)
 
   }

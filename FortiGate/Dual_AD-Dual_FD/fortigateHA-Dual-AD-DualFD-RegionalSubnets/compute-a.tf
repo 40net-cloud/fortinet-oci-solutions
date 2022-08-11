@@ -4,6 +4,12 @@ resource "oci_core_instance" "vm-a" {
   display_name        = "vm-a"
   shape               = var.instance_shape
 
+  // Uncomment and addapt if you are yousing newer instance types like VM.Standard.E3.Flex
+#  shape_config {
+#    memory_in_gbs = "16"
+#    ocpus         = "4"
+#  }
+
   create_vnic_details {
     subnet_id        = oci_core_subnet.mgmt_subnet.id
     display_name     = "vm-a"
@@ -59,7 +65,7 @@ resource "oci_core_private_ip" "untrust_private_ip" {
   #Get Primary VNIC id
   vnic_id = element(oci_core_vnic_attachment.vnic_attach_untrust_a.*.vnic_id, 0)
 
-  #Optional	
+  #Optional
   display_name   = "untrust_ip"
   hostname_label = "untrust"
   ip_address     = var.untrust_floating_private_ip
@@ -70,7 +76,7 @@ resource "oci_core_public_ip" "untrust_public_ip" {
   compartment_id = var.compartment_ocid
   lifetime       = var.untrust_public_ip_lifetime
 
-  #Optional    
+  #Optional
   display_name  = "vm-untrust"
   private_ip_id = oci_core_private_ip.untrust_private_ip.id
 }
@@ -93,7 +99,7 @@ resource "oci_core_private_ip" "trust_private_ip" {
   #Get Primary VNIC id
   vnic_id = element(oci_core_vnic_attachment.vnic_attach_trust_a.*.vnic_id, 0)
 
-  #Optional	
+  #Optional
   display_name   = "trust_ip"
   hostname_label = "trust"
   ip_address     = var.trust_floating_private_ip
@@ -118,7 +124,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_hb_a" {
 data "template_file" "vm-a_userdata" {
 
   template = file(var.bootstrap_vm-a)
-  
+
   vars = {
     mgmt_ip = var.mgmt_private_ip_primary_a
     mgmt_ip_mask = "255.255.255.0"
@@ -137,11 +143,11 @@ data "template_file" "vm-a_userdata" {
     vcn_cidr = var.vcn_cidr
     trust_subnet_gw = var.trust_subnet_gateway
     mgmt_subnet_gw = var.mgmt_subnet_gateway
-    
+
     tenancy_ocid = var.tenancy_ocid
     //oci_user_ocid = var.oci_user_ocid
     compartment_ocid = var.compartment_ocid
-  
+
     license_file_a = file(var.license_vm-a)
 
   }
