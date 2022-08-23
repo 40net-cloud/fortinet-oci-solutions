@@ -20,10 +20,16 @@ variable "region" {
 ##############################################################################################################
 
 variable "tenancy_ocid" {}
-variable "user_ocid" {}
-variable "private_key_path" {}
-variable "fingerprint" {}
 variable "compartment_ocid" {}
+variable "user_ocid" {
+  default = ""
+}
+variable "private_key_path" {
+  default = ""
+}
+variable "fingerprint" {
+  default = ""
+}
 
 ##############################################################################################################
 # FortiGate instance type
