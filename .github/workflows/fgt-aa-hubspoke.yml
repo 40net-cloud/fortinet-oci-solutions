@@ -1,0 +1,34 @@
+name: '[FGT] OCI - DRGv2 Hub Spoke trafic inspection'
+
+env:
+  ARMPath: FortiGate/DRGv2-HubSpoke/
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+    - 'FortiGate/DRGv2-HubSpoke/*.tf'
+
+jobs:
+  OCI-DRGv2-Hub-Spoke:
+    name: 'OCI Terraform template DRGv2 Hub Spoke'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v2
+
+    - name: Archive Release
+      uses: thedoctor0/zip-release@main
+      with:
+        type: 'zip'
+        filename: 'release.zip'
+        directory: 'FortiGate/DRGv2-HubSpoke/'
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "release.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
