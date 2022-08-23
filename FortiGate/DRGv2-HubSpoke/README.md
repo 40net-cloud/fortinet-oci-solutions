@@ -40,7 +40,7 @@ For the deployment, you can use the the OCI Portal or Terraform. This set of ter
 
 ### Oracle Cloud Portal
 
-[![Deploy to Oracle Cloud] (https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/master/terraform-drgv2-hubspoke.zip)
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/master/terraform-drgv2-hubspoke.zip)
 
 ### Terraform
 
