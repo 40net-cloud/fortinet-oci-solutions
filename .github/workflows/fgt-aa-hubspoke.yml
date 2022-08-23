@@ -20,15 +20,19 @@ jobs:
     - name: "Checkout"
       uses: actions/checkout@v2
 
-    - name: Archive Release
-      uses: thedoctor0/zip-release@main
+    - name: Package and convert templates
+      uses: azure/powershell@v1
       with:
-        type: 'zip'
-        filename: 'release.zip'
-        directory: 'FortiGate/DRGv2-HubSpoke/'
+        inlineScript: |
+          Compress-Archive -Path "./FortiGate/DRGv2-HubSpoke/*" -DestinationPath "./terraform-drgv2-hubspoke.zip"
+        azPSVersion: "latest"
 
-    - name: Upload Release
-      uses: ncipollo/release-action@v1
+    - name: upload-templates-zip
+      uses: svenstaro/upload-release-action@v2
       with:
-        artifacts: "release.zip"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{secrets.GITHUB_TOKEN}}
+        file: ./terraform-drgv2-hubspoke.zip
+        asset_name: terraform-drgv2-hubspoke.zip
+        tag: ${{github.ref}}
+        overwrite: true
+        body: "OCI FortiGate DRGv2 Hub Spoke"
