@@ -34,6 +34,6 @@ jobs:
         repo_token: ${{secrets.GITHUB_TOKEN}}
         file: ./terraform-drgv2-hubspoke.zip
         asset_name: terraform-drgv2-hubspoke.zip
-        tag: ${{github.ref}}
+        tag: artefacts
         overwrite: true
         body: "OCI FortiGate DRGv2 Hub Spoke"
