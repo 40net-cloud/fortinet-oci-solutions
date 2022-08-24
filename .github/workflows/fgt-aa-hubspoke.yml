@@ -9,7 +9,8 @@ on:
     branches:
       - main
     paths:
-    - 'FortiGate/DRGv2-HubSpoke/*.tf'
+      - 'FortiGate/DRGv2-HubSpoke/*.tf'
+      - 'FortiGate/DRGv2-HubSpoke/*.tpl'
 
 jobs:
   OCI-DRGv2-Hub-Spoke:

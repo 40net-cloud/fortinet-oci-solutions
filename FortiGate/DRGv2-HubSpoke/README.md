@@ -40,7 +40,7 @@ For the deployment, you can use the the OCI Portal or Terraform. This set of ter
 
 ### Oracle Cloud Portal
 
-[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/master/terraform-drgv2-hubspoke.zip)
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/main/terraform-drgv2-hubspoke.zip)
 
 ### Terraform
 
@@ -184,5 +184,4 @@ For direct issues, please refer to the [Issues](https://github.com/40net-cloud/f
 For other questions related to this project, contact [github@fortinet.com](mailto:github@fortinet.com).
 
 ## License
-[License](https://github.com/fortinet/fortigate-terraform-deploy/blob/master/LICENSE) © Fortinet Technologies. All rights reserved.
-
+[License](LICENSE) © Fortinet Technologies. All rights reserved.

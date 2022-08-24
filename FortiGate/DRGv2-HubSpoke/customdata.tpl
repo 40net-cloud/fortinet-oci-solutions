@@ -86,7 +86,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="license"
 
-${file(fgt_license_file)}
+${fgt_license_file}
 
 %{ endif }
 --==OCI==--
