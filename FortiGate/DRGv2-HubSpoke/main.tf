@@ -406,7 +406,7 @@ data "template_file" "custom_data_fgt_a" {
 
   vars = {
     fgt_vm_name          = "${var.PREFIX}-fgta"
-    fgt_license_file     = fileexists(var.fgt_byol_license_a) ? file(var.fgt_byol_license_a) : var.fgt_byol_license_a
+    fgt_license_file     = "${var.fgt_byol_license_a == "" ? var.fgt_byol_license_a : (fileexists(var.fgt_byol_license_a) ? file(var.fgt_byol_license_a) : var.fgt_byol_license_a)}"
     fgt_license_flexvm   = var.fgt_byol_flexvm_license_a
     port1_ip             = var.fgt_ipaddress_a["2"]
     port1_mask           = var.subnetmask["2"]
@@ -498,7 +498,7 @@ data "template_file" "custom_data_fgt_b" {
 
   vars = {
     fgt_vm_name          = "${var.PREFIX}-fgtb"
-    fgt_license_file     = fileexists(var.fgt_byol_license_b) ? file(var.fgt_byol_license_b) : var.fgt_byol_license_b
+    fgt_license_file     = "${var.fgt_byol_license_b == "" ? var.fgt_byol_license_b : (fileexists(var.fgt_byol_license_b) ? file(var.fgt_byol_license_b) : var.fgt_byol_license_b)}"
     fgt_license_flexvm   = var.fgt_byol_flexvm_license_b
     port1_ip             = var.fgt_ipaddress_b["2"]
     port1_mask           = var.subnetmask["2"]
