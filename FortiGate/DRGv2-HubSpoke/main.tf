@@ -415,6 +415,8 @@ data "template_file" "custom_data_fgt_a" {
     untrusted_gateway_ip = oci_core_subnet.untrusted_subnet.virtual_router_ip
     trusted_gateway_ip   = oci_core_subnet.trusted_subnet.virtual_router_ip
     vcn_cidr             = var.vcn
+    spoke1_cidr          = var.vcn_cidr_spoke1
+    spoke2_cidr          = var.vcn_cidr_spoke2
   }
 }
 
