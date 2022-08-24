@@ -43,6 +43,7 @@ config router static
     set device port2
     set dst ${vcn_cidr}
     set gateway ${trusted_gateway_ip}
+    set vdom root
   next
   edit 3
     set device port2
