@@ -115,6 +115,138 @@ The terraform template deploys different resources and it is required to have th
 
 ### FortiGate
 
+##### FortiGate A
+
+```
+config system global
+  set hostname PREFIX-fgta
+end
+config system sdn-connector
+  edit oci-sdn
+    set type oci
+    set use-metadata-iam enable
+  next
+end
+config system probe-response
+  set http-probe-value OK
+  set mode http-probe
+end
+config system interface
+  edit port1
+    set alias untrusted
+    set mode static
+    set ip 172.16.140.35/28
+    set allowaccess ping https ssh fgfm probe-response
+  next
+  edit port2
+    set alias trusted
+    set mode static
+    set ip 172.16.140.67/28
+    set allowaccess ping https ssh fgfm probe-response
+  next
+end
+config router static
+  edit 1
+    set device port1
+    set gateway 172.16.140.33
+  next
+  edit 2
+    set device port2
+    set dst 172.16.140.0/22
+    set gateway 172.16.140.65
+  next
+  edit 3
+    set device port2
+    set dst 172.16.144.0/24
+    set gateway 172.16.140.65
+  next
+  edit 4
+    set device port2
+    set dst 172.16.145.0/24
+    set gateway 172.16.140.65
+  next
+end
+config firewall policy
+  edit 1
+    set name "DRG traffic"
+    set srcintf "port2"
+    set dstintf "port2"
+    set action accept
+    set srcaddr "all"
+    set dstaddr "all"
+    set schedule "always"
+    set service "ALL"
+    set nat enable
+  next
+end
+```
+
+##### FortiGate B
+
+```
+config system global
+  set hostname PREFIX-fgtb
+end
+config system sdn-connector
+  edit oci-sdn
+    set type oci
+    set use-metadata-iam enable
+  next
+end
+config system probe-response
+  set http-probe-value OK
+  set mode http-probe
+end
+config system interface
+  edit port1
+    set alias untrusted
+    set mode static
+    set ip 172.16.140.36/28
+    set allowaccess ping https ssh fgfm probe-response
+  next
+  edit port2
+    set alias trusted
+    set mode static
+    set ip 172.16.140.68/28
+    set allowaccess ping https ssh fgfm probe-response
+  next
+end
+config router static
+  edit 1
+    set device port1
+    set gateway 172.16.140.33
+  next
+  edit 2
+    set device port2
+    set dst 172.16.140.0/22
+    set gateway 172.16.140.65
+  next
+  edit 3
+    set device port2
+    set dst 172.16.144.0/24
+    set gateway 172.16.140.65
+  next
+  edit 4
+    set device port2
+    set dst 172.16.145.0/24
+    set gateway 172.16.140.65
+  next
+end
+config firewall policy
+  edit 1
+    set name "DRG traffic"
+    set srcintf "port2"
+    set dstintf "port2"
+    set action accept
+    set srcaddr "all"
+    set dstaddr "all"
+    set schedule "always"
+    set service "ALL"
+    set nat enable
+  next
+end
+```
+
 ### OCI
 
 
