@@ -456,7 +456,7 @@ resource "oci_core_instance" "vm_fgt_b" {
   // Commnet out the following if you use the feature.
   metadata = {
     user_data           = "${base64encode(data.template_file.custom_data_fgt_b.rendered)}"
-    ssh_authorized_keys = file("~/.ssh/id_rsa.pub")
+#    ssh_authorized_keys = file("~/.ssh/id_rsa.pub")
   }
 
   timeouts {
