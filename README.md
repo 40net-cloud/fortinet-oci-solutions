@@ -8,12 +8,12 @@
       - New VCN
       - Existing VCN
   - Active-Passive
-   - Dual-AD
-    - New VCN
-    - Existing VCN
-   - Single-AD
-    - New VCN
-    - Existing VCN
+    - Dual-AD
+      - New VCN
+      - Existing VCN
+    - Single-AD
+      - New VCN
+      - Existing VCN
   - Standalone
 - FortiWeb
   - Active-Active
