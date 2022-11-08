@@ -1,7 +1,28 @@
 **NAVIGATION GUIDE**
 - FortiGate
+  - Active-Active
+    - Dual-AD
+      - New VCN
+      - Existing VCN
+    - Single-AD
+      - New VCN
+      - Existing VCN
+  - Active-Passive
+   - Dual-AD
+    - New VCN
+    - Existing VCN
+   - Single-AD
+    - New VCN
+    - Existing VCN
+  - Standalone
 - FortiWeb
-  
+  - Active-Active
+    - Dual-AD
+      - New VCN
+      - Existing VCN
+    - Single-AD
+      - New VCN
+      - Existing VCN
 
 **DISCLAIMER**: 
 
