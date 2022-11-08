@@ -14,7 +14,7 @@
     - [Single-AD](Single-AD/)
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
-  - Standalone
+  - [Standalone](Standalone/)
 - [FortiWeb](FortiWeb/)
   - [Active-Active](Active-Active/)
     - [Dual-AD](Dual-AD/)
