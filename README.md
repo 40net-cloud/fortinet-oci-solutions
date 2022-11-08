@@ -2,8 +2,8 @@
 - [FortiGate](FortiGate/)
   - [Active-Passive](Active-Passive/)
     - [Dual-AD](Dual-AD/)
-      - New VCN
-      - Existing VCN
+      - [New VCN](New VCN/)
+      - [Existing VCN](Existing VCN/)
     - [Single-AD](Single-AD/)
       - New VCN
       - Existing VCN
