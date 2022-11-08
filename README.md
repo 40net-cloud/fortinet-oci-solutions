@@ -1,6 +1,6 @@
 # QUICK NAVIGATION GUIDE #
 - [FortiGate](FortiGate/)
-  - [Active-Passive](Active-Passive/)
+  - [Active-Passive](FortiGate/Active-Passive/)
     - [Dual-AD](Dual-AD/)
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
