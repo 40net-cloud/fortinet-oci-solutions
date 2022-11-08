@@ -2,14 +2,14 @@
 - [FortiGate](FortiGate/)
   - [Active-Passive](Active-Passive/)
     - [Dual-AD](Dual-AD/)
-      - [New VCN](New VCN/)
-      - [Existing VCN](Existing VCN/)
+      - [New VCN](New-VCN/)
+      - [Existing VCN](Existing-VCN/)
     - [Single-AD](Single-AD/)
       - New VCN
       - Existing VCN
   - [Active-Active](Active-Active/)
     - [Dual-AD]
-      - [New VCN](New VCN/)
+      - [New VCN](New-VCN/)
       - Existing VCN
     - Single-AD
       - New VCN
@@ -18,7 +18,7 @@
 - [FortiWeb](FortiWeb/)
   - [Active-Active](Active-Active/)
     - [Dual-AD](Dual-AD/)
-      - [New VCN](New VCN/)
+      - [New VCN](New-VCN/)
       - Existing VCN
     - Single-AD
       - New VCN
