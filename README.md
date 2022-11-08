@@ -1,5 +1,5 @@
-*** NAVIGATION GUIDE ***
-- * FortiGate *
+## NAVIGATION GUIDE ##
+- # FortiGate #
   - Active-Passive
     - Dual-AD
       - New VCN
