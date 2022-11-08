@@ -1,24 +1,24 @@
 # NAVIGATION GUIDE #
 - [FortiGate](FortiGate/)
-  - Active-Passive
-    - Dual-AD
+  - [Active-Passive](Active-Passive/)
+    - [Dual-AD](Dual-AD/)
       - New VCN
       - Existing VCN
-    - Single-AD
+    - [Single-AD](Single-AD/)
       - New VCN
       - Existing VCN
-  - Active-Active
-    - Dual-AD
-      - New VCN
+  - [Active-Active](Active-Active/)
+    - [Dual-AD]
+      - [New VCN](New VCN/)
       - Existing VCN
     - Single-AD
       - New VCN
       - Existing VCN
   - Standalone
 - [FortiWeb](FortiWeb/)
-  - Active-Active
-    - Dual-AD
-      - New VCN
+  - [Active-Active](Active-Active/)
+    - [Dual-AD](Dual-AD/)
+      - [New VCN](New VCN/)
       - Existing VCN
     - Single-AD
       - New VCN
