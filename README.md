@@ -10,13 +10,10 @@
   - [Active-Active](FortiGate/Active-Active/)
     - [Dual-AD](FortiGate/Active-Active/Dual-AD/)
       - [New VCN](FortiGate/Active-Active/Dual-AD/New-VCN/)
-  - [Standalone](FortiGate/Standalone/)
 - [FortiWeb](FortiWeb/)
   - [Active-Active](FortiWeb/Active-Active/)
     - [Dual-AD](FortiWeb/Active-Active/Dual-AD/)
       - [New VCN](FortiWeb/Active-Active/Dual-AD/New-VCN/)
-    - [Single-AD](FortiWeb/Active-Active/Single-AD/)
-  - [Standalone](FortiWeb/Standalone/)
 
 **DISCLAIMER**: 
 
