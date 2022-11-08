@@ -8,10 +8,10 @@
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
   - [Active-Active](Active-Active/)
-    - [Dual-AD]
+    - [Dual-AD](Dual-AD/)
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
-    - Single-AD
+    - [Single-AD](Single-AD/)
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
   - Standalone
@@ -20,7 +20,7 @@
     - [Dual-AD](Dual-AD/)
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
-    - Single-AD
+    - [Single-AD](Single-AD/)
       - [New VCN](New-VCN/)
       - [Existing VCN](Existing-VCN/)
 
