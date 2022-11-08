@@ -19,7 +19,7 @@
 - [FortiWeb](FortiWeb/)
   - [Active-Active](FortiWeb/Active-Active/)
     - [Dual-AD](FortiWeb/Active-Active/Dual-AD/)
-      - [New VCN](FortiWeb/Active-Active/Dual-AD/New-VCN/)
+      - [New VCN](FortiWeb/Active-Active/Dual-AD/New-VCN/) *New!*
       - [Existing VCN](FortiWeb/Active-Active/Dual-AD/Existing-VCN/)
     - [Single-AD](FortiWeb/Active-Active/Single-AD/)
       - [New VCN](FortiWeb/Active-Active/Single-AD/New-VCN/)
