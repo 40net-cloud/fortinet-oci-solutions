@@ -1,4 +1,4 @@
-# NAVIGATION GUIDE #
+# QUICK NAVIGATION GUIDE #
 - [FortiGate](FortiGate/)
   - [Active-Passive](Active-Passive/)
     - [Dual-AD](Dual-AD/)
