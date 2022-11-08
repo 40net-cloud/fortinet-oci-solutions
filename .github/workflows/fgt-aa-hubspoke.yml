@@ -26,7 +26,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Compress-Archive -Path "./FortiGate/Active-Active/Dual-AD/New-VCN/*" -DestinationPath "./$env:ZIP"
+          Compress-Archive -Path "./FortiGate/Active-Active/Dual-AD/New-VCN/*" -DestinationPath "./$${{ env.ZIPfile }}"
         azPSVersion: "latest"
 
     - name: upload-templates-zip
