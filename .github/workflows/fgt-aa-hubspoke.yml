@@ -2,6 +2,7 @@ name: '[FGT] OCI - DRGv2 Hub Spoke trafic inspection'
 
 env:
   ARMPath: FortiGate/DRGv2-HubSpoke/
+  ZIPfile: terraform-drgv2-hubspoke-aa.zip
 
 on:
   workflow_dispatch:
@@ -9,8 +10,8 @@ on:
     branches:
       - main
     paths:
-      - 'FortiGate/DRGv2-HubSpoke/*.tf'
-      - 'FortiGate/DRGv2-HubSpoke/*.tpl'
+      - 'FortiGate/Active-Active/Dual-AD/New-VCN/*.tf'
+      - 'FortiGate/Active-Active/Dual-AD/New-VCN/*.tpl'
 
 jobs:
   OCI-DRGv2-Hub-Spoke:
@@ -25,15 +26,15 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Compress-Archive -Path "./FortiGate/DRGv2-HubSpoke/*" -DestinationPath "./terraform-drgv2-hubspoke.zip"
+          Compress-Archive -Path "./FortiGate/Active-Active/Dual-AD/New-VCN/*" -DestinationPath "./$env:ZIP"
         azPSVersion: "latest"
 
     - name: upload-templates-zip
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{secrets.GITHUB_TOKEN}}
-        file: ./terraform-drgv2-hubspoke.zip
-        asset_name: terraform-drgv2-hubspoke.zip
+        file: ./${{ env.ZIPfile }}
+        asset_name: ${{ env.ZIPfile }}
         tag: artefacts
         overwrite: true
         body: "OCI FortiGate DRGv2 Hub Spoke"
