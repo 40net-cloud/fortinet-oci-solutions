@@ -1,6 +1,6 @@
-A set of OCI Terraform Templates for getting you started in Oracle with Fortinet solutions.
+A set of OCI Terraform Templates for getting you started in Oracle with Fortinet solutions
 
-# Active/Passive High Available FortiGate pair Regional Subnet.
+# Active/Passive High Available FortiGate pair Regional Subnet
 
 ## Introduction
 This Terraform template VERSION.0.12x deploys a High Availability pair of FortiGate Next-Generation Firewallis accompanied by the required infrastructure.
