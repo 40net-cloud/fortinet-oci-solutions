@@ -15,7 +15,7 @@ The Template deploys following components:
 
 ## 3. Deployment Steps
 
-Both options can be used to deploy FortiGate A/P solution in OCI.
+One of the two methods can be used to deploy FortiGate A/P solution in OCI.
 
 ### 3.1 Quick Deployment Using OCI Stacks service
 
