@@ -3,11 +3,21 @@
 ```
 exec factoryreset
 ```
-## 01. Deployment
+## 1. Introduction
+This Terraform template deploys a High Availability pair of FortiGate Next-Generation Firewalls accompanied by the required infrastructure.
+
+## 2. Deployment Overview
+
+The Template deploys following components:
+- A **new** Virtual Cloud Network (VCN) with 4 subnets (untrust, trust, hb and mgmt)
+- 2 FortiGate-VM instances with 4 vNICs, each in different AD
+- Required FortiGate configuration to activate A/P cluster using cloud-init (**read note below**)
+
+## 3. Deployment Steps
 
 Both options can be used to deploy FortiGate A/P solution in OCI.
 
-### 1. Quick Deployment Using OCI Stacks service
+### 3.1 Quick Deployment Using OCI Stacks service
 
 Following links are prepared to deploy FortiGate A/P cluster in Dual-AD in a specific region. You can select required FortiOS version to proceed. Since buttons will be re-directing to use OCI Stacks service, user should be already logged into OCI Dashboard.
 
@@ -23,7 +33,7 @@ Following links are prepared to deploy FortiGate A/P cluster in Dual-AD in a spe
 |:-:|:-:|:-:|:-:|
 |[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/activepassivedualad/FGT_A-P_Dual-AD_NewVCN_v6.4.10_PAYG.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/activepassivedualad/FGT_A-P_Dual-AD_NewVCN_v6.4.11_PAYG.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/activepassivedualad/FGT_A-P_Dual-AD_NewVCN_v7.0.8_PAYG.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/activepassivedualad/FGT_A-P_Dual-AD_NewVCN_v7.2.3_PAYG.zip)
 
-### 2. Manual Deployment Using Terraform CLI
+### 3.2. Manual Deployment Using Terraform CLI
 
 Pre-requisite to proceed: Terraform-CLI should be downloaded already. 
 
