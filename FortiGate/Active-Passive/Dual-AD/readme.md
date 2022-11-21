@@ -4,21 +4,25 @@ A set of OCI Terraform Templates for getting you started in Oracle with Fortinet
 
 ## Introduction
 This Terraform template v0.12x deploys a High Availability pair of FortiGate Next-Generation Firewalls accompanied by the required infrastructure.
-The Template deploys FortiGate A/P Regional Subnet, Dual Availability domains with Dual Fault domains.
-This also requires an additional OCI configuration for the OCI Fabric connector using IAM roles.
-**_Note: Region, Subnet & FG version can be modified_**.
 
-**Port-1**: mgmt (out-of-band management). For API-Call and SDN Connectors.
+## Deployment Overview
 
-**Port-2**: WAN (untrust). Towards IGW.
+The Template deploys following components:
+- A **new** Virtual Cloud Network (VCN) with 4 subnets (untrust, trust, hb and mgmt)
+- 2 FortiGate-VM instances with 4 vNICs, each in different AD
+- Required FortiGate configuration to activate A/P cluster using cloud-init (**read note below**)
 
-**Port-3**: LAN (Trust). Towards VCN and LPG.
+An additional OCI configuration for the OCI Fabric connector using IAM roles.</br>
+**_Note_**: Region, Subnet & FG version can be modified.
 
-**Port-4**: HeartBeat (HB).Between FG A/P.
+**port1**: Management (used for SDN connector API call)</br>
+**port2**: External (untrust, Internet facing)</br>
+**port3**: Internal (trust, internal communication towards LPG/DRG to other VCNs)</br>
+**port4**: HeartBeat (hb, used for cluster sync)</br>
 
-<img width="965" alt="Screen Shot 2021-10-05 at 12 20 17 PM" src="https://user-images.githubusercontent.com/64405031/135986810-68a958e5-6817-4c79-93f2-6566d34dc5a0.png">
+<img width="665" alt="Screen Shot 2021-10-05 at 12 20 17 PM" src="https://user-images.githubusercontent.com/64405031/135986810-68a958e5-6817-4c79-93f2-6566d34dc5a0.png">
 
-<img width="964" alt="Screen Shot 2021-10-05 at 12 20 08 PM" src="https://user-images.githubusercontent.com/64405031/135986825-522a699c-2eec-4fe7-8f20-24f48c5a5ccd.png">
+<img width="664" alt="Screen Shot 2021-10-05 at 12 20 08 PM" src="https://user-images.githubusercontent.com/64405031/135986825-522a699c-2eec-4fe7-8f20-24f48c5a5ccd.png">
 
 ## How to deploy
 
