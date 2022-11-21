@@ -7,7 +7,7 @@ exec factoryreset
 
 Following links are prepared to deploy FortiGate A/P cluster in Dual-AD. Since buttons will be re-directing to use OCI Stacks service, user should be already logged into OCI Dashboard.
 
-### Quick deployment using OCI Stacks service ###
+### One-click-deployment links ###
 
 #### BYOL Images (requires FortiGate license files)
 
