@@ -1,9 +1,9 @@
 # FortiGate Active/Passive High Available Dual-AD Deployment
 
-## 1.Introduction
+## 1. Introduction
 This Terraform template v0.12x deploys a High Availability pair of FortiGate Next-Generation Firewalls accompanied by the required infrastructure.
 
-## 2.Deployment Options
+## 2. Deployment Options
 
 One of the options below can be picked to deploy FortiGate A/P HA solution in OCI platform:
 - [Existing VCN](https://github.com/40net-cloud/fortinet-oci-solutions/tree/main/FortiGate/Active-Passive/Dual-AD/Existing-VCN) (VCN, regional subnets and IGW should be created already)
@@ -19,7 +19,7 @@ FortiGate-VMs will be provisioned with following vNICs:</br>
 **port3**: Internal (trust, internal communication towards LPG/DRG to other VCNs)</br>
 **port4**: HeartBeat (hb, used for cluster sync)</br>
 
-## 3.Topology Diagram
+## 3. Topology Diagram
 <img width="665" alt="Screen Shot 2021-10-05 at 12 20 17 PM" src="https://user-images.githubusercontent.com/64405031/135986810-68a958e5-6817-4c79-93f2-6566d34dc5a0.png">
 
 <img width="664" alt="Screen Shot 2021-10-05 at 12 20 08 PM" src="https://user-images.githubusercontent.com/64405031/135986825-522a699c-2eec-4fe7-8f20-24f48c5a5ccd.png">
