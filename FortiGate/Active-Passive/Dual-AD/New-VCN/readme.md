@@ -4,8 +4,9 @@ This Terraform template deploys a High Availability pair of FortiGate Next-Gener
 ## 2. Deployment Overview
 
 The Template deploys following components:
-- A **new** Virtual Cloud Network (VCN) with 4 subnets (untrust, trust, hb and mgmt)
+- A **new** Virtual Cloud Network (VCN) with 4 regional subnets (untrust, trust, hb and mgmt)
 - 2 FortiGate-VM instances with 4 vNICs, each in different AD
+- 4 route tables associated with regional subnets and an NSG
 - Required FortiGate configuration to activate A/P cluster using cloud-init (**read official note below**)
 
 ## 3. Deployment Steps
