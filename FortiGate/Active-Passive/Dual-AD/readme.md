@@ -30,7 +30,8 @@ One of the two methods can be used to deploy FortiGate A/P solution in OCI.
 
 ### 4.1 Quick Deployment Using OCI Stacks service
 
-Following links are prepared to deploy FortiGate A/P cluster in Dual-AD in a specific region. You can select required FortiOS version to proceed. Since buttons will be re-directing to use OCI Stacks service, user should be already logged into OCI Dashboard.
+You will find multiple links per available FortiOS version separately. You can select required FortiOS version to start deployment. User should be already logged into OCI Dashboard.
+
 ### 4.2 Manual Deployment Using Terraform CLI
 
 Pre-requisite to proceed: Terraform-CLI should be downloaded already. 
