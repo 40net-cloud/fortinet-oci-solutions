@@ -1,8 +1,3 @@
-**Official Note**: After deployment, FortiGate-VM instances may not get the proper configurations during the initial bootstrap configuration. User may need to do a manual factoryreset on the FortiGate-VMs in order to get proper configurations. To do factoryreset in FortiGate, user can login to the units via Console, and execute following command:
-
-```
-exec factoryreset
-```
 ## 1. Introduction
 This Terraform template deploys a High Availability pair of FortiGate Next-Generation Firewalls accompanied by the required infrastructure.
 
@@ -11,7 +6,7 @@ This Terraform template deploys a High Availability pair of FortiGate Next-Gener
 The Template deploys following components:
 - A **new** Virtual Cloud Network (VCN) with 4 subnets (untrust, trust, hb and mgmt)
 - 2 FortiGate-VM instances with 4 vNICs, each in different AD
-- Required FortiGate configuration to activate A/P cluster using cloud-init (**read note below**)
+- Required FortiGate configuration to activate A/P cluster using cloud-init (**read official note below**)
 
 ## 3. Deployment Steps
 
@@ -52,4 +47,10 @@ terraform init
 terraform plan
 terraform apply
 
+```
+
+**Official Note**: After deployment, FortiGate-VM instances may not get the proper configurations during the initial bootstrap configuration. User may need to do a manual factoryreset on the FortiGate-VMs in order to get proper configurations. To do factoryreset in FortiGate, user can login to the units via Console, and execute following command:
+
+```
+exec factoryreset
 ```
