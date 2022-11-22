@@ -43,11 +43,13 @@ https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
 terraform init
 ```
-6. Plan and apply Terraform state using following commands
+6. Use plan option to double check if there is no error/warning in the code.
 ```
 terraform plan
+```
+7. Apply Terraform state.
+```
 terraform apply
-
 ```
 
 **Official Note**: After deployment, FortiGate-VM instances may not get the proper configurations during the initial bootstrap configuration. User may need to do a manual factoryreset on the FortiGate-VMs in order to get proper configurations. To do factoryreset in FortiGate, user can login to the units via Console, and execute following command:
