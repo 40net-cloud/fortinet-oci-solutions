@@ -36,13 +36,14 @@ Pre-requisite to proceed: Terraform-CLI should be downloaded already.
 ```
 https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
-2. If you select BYOL deployment, add 2 FortiGate license files to **_license/_** folder and rename them as: FGT-A-license-filename.lic and FGT-B-license-filename.lic (PAYG deployment does NOT require license files, so related _.tf_ files and bootstrap script should be updated accordingly)
-3. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
-4. Initialize the Terraform using following command
+2. Navigate to required folder that includes "_.tf_" files.
+3. If you select BYOL deployment, add 2 FortiGate license files to **_license/_** folder and rename them as: FGT-A-license-filename.lic and FGT-B-license-filename.lic (PAYG deployment does NOT require license files, so related _.tf_ files and bootstrap script should be updated accordingly)
+4. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
+5. Initialize the Terraform using following command
 ```
 terraform init
 ```
-5. Plan and apply Terraform state using following commands
+6. Plan and apply Terraform state using following commands
 ```
 terraform plan
 terraform apply
