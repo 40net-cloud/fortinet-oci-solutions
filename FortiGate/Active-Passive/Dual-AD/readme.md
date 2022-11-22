@@ -40,17 +40,20 @@ Pre-requisite to proceed: Terraform-CLI should be downloaded already.
 ```
 https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
-2. If you select BYOL deployment, add 2 FortiGate license files to **_license/_** folder and rename them as: FGT-A-license-filename.lic and FGT-B-license-filename.lic (PAYG deployment does NOT require license files, so related _.tf_ files and bootstrap script should be updated accordingly)
-3. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
-4. Initialize the Terraform using following command
+2. Navigate to required folder that includes "_.tf_" files.
+3. If you select BYOL deployment, add 2 FortiGate license files to **_license/_** folder and rename them as: FGT-A-license-filename.lic and FGT-B-license-filename.lic (PAYG deployment does NOT require license files, so related _.tf_ files and bootstrap script should be updated accordingly)
+4. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
+5. Initialize the Terraform using following command
 ```
 terraform init
 ```
-5. Plan and apply Terraform state using following commands
+6. Use plan option to double check if there is no error/warning in the code.
 ```
 terraform plan
+```
+7. Apply Terraform state.
+```
 terraform apply
-
 ```
 
 **Official Note**: After deployment, FortiGate-VM instances may not get the proper configurations during the initial bootstrap configuration. User may need to do a manual factoryreset on the FortiGate-VMs in order to get proper configurations. To do factoryreset in FortiGate, user can login to the units via Console, and execute following command:
@@ -59,15 +62,7 @@ terraform apply
 exec factoryreset
 ```
 
-**_Note: This will deploy FortiGate-HA by default in "eu-frankfurt-1" Region & FG-v.7.0.1.**
-However, you can replace the region name in the: "Region" and the "VM_IMAGE_OCID" variable fields with required region name (During Step .5 above):
-Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
-
-## For new hub VCN Folder:
-1. This is used for New VCN, New IGW.
-2. This will create New VCN, New IGW, 4 new Subnets, new 4 RTs, new NSG and Two new FG A/P inside VCN with all required config.
-
-## Additional Configuration:
+## 5. Additional Configuration:
 For the Failover to work automatically: Additional configuration is required to use the IAM role provided by and configurable in the OCI environment for authentication. The IAM role includes permissions that you can give to the instance, so that FortiOS can implicitly access metadata information and communicate to the Fabric connector on its own private internal network without further authentication.
 
 [Configuring SDN Connector](https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/562317/configuring-an-oci-fabric-connector-using-iam-roles)
