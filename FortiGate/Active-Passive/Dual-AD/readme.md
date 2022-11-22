@@ -1,4 +1,4 @@
-# Active/Passive High Available FortiGate pair Regional Subnet
+# FortiGate Active/Passive High Available Dual-AD Deployment
 
 ## 1.Introduction
 This Terraform template v0.12x deploys a High Availability pair of FortiGate Next-Generation Firewalls accompanied by the required infrastructure.
@@ -6,7 +6,7 @@ This Terraform template v0.12x deploys a High Availability pair of FortiGate Nex
 ## 2.Deployment Options
 
 One of the options below can be picked to deploy FortiGate A/P HA solution in OCI platform:
-- [Existing VCN](/Existing-VCN) (VCN, subnets and IGW should be created already)
+- [Existing VCN](/Existing-VCN) (VCN, regional subnets and IGW should be created already)
 - [New VCN](/New-VCN) (template creates all required components including a new VCN)
 
 An additional OCI configuration is required for the OCI SDN-Connector using IAM roles (see documentation [configuring SDN connector](https://docs.fortinet.com/document/fortigate-public-cloud/7.2.0/oci-administration-guide/442167/sdn-connector-integration-with-oci))</br>
