@@ -23,9 +23,9 @@ FortiGate-VMs will be provisioned with following vNICs:</br>
 
 Diagram below is showing logical placement of FortiGate-VMs in VCN. Same diagram applies both deployment options. 
 
-<img width="964" alt="Screen Shot 2021-10-05 at 11 16 04 AM" src="https://user-images.githubusercontent.com/64405031/135977322-443625dc-d516-4a06-a431-6cc7ab66948e.png">
+<img width="664" alt="Screen Shot 2021-10-05 at 11 16 04 AM" src="https://user-images.githubusercontent.com/64405031/135977322-443625dc-d516-4a06-a431-6cc7ab66948e.png">
 
-<img width="967" alt="Screen Shot 2021-10-05 at 11 08 44 AM" src="https://user-images.githubusercontent.com/64405031/135976457-eebab16f-42c7-4029-bc12-00ec59951f52.png">
+<img width="667" alt="Screen Shot 2021-10-05 at 11 08 44 AM" src="https://user-images.githubusercontent.com/64405031/135976457-eebab16f-42c7-4029-bc12-00ec59951f52.png">
 
 ## 4. Deployment Steps
 
