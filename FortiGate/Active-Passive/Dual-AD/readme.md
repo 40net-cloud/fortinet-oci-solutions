@@ -29,7 +29,7 @@ Diagram below is showing logical placement of FortiGate-VMs in VCN. Same diagram
 
 ## 4. Deployment Steps
 
-One of the two methods can be used to deploy FortiGate A/P solution in OCI.
+One of the two methods can be used to deploy FortiGate A/P Dual-AD solution in OCI.
 
 ### 4.1 Quick Deployment Using OCI Stacks service
 
