@@ -1,5 +1,5 @@
 ## QUICK NAVIGATION GUIDE #
-- [FortiGate](FortiGate/)
+- [**FortiGate**](FortiGate/)
   - [Active-Passive](FortiGate/Active-Passive/)
     - [Dual-AD](FortiGate/Active-Passive/Dual-AD/)
       - [New VCN](FortiGate/Active-Passive/Dual-AD/New-VCN/)
@@ -13,7 +13,7 @@
   - [Standalone](FortiGate/Standalone/)
       - [New VCN](FortiGate/Standalone/New-VCN/)
       - [Existing VCN](FortiGate/Standalone/Existing-VCN/)
-- [FortiWeb](FortiWeb/)
+- [**FortiWeb**](FortiWeb/)
   - [Active-Active](FortiWeb/Active-Active/)
     - [Dual-AD](FortiWeb/Active-Active/Dual-AD/)
       - [New VCN](FortiWeb/Active-Active/Dual-AD/New-VCN/)
