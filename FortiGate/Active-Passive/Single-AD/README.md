@@ -1,53 +1,71 @@
-# Active/Passive High Available FortiGate pair Regional Subnet
+# FortiGate Active/Passive High Available Single-AD Deployment
 
-## Introduction
-This Terraform template VERSION.0.12x deploys a High Availability pair of FortiGate Next-Generation Firewallis accompanied by the required infrastructure.
-The Template deploys FortiGate A/P Regional Subnet, Single Availability domains with Dual Fault domains.
-This also requires an additional OCI configuration for the OCI Fabric connector using IAM roles.
-**_Note: Region, Subnet & FG version can be modified_**.
+## 1. Introduction
+This Terraform template deploys a High Availability pair of FortiGate Next-Generation Firewalls accompanied by the required infrastructure.
 
-**Port-1**: mgmt (out-of-band management). For API-Call and SDN Connectors.
+## 2. Deployment Options
 
-**Port-2**: WAN (untrust). Towards IGW.
+One of the options below can be picked to deploy FortiGate A/P Single-AD HA solution in OCI platform:
+- [Existing VCN](https://github.com/40net-cloud/fortinet-oci-solutions/tree/main/FortiGate/Active-Passive/Single-AD/Existing-VCN) (VCN and IGW should be created already)
+- [New VCN](https://github.com/40net-cloud/fortinet-oci-solutions/tree/main/FortiGate/Active-Passive/Single-AD/New-VCN) (template creates all required components including a new VCN)
 
-**Port-3**: LAN (Trust). Towards VCN and LPG.
+An additional OCI configuration is required for the OCI SDN-Connector using IAM roles (see documentation [configuring SDN connector](https://docs.fortinet.com/document/fortigate-public-cloud/7.2.0/oci-administration-guide/442167/sdn-connector-integration-with-oci))</br>
 
-**Port-4**: HeartBeat (HB).Between FG A/P.
+**_Note_**: Variables (region, CIDRs) can be modified.
+
+FortiGate-VMs will be provisioned with following vNICs:</br>
+**port1**: Management (used for SDN connector API call)</br>
+**port2**: External (untrust, Internet facing)</br>
+**port3**: Internal (trust, internal communication towards LPG/DRG to other VCNs)</br>
+**port4**: HeartBeat (hb, used for cluster sync)</br>
+
+## 3. Topology Diagram
+
+Diagram below is showing logical placement of FortiGate-VMs in VCN. Same diagram applies both deployment options. 
 
 <img width="964" alt="Screen Shot 2021-10-05 at 11 16 04 AM" src="https://user-images.githubusercontent.com/64405031/135977322-443625dc-d516-4a06-a431-6cc7ab66948e.png">
 
 <img width="967" alt="Screen Shot 2021-10-05 at 11 08 44 AM" src="https://user-images.githubusercontent.com/64405031/135976457-eebab16f-42c7-4029-bc12-00ec59951f52.png">
 
-## How to deploy
+## 4. Deployment Steps
 
-1. Download the 4 files in folder: 00-general.tf, 01-network.tf, 02-fortigate.tf & fgt-userdata.tpl // or from  terminal: **git clone** https://github.com/hkebbi/fortinet-oci-solutions.git
-2. Add Two BYOL FG License files name them as: **fgt1.lic**  &  **fgt2.lic**.
-3. Compress the folder in a .zip file. 
-4. Upload the .zip file in OCI Stack.
-5. Fill all required variable fields (except user_ocid, Fingerprint & Private_key_path) as per your network requirements.  
-6. Apply the Terraform State. 
+One of the two methods can be used to deploy FortiGate A/P Single-AD solution in OCI.
 
-**_Note: This will deploy FortiGate-HA by default in "me-jeddah" Region & FG-v.7.0.1.**
-However, you can replace the region name in the: "Region" and the "VM_IMAGE_OCID" variable fields with required region name (During Step .5 above):
-Example"  "uk-london-1" / "eu-frankfurt-1" / "me-jeddah-1" / "eu-amsterdam-1"
+### 4.1 Quick Deployment Using OCI Stacks service
 
-## For new hub VCN Folder:
-1. This is used for New VCN, New IGW.
-2. This will create New VCN, New IGW, 4 new Subnets, new 4 RTs, new NSG and Two new FG A/P inside VCN with all required config.
+You will find multiple links per available FortiOS version separately. You can select required FortiOS version to start deployment. User should be already logged into OCI Dashboard.
 
-## For existing VCN (No_IGW) Folder (VCN and IGW already exist):
-1. This is used for existing VCN and existing IGW.
-2. Copy/paste VCN-OCID **"Vcn_id"** during terraform deployment on the OCI Stack.
-3. This will create 4 new: 4 subnets, Two new RTs (Hb & Trust), new NSG and FG A/P inside existing VCN.
-4. Create after deployment Two RTs ( unTrust and Managment) that points to existing IGW (0.0.0.0/0 --> IGW) on OCI RT.
+### 4.2 Manual Deployment Using Terraform CLI
 
-## For existing VCN (with IGW) Folder (VCN already exist, IGW will be created in the script):
-1. This is used for existing VCN Only.
-2. Copy/paste VCN-OCID **"Vcn_id"** during terraform deployment on the OCI Stack.
-3. This will create new: 4 subnets, 4 RTs , IGW, NSG and FG A/P inside existing VCN.
+Pre-requisite to proceed: Terraform-CLI should be downloaded already. 
 
+1. Download the files in a local folder or clone the repository using command below:</br>
+```
+https://github.com/40net-cloud/fortinet-oci-solutions.git
+```
+2. Navigate to required folder that includes "_.tf_" files.
+3. If you select BYOL deployment, add 2 FortiGate license files to **_license/_** folder and rename them as: FGT-A-license-filename.lic and FGT-B-license-filename.lic (PAYG deployment does NOT require license files, so related _.tf_ files and bootstrap script should be updated accordingly)
+4. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
+5. Initialize the Terraform using following command
+```
+terraform init
+```
+6. Use plan option to double check if there is no error/warning in the code.
+```
+terraform plan
+```
+7. Apply Terraform state.
+```
+terraform apply
+```
 
-## Additional Configuration:
+**Official Note**: After deployment, FortiGate-VM instances may not get the proper configurations during the initial bootstrap configuration. User may need to do a manual factoryreset on the FortiGate-VMs in order to get proper configurations. To do factoryreset in FortiGate, user can login to the units via Console, and execute following command:
+
+```
+exec factoryreset
+```
+
+## 5. Additional Configuration:
 For the Failover to work automatically: Additional configuration is required to use the IAM role provided by and configurable in the OCI environment for authentication. The IAM role includes permissions that you can give to the instance, so that FortiOS can implicitly access metadata information and communicate to the Fabric connector on its own private internal network without further authentication.
 
-https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/562317/configuring-an-oci-fabric-connector-using-iam-roles
+[Configuring SDN Connector](https://docs.fortinet.com/vm/oci/fortigate/6.4/oci-cookbook/6.4.0/562317/configuring-an-oci-fabric-connector-using-iam-roles)
