@@ -20,6 +20,9 @@ FortiGate-VMs will be provisioned with following vNICs:</br>
 **port4**: HeartBeat (hb, used for cluster sync)</br>
 
 ## 3. Topology Diagram
+
+Diagram below is showing logical placement of FortiGate-VMs in VCN. Same diagram applies both deployment options. 
+
 <img width="665" alt="Screen Shot 2021-10-05 at 12 20 17 PM" src="https://user-images.githubusercontent.com/64405031/135986810-68a958e5-6817-4c79-93f2-6566d34dc5a0.png">
 
 <img width="664" alt="Screen Shot 2021-10-05 at 12 20 08 PM" src="https://user-images.githubusercontent.com/64405031/135986825-522a699c-2eec-4fe7-8f20-24f48c5a5ccd.png">
