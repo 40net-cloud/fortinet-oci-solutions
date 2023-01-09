@@ -16,7 +16,7 @@ One of the two methods can be used to deploy FortiGate Standalone solution in OC
 
 Following links are prepared to deploy FortiGate Standalone solution in a specific region. You can select required FortiOS version to proceed. Since buttons will be re-directing to use OCI Stacks service, user should be already logged into OCI Dashboard.
 
-##### BYOL Images (requires FortiGate license files)
+##### BYOL Images
 
 |v6.4.10|v6.4.11|v7.0.9|v7.2.3
 |:-:|:-:|:-:|:-:|
