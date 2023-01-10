@@ -35,7 +35,7 @@ Pre-requisite to proceed: Terraform-CLI should be downloaded already.
 ```
 https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
-2. Navigate to required folder that includes "_.tf_" files. (path: fortinet-oci-solutions > FortiAnalyzer > Standalone > Existing-VCN)
+2. Navigate to required folder that includes "_.tf_" files. (path: fortinet-oci-solutions > FortiAnalyzer  > Existing-VCN > BYOL)
 3. FortiAnalyzer license can be activated using web gui.
 4. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
 5. Initialize the Terraform using following command
