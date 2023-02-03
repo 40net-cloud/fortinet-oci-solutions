@@ -44,7 +44,7 @@ Pre-requisite to proceed: Terraform-CLI should be downloaded already.
 ```
 https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
-2. Navigate to required folder that includes "_.tf_" files. (path: fortinet-oci-solutions > FortiGate > Active-Passive > Single-AD > New-VCN)
+2. Navigate to required folder that includes "_.tf_" files. (path: fortinet-oci-solutions > FortiGate > Active-Passive > New-VCN)
 3. If you select BYOL deployment, add 2 FortiGate license files to **_license/_** folder and rename them as: FGT-A-license-filename.lic and FGT-B-license-filename.lic (PAYG deployment does NOT require license files, so related _.tf_ files and bootstrap script should be updated accordingly)
 4. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
 5. Initialize the Terraform using following command
