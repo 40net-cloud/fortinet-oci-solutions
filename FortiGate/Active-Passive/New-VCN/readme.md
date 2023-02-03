@@ -5,13 +5,20 @@ This Terraform template deploys a High Availability pair of FortiGate Next-Gener
 
 The Template deploys following components:
 - A **new** Virtual Cloud Network (VCN) with 4 regional subnets (untrust, trust, hb and mgmt)
-- 2 FortiGate-VM instances with 4 vNICs, each in same AD, but in **separate Fault Domain (FD)**
+- 2 FortiGate-VM instances with 4 vNICs, each in **selected** AD, also in **separate Fault Domain (FD)**
 - 4 route tables associated with regional subnets and an NSG
 - Required FortiGate configuration to activate A/P cluster using cloud-init (**read official note below**)
 
+### 2.1 Deployment Options
+
+Depending on selected region, 1 or more AD (availability domain) can be selected during deployment as follows.
+
+- **Dual-AD**: Define different AD variable (e.g. "1" for ad_a and "2" for ad_b)
+- **Single-AD**: Define same AD variable (e.g. "1" for ad_a and "1" for ad_b)
+
 ## 3. Deployment Steps
 
-One of the two methods can be used to deploy FortiGate A/P solution in OCI.
+One of the two methods can be used to deploy FortiGate A/P solution in OCI. 
 
 ### 3.1 Quick Deployment Using OCI Stacks service
 
