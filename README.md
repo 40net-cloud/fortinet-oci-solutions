@@ -1,24 +1,12 @@
 ## QUICK NAVIGATION GUIDE #
 - [**FortiGate**](FortiGate/)
   - [Active-Passive](FortiGate/Active-Passive/)
-      - [New VCN](FortiGate/Active-Passive/New-VCN/)
-      - [Existing VCN](FortiGate/Active-Passive/Existing-VCN/)
   - [Active-Active](FortiGate/Active-Active/)
-    - [Dual-AD](FortiGate/Active-Active/Dual-AD/)
-      - [New VCN](FortiGate/Active-Active/Dual-AD/New-VCN/)
   - [Standalone](FortiGate/Standalone/)
-      - [New VCN](FortiGate/Standalone/New-VCN/)
-      - [Existing VCN](FortiGate/Standalone/Existing-VCN/)
 - [**FortiAnalyzer**](FortiAnalyzer/)
-  - [Existing-VCN](FortiAnalyzer/Existing-VCN/)
-  - [New-VCN](FortiAnalyzer/New-VCN/)
 - [**FortiManager**](FortiManager/)
-  - [Existing-VCN](FortiManager/Existing-VCN/)
-  - [New-VCN](FortiManager/New-VCN/)
 - [**FortiWeb**](FortiWeb/)
   - [Active-Active](FortiWeb/Active-Active/)
-    - [Dual-AD](FortiWeb/Active-Active/Dual-AD/)
-      - [New VCN](FortiWeb/Active-Active/Dual-AD/New-VCN/)
 
 **DISCLAIMER**: 
 
