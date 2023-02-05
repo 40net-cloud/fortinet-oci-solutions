@@ -10,7 +10,7 @@ The Template deploys following components:
 
 ## 3. Deployment Steps
 
-Before starting deployment, **following values are required**:
+Before starting deployment, **following values are required**. All other settings can be modified.
 - Existing VCN OCID
 - Existing VCN CIDR block (example: 10.1.0.0/16)
 - Existing Internet Gateway OCID (if there is no IGW, it should be created in advance)
