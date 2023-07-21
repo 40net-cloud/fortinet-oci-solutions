@@ -45,7 +45,7 @@ Following links are prepared to deploy FortiGate A/P cluster in Dual-AD in a spe
 
 ### 3.2. Manual Deployment Using Terraform CLI
 
-Pre-requisite to proceed: Terraform-CLI should be downloaded already. 
+Prerequisite to proceed: Terraform-CLI should be downloaded already. 
 
 1. Download the files in a local folder or clone the repository using command below:</br>
 ```
