@@ -1,2 +1,2 @@
-- Select [**New-VCN**](/New-VCN) for fresh deployment into **new** infrastructure.
-- Select [**Existing-VCN**](/Existing-VCN) for deploying into **existing** infrastructure.
+- Select [**New-VCN**](New-VCN) for fresh deployment into **new** infrastructure.
+- Select [**Existing-VCN**](Existing-VCN) for deploying into **existing** infrastructure.
