@@ -1,5 +1,5 @@
 ## 1. Introduction
-This Terraform template deploys a Active/Active High Availability pair of FortiWeb accompanied by the required infrastructure.
+This Terraform template deploys a Active/Active High Availability pair of FortiWeb instances accompanied by the required infrastructure.
 
 ## 2. Deployment Overview
 
