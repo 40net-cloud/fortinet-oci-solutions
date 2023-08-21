@@ -1,4 +1,4 @@
-### Readme will be updated...
+### Readme will be updated.
 
 ##### OCI public regions - BYOL Images (requires FortiWeb license files)
 
