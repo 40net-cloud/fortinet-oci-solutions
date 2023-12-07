@@ -17,10 +17,6 @@ jobs:
   OCI-FGT-TF-Standalone:
     name: 'Terraform A-Single-VM'
     runs-on: ubuntu-latest
-    env:
-      TF_VAR_tenancy_ocid: ""
-      TF_VAR_compartment_ocid: ""
-      TF_VAR_user_ocid: ""
 
     steps:
     - name: "Checkout"
