@@ -17,6 +17,10 @@ jobs:
   OCI-FGT-TF-Standalone:
     name: 'Terraform A-Single-VM'
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_tenancy_ocid: "FORTIQA-A-Single-VM-${{ github.run_id }}-${{ github.run_number }}"
+      TF_VAR_compartment_ocid: "westeurope"
+      TF_VAR_user_ocid: "azureuser"
 
     steps:
     - name: "Checkout"
