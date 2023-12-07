@@ -1,0 +1,71 @@
+name: '[FGT] TF - A-Single-VM'
+
+env:
+  TFpath: FortiGate/Standalone/New-VCN/
+  ZIPfile: tf-fgt-standalone.zip
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'FortiGate/Standalone/New-VCN/*.tf'
+      - 'FortiGate/Standalone/New-VCN/*.tpl'
+
+jobs:
+  OCI-FGT-TF-Standalone:
+    name: 'Terraform A-Single-VM'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v4
+
+    - name: "Setup Terraform"
+      uses: hashicorp/setup-terraform@v3
+
+    - name: "Terraform Init"
+      id: init
+      run: terraform init
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Validation"
+      id: validate
+      run: terraform validate
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Format"
+      id: format
+      run: terraform fmt -check -diff
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Plan"
+      id: plan
+      run: terraform plan -out plan.tfplan
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Show"
+      id: show
+      run: terraform show -json plan.tfplan
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Save Plan JSON"
+      run: echo '${{ steps.show.outputs.stdout }}' > plan.json # Do not change
+
+    - name: Package and convert templates
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          Compress-Archive -Path "./FortiGate/Standalone/New-VCN/*" -DestinationPath "./${{ env.ZIPfile }}"
+        azPSVersion: "latest"
+
+    - name: upload-templates-zip
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{secrets.GITHUB_TOKEN}}
+        file: ./${{ env.ZIPfile }}
+        asset_name: ${{ env.ZIPfile }}
+        tag: artefactstest
+        overwrite: true
+        body: "OCI FortiGate Standalone"
