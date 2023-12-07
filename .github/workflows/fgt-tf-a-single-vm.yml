@@ -1,7 +1,7 @@
 name: '[FGT] TF - A-Single-VM'
 
 env:
-  TFPath: FortiGate/Standalone/New-VCN/
+  TFPath: FortiGate/Standalone/New-VCN/terraform/
   ZIPfile: tf-fgt-standalone.zip
 
 on:
@@ -10,8 +10,9 @@ on:
     branches:
       - main
     paths:
-      - 'FortiGate/Standalone/New-VCN/*.tf'
-      - 'FortiGate/Standalone/New-VCN/*.tpl'
+      - 'FortiGate/Standalone/New-VCN/terraform/*.tf'
+      - 'FortiGate/Standalone/New-VCN/terraform/*.tpl'
+      - 'FortiGate/Standalone/New-VCN/terraform/*.hcl'
 
 jobs:
   OCI-FGT-TF-Standalone:
