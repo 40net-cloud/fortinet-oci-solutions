@@ -1,7 +1,7 @@
 name: '[FGT] OCI - DRGv2 Hub Spoke trafic inspection'
 
 env:
-  ARMPath: FortiGate/DRGv2-HubSpoke/
+  ARMPath: FortiGate/Active-Active/Dual-AD/New-VCN/
   ZIPfile: terraform-drgv2-hubspoke-aa.zip
 
 on:
