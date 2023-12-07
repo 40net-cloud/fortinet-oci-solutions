@@ -1,7 +1,7 @@
 name: '[FGT] TF - A-Single-VM'
 
 env:
-  TFpath: FortiGate/Standalone/New-VCN/
+  TFPath: FortiGate/Standalone/New-VCN/
   ZIPfile: tf-fgt-standalone.zip
 
 on:
