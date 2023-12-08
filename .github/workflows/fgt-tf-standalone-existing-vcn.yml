@@ -1,8 +1,8 @@
-name: '[FGT] TF - Standalone - New-VCN'
+name: '[FGT] TF - Standalone - Existing-VCN'
 
 env:
-  TFPath: FortiGate/Standalone/New-VCN/terraform/
-  ZIPfile: tf-fgt-standalone-newvcn.zip
+  TFPath: FortiGate/Standalone/Existing-VCN/terraform/
+  ZIPfile: tf-fgt-standalone-existingvcn.zip
 
 on:
   workflow_dispatch:
@@ -10,9 +10,9 @@ on:
     branches:
       - main
     paths:
-      - 'FortiGate/Standalone/New-VCN/terraform/*.tf'
-      - 'FortiGate/Standalone/New-VCN/terraform/*.tpl'
-      - 'FortiGate/Standalone/New-VCN/terraform/*.hcl'
+      - 'FortiGate/Standalone/Existing-VCN/terraform/*.tf'
+      - 'FortiGate/Standalone/Existing-VCN/terraform/*.tpl'
+      - 'FortiGate/Standalone/Existing-VCN/terraform/*.hcl'
 
 jobs:
   OCI-FGT-TF-Standalone:
@@ -71,7 +71,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Compress-Archive -Path "./FortiGate/Standalone/New-VCN/*" -DestinationPath "./${{ env.ZIPfile }}"
+          Compress-Archive -Path "./FortiGate/Standalone/Existing-VCN/*" -DestinationPath "./${{ env.ZIPfile }}"
         azPSVersion: "latest"
 
     - name: upload-templates-zip
