@@ -1,0 +1,62 @@
+Content-Type: multipart/mixed; boundary="==OCI=="
+MIME-Version: 1.0
+
+--==OCI==
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+
+config system global
+    set hostname "FortiGate"
+    set admintimeout 60
+end
+
+config system interface
+    edit port1
+        set ip ${untrust_ip} ${untrust_ip_mask}
+        set allowaccess ping https ssh http fgfm
+        set type physical
+        set alias mgmt
+        set description "untrust"
+        set mtu-override enable
+        set mtu 9000
+    next
+end
+config system interface
+    edit port2
+        set mode static        
+        set vdom "root"
+        set ip ${trust_ip} ${trust_ip_mask}
+        set type physical
+        set description "Trust"
+        set alias trust
+        set mtu-override enable
+        set mtu 9000
+    next
+end
+
+config system sdn-connector
+    edit "oci-sdn"
+        set type oci
+		set ha-status enable
+        set tenant-id ${tenancy_ocid}
+        set compartment-id ${compartment_ocid}
+    next
+end
+config router static
+    edit 1        
+        set gateway ${untrust_subnet_gw}
+        set device port1
+    next
+    edit 2
+        set dst ${vcn_cidr}
+        set gateway ${trust_subnet_gw}
+        set device port2
+    next
+end
+--==OCI==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+--==OCI==--
+
