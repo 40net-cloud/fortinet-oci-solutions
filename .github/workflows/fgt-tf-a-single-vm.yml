@@ -24,7 +24,7 @@ jobs:
       TF_VAR_user_ocid: "${{ secrets.USER_OCID }}"
       TF_VAR_region: "${{ secrets.REGION }}"
       TF_VAR_fingerprint: "${{ secrets.FINGERPRINT }}"
-      TF_VAR_private_key_path: "${{ secrets.PRIVATE_KEY_PATH }}"
+      TF_VAR_private_key_path: ${{ secrets.OCI_PEM_KEY }}
       
     steps:
     - name: "Checkout"
@@ -33,14 +33,11 @@ jobs:
     - name: "Setup Terraform"
       uses: hashicorp/setup-terraform@v3
 
-    - name: Configure OCI credentials
-      run: |
-        echo "${{ secrets.PRIVATE_KEY_PATH }}" > ~/.oci/oraclekey.pem
-        chmod 600 ~/.oci/oraclekey.pem
-
     - name: "Terraform Init"
+      with:
+        private_key_path: ${{ secrets.OCI_PEM_KEY }}
       id: init
-      run: terraform init
+      run: terraform init -backend-config="key=${{ secrets.OCI_PEM_KEY }}"
       working-directory: ${{ env.TFPath }}
 
     - name: "Terraform Validation"
