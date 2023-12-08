@@ -35,9 +35,7 @@ jobs:
 
     - name: Configure OCI credentials
       run: |
-        cd /home/runner/.oci
-        mkdir .oci
-        cd .oci
+        mkdir -p ~/.oci
         echo "${{ secrets.OCI_PEM_KEY }}" > ~/.oci/oci_api_key.pem
         chmod 600 ~/.oci/oci_api_key.pem
 
