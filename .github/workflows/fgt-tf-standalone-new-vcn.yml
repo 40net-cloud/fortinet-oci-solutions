@@ -1,4 +1,4 @@
-name: '[FGT] TF - A-Single-VM'
+name: '[FGT] TF - Standalone - New-VCN'
 
 env:
   TFPath: FortiGate/Standalone/New-VCN/terraform/
