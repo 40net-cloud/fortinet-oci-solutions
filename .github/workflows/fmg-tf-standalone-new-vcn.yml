@@ -1,0 +1,85 @@
+name: '[FMG] TF - Standalone - New-VCN'
+
+env:
+  TFPath: FortiManager/New-VCN/BYOL/terraform/
+  ZIPfile: tf-fmg-standalone-newvcn.zip
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'FortiManager/New-VCN/BYOL/terraform/*.tf'
+      - 'FortiManager/New-VCN/BYOL/terraform/*.tpl'
+      - 'FortiManager/New-VCN/BYOL/terraform/*.hcl'
+
+jobs:
+  OCI-FGT-TF-Standalone:
+    name: 'Terraform FortiManager Standalone'
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_tenancy_ocid: "${{ secrets.TENANCY_OCID }}"
+      TF_VAR_compartment_ocid: "${{ secrets.COMPARTMENT_OCID }}"
+      TF_VAR_user_ocid: "${{ secrets.USER_OCID }}"
+      TF_VAR_region: "${{ secrets.REGION }}"
+      TF_VAR_fingerprint: "${{ secrets.FINGERPRINT }}"
+      TF_VAR_private_key_path: ~/.oci/oci_api_key.pem
+      
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v4
+
+    - name: "Setup Terraform"
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Configure OCI credentials
+      run: |
+        mkdir -p ~/.oci
+        echo "${{ secrets.OCI_PEM_KEY }}" > ~/.oci/oci_api_key.pem
+        chmod 600 ~/.oci/oci_api_key.pem
+
+    - name: "Terraform Init"
+      id: init
+      run: terraform init
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Validation"
+      id: validate
+      run: terraform validate
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Format"
+      id: format
+      run: terraform fmt -check -diff
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Plan"
+      id: plan
+      run: terraform plan -out plan.tfplan
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Terraform Show"
+      id: show
+      run: terraform show -json plan.tfplan
+      working-directory: ${{ env.TFPath }}
+
+    - name: "Save Plan JSON"
+      run: echo '${{ steps.show.outputs.stdout }}' > plan.json # Do not change
+
+    - name: Package and convert templates
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          Compress-Archive -Path "./FortiManager/New-VCN/BYOL/*" -DestinationPath "./${{ env.ZIPfile }}"
+        azPSVersion: "latest"
+
+    - name: upload-templates-zip
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{secrets.GITHUB_TOKEN}}
+        file: ./${{ env.ZIPfile }}
+        asset_name: ${{ env.ZIPfile }}
+        tag: fmgstandalone
+        overwrite: true
+        body: "OCI FortiManager Standalone"
