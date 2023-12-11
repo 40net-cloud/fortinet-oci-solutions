@@ -2,7 +2,7 @@ name: '[FGT] OCI - DRGv2 Hub Spoke trafic inspection'
 
 env:
   ARMPath: FortiGate/Active-Active/Dual-AD/New-VCN/
-  ZIPfile: terraform-drgv2-hubspoke-aa.zip
+  ZIPfile: tf-fgt-active-active-newvcn.zip
 
 on:
   workflow_dispatch:
@@ -35,6 +35,6 @@ jobs:
         repo_token: ${{secrets.GITHUB_TOKEN}}
         file: ./${{ env.ZIPfile }}
         asset_name: ${{ env.ZIPfile }}
-        tag: artefacts
+        tag: fgtactiveactive
         overwrite: true
         body: "OCI FortiGate DRGv2 Hub Spoke"
