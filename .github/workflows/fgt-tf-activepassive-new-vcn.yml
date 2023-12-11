@@ -80,6 +80,6 @@ jobs:
         repo_token: ${{secrets.GITHUB_TOKEN}}
         file: ./${{ env.ZIPfile }}
         asset_name: ${{ env.ZIPfile }}
-        tag: fgtActive-Passive
+        tag: fgtactivepassive
         overwrite: true
         body: "OCI FortiGate Active-Passive"
