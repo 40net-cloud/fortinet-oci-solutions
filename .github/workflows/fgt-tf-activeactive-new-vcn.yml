@@ -1,4 +1,4 @@
-name: '[FGT] OCI - DRGv2 Hub Spoke trafic inspection'
+name: '[FGT] TF - Active-Active - New-VCN'
 
 env:
   ARMPath: FortiGate/Active-Active/Dual-AD/New-VCN/
