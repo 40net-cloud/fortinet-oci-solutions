@@ -1,0 +1,40 @@
+name: '[FGT] OCI - DRGv2 Hub Spoke trafic inspection'
+
+env:
+  ARMPath: FortiGate/Active-Active/Dual-AD/New-VCN/
+  ZIPfile: terraform-drgv2-hubspoke-aa.zip
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'FortiGate/Active-Active/Dual-AD/New-VCN/*.tf'
+      - 'FortiGate/Active-Active/Dual-AD/New-VCN/*.tpl'
+
+jobs:
+  OCI-DRGv2-Hub-Spoke:
+    name: 'OCI Terraform template DRGv2 Hub Spoke'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v2
+
+    - name: Package and convert templates
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          Compress-Archive -Path "./FortiGate/Active-Active/Dual-AD/New-VCN/*" -DestinationPath "./${{ env.ZIPfile }}"
+        azPSVersion: "latest"
+
+    - name: upload-templates-zip
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{secrets.GITHUB_TOKEN}}
+        file: ./${{ env.ZIPfile }}
+        asset_name: ${{ env.ZIPfile }}
+        tag: artefacts
+        overwrite: true
+        body: "OCI FortiGate DRGv2 Hub Spoke"
