@@ -9,7 +9,7 @@ The Template deploys following components:
 - Backend Set with health check over TCP/8443 (_can be modified later_)
 - NLB backends pointing FortiWeb port1 IPs
 - NLB listener with ANY protocol setting (_can be modified later_)
-- 2 FortiWeb-VM instances with 2 vNICs, each in **selected** AD, also in **separate Fault Domain (FD)**
+- 2 FortiWeb-VM instances with 1 vNIC, each in **selected** AD, also in **separate Fault Domain (FD)**
 - 2 route tables associated with regional subnets and an NSG
 
 ### 2.1 Deployment Options
@@ -18,6 +18,8 @@ Depending on selected Oracle Cloud region, 1 or more AD (availability domain) ca
 
 - **Dual-AD**: Define different AD variable (e.g. "1" for ad_a and "2" for ad_b)
 - **Single-AD**: Define same AD variable (e.g. "1" for ad_a and "1" for ad_b)
+
+If it is required, 2nd VNIC can be added after deployment is successfully completed. "cloud_init" cannot be used for FortiWeb deployment as of today.
 
 ## 3. Deployment Steps
 
