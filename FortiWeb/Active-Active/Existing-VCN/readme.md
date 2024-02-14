@@ -5,7 +5,7 @@ This Terraform template deploys a Active/Active High Availability pair of FortiW
 
 The Template deploys following components:
 - 3 regional subnets into existing VCN
-- 2 FortiWeb-VM instances with 2 vNICs, each in **selected** AD, also in **separate Fault Domain (FD)**
+- 2 FortiWeb-VM instances with 1 vNIC, in **selected** AD, also in **separate Fault Domain (FD)**
 - Flexible Network Load Balancer (NLB) in specific network load balancer subnet
 - Backend Set with health check over TCP/8443 (_can be modified later_)
 - NLB backends pointing FortiWeb port1 IPs
@@ -28,6 +28,8 @@ Before starting deployment, **following values are required**:
 - Existing Internet Gateway OCID (if there is no IGW, it should be created in advance)
 
 One of the two methods below can be used to deploy FortiWeb A/A solution in OCI.
+
+If it is required, 2nd VNIC can be added after deployment is successfully completed. "cloud_init" cannot be used for FortiWeb deployment as of today.
 
 ### 3.1 Quick Deployment Using OCI Stacks service
 
