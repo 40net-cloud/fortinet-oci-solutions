@@ -1,7 +1,7 @@
 ## 1. Introduction
 This Terraform template deploys a Active/Active High Availability pair of FortiWeb instances accompanied by the required infrastructure.
 
-## 2. Deployment Overview
+## 2. Deployment Overview 
 
 The Template deploys following components:
 - A **new** Virtual Cloud Network (VCN) with 3 regional subnets (network load balancer, untrust and trust)
