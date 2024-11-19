@@ -42,9 +42,9 @@ For the deployment, you can use the the OCI Portal or Terraform. This set of ter
 
 ##### OCI public regions - Demo deployment
 
-|v7.4.4 BYOL Demo|v7.4.4 PAYG Demo|
+|v7.6.0 BYOL Demo|v7.6.0 PAYG Demo|
 |:-:|:-:|
-|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fgtactiveactive/FGT_A-A_NewVCN_Demo_v7.4.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fgtactiveactive/FGT_A-A_NewVCN_Demo_v7.4.4_PAYG.zip)
+|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fgtactiveactive/FGT_A-A_NewVCN_Demo_v7.6.0_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fgtactiveactive/FGT_A-A_NewVCN_Demo_v7.6.0_PAYG.zip)
 
 ##### OCI public regions - PAYG Images (PoC ready)
 
