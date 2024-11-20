@@ -33,22 +33,22 @@ Preconfigured links for quick deployment are provided below. Select the required
 
 Pre-requisite to proceed: Terraform-CLI should be downloaded already. 
 
-1. Clone the Repository: Download the required files or clone the repository using the following command:
+1. **Clone the Repository:** Download the required files or clone the repository using the following command:
 ```
 git clone https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
-2. Navigate to the Terraform Directory: Access the folder containing the Terraform files. (path: fortinet-oci-solutions > FortiAnalyzer > New-VCN > BYOL)
-3. Configure FortiAnalyzer License: The license can be activated via the FortiAnalyzer web GUI after deployment.
-4. Edit Variables: Open the terraform.tfvars file and populate the required fields such as tenancy_ocid, compartment_ocid, region etc.
-5. Initialize Terraform: Run the following command to initialize Terraform and download necessary providers:
+2. **Navigate to the Terraform Directory:** Access the folder containing the Terraform files. (path: fortinet-oci-solutions > FortiAnalyzer > New-VCN > BYOL)
+3. **Configure FortiAnalyzer License:** The license can be activated via the FortiAnalyzer web GUI after deployment.
+4. **Edit Variables:** Open the terraform.tfvars file and populate the required fields such as tenancy_ocid, compartment_ocid, region etc.
+5. **Initialize Terraform:** Run the following command to initialize Terraform and download necessary providers:
 ```
 terraform init
 ```
-6. Validate Configuration: Run a plan to ensure there are no errors or warnings:
+6. **Validate Configuration:** Run a plan to ensure there are no errors or warnings:
 ```
 terraform plan
 ```
-7. Deploy the Resources: Apply the Terraform configuration to deploy the FortiAnalyzer:
+7. **Deploy the Resources:** Apply the Terraform configuration to deploy the FortiAnalyzer:
 ```
 terraform apply
 ```
