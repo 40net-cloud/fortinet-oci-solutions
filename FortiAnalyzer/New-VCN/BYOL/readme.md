@@ -1,22 +1,22 @@
 ## 1. Introduction
-This Terraform template deploys a single/standalone FortiAnalyzer accompanied by the required infrastructure.
+This Terraform template facilitates the deployment of a standalone FortiAnalyzer instance along with the necessary infrastructure on Oracle Cloud Infrastructure (OCI).
 
 ## 2. Deployment Overview
 
-The Template deploys following components:
-- A **new** Virtual Cloud Network (VCN) with 1 regional subnet (untrust)
-- 1 FortiAnalyzer-VM instance with 1 vNIC
-- 1 route table associated with regional subnet and an NSG
+The template provisions the following components:
+- A **new** Virtual Cloud Network (VCN) with a single regional subnet (untrust).
+- A Standalone FortiAnalyzer-VM instance with one vNIC.
+- A route table associated with the regional subnet and a Security List.
 
 ## 3. Deployment Steps
 
-One of the two methods can be used to deploy FortiAnalyzer Standalone solution in OCI.
+You can deploy the FortiAnalyzer standalone solution on OCI using one of two methods:
 
 ### 3.1 Quick Deployment Using OCI Stacks service
 
-Following links are prepared to deploy FortiAnalyzer Standalone solution in a specific region. You can select required FortiAnalyzer OS version to proceed. Since buttons will be re-directing to use OCI Stacks service, user should be already logged into OCI Dashboard.
+Preconfigured links for quick deployment are provided below. Select the required FortiAnalyzer OS version and follow the deployment steps. Ensure you are logged into the OCI Dashboard before proceeding.
 
-##### BYOL Images
+##### BYOL Images (Bring Your Own License)
 
 |v6.4.15|v7.0.13|v7.2.8|v7.4.5|v7.6.1|
 |:-:|:-:|:-:|:-:|:-:|
@@ -33,22 +33,22 @@ Following links are prepared to deploy FortiAnalyzer Standalone solution in a sp
 
 Pre-requisite to proceed: Terraform-CLI should be downloaded already. 
 
-1. Download the files in a local folder or clone the repository using command below:</br>
+1. Clone the Repository: Download the required files or clone the repository using the following command:
 ```
-https://github.com/40net-cloud/fortinet-oci-solutions.git
+git clone https://github.com/40net-cloud/fortinet-oci-solutions.git
 ```
-2. Navigate to required folder that includes "_.tf_" files. (path: fortinet-oci-solutions > FortiAnalyzer > New-VCN > BYOL)
-3. FortiAnalyzer license can be activated using web gui.
-4. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
-5. Initialize the Terraform using following command
+2. Navigate to the Terraform Directory: Access the folder containing the Terraform files. (path: fortinet-oci-solutions > FortiAnalyzer > New-VCN > BYOL)
+3. Configure FortiAnalyzer License: The license can be activated via the FortiAnalyzer web GUI after deployment.
+4. Edit Variables: Open the terraform.tfvars file and populate the required fields such as tenancy_ocid, compartment_ocid, region etc.
+5. Initialize Terraform: Run the following command to initialize Terraform and download necessary providers:
 ```
 terraform init
 ```
-6. Use plan option to double check if there is no error/warning in the code.
+6. Validate Configuration: Run a plan to ensure there are no errors or warnings:
 ```
 terraform plan
 ```
-7. Apply Terraform state.
+7. Deploy the Resources: Apply the Terraform configuration to deploy the FortiAnalyzer:
 ```
 terraform apply
 ```
