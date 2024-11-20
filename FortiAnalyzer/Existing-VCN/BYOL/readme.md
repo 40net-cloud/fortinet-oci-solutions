@@ -1,21 +1,23 @@
+This README.md serves as a comprehensive guide for deploying a standalone FortiAnalyzer on Oracle Cloud Infrastructure (OCI) using Terraform. The guide outlines deployment steps, prerequisites, and deployment methods.
+
 ## 1. Introduction
-This Terraform template deploys a single/standalone FortiAnalyzer into an existing environment.
+This Terraform template simplifies the deployment of a standalone FortiAnalyzer into an existing OCI environment. It provides both automated and manual methods for deployment.
 
 ## 2. Deployment Overview
 
-The Template deploys following components:
-- 1 regional subnet into existing VCN
-- 1 FortiAnalyzer-VM instance with 1 vNIC
-- 1 route table associated with regional subnet and an NSG
+The template deploys the following components:
+- **Regional Subnet:** One subnet in the existing VCN.
+- **FortiAnalyzer Instance:** A FortiAnalyzer-VM instance with a single vNIC.
+- **Route Table:** Includes routing configurations and is associated with the regional subnet and an NSG (Network Security Group).
 
-## 3. Deployment Steps
+## 3. Deployment Methods
 
 Before starting deployment, **following values are required**. All other settings can be modified.
 - Existing VCN OCID
 - Existing VCN CIDR block (example: 10.1.0.0/16)
 - Existing Internet Gateway OCID (if there is no IGW, it should be created in advance)
 
-One of the two methods can be used to deploy FortiAnalyzer Standalone solution in OCI.
+Two methods are available for deploying the standalone FortiAnalyzer:
 
 ### 3.1 Quick Deployment Using OCI Stacks service
 
