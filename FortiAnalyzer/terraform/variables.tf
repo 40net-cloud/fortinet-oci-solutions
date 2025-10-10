@@ -344,5 +344,5 @@ variable "untrust_public_ip_lifetime" {
 
 variable "volume_size" {
   description = "Firewall VM Block Volume Attachment Size in GB"
-  default = "50" //GB
+  default = "50"
 }
