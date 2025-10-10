@@ -1,4 +1,4 @@
-name: '[FAZ] TF - Standalone - Existing-VCN'
+name: '[FAZ] TF - Standalone'
 
 env:
   TFPath: FortiAnalyzer/terraform/
