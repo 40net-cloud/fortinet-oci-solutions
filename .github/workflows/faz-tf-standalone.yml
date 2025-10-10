@@ -14,6 +14,7 @@ on:
       - 'FortiAnalyzer/terraform/*.tpl'
       - 'FortiAnalyzer/terraform/*.hcl'
       - 'FortiAnalyzer/terraform/*.json'
+      - 'FortiAnalyzer/terraform/*.yaml'
 
 jobs:
   OCI-FGT-TF-Standalone:
