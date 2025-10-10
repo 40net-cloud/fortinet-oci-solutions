@@ -1,4 +1,4 @@
-# FortiGate Firewall Active/Passive FGCP Deployment on Oracle Cloud
+# FortiGate Firewall Active/Passive FGCP Terraform Deployment on Oracle Cloud
 
 
 This repository provides Terraform code to deploy FortiGate appliances in Oracle Cloud Infrastructure (OCI) using the FGCP architecture.
