@@ -347,3 +347,4 @@ variable "volume_size" {
   default = "50"
 }
 
+# newline
