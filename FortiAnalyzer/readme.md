@@ -35,17 +35,17 @@ This package enables automated deployment of FortiAnalyzer Standalone VM(s) on O
 
 ## File Overview
 
-- [`marketplace.yaml`](marketplace.yaml): OCI Resource Manager schema for UI-driven deployments.
-- [`provider.tf`](provider.tf): OCI provider configuration.
-- [`variables.tf`](variables.tf): All input variables.
-- [`locals.tf`](locals.tf): Dynamic logic and Marketplace image selection.
-- [`compute.tf`](compute.tf): VM and block volume resources.
-- [`network.tf`](network.tf): VCN, subnets, gateways, route tables.
-- [`data_sources.tf`](data_sources.tf): Data sources for compartments, ADs, security lists.
-- [`image_subscription.tf`](image_subscription.tf): Marketplace image agreement and subscription.
-- [`output.tf`](output.tf): Outputs (e.g., public IP).
-- [`final_listings.json`](final_listings.json): Marketplace image metadata.
-- [`build-orm/install.tf`](build-orm/install.tf): Helper for packaging the deployment for OCI Resource Manager.
+- [`marketplace.yaml`](/FortiAnalyzer/terraform/marketplace.yaml): OCI Resource Manager schema for UI-driven deployments.
+- [`provider.tf`](/FortiAnalyzer/terraform/provider.tf): OCI provider configuration.
+- [`variables.tf`](/FortiAnalyzer/terraform/variables.tf): All input variables.
+- [`locals.tf`](/FortiAnalyzer/terraform/locals.tf): Dynamic logic and Marketplace image selection.
+- [`compute.tf`](/FortiAnalyzer/terraform/compute.tf): VM and block volume resources.
+- [`network.tf`](/FortiAnalyzer/terraform/network.tf): VCN, subnets, gateways, route tables.
+- [`data_sources.tf`](/FortiAnalyzer/terraform/data_sources.tf): Data sources for compartments, ADs, security lists.
+- [`image_subscription.tf`](/FortiAnalyzer/terraform/image_subscription.tf): Marketplace image agreement and subscription.
+- [`output.tf`](/FortiAnalyzer/terraform/output.tf): Outputs (e.g., public IP).
+- [`final_listings.json`](/FortiAnalyzer/terraform/final_listings.json): Marketplace image metadata.
+- [`build-orm/install.tf`](/FortiAnalyzer/terraform/build-orm/install.tf): Helper for packaging the deployment for OCI Resource Manager.
 
 ## Outputs
 
