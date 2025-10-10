@@ -346,5 +346,3 @@ variable "untrust_public_ip_lifetime" {
   description = "Public IP Address Reservation Type"
   default = "RESERVED"
 }
-
-
