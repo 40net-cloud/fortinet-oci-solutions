@@ -2,7 +2,7 @@ name: '[FAZ] TF - Standalone'
 
 env:
   TFPath: FortiAnalyzer/terraform/
-  ZIPfile: tf-faz-standalone.zip
+  ZIPfile: FortiAnalyzer_Standalone_Terraform_v1.0.zip
 
 on:
   workflow_dispatch:
