@@ -82,6 +82,11 @@ variable "instance_launch_options_network_type" {
   default     = "PARAVIRTUALIZED"
 }
 
+variable "volume_size" {
+  description = "Firewall VM Block Volume Attachment Size in GB"
+  default = "50"
+}
+
 ############################
 #  Network Configuration   #
 ############################
@@ -342,9 +347,4 @@ variable "untrust_public_ip_lifetime" {
   default = "RESERVED"
 }
 
-variable "volume_size" {
-  description = "Firewall VM Block Volume Attachment Size in GB"
-  default = "50"
-}
 
-# newline
