@@ -1,4 +1,4 @@
-# FortiGate Firewall Standalone Deployment on Oracle Cloud
+# FortiGate Firewall Standalone Terraform Deployment on Oracle Cloud
 
 This repository contains Terraform code and Oracle Marketplace Resource Manager templates to deploy a standalone FortiGate Firewall on Oracle Cloud Infrastructure (OCI).
 
