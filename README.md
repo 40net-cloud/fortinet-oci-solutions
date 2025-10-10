@@ -10,7 +10,7 @@
 |||||
 |FortiAnalyzer Standalone|
 ||
-|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fazstandalone/FortiAnalyzer_Standalone_Terraform_v1.0.zip)|
+|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fazstandalone/FortiAnalyzer_Standalone_Terraform.zip)|
 
 ## QUICK NAVIGATION GUIDE #
 - [**FortiGate**](FortiGate/)
