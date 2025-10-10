@@ -33,6 +33,7 @@ jobs:
       TF_VAR_fortios_version: "${{ secrets.FORTIOS_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
       TF_VAR_vm_compute_shape: "${{ secrets.VM_COMPUTE_SHAPE }}"
+      TF_VAR_compute_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
       
     steps:
     - name: "Checkout"
