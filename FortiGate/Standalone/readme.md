@@ -46,7 +46,7 @@ terraform apply
 - `cpu_type` (X64 or ARM64)
 - Network configuration (VCN, subnets, gateways, etc.)
 
-See [`variables.tf`](variables.tf) and [`marketplace.yaml`](marketplace.yaml) for all configurable options.
+See [`variables.tf`](/FortiGate/Standalone/terraform/variables.tf) and [`marketplace.yaml`](/FortiGate/Standalone/terraform/marketplace.yaml) for all configurable options.
 
 ## Features
 
@@ -58,14 +58,14 @@ See [`variables.tf`](variables.tf) and [`marketplace.yaml`](marketplace.yaml) fo
 
 ## File Structure
 
-- [`compute.tf`](/Standalone/terraform/compute.tf): VM and networking resources
-- [`network.tf`](network.tf): VCN, subnets, gateways, route tables, NSGs
-- [`variables.tf`](variables.tf): Input variables
-- [`locals.tf`](locals.tf): Local values and logic
-- [`data_sources.tf`](data_sources.tf): Data sources for OCI resources
-- [`image_subscription.tf`](image_subscription.tf): Marketplace image subscription logic
-- [`marketplace.yaml`](marketplace.yaml): Resource Manager template metadata
-- [`final_listings.json`](final_listings.json): Marketplace image listings
+- [`compute.tf`](/FortiGate/Standalone/terraform/compute.tf): VM and networking resources
+- [`network.tf`](/FortiGate/Standalone/terraform/network.tf): VCN, subnets, gateways, route tables, NSGs
+- [`variables.tf`](/FortiGate/Standalone/terraform/variables.tf): Input variables
+- [`locals.tf`](/FortiGate/Standalone/terraform/locals.tf): Local values and logic
+- [`data_sources.tf`](/FortiGate/Standalone/terraform/data_sources.tf): Data sources for OCI resources
+- [`image_subscription.tf`](/FortiGate/Standalone/terraform/image_subscription.tf): Marketplace image subscription logic
+- [`marketplace.yaml`](/FortiGate/Standalone/terraform/marketplace.yaml): Resource Manager template metadata
+- [`final_listings.json`](/FortiGate/Standalone/terraform/final_listings.json): Marketplace image listings
 
 ## Support
 
