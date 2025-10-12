@@ -39,7 +39,7 @@ jobs:
         REGION: ${{ secrets.REGION }}
       run: |
         cd ${{ env.TFPath }}
-        python python .github/workflows/scripts/ocimarketplace.py  # Adjust path if ocimarketplace.py is not at root
+        python .github/workflows/scripts/ocimarketplace.py  # Adjust path if ocimarketplace.py is not at root
 
     - name: Commit and push updated JSON
       run: |
