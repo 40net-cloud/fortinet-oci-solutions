@@ -1847,6 +1847,76 @@
             {
                 "listing_id": "42416321",
                 "package_type": "IMAGE",
+                "package_version": "7.6.4 ( X64 )",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194386393",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "42416321",
+                    "_version": "7.6.4 ( X64 )",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "194386393",
+                    "_time_created": "2025-08-22T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaam7ewzrjbltqiarxukuk72v2lqkdtpqtwxqpszqqvrm7likfnpt5q",
+                    "_app_catalog_listing_resource_version": "7.6.4_(_X64_)",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa6sh4hz4ziatjmda262htabajhihetqgli22mnfyksxjly7gy26gq"
+                }
+            },
+            {
+                "listing_id": "42416321",
+                "package_type": "IMAGE",
                 "package_version": "7.4.8 ( X64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -2547,76 +2617,6 @@
             {
                 "listing_id": "42416321",
                 "package_type": "IMAGE",
-                "package_version": "7.6.2 ( X64 )",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "181055669",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "42416321",
-                    "_version": "7.6.2 ( X64 )",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "BYOL",
-                        "_pay_go_strategy": null,
-                        "_currency": null,
-                        "_rate": null,
-                        "_international_market_price": null
-                    },
-                    "_resource_id": "181055669",
-                    "_time_created": "2025-01-31T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaam7ewzrjbltqiarxukuk72v2lqkdtpqtwxqpszqqvrm7likfnpt5q",
-                    "_app_catalog_listing_resource_version": "7.6.2_(_X64_)",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaas3kl6ynyigahrsiegwzesfub6nffiy6qxlrhs742p6ltvode257a"
-                }
-            },
-            {
-                "listing_id": "42416321",
-                "package_type": "IMAGE",
                 "package_version": "7.6.2 ( ARM64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -2973,6 +2973,76 @@
             {
                 "listing_id": "39667790",
                 "package_type": "IMAGE",
+                "package_version": "7.6.4 Paravirtualized Mode",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "195581917",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "39667790",
+                    "_version": "7.6.4 Paravirtualized Mode",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "195581917",
+                    "_time_created": "2025-09-10T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaa4ehcyncbbmuotd6ede2lengq7uoash27s4hgwpzexsktsxanp6oa",
+                    "_app_catalog_listing_resource_version": "7.6.4_Paravirtualized_Mode",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaar43vcep6jjdfbzw524lgurtiz4dj7ttdqwvqctavs7vnaljrv4vq"
+                }
+            },
+            {
+                "listing_id": "39667790",
+                "package_type": "IMAGE",
                 "package_version": "7.0.14 Paravirtualized Mode",
                 "pricing": "null",
                 "regions": "null",
@@ -3323,76 +3393,6 @@
             {
                 "listing_id": "39667790",
                 "package_type": "IMAGE",
-                "package_version": "7.6.2 Paravirtualized Mode",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "178934666",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "39667790",
-                    "_version": "7.6.2 Paravirtualized Mode",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "BYOL",
-                        "_pay_go_strategy": null,
-                        "_currency": null,
-                        "_rate": null,
-                        "_international_market_price": null
-                    },
-                    "_resource_id": "178934666",
-                    "_time_created": "2024-12-19T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaa4ehcyncbbmuotd6ede2lengq7uoash27s4hgwpzexsktsxanp6oa",
-                    "_app_catalog_listing_resource_version": "7.6.2_Paravirtualized_Mode",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaars7raclhriqvxi7zeodsc43xzbcmav3li34cyoru6lykwwpcvolq"
-                }
-            },
-            {
-                "listing_id": "39667790",
-                "package_type": "IMAGE",
                 "package_version": "7.2.9 Paravirtualized Mode",
                 "pricing": "null",
                 "regions": "null",
@@ -3606,6 +3606,76 @@
         "listing_id": "39647604",
         "name": "FortiManager Centralized Security Management (BYOL)",
         "packages": [
+            {
+                "listing_id": "39647604",
+                "package_type": "IMAGE",
+                "package_version": "7.6.4 Paravirtualized Mode",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "195580620",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "39647604",
+                    "_version": "7.6.4 Paravirtualized Mode",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "195580620",
+                    "_time_created": "2025-09-10T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawpkjzjrzqhd6m4q6j6qfkwsiqaqnv5f5juup6z2lvyg56wjbcbyq",
+                    "_app_catalog_listing_resource_version": "7.6.4_Paravirtualized_Mode",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaan6zdvh34ut5eamynxrsewpqvafumq2jodk3huytulhdrti7z6gnq"
+                }
+            },
             {
                 "listing_id": "39647604",
                 "package_type": "IMAGE",
@@ -3959,76 +4029,6 @@
             {
                 "listing_id": "39647604",
                 "package_type": "IMAGE",
-                "package_version": "7.6.2 Paravirtualized Mode",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "178934527",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "39647604",
-                    "_version": "7.6.2 Paravirtualized Mode",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "BYOL",
-                        "_pay_go_strategy": null,
-                        "_currency": null,
-                        "_rate": null,
-                        "_international_market_price": null
-                    },
-                    "_resource_id": "178934527",
-                    "_time_created": "2024-12-19T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawpkjzjrzqhd6m4q6j6qfkwsiqaqnv5f5juup6z2lvyg56wjbcbyq",
-                    "_app_catalog_listing_resource_version": "7.6.2_Paravirtualized_Mode",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaanajtigpxolgy53aoue4qtilc6sjm3myvkhtnmw5e3iauagwefqca"
-                }
-            },
-            {
-                "listing_id": "39647604",
-                "package_type": "IMAGE",
                 "package_version": "7.2.9 Paravirtualized Mode",
                 "pricing": "null",
                 "regions": "null",
@@ -4309,6 +4309,228 @@
         ]
     },
     {
+        "listing_id": "195958003",
+        "name": "Fortinet FortiNDR Cloud Sensor for OCI",
+        "packages": [
+            {
+                "listing_id": "195958003",
+                "package_type": "IMAGE",
+                "package_version": "2.3.0",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "195958716",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "195958003",
+                    "_version": "2.3.0",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "195958716",
+                    "_time_created": "2025-09-19T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaa7ozszalb4srtcgjti7sq3zqyr5c6gi7rywxhw45y3fbc4jug52iq",
+                    "_app_catalog_listing_resource_version": "2.3.0",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa6sgozli5fk7vjls37iykrdmqk5scfjiaewghhfg6qzxa3zzmgxzq"
+                }
+            }
+        ]
+    },
+    {
+        "listing_id": "193991180",
+        "name": "FortiNAC Secure Network Access Control (BYOL)",
+        "packages": [
+            {
+                "listing_id": "193991180",
+                "package_type": "IMAGE",
+                "package_version": "7.6.4",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194723905",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "193991180",
+                    "_version": "7.6.4",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "194723905",
+                    "_time_created": "2025-08-28T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawvfjme5q5vcpm5ntmve4sa6j3i6qzlggmeqtckbtyzznevfbszxa",
+                    "_app_catalog_listing_resource_version": "7.6.4",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa2bxoqb7z5torekeh6s4xp5uttzre3wouzjq3bwj2xnjtbblyo6ja"
+                }
+            },
+            {
+                "listing_id": "193991180",
+                "package_type": "IMAGE",
+                "package_version": "7.6.3",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "193991988",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "193991180",
+                    "_version": "7.6.3",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "193991988",
+                    "_time_created": "2025-08-19T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawvfjme5q5vcpm5ntmve4sa6j3i6qzlggmeqtckbtyzznevfbszxa",
+                    "_app_catalog_listing_resource_version": "7.6.3",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaagobjlmv4x52m5qj3qrpwhaqwt4hkoj5bqtz3e3l4m55d3g6op6sa"
+                }
+            }
+        ]
+    },
+    {
         "listing_id": "180103209",
         "name": "FortiMail Secure Email Gateway (BYOL)",
         "packages": [
@@ -4461,6 +4683,76 @@
             {
                 "listing_id": "172909410",
                 "package_type": "IMAGE",
+                "package_version": "3.0.1",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "197376281",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "172909410",
+                    "_version": "3.0.1",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "197376281",
+                    "_time_created": "2025-10-10T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaaqh4tet7fksyud7xswxwse34ybeo4bttqxchr2ley54ufiunnvpqa",
+                    "_app_catalog_listing_resource_version": "3.0.1",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaajcaceokqoaqqx6jo5ig77s3xxipxq67s53cdmzh6hyeix4yl5bjq"
+                }
+            },
+            {
+                "listing_id": "172909410",
+                "package_type": "IMAGE",
                 "package_version": "2.1.0",
                 "pricing": "null",
                 "regions": "null",
@@ -4534,6 +4826,76 @@
         "listing_id": "172821855",
         "name": "Fortinet FortiGuest Guest Access and Policy Management (BYOL)",
         "packages": [
+            {
+                "listing_id": "172821855",
+                "package_type": "IMAGE",
+                "package_version": "2.2.1",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194770970",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "172821855",
+                    "_version": "2.2.1",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "194770970",
+                    "_time_created": "2025-08-29T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaanvadbqcdfhmdezf4lly44xokjr22sgxavk332sv5kdtqidw3jaua",
+                    "_app_catalog_listing_resource_version": "2.2.1",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa6o4ufjatpxpozgqzad6xokweacnihl6l23ppzeo6352anb3mv4aa"
+                }
+            },
             {
                 "listing_id": "172821855",
                 "package_type": "IMAGE",
@@ -5451,6 +5813,90 @@
             {
                 "listing_id": "148680162",
                 "package_type": "IMAGE",
+                "package_version": "7.6.4 ( X64 )",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194386869",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "148680162",
+                    "_version": "7.6.4 ( X64 )",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "PAYGO",
+                        "_pay_go_strategy": "PER_OCPU_LINEAR",
+                        "_currency": "USD",
+                        "_rate": 0.4,
+                        "_international_market_price": {
+                            "swagger_types": {
+                                "currency_code": "str",
+                                "currency_symbol": "str",
+                                "rate": "float"
+                            },
+                            "attribute_map": {
+                                "currency_code": "currencyCode",
+                                "currency_symbol": "currencySymbol",
+                                "rate": "rate"
+                            },
+                            "_currency_code": "USD",
+                            "_currency_symbol": null,
+                            "_rate": 0.4
+                        }
+                    },
+                    "_resource_id": "194386869",
+                    "_time_created": "2025-08-22T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaabepjdf2sw2jkr77a7zrbog7ukzxepoexzgkoyvbw2j2jn7l4y7lq",
+                    "_app_catalog_listing_resource_version": "7.6.4_(_X64_)",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa6qqlsuqbpezqqzlrldld4hfhjjw7lkedfwhtmnx4lp2q7tptytaa"
+                }
+            },
+            {
+                "listing_id": "148680162",
+                "package_type": "IMAGE",
                 "package_version": "7.4.8 ( X64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -6291,90 +6737,6 @@
             {
                 "listing_id": "148680162",
                 "package_type": "IMAGE",
-                "package_version": "7.6.2 ( X64 )",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "181056659",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "148680162",
-                    "_version": "7.6.2 ( X64 )",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "PAYGO",
-                        "_pay_go_strategy": "PER_OCPU_LINEAR",
-                        "_currency": "USD",
-                        "_rate": 0.4,
-                        "_international_market_price": {
-                            "swagger_types": {
-                                "currency_code": "str",
-                                "currency_symbol": "str",
-                                "rate": "float"
-                            },
-                            "attribute_map": {
-                                "currency_code": "currencyCode",
-                                "currency_symbol": "currencySymbol",
-                                "rate": "rate"
-                            },
-                            "_currency_code": "USD",
-                            "_currency_symbol": null,
-                            "_rate": 0.4
-                        }
-                    },
-                    "_resource_id": "181056659",
-                    "_time_created": "2025-01-31T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaabepjdf2sw2jkr77a7zrbog7ukzxepoexzgkoyvbw2j2jn7l4y7lq",
-                    "_app_catalog_listing_resource_version": "7.6.2_(_X64_)",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaasfeqqgkdyjwplhkj2me6ie2r4gbkrsgfp26gmjaorxxo37safyyq"
-                }
-            },
-            {
-                "listing_id": "148680162",
-                "package_type": "IMAGE",
                 "package_version": "7.6.2 ( ARM64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -7134,6 +7496,90 @@
         "listing_id": "141442228",
         "name": "FortiGate Next-Gen Firewall (16 cores)",
         "packages": [
+            {
+                "listing_id": "141442228",
+                "package_type": "IMAGE",
+                "package_version": "7.6.4 ( X64 )",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194387575",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "141442228",
+                    "_version": "7.6.4 ( X64 )",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "PAYGO",
+                        "_pay_go_strategy": "PER_OCPU_LINEAR",
+                        "_currency": "USD",
+                        "_rate": 0.256,
+                        "_international_market_price": {
+                            "swagger_types": {
+                                "currency_code": "str",
+                                "currency_symbol": "str",
+                                "rate": "float"
+                            },
+                            "attribute_map": {
+                                "currency_code": "currencyCode",
+                                "currency_symbol": "currencySymbol",
+                                "rate": "rate"
+                            },
+                            "_currency_code": "USD",
+                            "_currency_symbol": null,
+                            "_rate": 0.256
+                        }
+                    },
+                    "_resource_id": "194387575",
+                    "_time_created": "2025-08-22T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawyxdympmdyxagwj2kr77zybopywouiivxd7vxfttwftkvnw2lqla",
+                    "_app_catalog_listing_resource_version": "7.6.4_(_X64_)",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaanrwk6ajdmtedmw6vlkslhnxnd7qwzarbd2rslruhi5p4jzerwdda"
+                }
+            },
             {
                 "listing_id": "141442228",
                 "package_type": "IMAGE",
@@ -7972,90 +8418,6 @@
                     "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawyxdympmdyxagwj2kr77zybopywouiivxd7vxfttwftkvnw2lqla",
                     "_app_catalog_listing_resource_version": "7.4.7_(_ARM64_)",
                     "_image_id": "ocid1.image.oc1..aaaaaaaai4fnyaucmjurpkerntzlop57ebozqkr7igjftmm32tm4ijgsug2q"
-                }
-            },
-            {
-                "listing_id": "141442228",
-                "package_type": "IMAGE",
-                "package_version": "7.6.2 ( X64 )",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "181057490",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "141442228",
-                    "_version": "7.6.2 ( X64 )",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "PAYGO",
-                        "_pay_go_strategy": "PER_OCPU_LINEAR",
-                        "_currency": "USD",
-                        "_rate": 0.256,
-                        "_international_market_price": {
-                            "swagger_types": {
-                                "currency_code": "str",
-                                "currency_symbol": "str",
-                                "rate": "float"
-                            },
-                            "attribute_map": {
-                                "currency_code": "currencyCode",
-                                "currency_symbol": "currencySymbol",
-                                "rate": "rate"
-                            },
-                            "_currency_code": "USD",
-                            "_currency_symbol": null,
-                            "_rate": 0.256
-                        }
-                    },
-                    "_resource_id": "181057490",
-                    "_time_created": "2025-01-31T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaawyxdympmdyxagwj2kr77zybopywouiivxd7vxfttwftkvnw2lqla",
-                    "_app_catalog_listing_resource_version": "7.6.2_(_X64_)",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaao533bruxnhmtp5hc7o2fpr6l24rh4oibnsq75645ktwfwltze6jq"
                 }
             },
             {
@@ -10219,6 +10581,90 @@
             {
                 "listing_id": "125207753",
                 "package_type": "IMAGE",
+                "package_version": "7.6.4 ( X64 )",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194387751",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "125207753",
+                    "_version": "7.6.4 ( X64 )",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "PAYGO",
+                        "_pay_go_strategy": "PER_OCPU_LINEAR",
+                        "_currency": "USD",
+                        "_rate": 0.17,
+                        "_international_market_price": {
+                            "swagger_types": {
+                                "currency_code": "str",
+                                "currency_symbol": "str",
+                                "rate": "float"
+                            },
+                            "attribute_map": {
+                                "currency_code": "currencyCode",
+                                "currency_symbol": "currencySymbol",
+                                "rate": "rate"
+                            },
+                            "_currency_code": "USD",
+                            "_currency_symbol": null,
+                            "_rate": 0.17
+                        }
+                    },
+                    "_resource_id": "194387751",
+                    "_time_created": "2025-08-22T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaamc75m7b3rukv6vd573mdrdqnlqabrbhmz5fggvvtalq3ckfl3zqa",
+                    "_app_catalog_listing_resource_version": "7.6.4_(_X64_)",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaaa3xulwhsdlgmvm7eroihoovqtmulatqsnqul4ljjtkhdhmqdjt6q"
+                }
+            },
+            {
+                "listing_id": "125207753",
+                "package_type": "IMAGE",
                 "package_version": "7.4.8 ( X64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -11059,90 +11505,6 @@
             {
                 "listing_id": "125207753",
                 "package_type": "IMAGE",
-                "package_version": "7.6.2 ( X64 )",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "181057843",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "125207753",
-                    "_version": "7.6.2 ( X64 )",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "PAYGO",
-                        "_pay_go_strategy": "PER_OCPU_LINEAR",
-                        "_currency": "USD",
-                        "_rate": 0.17,
-                        "_international_market_price": {
-                            "swagger_types": {
-                                "currency_code": "str",
-                                "currency_symbol": "str",
-                                "rate": "float"
-                            },
-                            "attribute_map": {
-                                "currency_code": "currencyCode",
-                                "currency_symbol": "currencySymbol",
-                                "rate": "rate"
-                            },
-                            "_currency_code": "USD",
-                            "_currency_symbol": null,
-                            "_rate": 0.17
-                        }
-                    },
-                    "_resource_id": "181057843",
-                    "_time_created": "2025-01-31T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaamc75m7b3rukv6vd573mdrdqnlqabrbhmz5fggvvtalq3ckfl3zqa",
-                    "_app_catalog_listing_resource_version": "7.6.2_(_X64_)",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaattjmhlfcl4647azmk7lqv3ohnu33jrclakymdq3qnhvlkwzyfirq"
-                }
-            },
-            {
-                "listing_id": "125207753",
-                "package_type": "IMAGE",
                 "package_version": "7.6.2 ( ARM64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -11566,6 +11928,90 @@
         "listing_id": "125205408",
         "name": "FortiGate Next-Gen Firewall (8 cores)",
         "packages": [
+            {
+                "listing_id": "125205408",
+                "package_type": "IMAGE",
+                "package_version": "7.6.4 ( X64 )",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194387203",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "125205408",
+                    "_version": "7.6.4 ( X64 )",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "PAYGO",
+                        "_pay_go_strategy": "PER_OCPU_LINEAR",
+                        "_currency": "USD",
+                        "_rate": 0.41,
+                        "_international_market_price": {
+                            "swagger_types": {
+                                "currency_code": "str",
+                                "currency_symbol": "str",
+                                "rate": "float"
+                            },
+                            "attribute_map": {
+                                "currency_code": "currencyCode",
+                                "currency_symbol": "currencySymbol",
+                                "rate": "rate"
+                            },
+                            "_currency_code": "USD",
+                            "_currency_symbol": null,
+                            "_rate": 0.41
+                        }
+                    },
+                    "_resource_id": "194387203",
+                    "_time_created": "2025-08-22T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaa6e3iscizq3p24bfb5nr4wxsxzc3s6mzpekxgv7f2kse35akhg45q",
+                    "_app_catalog_listing_resource_version": "7.6.4_(_X64_)",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa253cvjattvnzdkpok4jaur7ujtl7savbtqstzb6mdfrts6tebswq"
+                }
+            },
             {
                 "listing_id": "125205408",
                 "package_type": "IMAGE",
@@ -12409,90 +12855,6 @@
             {
                 "listing_id": "125205408",
                 "package_type": "IMAGE",
-                "package_version": "7.6.2 ( X64 )",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "181057160",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "125205408",
-                    "_version": "7.6.2 ( X64 )",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "PAYGO",
-                        "_pay_go_strategy": "PER_OCPU_LINEAR",
-                        "_currency": "USD",
-                        "_rate": 0.41,
-                        "_international_market_price": {
-                            "swagger_types": {
-                                "currency_code": "str",
-                                "currency_symbol": "str",
-                                "rate": "float"
-                            },
-                            "attribute_map": {
-                                "currency_code": "currencyCode",
-                                "currency_symbol": "currencySymbol",
-                                "rate": "rate"
-                            },
-                            "_currency_code": "USD",
-                            "_currency_symbol": null,
-                            "_rate": 0.41
-                        }
-                    },
-                    "_resource_id": "181057160",
-                    "_time_created": "2025-01-31T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaa6e3iscizq3p24bfb5nr4wxsxzc3s6mzpekxgv7f2kse35akhg45q",
-                    "_app_catalog_listing_resource_version": "7.6.2_(_X64_)",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaaps5pmrknu5jodezjr4e3nfo46coxpdlueluqanwy6mfb4qm7ssza"
-                }
-            },
-            {
-                "listing_id": "125205408",
-                "package_type": "IMAGE",
                 "package_version": "7.6.2 ( ARM64 )",
                 "pricing": "null",
                 "regions": "null",
@@ -13084,6 +13446,90 @@
         "listing_id": "125196411",
         "name": "FortiGate Next-Gen Firewall (2 cores)",
         "packages": [
+            {
+                "listing_id": "125196411",
+                "package_type": "IMAGE",
+                "package_version": "7.6.4 ( X64 )",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "194386550",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "125196411",
+                    "_version": "7.6.4 ( X64 )",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "PAYGO",
+                        "_pay_go_strategy": "PER_OCPU_LINEAR",
+                        "_currency": "USD",
+                        "_rate": 0.51,
+                        "_international_market_price": {
+                            "swagger_types": {
+                                "currency_code": "str",
+                                "currency_symbol": "str",
+                                "rate": "float"
+                            },
+                            "attribute_map": {
+                                "currency_code": "currencyCode",
+                                "currency_symbol": "currencySymbol",
+                                "rate": "rate"
+                            },
+                            "_currency_code": "USD",
+                            "_currency_symbol": null,
+                            "_rate": 0.51
+                        }
+                    },
+                    "_resource_id": "194386550",
+                    "_time_created": "2025-08-22T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaaif6zctibx6njnmob2a23l5if7voquhgsfqxi2ftog2yy3jxmuaba",
+                    "_app_catalog_listing_resource_version": "7.6.4_(_X64_)",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaawynwkn2pks4wjebr65ctxdfl6l6sqym3hvkij4s45ayot4jzzxuq"
+                }
+            },
             {
                 "listing_id": "125196411",
                 "package_type": "IMAGE",
@@ -13922,90 +14368,6 @@
                     "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaaif6zctibx6njnmob2a23l5if7voquhgsfqxi2ftog2yy3jxmuaba",
                     "_app_catalog_listing_resource_version": "7.4.7_(_ARM64_)",
                     "_image_id": "ocid1.image.oc1..aaaaaaaazuaxja5tfdnor4j4xqbdwtrajyvwpxhnhwjdvwnlmf4xuw22r6ua"
-                }
-            },
-            {
-                "listing_id": "125196411",
-                "package_type": "IMAGE",
-                "package_version": "7.6.2 ( X64 )",
-                "pricing": "null",
-                "regions": "null",
-                "resource_id": "181056257",
-                "package_info": {
-                    "swagger_types": {
-                        "description": "str",
-                        "listing_id": "str",
-                        "version": "str",
-                        "package_type": "str",
-                        "pricing": "PricingModel",
-                        "resource_id": "str",
-                        "time_created": "datetime",
-                        "operating_system": "OperatingSystem",
-                        "regions": "list[Region]",
-                        "app_catalog_listing_id": "str",
-                        "app_catalog_listing_resource_version": "str",
-                        "image_id": "str"
-                    },
-                    "attribute_map": {
-                        "description": "description",
-                        "listing_id": "listingId",
-                        "version": "version",
-                        "package_type": "packageType",
-                        "pricing": "pricing",
-                        "resource_id": "resourceId",
-                        "time_created": "timeCreated",
-                        "operating_system": "operatingSystem",
-                        "regions": "regions",
-                        "app_catalog_listing_id": "appCatalogListingId",
-                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
-                        "image_id": "imageId"
-                    },
-                    "_description": "",
-                    "_listing_id": "125196411",
-                    "_version": "7.6.2 ( X64 )",
-                    "_package_type": "IMAGE",
-                    "_pricing": {
-                        "swagger_types": {
-                            "type": "str",
-                            "pay_go_strategy": "str",
-                            "currency": "str",
-                            "rate": "float",
-                            "international_market_price": "InternationalMarketPrice"
-                        },
-                        "attribute_map": {
-                            "type": "type",
-                            "pay_go_strategy": "payGoStrategy",
-                            "currency": "currency",
-                            "rate": "rate",
-                            "international_market_price": "internationalMarketPrice"
-                        },
-                        "_type": "PAYGO",
-                        "_pay_go_strategy": "PER_OCPU_LINEAR",
-                        "_currency": "USD",
-                        "_rate": 0.51,
-                        "_international_market_price": {
-                            "swagger_types": {
-                                "currency_code": "str",
-                                "currency_symbol": "str",
-                                "rate": "float"
-                            },
-                            "attribute_map": {
-                                "currency_code": "currencyCode",
-                                "currency_symbol": "currencySymbol",
-                                "rate": "rate"
-                            },
-                            "_currency_code": "USD",
-                            "_currency_symbol": null,
-                            "_rate": 0.51
-                        }
-                    },
-                    "_resource_id": "181056257",
-                    "_time_created": "2025-01-31T00:00:00+00:00",
-                    "_operating_system": null,
-                    "_regions": [],
-                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaaif6zctibx6njnmob2a23l5if7voquhgsfqxi2ftog2yy3jxmuaba",
-                    "_app_catalog_listing_resource_version": "7.6.2_(_X64_)",
-                    "_image_id": "ocid1.image.oc1..aaaaaaaajwriao4h5ip6fikwygsaqlc4z3jcjahgg5x6iykvsufoarbfvdma"
                 }
             },
             {
