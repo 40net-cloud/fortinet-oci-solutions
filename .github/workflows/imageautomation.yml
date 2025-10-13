@@ -38,7 +38,6 @@ jobs:
         TENANCY_OCID: ${{ secrets.TENANCY_OCID }}
         REGION: ${{ secrets.REGION }}
       run: |
-        cd ${{ env.TFPath }}
         python .github/workflows/scripts/ocimarketplace.py  # Adjust path if ocimarketplace.py is not at root
 
     - name: Commit and push updated JSON
