@@ -40,10 +40,21 @@ jobs:
       run: |
         python .github/workflows/scripts/ocimarketplace.py  # Adjust path if ocimarketplace.py is not at root
 
-    - name: Commit and push updated JSON
+    - name: Copy final_listings.json to all product folders
+      run: |
+        # Copy generated JSON file to each folder
+        cp final_listings.json FortiAnalyzer/terraform/
+        cp final_listings.json FortiManager/terraform/
+        cp final_listings.json FortiGate/Standalone/terraform/
+        cp final_listings.json FortiGate/Active-Passive/terraform/
+
+    - name: Commit and push updated JSON files
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add ${{ env.TFPath }}final_listings.json
+        git add FortiAnalyzer/terraform/final_listings.json
+        git add FortiManager/terraform/final_listings.json
+        git add FortiGate/Standalone/terraform/final_listings.json
+        git add FortiGate/Active-Passive/terraform/final_listings.json
         git commit -m "Automated update of final_listings.json on 1st of month" || echo "No changes to commit"
         git push
