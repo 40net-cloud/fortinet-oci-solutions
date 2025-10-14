@@ -82,7 +82,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Compress-Archive -Path "./FortiGate/Standalone*" -DestinationPath "./${{ env.ZIPfile }}"
+          Compress-Archive -Path "./FortiGate/Standalone/terraform*" -DestinationPath "./${{ env.ZIPfile }}"
         azPSVersion: "latest"
 
     - name: upload-templates-zip
