@@ -11,7 +11,7 @@ You can quickly deploy this solution using the Oracle Cloud Stack service:
 
 |FortiGate A/P FGCP Cluster|
 |:-:|
-|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fgtactivepassive/FortiGate_AP_FGCP_Terraform_v2.0.zip)|
+|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fgtactivepassive/FortiGate_AP_FGCP_Terraform.zip)|
 
 Click the button above to launch the stack in your OCI tenancy. You will be guided through the configuration steps in the Oracle Cloud Console.
 
