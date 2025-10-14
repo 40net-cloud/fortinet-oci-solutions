@@ -4829,6 +4829,76 @@
             {
                 "listing_id": "172821855",
                 "package_type": "IMAGE",
+                "package_version": "2.4.0",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "197545053",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "172821855",
+                    "_version": "2.4.0",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "197545053",
+                    "_time_created": "2025-10-13T00:00:00+00:00",
+                    "_operating_system": null,
+                    "_regions": [],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaanvadbqcdfhmdezf4lly44xokjr22sgxavk332sv5kdtqidw3jaua",
+                    "_app_catalog_listing_resource_version": "2.4.0",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaa453cnnqyakq7f66k6v6iazcbj3k4m2oewsqv3yjl5pr3ce5vp5qq"
+                }
+            },
+            {
+                "listing_id": "172821855",
+                "package_type": "IMAGE",
                 "package_version": "2.2.1",
                 "pricing": "null",
                 "regions": "null",
