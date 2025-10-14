@@ -31,6 +31,7 @@ jobs:
       TF_VAR_vcn_ocid: "${{ secrets.VCN_OCID }}"
       TF_VAR_vcn_cidr: "${{ secrets.VCN_CIDR }}"
       TF_VAR_availability_domain_name_1: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
+      TF_VAR_availability_domain_name_2: "${{ secrets.AVAILABILITY_DOMAIN_NAME_2 }}"
       TF_VAR_cpu_type: "${{ secrets.CPU_TYPE }}"
       TF_VAR_fortios_version: "${{ secrets.FORTIOS_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
