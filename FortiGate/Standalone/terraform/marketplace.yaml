@@ -224,6 +224,7 @@ variables:
     type: enum
     required: true
     enum:
+      - 7.6.4
       - 7.6.3
       - 7.4.8
       - 7.2.11
