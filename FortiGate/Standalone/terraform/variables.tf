@@ -92,7 +92,7 @@ variable "cpu_type" {
 variable "fortios_version" {
   type = string
   validation {
-    condition     = contains(["6.4.13", "7.0.17", "7.2.11", "7.4.8", "7.6.3", "7.6.4"], var.fortios_version)
+    condition     = contains(["6.4.13", "7.0.17", "7.2.11", "7.4.8", "7.6.3"], var.fortios_version)
     error_message = "Only supported FortiOS versions are allowed"
   }
 }
@@ -158,37 +158,18 @@ variable "trust_subnet_id" {
 }
 
 variable "trust_subnet_display_name" {
-  description = "Trust Subnet Name"
-  default     = "trust-subnet"
+  description = "Firewall Trust Subnet Name"
+  default     = "Trust-subnet"
 }
 
 variable "trust_subnet_cidr_block" {
-  description = "Trust Subnet CIDR"
+  description = "Firewall Trust Subnet CIDR"
   default     = "192.168.2.0/24"
 }
 
 variable "trust_subnet_dns_label" {
   description = "Trust Subnet DNS Label"
   default     = "trust"
-}
-
-variable "untrust_subnet_id" {
-  default = ""
-}
-
-variable "untrust_subnet_display_name" {
-  description = "Firewall Untrust Subnet Name"
-  default     = "untrust-subnet"
-}
-
-variable "untrust_subnet_cidr_block" {
-  description = "Firewall Untrust Subnet CIDR"
-  default     = "192.168.3.0/24"
-}
-
-variable "untrust_subnet_dns_label" {
-  description = "Untrust Subnet DNS Label"
-  default     = "untrust"
 }
 
 ############################
@@ -211,7 +192,7 @@ variable "nsg_display_name" {
 
 variable "public_routetable_display_name" {
   description = "Public route table Name"
-  default     = "Untrust-Route-Table"
+  default     = "Trust-Route-Table"
 }
 
 variable "management_routetable_display_name" {
@@ -224,14 +205,9 @@ variable "management_routetable_display_name_existing" {
   default     = "Management-Route-Table"
 }
 
-variable "untrust_routetable_display_name_existing" {
-  description = "Untrust route table Name"
-  default     = "Untrust-Route-Table-Existing"
-}
-
 variable "trust_routetable_display_name_existing" {
-  description = "Untrust route table Name"
-  default     = "Untrust-Route-Table-Existing"
+  description = "Trust route table Name"
+  default     = "Trust-Route-Table-Existing"
 }
 
 variable "management_route_table_existing_attachment" {
@@ -299,47 +275,15 @@ variable "bootstrap_vm-a" {
 ######################
 #    Static Values     #   
 ######################
-#ACTIVE NODE
-variable "mgmt_private_ip_primary_a" {
+
+variable "mgmt_private_ip" {
   description = "Primary Firewall Mgmt Interface Private IP"
   default     = "192.168.1.10"
 }
 
-variable "untrust_private_ip_primary_a" {
-  description = "Primary Firewall Untrust Interface Private IP"
-  default     = "192.168.3.10"
-}
-
-variable "trust_private_ip_primary_a" {
+variable "trust_private_ip" {
   description = "Primary Firewall Trust Interface Private IP"
   default     = "192.168.2.10"
-}
-
-#PASSIVE NODE
-variable "mgmt_private_ip_primary_b" {
-  description = "Secondary Firewall Mgmt Interface Private IP"
-  default     = "192.168.1.20"
-}
-
-variable "untrust_private_ip_primary_b" {
-  description = "Secondary Firewall Untrust Interface Private IP"
-  default     = "192.168.3.20"
-}
-
-variable "trust_private_ip_primary_b" {
-  description = "Secondary Firewall Trust Interface Private IP"
-  default     = "192.168.2.20"
-}
-
-
-variable "untrust_floating_private_ip" {
-  description = "Firewall Untrust Interface Floating Private IP"
-  default     = "192.168.3.30"
-}
-
-variable "trust_floating_private_ip" {
-  description = "Firewall Trust Interface Floating Private IP"
-  default     = "192.168.2.30"
 }
 
 variable "mgmt_subnet_gateway" {
@@ -352,12 +296,7 @@ variable "trust_subnet_gateway" {
   default     = "192.168.2.1"
 }
 
-variable "untrust_subnet_gateway" {
-  description = "Untrust Subnet Default Gateway IP"
-  default     = "192.168.3.1"
-}
-
-variable "untrust_public_ip_lifetime" {
+variable "trust_public_ip_lifetime" {
   description = "Public IP Address Reservation Type"
   default     = "RESERVED"
 }

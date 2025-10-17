@@ -57,21 +57,6 @@ data "oci_core_security_lists" "allow_all_security" {
 }
 
 # ------ Get the attachement based on Public Subnet
-data "oci_core_vnic_attachments" "untrust_attachments" {
-  compartment_id = var.compute_compartment_ocid
-  instance_id    = oci_core_instance.vm-a.0.id
-
-  filter {
-    name   = "subnet_id"
-    values = [local.use_existing_network ? var.untrust_subnet_id : oci_core_subnet.untrust_subnet[0].id]
-  }
-
-  depends_on = [
-    oci_core_vnic_attachment.vnic_attach_untrust_a,
-  ]
-}
-
-# ------ Get the attachement based on Private Subnet
 data "oci_core_vnic_attachments" "trust_attachments" {
   compartment_id = var.compute_compartment_ocid
   instance_id    = oci_core_instance.vm-a.0.id
@@ -85,4 +70,3 @@ data "oci_core_vnic_attachments" "trust_attachments" {
     oci_core_vnic_attachment.vnic_attach_trust_a,
   ]
 }
-

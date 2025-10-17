@@ -33,7 +33,7 @@ variableGroups:
       - template_name
       - availability_domain_number
       - template_version
-      - untrust_public_ip_lifetime
+      - trust_public_ip_lifetime
       - fingerprint
       - management_route_table_existing_attachment
       - mp_listing_id
@@ -75,43 +75,24 @@ variableGroups:
       - management_subnet_display_name
       - management_subnet_cidr_block
       - management_subnet_dns_label
-      - ha_subnet_id
-      - ha_subnet_display_name
-      - ha_subnet_cidr_block
-      - ha_subnet_dns_label
       - trust_subnet_id
       - trust_subnet_display_name
       - trust_subnet_cidr_block
       - trust_subnet_dns_label
-      - untrust_subnet_id
-      - untrust_subnet_display_name
-      - untrust_subnet_cidr_block
-      - untrust_subnet_dns_label
       - use_existing_ip
       - public_routetable_display_name
       - private_routetable_display_name
-      - ha_routetable_display_name
       - management_routetable_display_name
       - management_routetable_display_name_existing
-      - untrust_routetable_display_name_existing
       - trust_routetable_display_name_existing
-      - ha_routetable_display_name_existing
+      - trust_routetable_display_name_existing
   
   - title: "Static IP Addresses Configuration"
     variables:
-      - mgmt_private_ip_primary_a
-      - untrust_private_ip_primary_a
-      - trust_private_ip_primary_a
-      - hb_private_ip_primary_a
-      - mgmt_private_ip_primary_b
-      - untrust_private_ip_primary_b
-      - trust_private_ip_primary_b
-      - hb_private_ip_primary_b
-      - untrust_floating_private_ip
-      - trust_floating_private_ip
+      - mgmt_private_ip
+      - trust_private_ip
       - mgmt_subnet_gateway
       - trust_subnet_gateway
-      - untrust_subnet_gateway
       - volume_size
 
 variables:
@@ -224,7 +205,6 @@ variables:
     type: enum
     required: true
     enum:
-      - 7.6.4
       - 7.6.3
       - 7.4.8
       - 7.2.11
@@ -404,52 +384,6 @@ variables:
     title: Management Subnet CIDR Block
     description: The CIDR of the new Subnet. The new subnet's CIDR should not overlap with any other subnet CIDRs.
 
-  ha_subnet_id:
-    visible: #($network_strategy  == "Use Existing VCN and Subnet")
-      eq:
-        - network_strategy
-        - "Use Existing VCN and Subnet"
-    type: oci:core:subnet:id
-    dependsOn:
-      vcnId: vcn_id
-      compartmentId: compartment_ocid
-    default: ""
-    required: true
-    title: Select Existing HA Subnet
-    description: An existing HA subnet to use for compute instances. This subnet must already be present in the chosen VCN.
-
-  ha_subnet_display_name:
-    visible: #($network_strategy  == ""Create New VCN and Subnet"")
-      eq:
-        - network_strategy
-        - "Create New VCN and Subnet"
-    type: string
-    default: ha-subnet
-    required: true
-    title: HA Subnet
-    description: The name of the new HA Subnet
-
-  ha_subnet_cidr_block:
-    visible:
-      - eq:
-        - network_strategy
-        - "Create New VCN and Subnet"
-      - eq:
-        - network_strategy
-        - "Use Existing VCN and Subnet"
-        title: Existing HA Subnet CIDR Block
-        default: ""
-        description: Edit HA Subnet CIDR based on your selection.
-        type: string
-        pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-        required: true
-    type: string
-    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-    required: true
-    default: "192.168.4.0/24"
-    title: HA Subnet CIDR Block
-    description: The CIDR of the new Subnet. The new subnet's CIDR should not overlap with any other subnet CIDRs.
-
   trust_subnet_id:
     visible: #($network_strategy  == "Use Existing VCN and Subnet")
       eq:
@@ -462,7 +396,7 @@ variables:
     default: ""
     required: true
     title: Select Existing Trust Subnet
-    description: An existing trust subnet to use for transit connectivity between hub and spoke. This subnet must already be present in the chosen VCN.
+    description: An existing trust subnet to use traffic coming from trust. This subnet must already be present in the chosen VCN.
 
   trust_subnet_display_name:
     visible: #($network_strategy  == ""Create New VCN and Subnet"")
@@ -496,52 +430,6 @@ variables:
     title: Trust Subnet CIDR Block
     description: The CIDR of the new Subnet. The new subnet's CIDR should not overlap with any other subnet CIDRs.
 
-  untrust_subnet_id:
-    visible: #($network_strategy  == "Use Existing VCN and Subnet")
-      eq:
-        - network_strategy
-        - "Use Existing VCN and Subnet"
-    type: oci:core:subnet:id
-    dependsOn:
-      vcnId: vcn_id
-      compartmentId: compartment_ocid
-    default: ""
-    required: true
-    title: Select Existing Untrust Subnet
-    description: An existing Untrust subnet to use traffic coming from untrust. This subnet must already be present in the chosen VCN.
-
-  untrust_subnet_display_name:
-    visible: #($network_strategy  == ""Create New VCN and Subnet"")
-      eq:
-        - network_strategy
-        - "Create New VCN and Subnet"
-    type: string
-    default: untrust-subnet
-    required: true
-    title: Untrust Subnet
-    description: The name of the new Untrust Subnet
-
-  untrust_subnet_cidr_block:
-    visible:
-      - eq:
-        - network_strategy
-        - "Create New VCN and Subnet"
-      - eq:
-        - network_strategy
-        - "Use Existing VCN and Subnet"
-        title: Existing Untrust Subnet CIDR Block
-        default: ""
-        description: Edit Untrust Subnet CIDR based on your selection.
-        type: string
-        pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-        required: true
-    type: string
-    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-    required: true
-    default: "192.168.3.0/24"
-    title: Untrust Subnet CIDR Block
-    description: The CIDR of the new Subnet. The new subnet's CIDR should not overlap with any other subnet CIDRs.
-
   vcn_dns_label:
     visible: #($network_strategy  == ""Create New VCN and Subnet"")
       eq:
@@ -573,22 +461,11 @@ variables:
     required: true
     default: trust
     title: Trust Subnet DNS Label
-    description: Trust Subnet DNS Label. Only letters and numbers, starting with a letter. 15 characters max.
-
-  untrust_subnet_dns_label:
-    visible: #($network_strategy  == ""Create New VCN and Subnet"")
-      eq:
-        - network_strategy
-        - "Create New VCN and Subnet"
-    type: string
-    required: true
-    default: untrust
-    title: Untrust Subnet DNS Label
-    description: Untrust subnet DNS Label. Only letters and numbers, starting with a letter. 15 characters max.
+    description: Trust subnet DNS Label. Only letters and numbers, starting with a letter. 15 characters max.
 
   use_existing_ip:
     type: enum
-    title: Firewall Untrust Interface Floating Cluster Public IP
+    title: Firewall Trust Interface Floating Cluster Public IP
     required: true
     enum:
       - "Create new IP"
@@ -623,7 +500,7 @@ variables:
   public_routetable_display_name:
     type: string
     required: true
-    default: Untrust-Route-Table
+    default: Trust-Route-Table
     title: Public Route Table
     description: The name of the Public Route Table
 
@@ -652,17 +529,6 @@ variables:
     title: Management Route Table Existing
     description: The name of the Management Route Table Existing
 
-  untrust_routetable_display_name_existing:
-    visible: #($network_strategy  == ""Create New VCN and Subnet"")
-      eq:
-        - network_strategy
-        - "Use Existing VCN and Subnet"
-    type: string
-    required: true
-    default: Untrust-Route-Table-Existing
-    title: Untrust Route Table Existing
-    description: The name of the Untrust Route Table Existing
-
   trust_routetable_display_name_existing:
     visible: #($network_strategy  == ""Create New VCN and Subnet"")
       eq:
@@ -674,93 +540,19 @@ variables:
     title: Trust Route Table Existing
     description: The name of the Trust Route Table Existing
 
-  ha_routetable_display_name_existing:
-    visible: #($network_strategy  == ""Create New VCN and Subnet"")
-      eq:
-        - network_strategy
-        - "Use Existing VCN and Subnet"
-    type: string
-    required: true
-    default: HA-Route-Table-Existing
-    title: HA Route Table Existing
-    description: The name of the HA Route Table Existing
-
-  ha_routetable_display_name:
-    type: string
-    required: true
-    default: HA-Route-Table
-    title: HA Route Table
-    description: The name of the HA Route Table
-
-  mgmt_private_ip_primary_a:
+  mgmt_private_ip:
     type: string
     default: 192.168.1.10
     required: true
     title: Primary Firewall Mgmt Interface IP 
     description: Primary Firewall Mgmt Interface Private IP
 
-  trust_private_ip_primary_a:
+  trust_private_ip:
     type: string
     default: 192.168.2.10
     required: true
     title: Primary Firewall Trust Interface IP 
     description: Primary Firewall Trust Interface Private IP
-
-  untrust_private_ip_primary_a:
-    type: string
-    default: 192.168.3.10
-    required: true
-    title: Primary Firewall Untrust Interface IP 
-    description: Primary Firewall Untrust Interface Private IP
-
-  hb_private_ip_primary_a:
-    type: string
-    default: 192.168.4.10
-    required: true
-    title: Primary Firewall HA Interface IP 
-    description: Primary Firewall HA Interface Private IP
-
-  mgmt_private_ip_primary_b:
-    type: string
-    default: 192.168.1.20
-    required: true
-    title: Secondary Firewall Mgmt Interface IP 
-    description: Secondary Firewall Mgmt Interface Private IP
-
-  trust_private_ip_primary_b:
-    type: string
-    default: 192.168.2.20
-    required: true
-    title: Secondary Firewall Trust Interface IP 
-    description: Secondary Firewall Trust Interface Private IP
-
-  untrust_private_ip_primary_b:
-    type: string
-    default: 192.168.3.20
-    required: true
-    title: Secondary Firewall Untrust Interface IP 
-    description: Secondary Firewall Untrust Interface Private IP
-
-  hb_private_ip_primary_b:
-    type: string
-    default: 192.168.4.20
-    required: true
-    title: Secondary Firewall HA Interface IP 
-    description: Secondary Firewall HA Interface Private IP
-
-  trust_floating_private_ip:
-    type: string
-    default: 192.168.2.30
-    required: true
-    title: Trust Interface Floating IP
-    description: Firewall Trust Interface Floating Private IP
-
-  untrust_floating_private_ip:
-    type: string
-    default: 192.168.3.30
-    required: true
-    title: Untrust Interface Floating IP
-    description: Firewall Untrust Interface Floating Private IP
 
   mgmt_subnet_gateway:
     type: string
@@ -775,13 +567,6 @@ variables:
     required: true
     title: Trust Subnet Gateway
     description: Trust Subnet Default Gateway IP
-
-  untrust_subnet_gateway:
-    type: string
-    default: 192.168.3.1
-    required: true
-    title: Untrust Subnet Gateway
-    description: Untrust Subnet Default Gateway IP
 
   volume_size:
     visible: #($network_strategy  == ""Create New VCN and Subnet"")
@@ -817,16 +602,6 @@ outputs:
   firewallA_instance_private_ips:
     type: link
     title: Firewall-A Instance Private IP
-    visible: true
-
-  firewallB_instance_public_ips:
-    type: link
-    title: Firewall-B Instance Public IP
-    visible: true
-
-  firewallB_instance_private_ips:
-    type: link
-    title: Firewall-B Instance Private IP
     visible: true
 
   initial_instruction:

@@ -1,5 +1,5 @@
 ########################################
-###### Create FortiGate Primary VM #####
+###### Create FortiGate VM #####
 ########################################
 
 resource "oci_core_instance" "vm-a" {
@@ -22,7 +22,7 @@ resource "oci_core_instance" "vm-a" {
     display_name     = "vm-a"
     assign_public_ip = true
     hostname_label   = "vma"
-    private_ip       = var.mgmt_private_ip_primary_a
+    private_ip       = var.mgmt_private_ip
   }
 
   source_details {
@@ -40,52 +40,20 @@ resource "oci_core_instance" "vm-a" {
 }
 
 ##########################
-##### Untrust VNIC-A #####
+##### trust VNIC-A #####
 ##########################
-resource "oci_core_vnic_attachment" "vnic_attach_untrust_a" {
+resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
   count        = 1
   depends_on   = [oci_core_instance.vm-a]
   instance_id  = oci_core_instance.vm-a[0].id
-  display_name = "vnic_untrust_a"
-
-  create_vnic_details {
-    subnet_id              = local.use_existing_network ? var.untrust_subnet_id : oci_core_subnet.untrust_subnet[0].id
-    display_name           = "vnic_untrust_a"
-    assign_public_ip       = false
-    skip_source_dest_check = false
-    private_ip             = var.untrust_private_ip_primary_a
-  }
-}
-
-resource "oci_core_private_ip" "untrust_private_ip" {
-  vnic_id        = data.oci_core_vnic_attachments.untrust_attachments.vnic_attachments.0.vnic_id
-  display_name   = "untrust_ip"
-  hostname_label = "untrust"
-  ip_address     = var.untrust_floating_private_ip
-}
-
-resource "oci_core_public_ip" "untrust_public_ip" {
-  compartment_id = var.compute_compartment_ocid
-  lifetime       = var.untrust_public_ip_lifetime
-  display_name   = "vm-untrust"
-  private_ip_id  = oci_core_private_ip.untrust_private_ip.id
-}
-
-########################
-##### Trust VNIC-A #####
-########################
-resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
-  depends_on   = [oci_core_vnic_attachment.vnic_attach_untrust_a]
-  count        = 1
-  instance_id  = oci_core_instance.vm-a[count.index].id
-  display_name = "vnic_trust"
+  display_name = "vnic_trust_a"
 
   create_vnic_details {
     subnet_id              = local.use_existing_network ? var.trust_subnet_id : oci_core_subnet.trust_subnet[0].id
     display_name           = "vnic_trust_a"
     assign_public_ip       = false
-    skip_source_dest_check = true
-    private_ip             = var.trust_private_ip_primary_a
+    skip_source_dest_check = false
+    private_ip             = var.trust_private_ip
   }
 }
 
@@ -93,27 +61,31 @@ resource "oci_core_private_ip" "trust_private_ip" {
   vnic_id        = data.oci_core_vnic_attachments.trust_attachments.vnic_attachments.0.vnic_id
   display_name   = "trust_ip"
   hostname_label = "trust"
-  ip_address     = var.trust_floating_private_ip
+  ip_address     = var.trust_private_ip
 }
 
-#######################################
-##### Primary FortiGate Bootstrap #####
-#######################################
+resource "oci_core_public_ip" "trust_public_ip" {
+  compartment_id = var.compute_compartment_ocid
+  lifetime       = var.trust_public_ip_lifetime
+  display_name   = "vm-trust"
+  private_ip_id  = oci_core_private_ip.trust_private_ip.id
+}
+
+###############################
+##### FortiGate Bootstrap #####
+###############################
 data "template_file" "vm-a_userdata" {
   template = file(var.bootstrap_vm-a)
   vars = {
-    mgmt_ip           = var.mgmt_private_ip_primary_a
-    mgmt_ip_mask      = "255.255.255.0"
-    untrust_ip        = var.untrust_private_ip_primary_a
-    untrust_ip_mask   = "255.255.255.0"
-    trust_ip          = var.trust_private_ip_primary_a
-    trust_ip_mask     = "255.255.255.0"
-    untrust_subnet_gw = var.untrust_subnet_gateway
-    vcn_cidr          = var.vcn_cidr_block
-    trust_subnet_gw   = var.trust_subnet_gateway
-    mgmt_subnet_gw    = var.mgmt_subnet_gateway
-    tenancy_ocid      = var.tenancy_ocid
-    compartment_ocid  = var.compute_compartment_ocid
+    mgmt_ip          = var.mgmt_private_ip
+    mgmt_ip_mask     = "255.255.255.0"
+    trust_ip         = var.trust_private_ip
+    trust_ip_mask    = "255.255.255.0"
+    trust_subnet_gw  = var.trust_subnet_gateway
+    vcn_cidr         = var.vcn_cidr_block
+    mgmt_subnet_gw   = var.mgmt_subnet_gateway
+    tenancy_ocid     = var.tenancy_ocid
+    compartment_ocid = var.compute_compartment_ocid
   }
 }
 
