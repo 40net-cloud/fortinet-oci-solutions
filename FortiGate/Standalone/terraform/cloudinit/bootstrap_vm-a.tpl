@@ -25,19 +25,6 @@ config system interface
     edit port2
         set mode static     
         set vdom "root"
-        set ip ${untrust_ip} ${untrust_ip_mask}
-        set type physical
-        set description "Untrust"
-        set alias untrust
-        set mtu-override enable
-        set mtu 9000
-        set secondary-IP enable
-    next
-end
-config system interface
-    edit port3
-        set mode static        
-        set vdom "root"
         set ip ${trust_ip} ${trust_ip_mask}
         set type physical
         set description "Trust"
@@ -58,13 +45,13 @@ config system sdn-connector
 end
 config router static
     edit 1        
-        set gateway ${untrust_subnet_gw}
-        set device port2
+        set gateway ${mgmt_subnet_gw}
+        set device port1
     next
     edit 2
         set dst ${vcn_cidr}
         set gateway ${trust_subnet_gw}
-        set device port3
+        set device port2
     next
 end
 --==OCI==
