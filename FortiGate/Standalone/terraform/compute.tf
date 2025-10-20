@@ -53,12 +53,12 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
     display_name           = "vnic_trust_a"
     assign_public_ip       = false
     skip_source_dest_check = false
-    private_ip             = var.trust_private_ip
+    // private_ip             = var.trust_private_ip   // removed to avoid duplicate allocation
   }
 }
 
 resource "oci_core_private_ip" "trust_private_ip" {
-  vnic_id        = data.oci_core_vnic_attachments.trust_attachments.vnic_attachments.0.vnic_id
+  vnic_id        = oci_core_vnic_attachment.vnic_attach_trust_a[0].vnic_id
   display_name   = "trust_ip"
   hostname_label = "trust"
   ip_address     = var.trust_private_ip
