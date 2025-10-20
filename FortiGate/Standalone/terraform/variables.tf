@@ -92,7 +92,7 @@ variable "cpu_type" {
 variable "fortios_version" {
   type = string
   validation {
-    condition     = contains(["6.4.13", "7.0.17", "7.2.11", "7.4.8", "7.6.3"], var.fortios_version)
+    condition     = contains(["6.4.13", "7.0.17", "7.2.12", "7.4.9", "7.6.4"], var.fortios_version)
     error_message = "Only supported FortiOS versions are allowed"
   }
 }
