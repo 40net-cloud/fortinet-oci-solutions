@@ -14,17 +14,17 @@ variable "compute_compartment_ocid" {
 
 variable "user_ocid" {
   description = "OCI User OCID"
-  default = ""
+  default     = ""
 }
 
 variable "private_key_path" {
   description = "Path to the private key for OCI API authentication"
-  default = ""
+  default     = ""
 }
 
 variable "fingerprint" {
   description = "Fingerprint of the public key for OCI API authentication"
-  default = ""
+  default     = ""
 }
 
 variable "region" {
@@ -101,7 +101,7 @@ variable "memory_in_gbs" {
 }
 
 variable "cpu_type" {
-  type    = string
+  type = string
   validation {
     condition     = contains(["X64", "ARM64"], var.cpu_type)
     error_message = "cpu_type must be X64 or ARM64"
@@ -109,7 +109,7 @@ variable "cpu_type" {
 }
 
 variable "fortios_version" {
-  type    = string
+  type = string
   validation {
     condition     = contains(["6.4.13", "7.0.17", "7.2.12", "7.4.9", "7.6.4"], var.fortios_version)
     error_message = "Only supported FortiOS versions are allowed"
@@ -319,7 +319,7 @@ variable "private_routetable_display_name" {
 #    Enum Values     #   
 ######################
 variable "network_strategy_enum" {
-  type = map
+  type = map(any)
   default = {
     CREATE_NEW_VCN_SUBNET   = "Create New VCN and Subnet"
     USE_EXISTING_VCN_SUBNET = "Use Existing VCN and Subnet"
@@ -327,7 +327,7 @@ variable "network_strategy_enum" {
 }
 
 variable "subnet_type_enum" {
-  type = map
+  type = map(any)
   default = {
     transit_subnet    = "Private Subnet"
     MANAGEMENT_SUBENT = "Public Subnet"
@@ -335,7 +335,7 @@ variable "subnet_type_enum" {
 }
 
 variable "nsg_config_enum" {
-  type = map
+  type = map(any)
   default = {
     BLOCK_ALL_PORTS = "Block all ports"
     OPEN_ALL_PORTS  = "Open all ports"
@@ -348,7 +348,7 @@ variable "bootstrap_vm-a" {
 }
 
 variable "bootstrap_vm-b" {
- default = "./cloudinit/bootstrap_vm-b.tpl"
+  default = "./cloudinit/bootstrap_vm-b.tpl"
 }
 
 ######################
@@ -357,76 +357,76 @@ variable "bootstrap_vm-b" {
 #ACTIVE NODE
 variable "mgmt_private_ip_primary_a" {
   description = "Primary Firewall Mgmt Interface Private IP"
-  default = "192.168.1.10"
+  default     = "192.168.1.10"
 }
 
 variable "untrust_private_ip_primary_a" {
   description = "Primary Firewall Untrust Interface Private IP"
-  default = "192.168.3.10"
+  default     = "192.168.3.10"
 }
 
 variable "trust_private_ip_primary_a" {
   description = "Primary Firewall Trust Interface Private IP"
-  default = "192.168.2.10"
+  default     = "192.168.2.10"
 }
 
 variable "hb_private_ip_primary_a" {
   description = "Primary Firewall HA Interface Private IP"
-  default = "192.168.4.10"
+  default     = "192.168.4.10"
 }
 
 #PASSIVE NODE
 variable "mgmt_private_ip_primary_b" {
   description = "Secondary Firewall Mgmt Interface Private IP"
-  default = "192.168.1.20"
+  default     = "192.168.1.20"
 }
 
 variable "untrust_private_ip_primary_b" {
   description = "Secondary Firewall Untrust Interface Private IP"
-  default = "192.168.3.20"
+  default     = "192.168.3.20"
 }
 
 variable "trust_private_ip_primary_b" {
   description = "Secondary Firewall Trust Interface Private IP"
-  default = "192.168.2.20"
+  default     = "192.168.2.20"
 }
 
 variable "hb_private_ip_primary_b" {
   description = "Secondary Firewall HA Interface Private IP"
-  default = "192.168.4.20"
+  default     = "192.168.4.20"
 }
 
 variable "untrust_floating_private_ip" {
   description = "Firewall Untrust Interface Floating Private IP"
-  default = "192.168.3.30"
+  default     = "192.168.3.30"
 }
 
 variable "trust_floating_private_ip" {
   description = "Firewall Trust Interface Floating Private IP"
-  default = "192.168.2.30"
+  default     = "192.168.2.30"
 }
 
 variable "mgmt_subnet_gateway" {
   description = "Mgmt Subnet Default Gateway IP"
-  default = "192.168.1.1"
+  default     = "192.168.1.1"
 }
 
 variable "trust_subnet_gateway" {
   description = "Trust Subnet Default Gateway IP"
-  default = "192.168.2.1"
+  default     = "192.168.2.1"
 }
 
 variable "untrust_subnet_gateway" {
   description = "Untrust Subnet Default Gateway IP"
-  default = "192.168.3.1"
+  default     = "192.168.3.1"
 }
 
 variable "untrust_public_ip_lifetime" {
   description = "Public IP Address Reservation Type"
-  default = "RESERVED"
+  default     = "RESERVED"
 }
 
 variable "volume_size" {
   description = "Firewall VM Block Volume Attachment Size in GB"
-  default = "50" //GB
+  default     = "50" //GB
 }
