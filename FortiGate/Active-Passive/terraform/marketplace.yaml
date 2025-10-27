@@ -268,7 +268,6 @@ variables:
         - ${cpu_type}
         - "X64"
     enum:
-      - "VM.Standard2.2"
       - "VM.Standard2.4"
       - "VM.Standard2.8"
       - "VM.Standard2.16"
