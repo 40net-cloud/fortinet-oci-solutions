@@ -166,6 +166,7 @@ variables:
     required: true
     enum:
       - BYOL
+      - PAYGO 2 OCPUs
       - PAYGO 4 OCPUs
       - PAYGO 8 OCPUs
       - PAYGO 16 OCPUs
@@ -179,6 +180,8 @@ variables:
     dependsOn:
       vm_compute_shape
     enum:
+      - 1
+      - 2
       - 4
       - 8
       - 16
@@ -201,6 +204,8 @@ variables:
       vm_compute_shape
     default: 4
     enum:
+      - 16
+      - 32
       - 64
       - 128
       - 256
@@ -268,6 +273,7 @@ variables:
         - ${cpu_type}
         - "X64"
     enum:
+      - "VM.Standard2.2"
       - "VM.Standard2.4"
       - "VM.Standard2.8"
       - "VM.Standard2.16"
