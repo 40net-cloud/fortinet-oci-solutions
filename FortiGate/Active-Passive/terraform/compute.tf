@@ -10,7 +10,7 @@ resource "oci_core_instance" "vm-a" {
   shape               = local.vm_compute_shape
 
   dynamic "shape_config" {
-    for_each = local.vm_compute_shape != null && contains(["VM.Standard.A1.Flex", "VM.Standard.E4.Flex"], local.vm_compute_shape) ? [1] : []
+    for_each = contains(["VM.Standard.A1.Flex", "VM.Standard.E4.Flex"], local.vm_compute_shape) ? [1] : []
     content {
       memory_in_gbs = var.memory_in_gbs
       ocpus         = var.ocpu_count
@@ -173,7 +173,7 @@ resource "oci_core_instance" "vm-b" {
   shape               = local.vm_compute_shape
 
   dynamic "shape_config" {
-    for_each = local.vm_compute_shape != null && contains(["VM.Standard.A1.Flex", "VM.Standard.E4.Flex"], local.vm_compute_shape) ? [1] : []
+    for_each = contains(["VM.Standard.A1.Flex", "VM.Standard.E4.Flex"], local.vm_compute_shape) ? [1] : []
     content {
       memory_in_gbs = var.memory_in_gbs
       ocpus         = var.ocpu_count

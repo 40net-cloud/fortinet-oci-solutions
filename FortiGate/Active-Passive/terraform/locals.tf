@@ -45,8 +45,8 @@ locals {
   mp_listing_resource_version = try(local.matched_package.resource_ver, null)
 
   vm_compute_shape = (
-    var.vm_compute_shape_arm != "" ? var.vm_compute_shape_arm :
-    var.vm_compute_shape_x64 != "" ? var.vm_compute_shape_x64 :
+    var.cpu_type == "ARM64" ? var.vm_compute_shape_arm :
+    var.cpu_type == "X64" ? var.vm_compute_shape_x64 :
     null
   )
 }
