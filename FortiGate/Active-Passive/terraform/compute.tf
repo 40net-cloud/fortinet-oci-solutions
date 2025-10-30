@@ -13,8 +13,9 @@ resource "oci_core_instance" "vm-a" {
     for_each = local.vm_compute_shape != null && contains([
       "VM.Standard.A1.Flex",
       "VM.Standard.E4.Flex",
-      "VM.Standard.E5.Flex", # ← NEW
-      "VM.Standard.E6.Flex"  # ← NEW
+      "VM.Standard.E5.Flex",
+      "VM.Standard.E6.Flex",
+      "VM.Standard3.Flex"
     ], local.vm_compute_shape) ? [1] : []
 
     content {
@@ -182,8 +183,9 @@ resource "oci_core_instance" "vm-b" {
     for_each = local.vm_compute_shape != null && contains([
       "VM.Standard.A1.Flex",
       "VM.Standard.E4.Flex",
-      "VM.Standard.E5.Flex", # ← NEW
-      "VM.Standard.E6.Flex"  # ← NEW
+      "VM.Standard.E5.Flex",
+      "VM.Standard.E6.Flex",
+      "VM.Standard3.Flex"
     ], local.vm_compute_shape) ? [1] : []
 
     content {

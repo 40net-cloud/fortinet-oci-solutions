@@ -197,6 +197,9 @@ variables:
         - eq:
           - ${vm_compute_shape_x64}
           - "VM.Standard.E6.Flex"
+        - eq:
+          - ${vm_compute_shape_x64}
+          - "VM.Standard3.Flex"
     title: Number of OCPU to allocate
     description: Number of OCPU to allocate
 
@@ -227,6 +230,9 @@ variables:
         - eq:
           - ${vm_compute_shape_x64}
           - "VM.Standard.E6.Flex"
+        - eq:
+          - ${vm_compute_shape_x64}
+          - "VM.Standard3.Flex"
   cpu_type:
     type: enum
     required: true
@@ -283,6 +289,7 @@ variables:
       - "VM.Standard2.8"
       - "VM.Standard2.16"
       - "VM.Standard2.24"
+      - "VM.Standard3.Flex"
       - "VM.Standard.E4.Flex"
       - "VM.Standard.E5.Flex"
       - "VM.Standard.E6.Flex"
