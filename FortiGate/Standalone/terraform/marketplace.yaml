@@ -192,7 +192,6 @@ variables:
         - eq:
           - ${vm_compute_shape_x64}
           - "VM.Standard.E4.Flex"
-          - "VM.Standard.E5.Flex"
 
   cpu_type:
     type: enum
@@ -252,14 +251,12 @@ variables:
       - "VM.Standard2.16"
       - "VM.Standard2.24"
       - "VM.Standard.E4.Flex"
-      - "VM.Standard.E5.Flex"
 
   vm_flex_shape_ocpus:
     visible:
       eq:
         - vm_compute_shape
         - "VM.Standard.E4.Flex"
-        - "VM.Standard.E5.Flex"
     type: integer
     default: 4
     title: Flex Shape OCPUs
