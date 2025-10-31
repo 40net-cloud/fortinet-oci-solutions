@@ -10,6 +10,18 @@ config system global
     set admintimeout 60
 end
 
+config system vdom-exception
+    edit 1
+        set object system.interface
+    next
+    edit 2
+        set object firewall.vip
+    next
+    edit 3
+        set object router.static
+    next
+end
+
 config system interface
     edit port1
         set ip ${mgmt_ip} ${mgmt_ip_mask}
