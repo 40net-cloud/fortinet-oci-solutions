@@ -146,6 +146,7 @@ data "template_file" "vm-a_userdata" {
     mgmt_subnet_gw                   = var.mgmt_subnet_gateway
     tenancy_ocid                     = var.tenancy_ocid
     compartment_ocid                 = var.compute_compartment_ocid
+    fortios_version                  = var.fortios_version
   }
 }
 
@@ -296,6 +297,7 @@ data "template_file" "vm-b_userdata" {
     mgmt_subnet_gw                   = var.mgmt_subnet_gateway
     tenancy_ocid                     = var.tenancy_ocid
     compartment_ocid                 = var.compute_compartment_ocid
+    fortios_version                  = var.fortios_version
   }
 }
 
