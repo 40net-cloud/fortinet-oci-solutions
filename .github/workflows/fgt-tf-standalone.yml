@@ -11,7 +11,7 @@ on:
       - main
     paths:
       - 'FortiGate/Standalone/terraform/*.tf'
-      - 'FortiGate/Standalone/terraform/*.tpl'
+      - 'FortiGate/Standalone/terraform/cloudinit/*.tpl'
       - 'FortiGate/Standalone/terraform/*.hcl'
       - 'FortiGate/Standalone/terraform/*.json'
       - 'FortiGate/Standalone/terraform/*.yaml'
