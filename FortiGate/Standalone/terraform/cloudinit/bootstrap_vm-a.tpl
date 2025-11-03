@@ -35,14 +35,27 @@ config system interface
     next
 end
 
+%{ if tonumber(split(".", fortios_version)[0]) < 7 || (tonumber(split(".", fortios_version)[0]) == 7 && tonumber(split(".", fortios_version)[1]) <= 2) }
 config system sdn-connector
     edit "oci-sdn"
         set type oci
-		set ha-status enable
+        set ha-status enable
         set tenant-id ${tenancy_ocid}
         set compartment-id ${compartment_ocid}
     next
 end
+%{ else }
+config system sdn-connector
+    edit "oci-sdn"
+        set type oci
+        set ha-status enable
+        set tenant-id ${tenancy_ocid}
+        config compartment-list
+            edit ${compartment_ocid}
+            next
+        end
+end
+%{ endif }
 config router static
     edit 1        
         set gateway ${mgmt_subnet_gw}
