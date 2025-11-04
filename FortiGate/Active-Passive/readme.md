@@ -27,8 +27,8 @@ Click the button above to launch the stack in your OCI tenancy. You will be guid
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-org/FortiGate_AP_FGCP_Terraform_v2.0.git
-   cd FortiGate_AP_FGCP_Terraform_v2.0
+   git clone https://github.com/40net-cloud/fortinet-oci-solutions.git
+   cd fortinet-oci-solutions/FortiGate/Active-Passive/terraform
    ```
 
 2. **Initialize Terraform:**
