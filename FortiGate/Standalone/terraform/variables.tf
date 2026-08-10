@@ -65,6 +65,18 @@ variable "availability_domain_name_1" {
 variable "license_type" {
   description = "License type, e.g. BYOL or PAYGO (like 'PAYGO 4 OCPUs')"
   type        = string
+
+  validation {
+    condition = contains([
+      "BYOL",
+      "PAYGO 2 OCPUs",
+      "PAYGO 4 OCPUs",
+      "PAYGO 8 OCPUs",
+      "PAYGO 16 OCPUs",
+      "PAYGO 24 OCPUs"
+    ], var.license_type)
+    error_message = "license_type must be one of: BYOL, PAYGO 2 OCPUs, PAYGO 4 OCPUs, PAYGO 8 OCPUs, PAYGO 16 OCPUs, or PAYGO 24 OCPUs."
+  }
 }
 
 variable "ocpu_count" {
@@ -91,6 +103,11 @@ variable "cpu_type" {
 
 variable "fortios_version" {
   type = string
+
+  validation {
+    condition     = contains(["8.0.0", "7.6.7", "7.4.12"], var.fortios_version)
+    error_message = "fortios_version must match a published OCI marketplace package. Supported versions are 8.0.0, 7.6.7, and 7.4.12."
+  }
 }
 
 variable "instance_launch_options_network_type" {
