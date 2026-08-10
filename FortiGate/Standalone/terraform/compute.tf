@@ -3,7 +3,7 @@
 ########################################
 
 resource "oci_core_instance" "vm-a" {
-  count               = local.matched_package != null ? 1 : 0
+  count = local.matched_package != null ? 1 : 0
   depends_on = [
     oci_core_app_catalog_subscription.mp_image_subscription
   ]
@@ -35,9 +35,9 @@ resource "oci_core_instance" "vm-a" {
   }
 
   source_details {
-  source_type = "image"
-  source_id   = local.matched_package.image_id
-}
+    source_type = "image"
+    source_id   = local.matched_package.image_id
+  }
   metadata = {
     //ssh_authorized_keys = var.ssh_public_key
     user_data = base64encode(data.template_file.vm-a_userdata.rendered)
