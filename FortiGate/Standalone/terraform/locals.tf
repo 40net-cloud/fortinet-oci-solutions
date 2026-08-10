@@ -87,16 +87,12 @@ locals {
   )
 
   vm_compute_shape = (
-    var.cpu_type == "ARM64" &&
-    var.vm_compute_shape_arm != ""
-    ? var.vm_compute_shape_arm
-    :
-    var.cpu_type == "X64" &&
-    var.vm_compute_shape_x64 != ""
-    ? var.vm_compute_shape_x64
-    :
-    null
-  )
+  var.cpu_type == "ARM64" && var.vm_compute_shape_arm != "" ?
+  var.vm_compute_shape_arm :
+  var.cpu_type == "X64" && var.vm_compute_shape_x64 != "" ?
+  var.vm_compute_shape_x64 :
+  null
+)
 }
 
 locals {
