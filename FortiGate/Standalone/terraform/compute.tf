@@ -33,7 +33,7 @@ resource "oci_core_instance" "vm-a" {
 
   source_details {
     source_type = "image"
-    source_id   = var.license_type == "BYOL" ? local.matched_package.image_id : local.paygo_image_id
+    source_id   = local.matched_package.image_id
   }
   metadata = {
     //ssh_authorized_keys = var.ssh_public_key
