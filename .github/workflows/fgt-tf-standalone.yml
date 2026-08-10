@@ -66,6 +66,15 @@ jobs:
       run: terraform fmt -check -diff
       working-directory: ${{ env.TFPath }}
 
+    - name: "Show Terraform Selection Inputs"
+      run: |
+        echo "CPU_TYPE=${TF_VAR_cpu_type}"
+        echo "FORTIOS_VERSION=${TF_VAR_fortios_version}"
+        echo "LICENSE_TYPE=${TF_VAR_license_type}"
+        echo "VM_COMPUTE_SHAPE_ARM=${TF_VAR_vm_compute_shape_arm}"
+        echo "VM_COMPUTE_SHAPE_X64=${TF_VAR_vm_compute_shape_x64}"
+      working-directory: ${{ env.TFPath }}
+
     - name: "Terraform Plan"
       id: plan
       run: terraform plan -out plan.tfplan
