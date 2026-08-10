@@ -1,7 +1,7 @@
-  ## 1. Introduction
-This Terraform template deploys a Active/Active High Availability pair of FortiWeb instances accompanied by the required infrastructure.
+## 1. Introduction
+This Terraform template deploys a Active/Active High Availability pair of FortiWeb accompanied by the required infrastructure.
 
-## 2. Deployment Overview 
+## 2. Deployment Overview
 
 The Template deploys following components:
 - A **new** Virtual Cloud Network (VCN) with 3 regional subnets (network load balancer, untrust and trust)
@@ -9,7 +9,7 @@ The Template deploys following components:
 - Backend Set with health check over TCP/8443 (_can be modified later_)
 - NLB backends pointing FortiWeb port1 IPs
 - NLB listener with ANY protocol setting (_can be modified later_)
-- 2 FortiWeb-VM instances with 1 vNIC, each in **selected** AD, also in **separate Fault Domain (FD)**
+- 2 FortiWeb-VM instances with 2 vNICs, each in **selected** AD, also in **separate Fault Domain (FD)**
 - 2 route tables associated with regional subnets and an NSG
 
 ### 2.1 Deployment Options
@@ -18,8 +18,6 @@ Depending on selected Oracle Cloud region, 1 or more AD (availability domain) ca
 
 - **Dual-AD**: Define different AD variable (e.g. "1" for ad_a and "2" for ad_b)
 - **Single-AD**: Define same AD variable (e.g. "1" for ad_a and "1" for ad_b)
-
-If it is required, 2nd VNIC can be added after deployment is successfully completed. "cloud_init" cannot be used for FortiWeb deployment as of today.
 
 ## 3. Deployment Steps
 
@@ -31,17 +29,17 @@ Following links are prepared to deploy FortiWeb A/A cluster in a specific region
 
 ##### OCI public regions - BYOL Images (requires FortiWeb license files)
 
-|v6.1.1|v6.3.4|v7.0.4|v7.4.2|
+|v6.0.2|v6.1.1|v6.3.4|v7.0.4|
 |:-:|:-:|:-:|:-:|
-|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v6.1.1_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v6.3.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v7.0.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v7.4.2_BYOL.zip)
-<!---
+|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v6.0.2_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v6.1.1_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v6.3.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_NewVCN_v7.0.4_BYOL.zip)
+
 ---------------------------------------
 ##### OCI DRCC Oman region - BYOL Images (requires FortiWeb license files)
 
 |v6.0.2|v6.1.1|v6.3.4|v7.0.4|
 |:-:|:-:|:-:|:-:|
 |[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_NewVCN_v6.0.2_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_NewVCN_v6.1.1_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_NewVCN_v6.3.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_NewVCN_v7.0.4_BYOL.zip)
---->
+
 ### 3.2. Manual Deployment Using Terraform CLI
 
 Prerequisite to proceed: Terraform-CLI should be downloaded already. 
