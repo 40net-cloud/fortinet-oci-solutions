@@ -49,7 +49,7 @@ resource "oci_core_instance" "vm-a" {
 ##### trust VNIC-A #####
 ##########################
 resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
-  count        = local.matched_package != null ? 1 : 0
+  count        = 1
   depends_on   = [oci_core_instance.vm-a]
   instance_id  = oci_core_instance.vm-a[0].id
   display_name = "vnic_trust_a"
@@ -64,19 +64,17 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
 }
 
 resource "oci_core_private_ip" "trust_private_ip" {
-  count         = local.matched_package != null ? 1 : 0
-  vnic_id       = oci_core_vnic_attachment.vnic_attach_trust_a[0].vnic_id
-  display_name  = "trust_ip"
+  vnic_id        = oci_core_vnic_attachment.vnic_attach_trust_a[0].vnic_id
+  display_name   = "trust_ip"
   hostname_label = "trust"
-  ip_address    = var.trust_private_ip
+  ip_address     = var.trust_private_ip
 }
 
 resource "oci_core_public_ip" "trust_public_ip" {
-  count         = local.matched_package != null ? 1 : 0
   compartment_id = var.compute_compartment_ocid
   lifetime       = var.trust_public_ip_lifetime
   display_name   = "vm-trust"
-  private_ip_id  = oci_core_private_ip.trust_private_ip[0].id
+  private_ip_id  = oci_core_private_ip.trust_private_ip.id
 }
 
 ###############################
