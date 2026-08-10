@@ -58,12 +58,18 @@ data "oci_core_security_lists" "allow_all_security" {
 
 # ------ Get the attachement based on Public Subnet
 data "oci_core_vnic_attachments" "trust_attachments" {
+  count = local.matched_package != null ? 1 : 0
+
   compartment_id = var.compute_compartment_ocid
-  instance_id    = oci_core_instance.vm-a.0.id
+  instance_id    = oci_core_instance.vm-a[0].id
 
   filter {
-    name   = "subnet_id"
-    values = [local.use_existing_network ? var.trust_subnet_id : oci_core_subnet.trust_subnet[0].id]
+    name = "subnet_id"
+    values = [
+      local.use_existing_network
+      ? var.trust_subnet_id
+      : oci_core_subnet.trust_subnet[0].id
+    ]
   }
 
   depends_on = [
