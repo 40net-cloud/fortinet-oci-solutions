@@ -217,11 +217,9 @@ variables:
     type: enum
     required: true
     enum:
-      - 7.6.4
-      - 7.4.9
-      - 7.2.12
-      - 7.0.17
-      - 6.4.13
+      - 8.0.0
+      - 7.6.7
+      - 7.4.12
     title: FortiOS version for FortiGate-VM
     description: Choose FortiOS version for installation
 
