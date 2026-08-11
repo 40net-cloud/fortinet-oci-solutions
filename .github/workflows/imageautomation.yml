@@ -2,8 +2,14 @@ name: Generate Final Listings JSON
 
 on:
   schedule:
-    - cron: '0 0 1 * *'  # Runs at midnight UTC on the 1st of every month
-  workflow_dispatch:  # Allows manual triggering for testing
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    inputs:
+      force_trigger_test:
+        description: 'Force a JSON-only test update and trigger downstream workflows'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   generate-json:
@@ -49,6 +55,14 @@ jobs:
         cp final_listings.json FortiManager/terraform/
         cp final_listings.json FortiGate/Standalone/terraform/
         cp final_listings.json FortiGate/Active-Passive/terraform/
+
+    - name: Force downstream-trigger test
+      if: ${{ inputs.force_trigger_test }}
+      run: |
+        printf '\n' >> FortiAnalyzer/terraform/final_listings.json
+        printf '\n' >> FortiManager/terraform/final_listings.json
+        printf '\n' >> FortiGate/Standalone/terraform/final_listings.json
+        printf '\n' >> FortiGate/Active-Passive/terraform/final_listings.json
 
     - name: Commit and push updated JSON files
       run: |
