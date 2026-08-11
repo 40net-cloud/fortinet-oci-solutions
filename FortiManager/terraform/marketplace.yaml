@@ -170,9 +170,10 @@ variables:
     type: enum
     required: true
     enum:
-      - 7.6.3
-      - 7.4.7
-      - 7.2.10
+      - 8.0.0
+      - 7.6.4
+      - 7.4.11
+      - 7.2.11
       - 7.0.14
       - 6.4.15
     title: FortiOS version for FortiManager-VM
