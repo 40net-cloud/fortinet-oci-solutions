@@ -71,10 +71,6 @@ variable "cpu_type" {
 
 variable "fortios_version" {
   type = string
-  validation {
-    condition     = contains(["6.4.15", "7.0.14", "7.2.10", "7.4.7", "7.6.3"], var.fortios_version)
-    error_message = "Only supported FortiOS versions are allowed"
-  }
 }
 
 variable "instance_launch_options_network_type" {
