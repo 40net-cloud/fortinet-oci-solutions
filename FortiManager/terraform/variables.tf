@@ -70,11 +70,8 @@ variable "cpu_type" {
 }
 
 variable "fortios_version" {
-  type = string
-  validation {
-    condition     = contains(["6.4.15", "7.0.14", "7.2.11", "7.4.11", "7.6.4", "8.0.0"], var.fortios_version)
-    error_message = "Only supported FortiOS versions are allowed"
-  }
+  description = "FortiManager firmware version, for example 7.6.4"
+  type        = string
 }
 
 variable "instance_launch_options_network_type" {
