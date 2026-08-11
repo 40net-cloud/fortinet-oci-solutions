@@ -15,7 +15,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}  # Needed for pushing changes
+        ref: main
+        token: ${{ secrets.AUTOMATION_PAT }}
+        persist-credentials: true
 
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -50,11 +52,18 @@ jobs:
 
     - name: Commit and push updated JSON files
       run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
+        git config user.name "fortinet-automation"
+        git config user.email "fortinet-automation@users.noreply.github.com"
+
         git add FortiAnalyzer/terraform/final_listings.json
         git add FortiManager/terraform/final_listings.json
         git add FortiGate/Standalone/terraform/final_listings.json
         git add FortiGate/Active-Passive/terraform/final_listings.json
-        git commit -m "Automated update of final_listings.json on 1st of month" || echo "No changes to commit"
-        git push
+
+        if git diff --cached --quiet; then
+          echo "No listing changes to commit."
+          exit 0
+        fi
+
+        git commit -m "chore: update final listings"
+        git push origin HEAD:main
