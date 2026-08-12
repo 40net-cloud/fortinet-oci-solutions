@@ -28,6 +28,19 @@ locals {
     )[0]
   ) : null
 
+  expected_listing_name = (
+    local.license_type == "BYOL"
+    ? "fortigate next-gen firewall (byol)"
+    : (
+      local.license_type == "PAYGO" && local.paygo_ocpu != null
+      ? lower(format(
+        "fortigate next-gen firewall (%d cores)",
+        local.paygo_ocpu
+      ))
+      : null
+    )
+  )
+
   fortigate_packages = flatten([
     for listing in local.listings : [
       for pkg in lookup(listing, "packages", []) : {
@@ -63,19 +76,7 @@ locals {
     if pkg.license_type == local.license_type &&
     pkg.cpu_type == local.normalized_cpu_type &&
     pkg.version == local.normalized_fortios &&
-    (
-      (
-        local.license_type == "BYOL" &&
-        pkg.listing_name == "fortigate next-gen firewall (byol)"
-      ) ||
-      (
-        local.license_type == "PAYGO" &&
-        pkg.listing_name == lower(format(
-          "fortigate next-gen firewall (%d cores)",
-          local.paygo_ocpu
-        ))
-      )
-    )
+    pkg.listing_name == local.expected_listing_name
   ]
 
   matched_package = (
