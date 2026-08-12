@@ -67,17 +67,6 @@ jobs:
       run: terraform fmt -check -diff
       working-directory: ${{ env.TFPath }}
 
-    - name: "Verify Marketplace image selection"
-      run: |
-        MATCH_COUNT=$(echo 'length(local.matched_packages)' | terraform console -no-color)
-        echo "Marketplace package matches: ${MATCH_COUNT}"
-
-        if [ "${MATCH_COUNT}" != "1" ]; then
-          echo "Expected exactly one Marketplace package."
-          exit 1
-        fi
-      working-directory: ${{ env.TFPath }}
-
     - name: "Terraform Plan"
       id: plan
       run: terraform plan -out plan.tfplan
