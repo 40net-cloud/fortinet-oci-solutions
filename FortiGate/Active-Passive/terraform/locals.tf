@@ -28,29 +28,29 @@ locals {
   ])
 
   matched_package = try(
-  one([
-    for pkg in local.fortigate_packages : pkg
-    if pkg.license_type == local.license_type &&
-    pkg.cpu_type == var.cpu_type &&
-    pkg.version == var.fortios_version &&
-    (
+    one([
+      for pkg in local.fortigate_packages : pkg
+      if pkg.license_type == local.license_type &&
+      pkg.cpu_type == var.cpu_type &&
+      pkg.version == var.fortios_version &&
       (
-        local.license_type == "BYOL" &&
-        pkg.listing_name == "fortigate next-gen firewall (byol)"
-      ) ||
-      (
-        local.license_type == "PAYGO" &&
-        pkg.listing_name == lower(
-          format(
-            "fortigate next-gen firewall (%d cores)",
-            local.paygo_ocpu
+        (
+          local.license_type == "BYOL" &&
+          pkg.listing_name == "fortigate next-gen firewall (byol)"
+        ) ||
+        (
+          local.license_type == "PAYGO" &&
+          pkg.listing_name == lower(
+            format(
+              "fortigate next-gen firewall (%d cores)",
+              local.paygo_ocpu
+            )
           )
         )
       )
-    )
-  ]),
-  null
-)
+    ]),
+    null
+  )
 
   # Dynamically extracted values based on matched package
   mp_listing_id               = try(local.matched_package.listing_id, null)
