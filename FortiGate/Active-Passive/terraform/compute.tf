@@ -50,8 +50,9 @@ resource "oci_core_instance" "vm-a" {
 ##### Untrust VNIC-A #####
 ##########################
 resource "oci_core_vnic_attachment" "vnic_attach_untrust_a" {
-  count        = length(oci_core_instance.vm-a)
-  depends_on   = [oci_core_instance.vm-a]
+  count = length(oci_core_instance.vm-a)
+  depends_on = [oci_core_instance.vm-a, terraform_data.validate_marketplace_package,
+  oci_core_app_catalog_subscription.mp_image_subscription]
   instance_id  = oci_core_instance.vm-a[0].id
   display_name = "vnic_untrust_a"
 
@@ -65,17 +66,21 @@ resource "oci_core_vnic_attachment" "vnic_attach_untrust_a" {
 }
 
 resource "oci_core_private_ip" "untrust_private_ip" {
-  vnic_id        = data.oci_core_vnic_attachments.untrust_attachments.vnic_attachments.0.vnic_id
+  count = length(oci_core_vnic_attachment.vnic_attach_untrust_a)
+
+  vnic_id        = oci_core_vnic_attachment.vnic_attach_untrust_a[count.index].vnic_id
   display_name   = "untrust_ip"
   hostname_label = "untrust"
   ip_address     = var.untrust_floating_private_ip
 }
 
 resource "oci_core_public_ip" "untrust_public_ip" {
+  count = length(oci_core_private_ip.untrust_private_ip)
+
   compartment_id = var.compute_compartment_ocid
   lifetime       = var.untrust_public_ip_lifetime
   display_name   = "vm-untrust"
-  private_ip_id  = oci_core_private_ip.untrust_private_ip.id
+  private_ip_id  = oci_core_private_ip.untrust_private_ip[count.index].id
 }
 
 ########################
@@ -97,7 +102,9 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
 }
 
 resource "oci_core_private_ip" "trust_private_ip" {
-  vnic_id        = data.oci_core_vnic_attachments.trust_attachments.vnic_attachments.0.vnic_id
+  count = length(oci_core_vnic_attachment.vnic_attach_trust_a)
+
+  vnic_id        = oci_core_vnic_attachment.vnic_attach_trust_a[count.index].vnic_id
   display_name   = "trust_ip"
   hostname_label = "trust"
   ip_address     = var.trust_floating_private_ip
@@ -155,7 +162,7 @@ data "template_file" "vm-a_userdata" {
 #######################################
 
 resource "oci_core_volume" "vm_volume-a" {
-  count               = 1
+  count               = length(oci_core_instance.vm-a)
   availability_domain = (var.availability_domain_name_1 != "" ? var.availability_domain_name_1 : (length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
   compartment_id      = var.compute_compartment_ocid
   display_name        = "vm_volume-a"
@@ -163,9 +170,10 @@ resource "oci_core_volume" "vm_volume-a" {
 }
 
 resource "oci_core_volume_attachment" "vm_volume_attach-a" {
-  count           = length(oci_core_instance.vm-a) > 0 ? 1 : 0
+  count = length(oci_core_instance.vm-a)
+
   attachment_type = "paravirtualized"
-  instance_id     = oci_core_instance.vm-a[0].id
+  instance_id     = oci_core_instance.vm-a[count.index].id
   volume_id       = oci_core_volume.vm_volume-a[count.index].id
 }
 
@@ -173,7 +181,9 @@ resource "oci_core_volume_attachment" "vm_volume_attach-a" {
 ###### Create FortiGate Secondary VM #####
 ##########################################
 resource "oci_core_instance" "vm-b" {
-  depends_on          = [oci_core_subnet.ha_subnet]
+  depends_on = [terraform_data.validate_marketplace_package,
+    oci_core_subnet.ha_subnet,
+  oci_core_app_catalog_subscription.mp_image_subscription]
   count               = local.matched_package != null ? 1 : 0
   availability_domain = (var.availability_domain_name_2 != "" ? var.availability_domain_name_2 : (length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
   compartment_id      = var.compute_compartment_ocid
@@ -306,7 +316,7 @@ data "template_file" "vm-b_userdata" {
 #######################################
 
 resource "oci_core_volume" "vm_volume-b" {
-  count               = 1
+  count               = length(oci_core_instance.vm-b)
   availability_domain = (var.availability_domain_name_2 != "" ? var.availability_domain_name_2 : (length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
   compartment_id      = var.compute_compartment_ocid
   display_name        = "vm_volume-b"
@@ -314,8 +324,9 @@ resource "oci_core_volume" "vm_volume-b" {
 }
 
 resource "oci_core_volume_attachment" "vm_volume_attach-b" {
-  count           = length(oci_core_instance.vm-b) > 0 ? 1 : 0
+  count = length(oci_core_instance.vm-b)
+
   attachment_type = "paravirtualized"
-  instance_id     = oci_core_instance.vm-b[0].id
+  instance_id     = oci_core_instance.vm-b[count.index].id
   volume_id       = oci_core_volume.vm_volume-b[count.index].id
 }
