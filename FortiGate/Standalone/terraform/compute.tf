@@ -8,6 +8,7 @@ resource "oci_core_instance" "vm-a" {
     oci_core_app_catalog_subscription.mp_image_subscription
   ]
   availability_domain = (var.availability_domain_name_1 != "" ? var.availability_domain_name_1 : (length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
+  fault_domain        = var.fault_domain_name_1
   compartment_id      = var.compute_compartment_ocid
   display_name        = "FortiGate-Standalone-Firewall"
   shape               = local.vm_compute_shape
