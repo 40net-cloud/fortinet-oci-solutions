@@ -34,7 +34,7 @@ resource "oci_core_instance" "vm-a" {
 
   source_details {
     source_type = "image"
-    source_id   = var.license_type == "BYOL" ? local.matched_package.image_id : local.paygo_image_id
+    source_id   = local.matched_package.image_id
   }
   metadata = {
     //ssh_authorized_keys = var.ssh_public_key
@@ -50,7 +50,7 @@ resource "oci_core_instance" "vm-a" {
 ##### Untrust VNIC-A #####
 ##########################
 resource "oci_core_vnic_attachment" "vnic_attach_untrust_a" {
-  count        = 1
+  count = length(oci_core_instance.vm-a)
   depends_on   = [oci_core_instance.vm-a]
   instance_id  = oci_core_instance.vm-a[0].id
   display_name = "vnic_untrust_a"
@@ -83,7 +83,7 @@ resource "oci_core_public_ip" "untrust_public_ip" {
 ########################
 resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
   depends_on   = [oci_core_vnic_attachment.vnic_attach_untrust_a]
-  count        = 1
+  count = length(oci_core_instance.vm-a)
   instance_id  = oci_core_instance.vm-a[count.index].id
   display_name = "vnic_trust"
 
@@ -108,7 +108,7 @@ resource "oci_core_private_ip" "trust_private_ip" {
 ##########################
 resource "oci_core_vnic_attachment" "vnic_attach_hb_a" {
   depends_on   = [oci_core_vnic_attachment.vnic_attach_trust_a]
-  count        = 1
+  count = length(oci_core_instance.vm-a)
   instance_id  = oci_core_instance.vm-a[count.index].id
   display_name = "vnic_hb_a"
 
@@ -205,7 +205,7 @@ resource "oci_core_instance" "vm-b" {
 
   source_details {
     source_type = "image"
-    source_id   = var.license_type == "BYOL" ? local.matched_package.image_id : local.paygo_image_id
+    source_id   = local.matched_package.image_id
   }
   metadata = {
     //ssh_authorized_keys = var.ssh_public_key
@@ -222,7 +222,7 @@ resource "oci_core_instance" "vm-b" {
 ##########################
 resource "oci_core_vnic_attachment" "vnic_attach_untrust_b" {
   depends_on   = [oci_core_instance.vm-b]
-  count        = 1
+  count = length(oci_core_instance.vm-b)
   instance_id  = oci_core_instance.vm-b[0].id
   display_name = "vnic_untrust_b"
 
@@ -240,7 +240,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_untrust_b" {
 ########################
 resource "oci_core_vnic_attachment" "vnic_attach_trust_b" {
   depends_on   = [oci_core_vnic_attachment.vnic_attach_untrust_b]
-  count        = 1
+  count        = length(oci_core_instance.vm-b)
   instance_id  = oci_core_instance.vm-b[count.index].id
   display_name = "vnic_trust"
 
@@ -258,7 +258,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_b" {
 ##########################
 resource "oci_core_vnic_attachment" "vnic_attach_hb_b" {
   depends_on   = [oci_core_vnic_attachment.vnic_attach_trust_b]
-  count        = 1
+  count = length(oci_core_instance.vm-b)
   instance_id  = oci_core_instance.vm-b[count.index].id
   display_name = "vnic_hb_b"
 

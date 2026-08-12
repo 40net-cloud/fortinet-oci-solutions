@@ -14,6 +14,7 @@ locals {
   fortigate_packages = flatten([
     for listing in local.listings : [
       for pkg in lookup(listing, "packages", []) : {
+        listing_name = lower(trimspace(listing.name))
         license_type = try(pkg.package_info._pricing._type, null),
         cpu_type     = can(regex(".*arm.*", lower(pkg.package_info._app_catalog_listing_resource_version))) ? "ARM64" : "X64"
         version      = regex("^([\\d.]+)", pkg.package_info._app_catalog_listing_resource_version)[0],
@@ -27,17 +28,29 @@ locals {
   ])
 
   matched_package = try(
-    one([
-      for pkg in local.fortigate_packages : pkg
-      if pkg.license_type == local.license_type &&
-      pkg.cpu_type == var.cpu_type &&
-      pkg.version == var.fortios_version &&
+  one([
+    for pkg in local.fortigate_packages : pkg
+    if pkg.license_type == local.license_type &&
+    pkg.cpu_type == var.cpu_type &&
+    pkg.version == var.fortios_version &&
+    (
       (
-        local.license_type != "PAYGO" || pkg.ocpu_count == local.paygo_ocpu
+        local.license_type == "BYOL" &&
+        pkg.listing_name == "fortigate next-gen firewall (byol)"
+      ) ||
+      (
+        local.license_type == "PAYGO" &&
+        pkg.listing_name == lower(
+          format(
+            "fortigate next-gen firewall (%d cores)",
+            local.paygo_ocpu
+          )
+        )
       )
-    ]),
-    null
-  )
+    )
+  ]),
+  null
+)
 
   # Dynamically extracted values based on matched package
   mp_listing_id               = try(local.matched_package.listing_id, null)
