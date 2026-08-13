@@ -56,15 +56,8 @@ jobs:
         cp final_listings.json FortiGate/Standalone/terraform/
         cp final_listings.json FortiGate/Active-Passive/terraform/
 
-    - name: Force downstream-trigger test
-      if: ${{ inputs.force_trigger_test }}
-      run: |
-        printf '\n' >> FortiAnalyzer/terraform/final_listings.json
-        printf '\n' >> FortiManager/terraform/final_listings.json
-        printf '\n' >> FortiGate/Standalone/terraform/final_listings.json
-        printf '\n' >> FortiGate/Active-Passive/terraform/final_listings.json
-
     - name: Commit and push updated JSON files
+      id: commit
       run: |
         git config user.name "fortinet-automation"
         git config user.email "fortinet-automation@users.noreply.github.com"
@@ -76,8 +69,20 @@ jobs:
 
         if git diff --cached --quiet; then
           echo "No listing changes to commit."
+          echo "changed=false" >> "$GITHUB_OUTPUT"
           exit 0
         fi
 
         git commit -m "chore: update final listings"
         git push origin HEAD:main
+        echo "changed=true" >> "$GITHUB_OUTPUT"
+
+    - name: Force downstream workflow dispatch
+      if: ${{ inputs.force_trigger_test && steps.commit.outputs.changed == 'false' }}
+      env:
+        GH_TOKEN: ${{ secrets.AUTOMATION_PAT }}
+      run: |
+        gh workflow run faz-tf-standalone.yml --ref main
+        gh workflow run fmg-tf-standalone.yml --ref main
+        gh workflow run fgt-tf-standalone.yml --ref main
+        gh workflow run fgt-tf-activepassive.yml --ref main
