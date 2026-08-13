@@ -29,12 +29,14 @@ locals {
   ])
 
   matched_package = try(
-    one([
-      for pkg in local.fortianalyzer_packages : pkg
-      if pkg.license_type == local.license_type && pkg.version == var.fortios_version
-    ]),
-    null
-  )
+  one([
+    for pkg in local.fortianalyzer_packages : pkg
+    if pkg.license_type == local.license_type &&
+    pkg.cpu_type == var.cpu_type &&
+    pkg.version == var.fortios_version
+  ]),
+  null
+)
 
   # Dynamically extracted values based on matched package
   mp_listing_id               = try(local.matched_package.listing_id, null)
