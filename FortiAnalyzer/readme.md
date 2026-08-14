@@ -137,9 +137,6 @@ OCI recommends least-privilege NSG and security-list rules, private subnets for 
 
 ## Deployment with OCI Resource Manager
 
-> [!CAUTION]
-> Use the deployment button only after the published release ZIP has been verified. OCI Resource Manager expects its working directory to contain at least one `.tf` file. For a deployment-button archive, place the Terraform files and `marketplace.yaml` at the ZIP root and exclude `.terraform`, state files, saved plans, credentials, and local variable files.
-
 | FortiAnalyzer standalone |
 | :---: |
 | [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fazstandalone/FortiAnalyzer_Standalone_Terraform.zip) |
