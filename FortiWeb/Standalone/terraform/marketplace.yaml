@@ -139,10 +139,11 @@ variables:
     enum:
       - VM.Standard2.1
       - VM.Standard2.2
+      - VM.Standard2.4
+      - VM.Standard2.8
       - VM.Standard3.Flex
       - VM.Standard.E3.Flex
       - VM.Standard.E4.Flex
-      - VM.Standard3.Flex 
 
   ocpu_count:
     type: integer

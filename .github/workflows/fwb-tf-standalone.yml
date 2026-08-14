@@ -6,39 +6,46 @@ env:
 
 on:
   workflow_dispatch:
+
   push:
     branches:
       - main
     paths:
       - 'FortiWeb/Standalone/terraform/*.tf'
-      - 'FortiWeb/Standalone/terraform/cloudinit/*.tpl'
+      - 'FortiWeb/Standalone/terraform/*.tpl'
       - 'FortiWeb/Standalone/terraform/*.hcl'
       - 'FortiWeb/Standalone/terraform/*.json'
       - 'FortiWeb/Standalone/terraform/*.yaml'
+      - '.github/workflows/fwb-tf-standalone.yml'
 
 jobs:
   OCI-FWB-TF-Standalone:
     name: 'Terraform FortiWeb Standalone'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     env:
+      # Terraform deployment variables
       TF_VAR_tenancy_ocid: "${{ secrets.TENANCY_OCID }}"
       TF_VAR_compartment_ocid: "${{ secrets.COMPARTMENT_OCID }}"
-      TF_VAR_user_ocid: "${{ secrets.USER_OCID }}"
+      TF_VAR_network_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
       TF_VAR_region: "${{ secrets.REGION }}"
-      TF_VAR_fingerprint: "${{ secrets.FINGERPRINT }}"
-      TF_VAR_private_key_path: ~/.oci/oci_api_key.pem
-      TF_VAR_igw_ocid: "${{ secrets.IGW_OCID }}"
-      TF_VAR_vcn_ocid: "${{ secrets.VCN_OCID }}"
-      TF_VAR_vcn_cidr: "${{ secrets.VCN_CIDR }}"
-      TF_VAR_availability_domain_name_1: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
-      TF_VAR_fault_domain_name_1: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
+
+      TF_VAR_availability_domain_name: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
+      TF_VAR_fault_domain_name: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
+
       TF_VAR_cpu_type: "${{ secrets.CPU_TYPE }}"
-      TF_VAR_fortios_version: "${{ secrets.FORTIWEB_VERSION }}"
+      TF_VAR_fortiweb_version: "${{ secrets.FORTIWEB_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
-      TF_VAR_vm_compute_shape_arm: "${{ secrets.VM_COMPUTE_SHAPE_ARM }}"
       TF_VAR_vm_compute_shape_x64: "${{ secrets.VM_COMPUTE_SHAPE_X64 }}"
-      TF_VAR_compute_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
-      
+
+      # OCI provider authentication
+      OCI_CLI_USER: "${{ secrets.USER_OCID }}"
+      OCI_CLI_FINGERPRINT: "${{ secrets.FINGERPRINT }}"
+      OCI_CLI_TENANCY: "${{ secrets.TENANCY_OCID }}"
+      OCI_CLI_REGION: "${{ secrets.REGION }}"
+      OCI_CLI_KEY_FILE: ~/.oci/oci_api_key.pem
+
     steps:
     - name: "Checkout"
       uses: actions/checkout@v4
@@ -47,14 +54,16 @@ jobs:
       uses: hashicorp/setup-terraform@v3
 
     - name: Configure OCI credentials
+      env:
+        OCI_PEM_KEY: "${{ secrets.OCI_PEM_KEY }}"
       run: |
         mkdir -p ~/.oci
-        echo "${{ secrets.OCI_PEM_KEY }}" > ~/.oci/oci_api_key.pem
+        printf '%s\n' "$OCI_PEM_KEY" > ~/.oci/oci_api_key.pem
         chmod 600 ~/.oci/oci_api_key.pem
 
     - name: "Terraform Init"
       id: init
-      run: terraform init
+      run: terraform init -input=false
       working-directory: ${{ env.TFPath }}
 
     - name: "Terraform Validation"
@@ -65,15 +74,6 @@ jobs:
     - name: "Terraform Format"
       id: format
       run: terraform fmt -check -diff
-      working-directory: ${{ env.TFPath }}
-
-    - name: "Show Terraform Selection Inputs"
-      run: |
-        echo "CPU_TYPE=${TF_VAR_cpu_type}"
-        echo "FORTIWEB_VERSION=${TF_VAR_fortios_version}"
-        echo "LICENSE_TYPE=${TF_VAR_license_type}"
-        echo "VM_COMPUTE_SHAPE_ARM=${TF_VAR_vm_compute_shape_arm}"
-        echo "VM_COMPUTE_SHAPE_X64=${TF_VAR_vm_compute_shape_x64}"
       working-directory: ${{ env.TFPath }}
 
     - name: "Terraform Plan"
@@ -87,7 +87,7 @@ jobs:
       working-directory: ${{ env.TFPath }}
 
     - name: "Save Plan JSON"
-      run: echo '${{ steps.show.outputs.stdout }}' > plan.json # Do not change
+      run: echo '${{ steps.show.outputs.stdout }}' > plan.json
 
     - name: Package and convert templates
       uses: azure/powershell@v1
@@ -99,7 +99,7 @@ jobs:
     - name: upload-templates-zip
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{secrets.GITHUB_TOKEN}}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ./${{ env.ZIPfile }}
         asset_name: ${{ env.ZIPfile }}
         tag: fwbstandalone
