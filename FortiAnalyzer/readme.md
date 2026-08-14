@@ -37,15 +37,6 @@ The Terraform configuration creates or uses the following resources:
 | Internet Gateway and routes | Created for a new VCN; an existing Internet Gateway OCID is required by the current existing-network workflow |
 | Marketplace agreement | Accepted and subscribed when `mp_subscription_enabled` is `true` |
 
-The deployment does **not** create:
-
-- FortiAnalyzer HA or a second FortiAnalyzer instance
-- A load balancer or floating cluster IP
-- FortiGate trust, untrust, or heartbeat interfaces
-- VPN, FastConnect, OCI Bastion, or a private management path
-- FortiAnalyzer configuration, administrator accounts, certificates, backups, or managed devices
-- Automatic FortiAnalyzer LVM initialization for the attached log disk
-
 ## Supported deployment model
 
 FortiAnalyzer-VM for OCI uses the BYOL licensing model. PAYG/On-Demand licensing is not available for FortiAnalyzer on OCI. Obtain and register an appropriate license before the deployment, or confirm that you are eligible for an evaluation license.
