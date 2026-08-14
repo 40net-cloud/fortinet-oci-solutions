@@ -5,6 +5,7 @@
 resource "oci_core_instance" "vm-a" {
   count               = local.matched_package != null ? 1 : 0
   availability_domain = (var.availability_domain_name_1 != "" ? var.availability_domain_name_1 : (length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
+  fault_domain        = var.fault_domain_name_1
   compartment_id      = var.compute_compartment_ocid
   display_name        = "FortiGate-Primary-Firewall"
   shape               = local.vm_compute_shape
@@ -186,6 +187,7 @@ resource "oci_core_instance" "vm-b" {
   oci_core_app_catalog_subscription.mp_image_subscription]
   count               = local.matched_package != null ? 1 : 0
   availability_domain = (var.availability_domain_name_2 != "" ? var.availability_domain_name_2 : (length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
+  fault_domain        = var.fault_domain_name_2
   compartment_id      = var.compute_compartment_ocid
   display_name        = "FortiGate-Secondary-Firewall"
   shape               = local.vm_compute_shape

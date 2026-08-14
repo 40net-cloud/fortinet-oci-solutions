@@ -46,7 +46,9 @@ variableGroups:
       - compute_compartment_ocid
       - vm_flex_shape_ocpus
       - availability_domain_name_1
+      - fault_domain_name_1
       - availability_domain_name_2
+      - fault_domain_name_2
       - license_type
       - fortios_version
       - cpu_type
@@ -151,6 +153,15 @@ variables:
     default: 1
     title: Availability Domain for Member-A
     description: Availability Domain
+  
+  fault_domain_name_1:
+    type: oci:identity:faultdomain:name
+    dependsOn:
+      compartmentId: ${compute_compartment_ocid}
+      availabilityDomainName: ${availability_domain_name_1}
+    required: true
+    title: Fault Domain for FortiGate-A
+    description: Choose the fault domain for FortiGate-A
 
   availability_domain_name_2:
     type: oci:identity:availabilitydomain:name
@@ -160,6 +171,15 @@ variables:
     default: 1
     title: Availability Domain for Member-B
     description: Availability Domain
+
+  fault_domain_name_2:
+    type: oci:identity:faultdomain:name
+    dependsOn:
+      compartmentId: ${compute_compartment_ocid}
+      availabilityDomainName: ${availability_domain_name_2}
+    required: true
+    title: Fault Domain for FortiGate-B
+    description: Choose the fault domain for FortiGate-B
 
   license_type:
     type: enum

@@ -81,6 +81,16 @@ variable "availability_domain_name_2" {
   description = "Availability Domain for Member-B"
 }
 
+variable "fault_domain_name_1" {
+  description = "Fault Domain for FortiGate-A"
+  type        = string
+}
+
+variable "fault_domain_name_2" {
+  description = "Fault Domain for FortiGate-B"
+  type        = string
+}
+
 variable "license_type" {
   description = "License type, e.g. BYOL or PAYGO (like 'PAYGO 4 OCPUs')"
   type        = string
