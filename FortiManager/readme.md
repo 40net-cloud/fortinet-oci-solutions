@@ -43,11 +43,7 @@ The deployment does **not** create or configure:
 
 - FortiManager HA or a second FortiManager instance
 - A load balancer or floating cluster IP
-- FortiGate trust, untrust, or heartbeat interfaces
-- VPN, FastConnect, OCI Bastion, or a private management path
-- FortiManager ADOMs, device groups, policy packages, or administrator accounts
 - FortiManager certificates, authentication servers, backups, or monitoring
-- Managed FortiGate authorization or policy installation
 - Automatic FortiManager LVM initialization for the attached data disk
 
 ## Supported deployment model
@@ -219,21 +215,6 @@ Open only the ports required by enabled features. See the [FortiManager incoming
 OCI recommends least-privilege NSG and security-list rules, private subnets for sensitive systems, and VCN Flow Logs. See [OCI secure network access recommendations](https://docs.oracle.com/en/solutions/oci-best-practices/ensure-secure-network-access1.html).
 
 ## Deployment with OCI Resource Manager
-
-> [!CAUTION]
-> Use the deployment button only after verifying the published release ZIP. OCI Resource Manager expects its working directory to contain at least one `.tf` file. For a deployment-button archive, place the Terraform files and `marketplace.yaml` at the ZIP root.
-
-The release archive must exclude:
-
-- `.terraform`
-- `.terraform.lock.hcl` unless intentionally generated for all target platforms
-- Terraform state files
-- Saved Terraform plans such as `plan.tfplan`
-- `terraform.tfvars`
-- OCI credentials
-- Private keys
-- FortiManager license files
-- Local test artifacts
 
 | FortiManager standalone |
 | :---: |
