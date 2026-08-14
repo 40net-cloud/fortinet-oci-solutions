@@ -6,7 +6,6 @@ env:
 
 on:
   workflow_dispatch:
-
   push:
     branches:
       - main
@@ -16,31 +15,29 @@ on:
       - 'FortiWeb/Standalone/terraform/*.hcl'
       - 'FortiWeb/Standalone/terraform/*.json'
       - 'FortiWeb/Standalone/terraform/*.yaml'
-      - '.github/workflows/fwb-tf-standalone.yml'
 
 jobs:
   OCI-FWB-TF-Standalone:
     name: 'Terraform FortiWeb Standalone'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
     env:
       TF_VAR_tenancy_ocid: "${{ secrets.TENANCY_OCID }}"
       TF_VAR_compartment_ocid: "${{ secrets.COMPARTMENT_OCID }}"
-      TF_VAR_network_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
+      TF_VAR_user_ocid: "${{ secrets.USER_OCID }}"
       TF_VAR_region: "${{ secrets.REGION }}"
-      TF_VAR_availability_domain_name: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
-      TF_VAR_fault_domain_name: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
+      TF_VAR_fingerprint: "${{ secrets.FINGERPRINT }}"
+      TF_VAR_private_key_path: ~/.oci/oci_api_key.pem
+      TF_VAR_igw_ocid: "${{ secrets.IGW_OCID }}"
+      TF_VAR_vcn_ocid: "${{ secrets.VCN_OCID }}"
+      TF_VAR_vcn_cidr: "${{ secrets.VCN_CIDR }}"
+      TF_VAR_availability_domain_name_1: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
+      TF_VAR_fault_domain_name_1: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
       TF_VAR_cpu_type: "${{ secrets.CPU_TYPE }}"
-      TF_VAR_fortiweb_version: "${{ secrets.FORTIWEB_VERSION }}"
+      TF_VAR_fortios_version: "${{ secrets.FORTIWEB_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
-      TF_VAR_vm_compute_shape_x64: "${{ secrets.VM_COMPUTE_SHAPE_X64 }}"
-      OCI_CLI_USER: "${{ secrets.USER_OCID }}"
-      OCI_CLI_FINGERPRINT: "${{ secrets.FINGERPRINT }}"
-      OCI_CLI_TENANCY: "${{ secrets.TENANCY_OCID }}"
-      OCI_CLI_REGION: "${{ secrets.REGION }}"
-      OCI_CLI_KEY_FILE: /home/runner/.oci/oci_api_key.pem
-
+      TF_VAR_vm_compute_shape: "${{ secrets.FORTIWEB_COMPUTE_SHAPE }}"
+      TF_VAR_compute_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
+      
     steps:
     - name: "Checkout"
       uses: actions/checkout@v4
@@ -49,25 +46,14 @@ jobs:
       uses: hashicorp/setup-terraform@v3
 
     - name: Configure OCI credentials
-      env:
-        OCI_PEM_KEY: "${{ secrets.OCI_PEM_KEY }}"
       run: |
-        mkdir -p "$HOME/.oci"
-        printf '%s\n' "$OCI_PEM_KEY" > "$HOME/.oci/oci_api_key.pem"
-        chmod 600 "$HOME/.oci/oci_api_key.pem"
-
-        if [ ! -s "$OCI_CLI_KEY_FILE" ]; then
-        echo "::error::OCI private key file is missing or empty."
-        exit 1
-        fi
-
-        openssl pkey \
-        -in "$OCI_CLI_KEY_FILE" \
-        -noout >/dev/null
+        mkdir -p ~/.oci
+        echo "${{ secrets.OCI_PEM_KEY }}" > ~/.oci/oci_api_key.pem
+        chmod 600 ~/.oci/oci_api_key.pem
 
     - name: "Terraform Init"
       id: init
-      run: terraform init -input=false
+      run: terraform init
       working-directory: ${{ env.TFPath }}
 
     - name: "Terraform Validation"
@@ -84,6 +70,7 @@ jobs:
       id: plan
       run: terraform plan -input=false -out=plan.tfplan
       working-directory: ${{ env.TFPath }}
+      timeout-minutes: 15
 
     - name: "Terraform Show"
       id: show
@@ -91,19 +78,19 @@ jobs:
       working-directory: ${{ env.TFPath }}
 
     - name: "Save Plan JSON"
-      run: echo '${{ steps.show.outputs.stdout }}' > plan.json
+      run: echo '${{ steps.show.outputs.stdout }}' > plan.json # Do not change
 
     - name: Package and convert templates
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Compress-Archive -Path "./FortiWeb/Standalone/terraform*" -DestinationPath "./${{ env.ZIPfile }}"
+          Compress-Archive -Path "./FortiWeb/*" -DestinationPath "./${{ env.ZIPfile }}"
         azPSVersion: "latest"
 
     - name: upload-templates-zip
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{secrets.GITHUB_TOKEN}}
         file: ./${{ env.ZIPfile }}
         asset_name: ${{ env.ZIPfile }}
         tag: fwbstandalone
