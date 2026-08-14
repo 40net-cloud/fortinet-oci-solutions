@@ -25,26 +25,21 @@ jobs:
     timeout-minutes: 15
 
     env:
-      # Terraform deployment variables
       TF_VAR_tenancy_ocid: "${{ secrets.TENANCY_OCID }}"
       TF_VAR_compartment_ocid: "${{ secrets.COMPARTMENT_OCID }}"
       TF_VAR_network_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
       TF_VAR_region: "${{ secrets.REGION }}"
-
       TF_VAR_availability_domain_name: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
       TF_VAR_fault_domain_name: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
-
       TF_VAR_cpu_type: "${{ secrets.CPU_TYPE }}"
       TF_VAR_fortiweb_version: "${{ secrets.FORTIWEB_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
       TF_VAR_vm_compute_shape_x64: "${{ secrets.VM_COMPUTE_SHAPE_X64 }}"
-
-      # OCI provider authentication
       OCI_CLI_USER: "${{ secrets.USER_OCID }}"
       OCI_CLI_FINGERPRINT: "${{ secrets.FINGERPRINT }}"
       OCI_CLI_TENANCY: "${{ secrets.TENANCY_OCID }}"
       OCI_CLI_REGION: "${{ secrets.REGION }}"
-      OCI_CLI_KEY_FILE: ~/.oci/oci_api_key.pem
+      OCI_CLI_KEY_FILE: /home/runner/.oci/oci_api_key.pem
 
     steps:
     - name: "Checkout"
@@ -57,9 +52,18 @@ jobs:
       env:
         OCI_PEM_KEY: "${{ secrets.OCI_PEM_KEY }}"
       run: |
-        mkdir -p ~/.oci
-        printf '%s\n' "$OCI_PEM_KEY" > ~/.oci/oci_api_key.pem
-        chmod 600 ~/.oci/oci_api_key.pem
+        mkdir -p "$HOME/.oci"
+        printf '%s\n' "$OCI_PEM_KEY" > "$HOME/.oci/oci_api_key.pem"
+        chmod 600 "$HOME/.oci/oci_api_key.pem"
+
+        if [ ! -s "$OCI_CLI_KEY_FILE" ]; then
+        echo "::error::OCI private key file is missing or empty."
+        exit 1
+        fi
+
+        openssl pkey \
+        -in "$OCI_CLI_KEY_FILE" \
+        -noout >/dev/null
 
     - name: "Terraform Init"
       id: init
