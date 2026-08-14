@@ -46,6 +46,7 @@ variableGroups:
       - compute_compartment_ocid
       - vm_flex_shape_ocpus
       - availability_domain_name_1
+      - fault_domain_name_1
       - license_type
       - fortios_version
       - cpu_type
@@ -149,6 +150,15 @@ variables:
     default: 1
     title: Availability Domain for FortiAnalyzer-VM deployment
     description: Availability Domain
+
+  fault_domain_name_1:
+    type: oci:identity:faultdomain:name
+    dependsOn:
+      compartmentId: ${compute_compartment_ocid}
+      availabilityDomainName: ${availability_domain_name_1}
+    required: true
+    title: Fault Domain for FortiAnalyzer-VM deployment
+    description: Choose the fault domain in the selected availability domain
 
   license_type:
     type: enum
