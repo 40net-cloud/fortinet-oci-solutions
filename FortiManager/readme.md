@@ -39,13 +39,6 @@ The Terraform configuration creates or uses the following resources:
 | Internet Gateway and routes | Created for a new VCN; an existing Internet Gateway OCID is required by the current existing-network workflow |
 | Marketplace agreement | Accepted and subscribed when `mp_subscription_enabled` is `true` |
 
-The deployment does **not** create or configure:
-
-- FortiManager HA or a second FortiManager instance
-- A load balancer or floating cluster IP
-- FortiManager certificates, authentication servers, backups, or monitoring
-- Automatic FortiManager LVM initialization for the attached data disk
-
 ## Supported deployment model
 
 The current template exposes the BYOL Marketplace option. Obtain and register an appropriate FortiManager license before deployment or confirm that you are eligible for an evaluation license.
