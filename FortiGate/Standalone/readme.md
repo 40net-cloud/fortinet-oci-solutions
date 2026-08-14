@@ -21,10 +21,8 @@ The template supports OCI Resource Manager and Terraform CLI deployments, BYOL a
 - [Bootstrap configuration](#bootstrap-configuration)
 - [Initialize the additional disk](#initialize-the-additional-disk)
 - [Configure traffic forwarding](#configure-traffic-forwarding)
-- [Post-deployment hardening](#post-deployment-hardening)
 - [Validation and troubleshooting](#validation-and-troubleshooting)
 - [Upgrade and lifecycle guidance](#upgrade-and-lifecycle-guidance)
-- [Cost considerations](#cost-considerations)
 - [Repository files](#repository-files)
 - [Support](#support)
 
@@ -38,7 +36,6 @@ The Terraform configuration creates or uses the following resources:
 | Primary VNIC | Attached to the management subnet as FortiGate `port1` |
 | Secondary VNIC | Attached to the trust subnet as FortiGate `port2` |
 | Public IP on `port1` | An automatically assigned ephemeral public IP |
-| Public IP on `port2` | A reserved public IP associated with the configured trust private IP |
 | Additional storage | One OCI Block Volume attached to the FortiGate instance |
 | VCN | Created when `network_strategy` is `Create New VCN and Subnet`; otherwise, an existing VCN is used |
 | Management subnet | Created or supplied for `port1` |
@@ -47,26 +44,6 @@ The Terraform configuration creates or uses the following resources:
 | Route tables | Default Internet Gateway routes for both new subnets |
 | Marketplace agreement | Accepted and subscribed when `mp_subscription_enabled` is `true` |
 | Bootstrap configuration | FortiOS CLI configuration supplied through instance user data |
-
-The deployment does **not** create or configure:
-
-- FortiGate HA
-- A second FortiGate instance
-- Load balancers
-- Floating HA IP addresses
-- A separate heartbeat interface
-- A dedicated untrust or external subnet
-- A protected application or workload subnet
-- OCI route rules targeting FortiGate as a virtual appliance
-- FortiGate firewall policies
-- Source NAT or destination NAT policies
-- IPsec VPNs
-- Dynamic routing
-- FortiManager registration
-- FortiAnalyzer logging
-- Trusted administrator accounts or MFA
-- Automatic BYOL license injection
-- A secure remote Terraform state backend
 
 ## Architecture and interface roles
 
@@ -86,17 +63,6 @@ The bootstrap configures:
 - A route for the VCN CIDR through the trust-subnet gateway on `port2`.
 - MTU 9000 on both interfaces.
 - An OCI SDN connector.
-
-> [!IMPORTANT]
-> The terms `management` and `trust` do not describe a conventional external/internal FortiGate topology in the current implementation. Both newly created subnets receive default Internet Gateway routes, and both VNICs receive public IP addresses. Review and redesign the interface roles before using this template as an Internet-edge or east-west firewall.
-
-A typical routed-firewall architecture would normally use clearly defined interfaces such as:
-
-- Management
-- External or untrust
-- Internal or trust
-
-It would also include protected subnet route tables that send traffic to the appropriate FortiGate private IP.
 
 ## Known limitations
 
@@ -129,9 +95,9 @@ Terraform creates an NSG and two allow-all rules, but the NSG is not assigned to
 
 Attach purpose-specific NSGs to the relevant VNICs and remove the subnet-wide allow-all security list.
 
-### Public IPs on both interfaces
+### Public IP on port1 interface
 
-The primary VNIC always receives an ephemeral public IP. The secondary VNIC always receives a reserved public IP.
+The primary VNIC always receives an ephemeral public IP.
 
 The `use_existing_ip` input does not control this behavior.
 
@@ -179,22 +145,6 @@ Using non-`/24` management or trust subnets can produce incorrect FortiOS interf
 The bootstrap sets MTU 9000 on both interfaces.
 
 Confirm that the entire traffic path supports jumbo frames before retaining this setting. Otherwise, use the OCI and FortiOS default MTU or configure a tested value.
-
-### Debug outputs only
-
-The Terraform configuration exports selected Marketplace package and configuration details but does not export the instance OCID, VNIC IDs, private IPs, public IPs, or HTTPS URL.
-
-### Schema inconsistencies
-
-The Resource Manager schema contains fields and outputs that do not match the Terraform implementation. Examples include:
-
-- Output names that do not exist in Terraform.
-- `cluster_ip` for a standalone deployment.
-- Misspelled `Open FotiGate`.
-- Inputs that are not used.
-- Dependencies on a nonexistent generic `vm_compute_shape` input.
-- A memory default that is not present in the allowed enum.
-- Shape choices that should be verified against current Fortinet support.
 
 ## Supported licensing
 
@@ -292,23 +242,6 @@ The deployment principal needs permission to:
 - Create and run Resource Manager stacks when using OCI Resource Manager.
 
 Apply least-privilege IAM policies appropriate to your tenancy.
-
-### OCI service limits
-
-Confirm capacity and service limits for:
-
-- Compute shapes
-- OCPUs
-- Memory
-- VNICs
-- Reserved public IPs
-- Block Volumes
-- VCNs
-- Subnets
-- Route tables
-- Security lists
-- NSGs
-- Internet Gateways
 
 ### FortiGate license
 
@@ -424,28 +357,6 @@ Restrict egress where operationally practical while allowing required destinatio
 - Approved application destinations
 
 ## Deployment with OCI Resource Manager
-
-> [!CAUTION]
-> The published deployment archive must be verified before using the deployment button. OCI Resource Manager expects the working directory to contain at least one `.tf` file.
-
-The deployment archive should place these files at its root:
-
-- Terraform `.tf` files
-- `marketplace.yaml`
-- `final_listings.json`
-- `cloudinit/bootstrap_vm-a.tpl`
-
-The archive must not contain:
-
-- `.terraform`
-- Terraform state
-- Saved plans such as `terraform/plan.tfplan`
-- `terraform.tfvars`
-- Private keys
-- OCI credentials
-- FortiGate license files
-- FortiFlex tokens
-- Local test artifacts
 
 | FortiGate standalone |
 | :---: |
@@ -667,23 +578,6 @@ The current Terraform exports debug information:
 - `selected_image_id`
 - `selected_configuration`
 
-It does not export the actual deployed instance or VNIC addresses.
-
-Recommended outputs include:
-
-- FortiGate instance OCID
-- FortiGate instance state
-- Management private IP
-- Management public IP
-- Trust private IP
-- Trust public IP
-- Management VNIC OCID
-- Trust VNIC OCID
-- HTTPS management URL
-- Block Volume OCID
-
-Until these outputs are added, retrieve addresses from the OCI Console.
-
 ## Initial access and licensing
 
 1. Wait for the OCI Compute instance to reach **Running**.
@@ -829,35 +723,6 @@ Validate:
 - Fail-closed behavior
 - Logging
 - FortiGuard connectivity
-
-## Post-deployment hardening
-
-Complete the following before production use:
-
-- Replace the default HTTPS certificate.
-- Change the built-in administrator password.
-- Create named administrator accounts.
-- Configure least-privilege access profiles.
-- Enable MFA or enterprise administrator authentication.
-- Configure administrator trusted hosts.
-- Remove HTTP administrative access.
-- Disable SSH if it is not required.
-- Disable administrative access on data interfaces.
-- Restrict OCI security rules.
-- Attach NSGs to the appropriate VNICs.
-- Remove the allow-all security list.
-- Remove unnecessary public IP addresses.
-- Disable source/destination checking only on forwarding VNICs.
-- Configure FortiGuard connectivity.
-- Configure trusted DNS and NTP servers.
-- Configure FortiAnalyzer, FortiManager, syslog, or SIEM logging.
-- Configure automatic backups.
-- Enable OCI VCN Flow Logs.
-- Configure OCI alarms and budgets.
-- Review FortiOS local-in policies.
-- Apply tested firewall policies and security profiles.
-- Verify license and support entitlement.
-- Record interface roles, routes, NAT, policies, public IPs, and recovery procedures.
 
 ## Validation and troubleshooting
 
@@ -1012,25 +877,6 @@ Before destruction:
 - Confirm workload connectivity after removal.
 - Review Marketplace subscription handling.
 - Review backups and snapshots separately.
-
-## Cost considerations
-
-This deployment can incur charges for:
-
-- OCI Compute OCPUs and memory
-- PAYG Marketplace software charges
-- Boot Volume storage
-- Additional Block Volume storage
-- Reserved public IP addresses
-- Network egress
-- Cross-region traffic
-- Backups and snapshots
-- OCI monitoring and logging
-- FortiGate BYOL licensing and support
-
-PAYG Marketplace charges and OCI infrastructure charges are separate.
-
-Configure OCI budgets and cost alerts before production deployment.
 
 ## Repository files
 
