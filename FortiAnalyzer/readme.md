@@ -1,6 +1,12 @@
 # FortiAnalyzer Standalone Terraform Deployment for Oracle Cloud
 
-This package enables automated deployment of FortiAnalyzer Standalone VM(s) on Oracle Cloud Infrastructure (OCI) using Marketplace images.
+Deploy one standalone FortiAnalyzer-VM on Oracle Cloud Infrastructure (OCI) with Terraform and an OCI Marketplace image.
+
+This template supports deployment through OCI Resource Manager or the Terraform CLI. It is a single-instance, Bring Your Own License (BYOL) deployment; it does not create a FortiAnalyzer HA cluster.
+
+> [!WARNING]
+> Review the security limitations below before deploying. The current Terraform assigns a public IPv4 address to the FortiAnalyzer management interface and creates an allow-all ingress security list when it creates a VCN. The `nsg_whitelist_ip` input is not currently enforced, and the created Network Security Group (NSG) is not attached to the instance. Do not use the default networking configuration for production until these Terraform issues are corrected.
+
 
 ## Deployment Options
 
