@@ -27,16 +27,14 @@ jobs:
       TF_VAR_region: "${{ secrets.REGION }}"
       TF_VAR_fingerprint: "${{ secrets.FINGERPRINT }}"
       TF_VAR_private_key_path: ~/.oci/oci_api_key.pem
-      TF_VAR_igw_ocid: "${{ secrets.IGW_OCID }}"
-      TF_VAR_vcn_ocid: "${{ secrets.VCN_OCID }}"
-      TF_VAR_vcn_cidr: "${{ secrets.VCN_CIDR }}"
+      TF_VAR_vcn_id: "${{ secrets.VCN_OCID }}"
+      TF_VAR_vcn_cidr_block: "${{ secrets.VCN_CIDR }}"
       TF_VAR_availability_domain_name_1: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
       TF_VAR_fault_domain_name_1: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
       TF_VAR_cpu_type: "${{ secrets.CPU_TYPE }}"
-      TF_VAR_fortios_version: "${{ secrets.FORTIWEB_VERSION }}"
+      TF_VAR_fortiweb_version: "${{ secrets.FORTIWEB_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
-      TF_VAR_vm_compute_shape: "${{ secrets.FORTIWEB_COMPUTE_SHAPE }}"
-      TF_VAR_compute_compartment_ocid: "${{ secrets.COMPUTE_COMPARTMENT_OCID }}"
+      TF_VAR_vm_compute_shape_x64: "${{ secrets.FORTIWEB_COMPUTE_SHAPE }}"
       
     steps:
     - name: "Checkout"
@@ -66,6 +64,16 @@ jobs:
       run: terraform fmt -check -diff
       working-directory: ${{ env.TFPath }}
 
+    - name: "Show Terraform Selection Inputs"
+      run: |
+        echo "CPU_TYPE=${TF_VAR_cpu_type}"
+        echo "FORTIWEB_VERSION=${TF_VAR_fortiweb_version}"
+        echo "LICENSE_TYPE=${TF_VAR_license_type}"
+        echo "VM_COMPUTE_SHAPE_X64=${TF_VAR_vm_compute_shape_x64}"
+        echo "VCN_ID=${TF_VAR_vcn_id}"
+        echo "VCN_CIDR_BLOCK=${TF_VAR_vcn_cidr_block}"
+      working-directory: ${{ env.TFPath }}
+
     - name: "Terraform Plan"
       id: plan
       run: terraform plan -input=false -out=plan.tfplan
@@ -84,7 +92,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Compress-Archive -Path "./FortiWeb/*" -DestinationPath "./${{ env.ZIPfile }}"
+          Compress-Archive -Path "./FortiWeb/Standalone/terraform/*" -DestinationPath "./${{ env.ZIPfile }}"
         azPSVersion: "latest"
 
     - name: upload-templates-zip
