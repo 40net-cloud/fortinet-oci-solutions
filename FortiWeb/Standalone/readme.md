@@ -110,20 +110,29 @@ The template supports the FortiWeb OCI Marketplace licensing model published for
 
 ## Deployment with OCI Resource Manager
 
-1. Create a new OCI Resource Manager stack.
-2. Upload the contents of the `terraform/` directory as the stack source.
-3. Set the required OCI variables, such as:
-   - tenancy OCID
-   - user OCID
-   - API key fingerprint
-   - private key path
-   - region
-   - compartment OCID
-4. Select the requested FortiWeb image version and compute shape.
-5. Review and apply the stack.
-6. Confirm the created VCN, subnets, and FortiWeb instance are present.
+| FortiWeb standalone |
+| :---: |
+| [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbstandalone/FortiWeb_Standalone_Terraform.zip) |
 
-This repo includes the OCI Marketplace metadata needed for the stack to be consumed in the same general GUI-driven flow as the other OCI deployments.
+To deploy:
+
+1. Sign in to the intended OCI tenancy and region.
+2. Select **Deploy to Oracle Cloud**.
+3. Review the downloaded Terraform configuration.
+4. Select the Resource Manager stack compartment.
+5. Choose a supported Terraform version.
+6. Select the FortiWeb license model.
+7. Select the FortiWeb version and CPU architecture.
+8. Select a supported compute shape.
+9. Configure OCPUs and memory for a flexible shape.
+10. Configure new or existing network resources.
+11. Use specific administrator CIDRs rather than `0.0.0.0/0`.
+12. Create the stack without automatically applying it.
+13. Run and review a **Plan** job.
+14. Verify the VCN, route tables, subnets, and public management IP configuration.
+15. Run **Apply** only after the plan is approved.
+
+See [Terraform configurations for OCI Resource Manager](https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Concepts/terraformconfigresourcemanager.htm).
 
 ## Deployment with Terraform CLI
 
