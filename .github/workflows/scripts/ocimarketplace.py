@@ -5,9 +5,13 @@ import os
 
 class FTNTMarketplace:
     def __init__(self):
+        key_file = os.path.expanduser(os.environ.get("OCI_KEY_FILE", "~/.oci/oci_api_key.pem"))
+        if not os.path.exists(key_file):
+            raise FileNotFoundError(f"OCI private key not found at {key_file}. Ensure the action created ~/.oci/oci_api_key.pem before running the Python script.")
+
         self.config = {
             "user": os.environ["USER_OCID"],
-            "key_file": "~/.oci/oci_api_key.pem",
+            "key_file": key_file,
             "fingerprint": os.environ["FINGERPRINT"],
             "tenancy": os.environ["TENANCY_OCID"],
             "region": os.environ["REGION"]

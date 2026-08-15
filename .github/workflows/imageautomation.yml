@@ -45,8 +45,10 @@ jobs:
         FINGERPRINT: ${{ secrets.FINGERPRINT }}
         TENANCY_OCID: ${{ secrets.TENANCY_OCID }}
         REGION: ${{ secrets.REGION }}
+        OCI_KEY_FILE: ~/.oci/oci_api_key.pem
       run: |
-        python .github/workflows/scripts/ocimarketplace.py  # Adjust path if ocimarketplace.py is not at root
+        ls -l ~/.oci/oci_api_key.pem
+        python .github/workflows/scripts/ocimarketplace.py
 
     - name: Copy final_listings.json to all product folders
       run: |
