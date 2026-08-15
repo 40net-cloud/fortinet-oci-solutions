@@ -1,5 +1,9 @@
 name: Generate Final Listings JSON
 
+permissions:
+  contents: write
+  actions: write
+
 on:
   schedule:
     - cron: '0 0 1 * *'
@@ -83,7 +87,7 @@ jobs:
     - name: Force downstream workflow dispatch
       if: ${{ inputs.force_trigger_test && steps.commit.outputs.changed == 'false' }}
       env:
-        GH_TOKEN: ${{ secrets.AUTOMATION_PAT }}
+        GH_TOKEN: ${{ github.token }}
       run: |
         gh workflow run faz-tf-standalone.yml --ref main
         gh workflow run fmg-tf-standalone.yml --ref main
