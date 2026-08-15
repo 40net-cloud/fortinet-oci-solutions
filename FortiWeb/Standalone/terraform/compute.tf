@@ -1,20 +1,23 @@
-resource "oci_core_instance" "fortiweb" {
+resource "oci_core_instance" "vm-a" {
   count = local.matched_package != null ? 1 : 0
 
   depends_on = [
-    terraform_data.validate_marketplace_package,
-    terraform_data.validate_network,
     oci_core_app_catalog_subscription.fortiweb
   ]
 
-  availability_domain = var.availability_domain_name
-  fault_domain        = var.fault_domain_name
+  availability_domain = var.availability_domain_name_1 != "" ? var.availability_domain_name_1 : data.oci_identity_availability_domains.ads.availability_domains[0].name
+  fault_domain        = var.fault_domain_name_1
   compartment_id      = var.compartment_ocid
-  display_name        = var.prefix
+  display_name        = var.vm_display_name
   shape               = local.vm_compute_shape
 
   dynamic "shape_config" {
-    for_each = contains(local.flex_shapes, local.vm_compute_shape) ? [1] : []
+    for_each = contains([
+      "VM.Standard3.Flex",
+      "VM.Standard.E4.Flex",
+      "VM.Standard.E5.Flex",
+      "VM.Standard.E6.Flex"
+    ], local.vm_compute_shape) ? [1] : []
 
     content {
       ocpus         = var.ocpu_count
@@ -23,15 +26,15 @@ resource "oci_core_instance" "fortiweb" {
   }
 
   create_vnic_details {
-    subnet_id        = oci_core_subnet.untrust.id
-    display_name     = "${var.prefix}-port1"
-    assign_public_ip = var.assign_public_ip
-    hostname_label   = "fortiweb"
-    private_ip       = var.fwb_untrust_ip
+    subnet_id        = local.use_existing_network ? var.management_subnet_id : oci_core_subnet.management_subnet[0].id
+    display_name     = "vm-a-mgmt"
+    assign_public_ip = true
+    hostname_label   = "fwbmgmt"
+    private_ip       = var.mgmt_private_ip
   }
 
   launch_options {
-    network_type = "PARAVIRTUALIZED"
+    network_type = var.instance_launch_options_network_type
   }
 
   source_details {
@@ -40,49 +43,45 @@ resource "oci_core_instance" "fortiweb" {
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }
 
-  metadata = {
-    user_data = base64encode(templatefile("${path.module}/customdatafwb.tpl", {
-      fwb_vm_name          = var.prefix
-      untrusted_gateway_ip = oci_core_subnet.untrust.virtual_router_ip
-      fwb_ipaddress_port2  = var.fwb_trust_ip
-      trust_mask           = cidrnetmask(var.trust_subnet_cidr)
-    }))
-  }
-
   timeouts {
     create = "60m"
   }
 }
 
-resource "oci_core_vnic_attachment" "fortiweb_trust" {
-  count = length(oci_core_instance.fortiweb)
-
-  instance_id  = oci_core_instance.fortiweb[0].id
-  display_name = "${var.prefix}-port2"
+resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
+  count        = local.matched_package != null ? 1 : 0
+  depends_on   = [oci_core_instance.vm-a]
+  instance_id  = oci_core_instance.vm-a[0].id
+  display_name = "vnic_trust_a"
 
   create_vnic_details {
-    subnet_id              = oci_core_subnet.trust.id
-    display_name           = "${var.prefix}-port2"
+    subnet_id              = local.use_existing_network ? var.trust_subnet_id : oci_core_subnet.trust_subnet[0].id
+    display_name           = "vnic_trust_a"
     assign_public_ip       = false
-    skip_source_dest_check = true
-    private_ip             = var.fwb_trust_ip
+    skip_source_dest_check = false
   }
 }
 
-resource "oci_core_volume" "fortiweb" {
-  count = length(oci_core_instance.fortiweb)
+resource "oci_core_private_ip" "trust_private_ip" {
+  count = local.matched_package != null ? 1 : 0
 
-  availability_domain = var.availability_domain_name
+  vnic_id        = oci_core_vnic_attachment.vnic_attach_trust_a[0].vnic_id
+  display_name   = "trust_ip"
+  hostname_label = "trust"
+  ip_address     = var.trust_private_ip
+}
+
+resource "oci_core_volume" "vm_volume_a" {
+  count               = local.matched_package != null ? 1 : 0
+  availability_domain = var.availability_domain_name_1 != "" ? var.availability_domain_name_1 : data.oci_identity_availability_domains.ads.availability_domains[0].name
   compartment_id      = var.compartment_ocid
-  display_name        = "${var.prefix}-data"
-  size_in_gbs         = var.data_volume_size_in_gbs
+  display_name        = "vm_volume-a"
+  size_in_gbs         = var.volume_size
 }
 
-resource "oci_core_volume_attachment" "fortiweb" {
-  count = length(oci_core_volume.fortiweb)
-
+resource "oci_core_volume_attachment" "vm_volume_attach_a" {
+  count           = length(oci_core_instance.vm-a) > 0 ? 1 : 0
   attachment_type = "paravirtualized"
-  instance_id     = oci_core_instance.fortiweb[0].id
-  volume_id       = oci_core_volume.fortiweb[0].id
+  instance_id     = oci_core_instance.vm-a[0].id
+  volume_id       = oci_core_volume.vm_volume_a[count.index].id
 }
-

@@ -20,4 +20,3 @@ resource "oci_core_app_catalog_subscription" "fortiweb" {
     create = "30m"
   }
 }
-

@@ -1,30 +1,29 @@
-title: FortiWeb Standalone Deployment
-description: Deploy one standalone FortiWeb appliance with untrusted and trusted interfaces.
+# Title shown in Application Information tab.
+title: FortiWeb Standalone Deployment Template
+# Sub Title shown in Application Information tab.
+description: This template deploys a single FortiWeb instance in OCI with a management subnet and a trust subnet.
 schemaVersion: 1.1.0
-version: "20260814"
-locale: en
+version: "20260815"
+
+locale: "en"
 
 variableGroups:
-  - title: Hidden Variables
+  - title: "Hidden Variable Group"
     visible: false
     variables:
       - tenancy_ocid
+      - user_ocid
+      - fingerprint
+      - private_key_path
+      - region
       - mp_subscription_enabled
 
-  - title: Deployment Location
+  - title: "FortiWeb Compute Configuration"
     variables:
       - compartment_ocid
-      - network_compartment_ocid
-      - region
-      - prefix
-
-  - title: FortiWeb Placement
-    variables:
-      - availability_domain_name
-      - fault_domain_name
-
-  - title: FortiWeb Image and Compute
-    variables:
+      - vm_display_name
+      - availability_domain_name_1
+      - fault_domain_name_1
       - license_type
       - fortiweb_version
       - cpu_type
@@ -33,79 +32,108 @@ variableGroups:
       - memory_in_gbs
       - boot_volume_size_in_gbs
       - data_volume_size_in_gbs
+      - instance_launch_options_network_type
 
-  - title: Network
+  - title: "FortiWeb Network Configuration"
     variables:
       - network_strategy
       - vcn_id
-      - existing_igw_ocid
+      - vcn_display_name
       - vcn_cidr_block
-      - untrust_subnet_cidr
-      - trust_subnet_cidr
-      - fwb_untrust_ip
-      - fwb_trust_ip
+      - vcn_dns_label
+      - management_subnet_id
+      - management_subnet_display_name
+      - management_subnet_cidr_block
+      - management_subnet_dns_label
+      - trust_subnet_id
+      - trust_subnet_display_name
+      - trust_subnet_cidr_block
+      - trust_subnet_dns_label
+      - management_routetable_display_name
+      - trust_routetable_display_name
+      - management_routetable_display_name_existing
+      - trust_routetable_display_name_existing
 
-  - title: Access
+  - title: "FortiWeb IP Configuration"
     variables:
-      - application_ingress_cidr
-      - admin_ingress_cidr
-      - assign_public_ip
+      - mgmt_private_ip
+      - trust_private_ip
+      - mgmt_subnet_gateway
+      - trust_subnet_gateway
+      - volume_size
 
 variables:
   tenancy_ocid:
     type: string
-    title: Tenancy OCID
-    description: OCI tenancy OCID supplied automatically by Resource Manager.
+    title: Tenancy ID
+    description: The Oracle Cloud Identifier (OCID) for your tenancy
     required: true
 
-  compartment_ocid:
-    type: oci:identity:compartment:id
-    title: Compute Compartment
-    description: Compartment for the FortiWeb instance, volume, and Marketplace subscription.
+  user_ocid:
+    type: string
+    title: User OCID
+    description: OCI user OCID used for API authentication
     required: true
 
-  network_compartment_ocid:
-    type: oci:identity:compartment:id
-    title: Network Compartment
-    description: Compartment containing the existing VCN or in which the new VCN is created.
+  fingerprint:
+    type: string
+    title: API Key Fingerprint
+    description: Fingerprint for the OCI API key
     required: true
-    default: compartment_ocid
+
+  private_key_path:
+    type: string
+    title: Private Key Path
+    description: Local path to the OCI API private key
+    required: true
 
   region:
     type: oci:identity:region:name
     title: Region
-    description: OCI region in which to deploy the stack.
+    description: The OCI region in which to create all resources
     required: true
 
-  prefix:
+  mp_subscription_enabled:
+    type: boolean
+    title: Subscribe to the FortiWeb Marketplace Listing
+    description: Enables the Oracle Cloud Marketplace subscription for the FortiWeb image
+    required: true
+    default: true
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    title: Compartment OCID
+    description: Compartment for compute, network, and Marketplace resources
+    required: true
+
+  vm_display_name:
     type: string
-    title: FortiWeb Name and Resource Prefix
-    description: Instance name and resource prefix. Starts with a letter and contains at most 20 letters, numbers, or hyphens.
+    title: FortiWeb Instance Name
+    description: Display name for the FortiWeb instance
     required: true
-    default: FortiWeb
-    pattern: "^[A-Za-z][A-Za-z0-9-]{0,19}$"
+    default: FortiWeb-Standalone
 
-  availability_domain_name:
+  availability_domain_name_1:
     type: oci:identity:availabilitydomain:name
     title: Availability Domain
-    description: Select the availability domain for the FortiWeb instance.
+    description: Availability domain for the FortiWeb instance
     required: true
     dependsOn:
       compartmentId: ${compartment_ocid}
 
-  fault_domain_name:
+  fault_domain_name_1:
     type: oci:identity:faultdomain:name
     title: Fault Domain
-    description: Select the fault domain for the FortiWeb instance.
+    description: Fault domain for the FortiWeb instance
     required: true
     dependsOn:
       compartmentId: ${compartment_ocid}
-      availabilityDomainName: ${availability_domain_name}
+      availabilityDomainName: ${availability_domain_name_1}
 
   license_type:
     type: enum
     title: FortiWeb License Type
-    description: License types available in the current FortiWeb Marketplace inventory.
+    description: FortiWeb Marketplace license type
     required: true
     default: BYOL
     enum:
@@ -124,7 +152,7 @@ variables:
   cpu_type:
     type: enum
     title: CPU Architecture
-    description: CPU architectures supported by the current FortiWeb Marketplace image.
+    description: CPU architecture for the selected FortiWeb image
     required: true
     default: X64
     enum:
@@ -133,25 +161,25 @@ variables:
   vm_compute_shape_x64:
     type: enum
     title: FortiWeb Compute Shape
-    description: X64 compute shape used for the FortiWeb instance.
+    description: OCI compute shape to use for the FortiWeb instance
     required: true
     default: VM.Standard.E5.Flex
     enum:
-      - VM.Standard2.1
       - VM.Standard2.2
       - VM.Standard2.4
       - VM.Standard2.8
       - VM.Standard3.Flex
-      - VM.Standard.E3.Flex
       - VM.Standard.E4.Flex
+      - VM.Standard.E5.Flex
+      - VM.Standard.E6.Flex
 
   ocpu_count:
     type: integer
-    title: FortiWeb OCPUs
-    description: Used only for Flex shapes.
+    title: OCPUs
+    description: Number of OCPUs for Flex VM shapes
     required: true
     default: 4
-    minimum: 2
+    minimum: 1
     maximum: 64
     visible:
       or:
@@ -170,11 +198,11 @@ variables:
 
   memory_in_gbs:
     type: integer
-    title: FortiWeb Memory (GB)
-    description: Used only for Flex shapes.
+    title: Memory (GB)
+    description: Memory for Flex VM shapes
     required: true
     default: 16
-    minimum: 8
+    minimum: 1
     maximum: 1024
     visible:
       or:
@@ -194,143 +222,183 @@ variables:
   boot_volume_size_in_gbs:
     type: integer
     title: Boot Volume Size (GB)
+    description: Boot volume size for the FortiWeb instance
     required: true
     default: 50
     minimum: 50
-    maximum: 32768
 
   data_volume_size_in_gbs:
     type: integer
     title: Data Volume Size (GB)
+    description: Data volume size for the FortiWeb instance
     required: true
     default: 50
     minimum: 50
-    maximum: 32768
 
-  mp_subscription_enabled:
-    type: boolean
-    title: Create Marketplace Subscription
-    description: Accept the image agreement and create the Marketplace subscription.
+  instance_launch_options_network_type:
+    type: enum
+    title: VNIC Network Type
+    description: Instance NIC attachment type
     required: true
-    default: true
+    default: PARAVIRTUALIZED
+    enum:
+      - PARAVIRTUALIZED
+      - VFIO
 
   network_strategy:
     type: enum
     title: Network Strategy
-    description: Create a VCN, or use an existing VCN while creating two new FortiWeb subnets in it.
+    description: Whether to create a new VCN or reuse an existing one
     required: true
-    default: Create New VCN
+    default: Create New VCN and Subnets
     enum:
-      - Create New VCN
-      - Use Existing VCN and Create New Subnets
+      - Create New VCN and Subnets
+      - Use Existing VCN and Subnets
 
   vcn_id:
-    type: oci:core:vcn:id
-    title: Existing VCN
-    description: Existing VCN in which the two new FortiWeb subnets will be created.
-    required: true
-    visible:
-      eq:
-        - ${network_strategy}
-        - Use Existing VCN and Create New Subnets
-    dependsOn:
-      compartmentId: ${network_compartment_ocid}
-
-  existing_igw_ocid:
     type: string
-    title: Existing Internet Gateway OCID
-    description: OCID of an enabled Internet Gateway already attached to the selected VCN.
-    required: true
+    title: Existing VCN OCID
+    description: VCN OCID if reusing an existing VCN
+    required: false
     default: ""
-    visible:
-      eq:
-        - ${network_strategy}
-        - Use Existing VCN and Create New Subnets
+
+  vcn_display_name:
+    type: string
+    title: VCN Name
+    description: Name of the new VCN to create
+    required: true
+    default: FortiWeb-Hub-VCN
 
   vcn_cidr_block:
     type: string
-    title: New VCN CIDR
-    description: CIDR block used when creating a new VCN.
+    title: VCN CIDR Block
+    description: CIDR block of the new VCN
     required: true
-    default: 172.16.140.0/22
-    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}/(3[0-2]|[1-2]?[0-9])$"
-    visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN
+    default: 10.0.0.0/16
 
-  untrust_subnet_cidr:
+  vcn_dns_label:
     type: string
-    title: Untrusted Subnet CIDR
-    description: CIDR for the new FortiWeb port1 subnet.
+    title: VCN DNS Label
+    description: DNS label of the new VCN
     required: true
-    default: 172.16.140.16/28
+    default: fwbvcn
 
-  trust_subnet_cidr:
+  management_subnet_id:
     type: string
-    title: Trusted Subnet CIDR
-    description: CIDR for the new FortiWeb port2 subnet.
+    title: Existing Management Subnet OCID
+    description: OCID for the management subnet when reusing an existing VCN
+    required: false
+    default: ""
+
+  management_subnet_display_name:
+    type: string
+    title: Management Subnet Name
+    description: Name of the management subnet
     required: true
-    default: 172.16.140.32/28
+    default: management-subnet
 
-  fwb_untrust_ip:
+  management_subnet_cidr_block:
     type: string
-    title: FortiWeb Port1 Private IP
+    title: Management Subnet CIDR
+    description: CIDR for the management subnet
     required: true
-    default: 172.16.140.20
+    default: 10.0.1.0/24
 
-  fwb_trust_ip:
+  management_subnet_dns_label:
     type: string
-    title: FortiWeb Port2 Private IP
+    title: Management Subnet DNS Label
+    description: DNS label for the management subnet
     required: true
-    default: 172.16.140.40
+    default: mgmt
 
-  application_ingress_cidr:
+  trust_subnet_id:
     type: string
-    title: Application Client CIDR
-    description: Client CIDR allowed to send application traffic directly to FortiWeb port1. Use 0.0.0.0/0 for public applications.
+    title: Existing Trust Subnet OCID
+    description: OCID for the trust subnet when reusing an existing VCN
+    required: false
+    default: ""
+
+  trust_subnet_display_name:
+    type: string
+    title: Trust Subnet Name
+    description: Name of the trust subnet
     required: true
-    default: 0.0.0.0/0
+    default: trust-subnet
 
-  admin_ingress_cidr:
+  trust_subnet_cidr_block:
     type: string
-    title: Administrator CIDR
-    description: CIDR allowed to access direct SSH and HTTPS management. Restrict this in production.
+    title: Trust Subnet CIDR
+    description: CIDR for the trust subnet
     required: true
-    default: 0.0.0.0/0
+    default: 10.0.2.0/24
 
-  assign_public_ip:
-    type: boolean
-    title: Assign Public IP
-    description: Assign a public IP to FortiWeb port1 for direct application and administrative access.
+  trust_subnet_dns_label:
+    type: string
+    title: Trust Subnet DNS Label
+    description: DNS label for the trust subnet
     required: true
-    default: true
+    default: trust
 
-outputGroups:
-  - title: FortiWeb Connection Information
-    outputs:
-      - fortiweb_management_url
-      - fortiweb_management_ip
-      - default_username
-      - fortiweb_instance_id
-
-outputs:
-  fortiweb_management_url:
-    type: link
-    title: Open FortiWeb
-    visible: true
-
-  fortiweb_management_ip:
+  management_routetable_display_name:
     type: string
-    title: FortiWeb Public IP
-    visible: true
+    title: Management Route Table Name
+    description: Display name for the management route table
+    required: true
+    default: Management-Route-Table
 
-  default_username:
+  trust_routetable_display_name:
     type: string
-    title: Default Username
-    visible: true
+    title: Trust Route Table Name
+    description: Display name for the trust route table
+    required: true
+    default: Trust-Route-Table
 
-  fortiweb_instance_id:
+  management_routetable_display_name_existing:
     type: string
-    title: FortiWeb Instance OCID / Initial Password
-    visible: true
+    title: Existing Management Route Table Name
+    description: Existing route table name for the management subnet when reusing a VCN
+    required: false
+    default: Management-Route-Table-Existing
+
+  trust_routetable_display_name_existing:
+    type: string
+    title: Existing Trust Route Table Name
+    description: Existing route table name for the trust subnet when reusing a VCN
+    required: false
+    default: Trust-Route-Table-Existing
+
+  mgmt_private_ip:
+    type: string
+    title: Management Private IP
+    description: Private IP assigned to the FortiWeb management interface
+    required: true
+    default: 10.0.1.10
+
+  trust_private_ip:
+    type: string
+    title: Trust Private IP
+    description: Private IP assigned to the FortiWeb trust interface
+    required: true
+    default: 10.0.2.10
+
+  mgmt_subnet_gateway:
+    type: string
+    title: Management Subnet Gateway
+    description: Gateway for the management subnet
+    required: true
+    default: 10.0.1.1
+
+  trust_subnet_gateway:
+    type: string
+    title: Trust Subnet Gateway
+    description: Gateway for the trust subnet
+    required: true
+    default: 10.0.2.1
+
+  volume_size:
+    type: integer
+    title: Data Volume Size (GB)
+    description: Additional storage volume size for the FortiWeb instance
+    required: true
+    default: 50
+    minimum: 50
