@@ -1,3 +1,7 @@
+data "oci_identity_availability_domains" "ads" {
+  compartment_id = var.tenancy_ocid
+}
+
 # Resolve the selected Marketplace package to the image OCID for the deployment
 # region. Marketplace image OCIDs are regional and must not be hardcoded.
 data "oci_core_app_catalog_listing_resource_version" "fortiadc" {

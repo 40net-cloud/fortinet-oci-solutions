@@ -14,8 +14,9 @@ variable "compartment_ocid" {
 }
 
 variable "availability_domain_name" {
-  description = "Availability domain for the FortiADC instance."
+  description = "Availability domain for the FortiADC instance. Leave blank to auto-select the first AD."
   type        = string
+  default     = ""
 }
 
 variable "fault_domain_name" {

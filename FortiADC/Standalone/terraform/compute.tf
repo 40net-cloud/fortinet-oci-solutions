@@ -6,7 +6,7 @@ resource "oci_core_instance" "fortiadc" {
     oci_core_app_catalog_subscription.fortiadc
   ]
 
-  availability_domain = var.availability_domain_name
+  availability_domain = var.availability_domain_name != "" ? var.availability_domain_name : data.oci_identity_availability_domains.ads.availability_domains[0].name
   fault_domain        = var.fault_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = var.vm_display_name
