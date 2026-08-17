@@ -285,6 +285,23 @@ variables:
     title: Select Existing VCN
     description: Existing Virtual Cloud Network to use for the FortiWeb deployment.
 
+  existing_igw_ocid:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Subnets
+    type: oci:core:internetgateway:id
+    dependsOn:
+      vcnId: ${vcn_id}
+      compartmentId: ${compartment_ocid}
+    required: true
+    title: Select Existing Internet Gateway
+    description: Existing Internet Gateway attached to the selected VCN.
+
   vcn_display_name:
     visible:
       eq:
@@ -330,6 +347,19 @@ variables:
     required: true
     title: Select Existing Management Subnet
     description: Existing management subnet to use for the FortiWeb management interface.
+
+  management_routetable_id:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+    type: oci:core:routetable:id
+    dependsOn:
+      vcnId: ${vcn_id}
+      compartmentId: ${compartment_ocid}
+    required: false
+    title: Select Existing Management Route Table
+    description: Existing route table to use for the management subnet when reusing an existing VCN.
 
   management_subnet_display_name:
     visible:
@@ -388,6 +418,19 @@ variables:
     required: true
     title: Select Existing Trust Subnet
     description: Existing trust subnet to use for the FortiWeb trust interface.
+
+  trust_routetable_id:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+    type: oci:core:routetable:id
+    dependsOn:
+      vcnId: ${vcn_id}
+      compartmentId: ${compartment_ocid}
+    required: false
+    title: Select Existing Trust Route Table
+    description: Existing route table to use for the trust subnet when reusing an existing VCN.
 
   trust_subnet_display_name:
     visible:
