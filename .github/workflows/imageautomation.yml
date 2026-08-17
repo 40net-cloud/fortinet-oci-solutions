@@ -62,6 +62,7 @@ jobs:
         cp final_listings.json FortiGate/Standalone/terraform/
         cp final_listings.json FortiGate/Active-Passive/terraform/
         cp final_listings.json FortiWeb/Standalone/terraform/
+        cp final_listings.json FortiADC/Standalone/terraform/
 
     - name: Commit and push updated JSON files
       id: commit
@@ -74,6 +75,7 @@ jobs:
         git add FortiGate/Standalone/terraform/final_listings.json
         git add FortiGate/Active-Passive/terraform/final_listings.json
         git add FortiWeb/Standalone/terraform/final_listings.json
+        git add FortiADC/Standalone/terraform/final_listings.json
         if git diff --cached --quiet; then
           echo "No listing changes to commit."
           echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -94,3 +96,4 @@ jobs:
         gh workflow run fgt-tf-standalone.yml --ref main
         gh workflow run fgt-tf-activepassive.yml --ref main
         gh workflow run fwb-tf-standalone.yml --ref main
+        gh workflow run fad-tf-standalone.yml --ref main

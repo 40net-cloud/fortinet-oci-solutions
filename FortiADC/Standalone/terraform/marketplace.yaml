@@ -1,0 +1,290 @@
+title: FortiADC Standalone BYOL Deployment
+description: Deploys one FortiADC BYOL instance with a public frontend port and a private backend port.
+schemaVersion: 1.1.0
+version: "20260814"
+locale: en
+
+variableGroups:
+  - title: Hidden variables
+    visible: false
+    variables:
+      - tenancy_ocid
+      - region
+      - mp_subscription_enabled
+
+  - title: FortiADC compute configuration
+    variables:
+      - compartment_ocid
+      - availability_domain_name
+      - fault_domain_name
+      - license_type
+      - fortiadc_version
+      - vm_display_name
+      - vm_compute_shape
+      - boot_volume_size_in_gbs
+
+  - title: Network configuration
+    variables:
+      - network_strategy
+      - vcn_id
+      - frontend_subnet_id
+      - backend_subnet_id
+      - vcn_display_name
+      - vcn_cidr
+      - frontend_subnet_cidr
+      - backend_subnet_cidr
+      - frontend_private_ip
+      - backend_private_ip
+      - assign_public_ip
+
+  - title: Access configuration
+    variables:
+      - management_cidr
+      - client_ingress_cidr
+      - client_port_min
+      - client_port_max
+
+variables:
+  tenancy_ocid:
+    type: string
+    required: true
+    title: Tenancy OCID
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    title: Region
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    title: Compartment
+
+  availability_domain_name:
+    type: oci:identity:availabilitydomain:name
+    required: true
+    title: Availability domain
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+
+  fault_domain_name:
+    type: oci:identity:faultdomain:name
+    required: false
+    title: Fault domain
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      availabilityDomainName: ${availability_domain_name}
+
+  license_type:
+    type: enum
+    required: true
+    default: BYOL
+    enum:
+      - BYOL
+    title: License type
+    description: This template supports Bring Your Own License only.
+
+  fortiadc_version:
+    type: enum
+    required: true
+    default: 6.1.1
+    enum:
+      - 6.1.1
+      - 6.0.1
+      - "5.4"
+    title: FortiADC version
+
+  vm_display_name:
+    type: string
+    required: true
+    default: FortiADC-Standalone
+    title: Instance name
+
+  vm_compute_shape:
+    type: enum
+    required: true
+    default: VM.Standard2.4
+    enum:
+      - VM.Standard1.1
+      - VM.Standard1.2
+      - VM.Standard1.4
+      - VM.Standard1.8
+      - VM.Standard1.16
+      - VM.Standard2.1
+      - VM.Standard2.2
+      - VM.Standard2.4
+      - VM.Standard2.8
+      - VM.Standard2.16
+      - VM.Standard2.24
+    title: Compute shape
+
+  boot_volume_size_in_gbs:
+    type: integer
+    required: true
+    default: 50
+    minimum: 50
+    title: Boot volume size (GB)
+
+  mp_subscription_enabled:
+    type: boolean
+    required: true
+    default: true
+    title: Subscribe to Marketplace image
+
+  network_strategy:
+    type: enum
+    required: true
+    default: Create New VCN and Subnets
+    enum:
+      - Create New VCN and Subnets
+      - Use Existing VCN and Subnets
+    title: Network strategy
+
+  vcn_id:
+    type: oci:core:vcn:id
+    required: true
+    title: Existing VCN
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+
+  frontend_subnet_id:
+    type: oci:core:subnet:id
+    required: true
+    title: Existing port1/frontend subnet
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      vcnId: ${vcn_id}
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+
+  backend_subnet_id:
+    type: oci:core:subnet:id
+    required: true
+    title: Existing port2/backend subnet
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      vcnId: ${vcn_id}
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+
+  vcn_display_name:
+    type: string
+    required: true
+    default: FortiADC-VCN
+    title: New VCN name
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
+
+  vcn_cidr:
+    type: string
+    required: true
+    default: 10.0.0.0/16
+    title: New VCN CIDR
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
+
+  frontend_subnet_cidr:
+    type: string
+    required: true
+    default: 10.0.1.0/24
+    title: Port1/frontend subnet CIDR
+
+  backend_subnet_cidr:
+    type: string
+    required: true
+    default: 10.0.2.0/24
+    title: Port2/backend subnet CIDR
+
+  frontend_private_ip:
+    type: string
+    required: true
+    default: 10.0.1.10
+    title: Port1 private IP
+
+  backend_private_ip:
+    type: string
+    required: true
+    default: 10.0.2.10
+    title: Port2 private IP
+
+  assign_public_ip:
+    type: boolean
+    required: true
+    default: true
+    title: Assign public IP to port1
+
+  management_cidr:
+    type: string
+    required: true
+    default: 0.0.0.0/0
+    title: Management source CIDR
+    description: Restrict HTTPS and SSH access to a trusted CIDR in production.
+
+  client_ingress_cidr:
+    type: string
+    required: true
+    default: 0.0.0.0/0
+    title: Application client source CIDR
+
+  client_port_min:
+    type: integer
+    required: true
+    default: 80
+    minimum: 1
+    maximum: 65535
+    title: First application TCP port
+
+  client_port_max:
+    type: integer
+    required: true
+    default: 443
+    minimum: 1
+    maximum: 65535
+    title: Last application TCP port
+
+outputGroups:
+  - title: FortiADC connection details
+    outputs:
+      - management_url
+      - management_public_ip
+      - frontend_private_ip
+      - backend_private_ip
+      - instance_id
+
+outputs:
+  management_url:
+    type: link
+    title: Open FortiADC
+    visible: true
+
+  management_public_ip:
+    type: string
+    title: Management public IP
+    visible: true
+
+  frontend_private_ip:
+    type: string
+    title: Port1 private IP
+    visible: true
+
+  backend_private_ip:
+    type: string
+    title: Port2 private IP
+    visible: true
+
+  instance_id:
+    type: string
+    title: Instance OCID
+    visible: true

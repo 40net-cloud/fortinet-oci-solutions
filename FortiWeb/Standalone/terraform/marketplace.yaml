@@ -173,8 +173,6 @@ variables:
       - VM.Standard2.24
       - VM.Standard3.Flex
       - VM.Standard.E4.Flex
-      - VM.Standard.E5.Flex
-      - VM.Standard.E6.Flex
 
   ocpu_count:
     type: enum
