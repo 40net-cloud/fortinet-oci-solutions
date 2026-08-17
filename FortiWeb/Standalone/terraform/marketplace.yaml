@@ -173,14 +173,15 @@ variables:
       - VM.Standard2.24
       - VM.Standard3.Flex
       - VM.Standard.E4.Flex
+      - VM.Standard.E5.Flex
+      - VM.Standard.E6.Flex
 
   ocpu_count:
-    type: integer
+    type: enum
     title: OCPUs
     description: Number of OCPUs for Flex VM shapes
     required: true
-    dependsOn:
-      vm_compute_shape
+    default: 4
     enum:
       - 1
       - 2
@@ -196,14 +197,18 @@ variables:
         - eq:
             - ${vm_compute_shape_x64}
             - VM.Standard.E4.Flex
+        - eq:
+            - ${vm_compute_shape_x64}
+            - VM.Standard.E5.Flex
+        - eq:
+            - ${vm_compute_shape_x64}
+            - VM.Standard.E6.Flex
 
   memory_in_gbs:
-    type: integer
+    type: enum
     title: Memory (GB)
     description: Memory for Flex VM shapes
     required: true
-    dependsOn:
-      vm_compute_shape
     default: 16
     enum:
       - 16
@@ -220,6 +225,12 @@ variables:
         - eq:
             - ${vm_compute_shape_x64}
             - VM.Standard.E4.Flex
+        - eq:
+            - ${vm_compute_shape_x64}
+            - VM.Standard.E5.Flex
+        - eq:
+            - ${vm_compute_shape_x64}
+            - VM.Standard.E6.Flex
 
   boot_volume_size_in_gbs:
     type: integer

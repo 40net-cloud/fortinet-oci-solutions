@@ -169,13 +169,18 @@ variables:
       - VM.Standard.E6.Flex
 
   ocpu_count:
-    type: integer
+    type: enum
     title: OCPUs per FortiWeb Instance
     description: Used only for Flex shapes.
     required: true
     default: 4
-    minimum: 2
-    maximum: 64
+    enum:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 24
     visible:
       or:
         - eq:
@@ -192,13 +197,18 @@ variables:
             - VM.Standard.E6.Flex
 
   memory_in_gbs:
-    type: integer
+    type: enum
     title: Memory per FortiWeb Instance (GB)
     description: Used only for Flex shapes.
     required: true
     default: 16
-    minimum: 8
-    maximum: 1024
+    enum:
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 384
     visible:
       or:
         - eq:
