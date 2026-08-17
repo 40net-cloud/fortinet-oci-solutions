@@ -1,5 +1,5 @@
 resource "oci_core_vcn" "fortiadc" {
-  count = local.use_existing_network ? 0 : 1
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   cidr_blocks    = [var.vcn_cidr]
@@ -11,7 +11,7 @@ resource "oci_core_internet_gateway" "fortiadc" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.fortiadc[0].id
+  vcn_id         = local.selected_vcn_id
   display_name   = "${var.vm_display_name}-internet-gateway"
   enabled        = true
 }
@@ -20,7 +20,7 @@ resource "oci_core_route_table" "frontend" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.fortiadc[0].id
+  vcn_id         = local.selected_vcn_id
   display_name   = "${var.vm_display_name}-frontend-routes"
 
   route_rules {
@@ -34,7 +34,7 @@ resource "oci_core_route_table" "backend" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.fortiadc[0].id
+  vcn_id         = local.selected_vcn_id
   display_name   = "${var.vm_display_name}-backend-routes"
 }
 
@@ -42,7 +42,7 @@ resource "oci_core_security_list" "frontend" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.fortiadc[0].id
+  vcn_id         = local.selected_vcn_id
   display_name   = "${var.vm_display_name}-frontend-empty-security-list"
 }
 
@@ -50,7 +50,7 @@ resource "oci_core_security_list" "backend" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.fortiadc[0].id
+  vcn_id         = local.selected_vcn_id
   display_name   = "${var.vm_display_name}-backend-empty-security-list"
 }
 
@@ -58,7 +58,7 @@ resource "oci_core_subnet" "frontend" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id             = var.compartment_ocid
-  vcn_id                     = oci_core_vcn.fortiadc[0].id
+  vcn_id                     = local.selected_vcn_id
   cidr_block                 = var.frontend_subnet_cidr
   display_name               = "${var.vm_display_name}-frontend-subnet"
   dns_label                  = "frontend"
@@ -71,7 +71,7 @@ resource "oci_core_subnet" "backend" {
   count = local.use_existing_network ? 0 : 1
 
   compartment_id             = var.compartment_ocid
-  vcn_id                     = oci_core_vcn.fortiadc[0].id
+  vcn_id                     = local.selected_vcn_id
   cidr_block                 = var.backend_subnet_cidr
   display_name               = "${var.vm_display_name}-backend-subnet"
   dns_label                  = "backend"

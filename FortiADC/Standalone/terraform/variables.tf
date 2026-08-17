@@ -90,16 +90,17 @@ variable "mp_subscription_enabled" {
 }
 
 variable "network_strategy" {
-  description = "Create a VCN and two subnets, or use an existing VCN and existing subnets."
+  description = "Create a new VCN, reuse an existing VCN with new subnets, or reuse both an existing VCN and subnets."
   type        = string
   default     = "Create New VCN and Subnets"
 
   validation {
     condition = contains([
       "Create New VCN and Subnets",
+      "Use Existing VCN and Create New Subnets",
       "Use Existing VCN and Subnets"
     ], var.network_strategy)
-    error_message = "Choose Create New VCN and Subnets or Use Existing VCN and Subnets."
+    error_message = "Choose one of: Create New VCN and Subnets, Use Existing VCN and Create New Subnets, or Use Existing VCN and Subnets."
   }
 }
 

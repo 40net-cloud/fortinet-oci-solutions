@@ -14,12 +14,16 @@ resource "terraform_data" "validate_configuration" {
     }
 
     precondition {
+      condition = !local.use_existing_vcn || trimspace(var.vcn_id) != ""
+      error_message = "vcn_id is required when reusing an existing VCN."
+    }
+
+    precondition {
       condition = !local.use_existing_network || alltrue([
-        trimspace(var.vcn_id) != "",
         trimspace(var.frontend_subnet_id) != "",
         trimspace(var.backend_subnet_id) != ""
       ])
-      error_message = "vcn_id, frontend_subnet_id, and backend_subnet_id are required when using existing networking."
+      error_message = "frontend_subnet_id and backend_subnet_id are required when using existing VCN and subnets."
     }
 
     precondition {
@@ -52,7 +56,7 @@ resource "terraform_data" "validate_configuration" {
         cidrhost(var.frontend_subnet_cidr, 0) != cidrhost("${cidrhost(var.backend_subnet_cidr, 0)}/${split("/", var.frontend_subnet_cidr)[1]}", 0),
         cidrhost(var.backend_subnet_cidr, 0) != cidrhost("${cidrhost(var.frontend_subnet_cidr, 0)}/${split("/", var.backend_subnet_cidr)[1]}", 0)
       ])
-      error_message = "For a new VCN, both subnets must be inside the VCN and must not overlap."
+      error_message = "For a new VCN or a reused VCN with new subnets, both subnets must be inside the selected VCN and must not overlap."
     }
   }
 }
