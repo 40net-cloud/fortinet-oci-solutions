@@ -163,13 +163,14 @@ variables:
     title: FortiWeb Compute Shape
     description: OCI compute shape to use for the FortiWeb instance
     required: true
-    default: VM.Standard.E5.Flex
+    default: VM.Standard2.2
     enum:
       - VM.Standard2.1
       - VM.Standard2.2
       - VM.Standard2.4
       - VM.Standard2.8
       - VM.Standard2.16
+      - VM.Standard2.24
       - VM.Standard3.Flex
       - VM.Standard.E4.Flex
 
