@@ -60,6 +60,9 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
     assign_public_ip       = false
     skip_source_dest_check = false
   }
+  timeouts {
+    delete = "2m"
+  }
 }
 
 resource "oci_core_private_ip" "trust_private_ip" {
