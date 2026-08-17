@@ -28,13 +28,12 @@ jobs:
       TF_VAR_fingerprint: "${{ secrets.FINGERPRINT }}"
       TF_VAR_private_key_path: ~/.oci/oci_api_key.pem
       TF_VAR_vcn_id: "${{ secrets.VCN_OCID }}"
-      TF_VAR_vcn_cidr_block: "${{ secrets.VCN_CIDR }}"
-      TF_VAR_availability_domain_name_1: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
-      TF_VAR_fault_domain_name_1: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
-      TF_VAR_cpu_type: "${{ secrets.CPU_TYPE }}"
+      TF_VAR_vcn_cidr: "${{ secrets.VCN_CIDR }}"
+      TF_VAR_availability_domain_name: "${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}"
+      TF_VAR_fault_domain_name: "${{ secrets.FAULT_DOMAIN_NAME_1 }}"
       TF_VAR_fortiadc_version: "${{ secrets.FORTIADC_VERSION }}"
       TF_VAR_license_type: "${{ secrets.LICENSE_TYPE }}"
-      TF_VAR_vm_compute_shape_x64: "${{ secrets.FORTIWEB_COMPUTE_SHAPE }}"
+      TF_VAR_vm_compute_shape: "${{ secrets.FORTIADC_COMPUTE_SHAPE }}"
       
     steps:
     - name: "Checkout"
@@ -66,12 +65,11 @@ jobs:
 
     - name: "Show Terraform Selection Inputs"
       run: |
-        echo "CPU_TYPE=${TF_VAR_cpu_type}"
         echo "FORTIADC_VERSION=${TF_VAR_fortiadc_version}"
         echo "LICENSE_TYPE=${TF_VAR_license_type}"
-        echo "VM_COMPUTE_SHAPE_X64=${TF_VAR_vm_compute_shape_x64}"
+        echo "VM_COMPUTE_SHAPE=${TF_VAR_vm_compute_shape}"
         echo "VCN_ID=${TF_VAR_vcn_id}"
-        echo "VCN_CIDR_BLOCK=${TF_VAR_vcn_cidr_block}"
+        echo "VCN_CIDR=${TF_VAR_vcn_cidr}"
       working-directory: ${{ env.TFPath }}
 
     - name: "Terraform Plan"
