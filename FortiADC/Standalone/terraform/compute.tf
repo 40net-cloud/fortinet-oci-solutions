@@ -31,13 +31,13 @@ resource "oci_core_instance" "fortiadc" {
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }
 
-  metadata = {
-    user_data = base64encode(templatefile("${path.module}/cloudinit/bootstrap.tpl", {
-      hostname        = var.vm_display_name
-      backend_ip      = var.backend_private_ip
-      backend_netmask = cidrnetmask(var.backend_subnet_cidr)
-    }))
-  }
+//  metadata = {
+//    user_data = base64encode(templatefile("${path.module}/cloudinit/bootstrap.tpl", {
+//      hostname        = var.vm_display_name
+//      backend_ip      = var.backend_private_ip
+//      backend_netmask = cidrnetmask(var.backend_subnet_cidr)
+//    }))
+//  }
 
   timeouts {
     create = "60m"

@@ -15,8 +15,7 @@ resource "oci_core_instance" "vm-a" {
     for_each = contains([
       "VM.Standard3.Flex",
       "VM.Standard.E4.Flex",
-      "VM.Standard.E5.Flex",
-      "VM.Standard.E6.Flex"
+      "VM.Standard.E5.Flex"
     ], local.vm_compute_shape) ? [1] : []
 
     content {
