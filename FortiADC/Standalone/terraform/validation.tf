@@ -14,7 +14,7 @@ resource "terraform_data" "validate_configuration" {
     }
 
     precondition {
-      condition = !local.use_existing_vcn || trimspace(var.vcn_id) != ""
+      condition     = !local.use_existing_vcn || trimspace(var.vcn_id) != ""
       error_message = "vcn_id is required when reusing an existing VCN."
     }
 
