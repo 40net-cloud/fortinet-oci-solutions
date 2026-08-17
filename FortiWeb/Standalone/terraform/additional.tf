@@ -10,8 +10,18 @@ resource "terraform_data" "validate_marketplace_package" {
 resource "terraform_data" "validate_network" {
   lifecycle {
     precondition {
-      condition     = !local.use_existing_network || (trimspace(var.vcn_id) != "" && trimspace(var.management_subnet_id) != "" && trimspace(var.trust_subnet_id) != "")
-      error_message = "When using an existing VCN, set vcn_id, management_subnet_id, and trust_subnet_id."
+      condition = (
+        local.create_new_vcn ||
+        (
+          local.use_existing_vcn &&
+          trimspace(var.vcn_id) != "" &&
+          (
+            (!local.use_existing_network && trimspace(var.management_subnet_cidr_block) != "" && trimspace(var.trust_subnet_cidr_block) != "") ||
+            (local.use_existing_network && trimspace(var.management_subnet_id) != "" && trimspace(var.trust_subnet_id) != "")
+          )
+        )
+      )
+      error_message = "Set a valid network strategy: create a new VCN/subnets, reuse a VCN with new subnets, or reuse both an existing VCN and existing subnets."
     }
   }
 }

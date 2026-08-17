@@ -1,4 +1,6 @@
 locals {
+  create_new_vcn       = var.network_strategy == "Create New VCN and Subnets"
+  use_existing_vcn     = var.network_strategy == "Use Existing VCN and Create New Subnets" || var.network_strategy == "Use Existing VCN and Subnets"
   use_existing_network = var.network_strategy == "Use Existing VCN and Subnets"
 
   listings = jsondecode(file("${path.module}/final_listings.json"))

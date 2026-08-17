@@ -261,18 +261,23 @@ variables:
   network_strategy:
     type: enum
     title: Network Strategy
-    description: Whether to create a new VCN or reuse an existing one
+    description: Whether to create a new VCN, reuse an existing VCN with new subnets, or reuse an existing VCN and subnets.
     required: true
     default: Create New VCN and Subnets
     enum:
       - Create New VCN and Subnets
+      - Use Existing VCN and Create New Subnets
       - Use Existing VCN and Subnets
 
   vcn_id:
     visible:
-      eq:
-        - ${network_strategy}
-        - Use Existing VCN and Subnets
+      or:
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Subnets
     type: oci:core:vcn:id
     dependsOn:
       compartmentId: ${compartment_ocid}
@@ -292,6 +297,10 @@ variables:
     default: FortiWeb-Hub-VCN
 
   vcn_cidr_block:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
     type: string
     title: VCN CIDR Block
     description: CIDR block of the new VCN
@@ -299,6 +308,10 @@ variables:
     default: 10.0.0.0/16
 
   vcn_dns_label:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
     type: string
     title: VCN DNS Label
     description: DNS label of the new VCN
@@ -320,9 +333,13 @@ variables:
 
   management_subnet_display_name:
     visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Management Subnet Name
     description: Name of the management subnet
@@ -330,6 +347,14 @@ variables:
     default: management-subnet
 
   management_subnet_cidr_block:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Management Subnet CIDR
     description: CIDR for the management subnet
@@ -337,6 +362,14 @@ variables:
     default: 10.0.1.0/24
 
   management_subnet_dns_label:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Management Subnet DNS Label
     description: DNS label for the management subnet
@@ -358,9 +391,13 @@ variables:
 
   trust_subnet_display_name:
     visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Trust Subnet Name
     description: Name of the trust subnet
@@ -368,6 +405,14 @@ variables:
     default: trust-subnet
 
   trust_subnet_cidr_block:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Trust Subnet CIDR
     description: CIDR for the trust subnet
@@ -375,6 +420,14 @@ variables:
     default: 10.0.2.0/24
 
   trust_subnet_dns_label:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Trust Subnet DNS Label
     description: DNS label for the trust subnet
@@ -382,6 +435,14 @@ variables:
     default: trust
 
   management_routetable_display_name:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Management Route Table Name
     description: Display name for the management route table
@@ -389,6 +450,14 @@ variables:
     default: Management-Route-Table
 
   trust_routetable_display_name:
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Create New VCN and Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
     type: string
     title: Trust Route Table Name
     description: Display name for the trust route table
@@ -396,6 +465,10 @@ variables:
     default: Trust-Route-Table
 
   management_routetable_display_name_existing:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
     type: string
     title: Existing Management Route Table Name
     description: Existing route table name for the management subnet when reusing a VCN
@@ -403,6 +476,10 @@ variables:
     default: Management-Route-Table-Existing
 
   trust_routetable_display_name_existing:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
     type: string
     title: Existing Trust Route Table Name
     description: Existing route table name for the trust subnet when reusing a VCN

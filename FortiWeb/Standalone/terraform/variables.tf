@@ -127,16 +127,17 @@ variable "instance_launch_options_network_type" {
 # Network configuration
 ############################
 variable "network_strategy" {
-  description = "Create a VCN or use an existing VCN"
+  description = "Create a VCN, reuse a VCN with new subnets, or reuse both the VCN and subnets"
   type        = string
   default     = "Create New VCN and Subnets"
 
   validation {
     condition = contains([
       "Create New VCN and Subnets",
+      "Use Existing VCN and Create New Subnets",
       "Use Existing VCN and Subnets"
     ], var.network_strategy)
-    error_message = "network_strategy must be Create New VCN and Subnets or Use Existing VCN and Subnets."
+    error_message = "network_strategy must be one of: Create New VCN and Subnets, Use Existing VCN and Create New Subnets, Use Existing VCN and Subnets."
   }
 }
 
