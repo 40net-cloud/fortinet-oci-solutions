@@ -61,7 +61,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
     skip_source_dest_check = false
   }
   timeouts {
-    delete = "5m"
+    delete = "6m"
   }
 }
 
