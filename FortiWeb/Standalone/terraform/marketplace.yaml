@@ -269,13 +269,22 @@ variables:
       - Use Existing VCN and Subnets
 
   vcn_id:
-    type: string
-    title: Existing VCN OCID
-    description: VCN OCID if reusing an existing VCN
-    required: false
-    default: ""
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+    type: oci:core:vcn:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    title: Select Existing VCN
+    description: Existing Virtual Cloud Network to use for the FortiWeb deployment.
 
   vcn_display_name:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
     type: string
     title: VCN Name
     description: Name of the new VCN to create
@@ -297,13 +306,23 @@ variables:
     default: fwbvcn
 
   management_subnet_id:
-    type: string
-    title: Existing Management Subnet OCID
-    description: OCID for the management subnet when reusing an existing VCN
-    required: false
-    default: ""
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+    type: oci:core:subnet:id
+    dependsOn:
+      vcnId: ${vcn_id}
+      compartmentId: ${compartment_ocid}
+    required: true
+    title: Select Existing Management Subnet
+    description: Existing management subnet to use for the FortiWeb management interface.
 
   management_subnet_display_name:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
     type: string
     title: Management Subnet Name
     description: Name of the management subnet
@@ -325,13 +344,23 @@ variables:
     default: mgmt
 
   trust_subnet_id:
-    type: string
-    title: Existing Trust Subnet OCID
-    description: OCID for the trust subnet when reusing an existing VCN
-    required: false
-    default: ""
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+    type: oci:core:subnet:id
+    dependsOn:
+      vcnId: ${vcn_id}
+      compartmentId: ${compartment_ocid}
+    required: true
+    title: Select Existing Trust Subnet
+    description: Existing trust subnet to use for the FortiWeb trust interface.
 
   trust_subnet_display_name:
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
     type: string
     title: Trust Subnet Name
     description: Name of the trust subnet
