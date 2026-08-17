@@ -2,7 +2,6 @@ resource "oci_core_instance" "fortiadc" {
   count = local.matched_package != null ? 1 : 0
 
   depends_on = [
-    terraform_data.validate_configuration,
     oci_core_app_catalog_subscription.fortiadc
   ]
 
