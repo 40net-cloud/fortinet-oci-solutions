@@ -58,19 +58,6 @@ variable "vm_compute_shape" {
   description = "OCI x86 VM shape for FortiADC."
   type        = string
   default     = "VM.Standard2.2"
-
-  validation {
-    condition = contains([
-      "VM.Standard1.1",
-      "VM.Standard1.2",
-      "VM.Standard1.4",
-      "VM.Standard1.8",
-      "VM.Standard1.16",
-      "VM.Standard2.1",
-      "VM.Standard2.2"
-    ], var.vm_compute_shape)
-    error_message = "Select one of the supported VM.Standard1 or VM.Standard2 shapes."
-  }
 }
 
 variable "boot_volume_size_in_gbs" {
