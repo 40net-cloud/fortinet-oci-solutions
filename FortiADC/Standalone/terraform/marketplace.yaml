@@ -27,6 +27,7 @@ variableGroups:
     variables:
       - network_strategy
       - vcn_id
+      - internet_gateway_id
       - vcn_display_name
       - vcn_cidr
       - frontend_subnet_id
@@ -147,6 +148,22 @@ variables:
     title: Existing VCN
     dependsOn:
       compartmentId: ${compartment_ocid}
+    visible:
+      or:
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Create New Subnets
+        - eq:
+            - ${network_strategy}
+            - Use Existing VCN and Subnets
+
+  internet_gateway_id:
+    type: oci:core:internetgateway:id
+    required: true
+    title: Existing Internet Gateway
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      vcnId: ${vcn_id}
     visible:
       or:
         - eq:

@@ -31,6 +31,7 @@ locals {
   )
 
   selected_vcn_id          = local.use_existing_vcn ? var.vcn_id : oci_core_vcn.fortiadc[0].id
+  selected_igw_id          = local.use_existing_vcn ? var.internet_gateway_id : oci_core_internet_gateway.fortiadc[0].id
   selected_front_subnet_id = local.use_existing_network ? var.frontend_subnet_id : oci_core_subnet.frontend[0].id
   selected_back_subnet_id  = local.use_existing_network ? var.backend_subnet_id : oci_core_subnet.backend[0].id
 }

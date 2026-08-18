@@ -110,6 +110,12 @@ variable "backend_subnet_id" {
   default     = ""
 }
 
+variable "internet_gateway_id" {
+  description = "Existing Internet Gateway OCID. Required when using an existing VCN."
+  type        = string
+  default     = ""
+}
+
 variable "vcn_display_name" {
   description = "Name of the VCN created by the template."
   type        = string
