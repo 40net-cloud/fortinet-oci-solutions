@@ -84,7 +84,8 @@ jobs:
       working-directory: ${{ env.TFPath }}
 
     - name: "Save Plan JSON"
-      run: echo '${{ steps.show.outputs.stdout }}' > plan.json # Do not change
+      run: terraform show -json plan.tfplan > plan.json
+      working-directory: ${{ env.TFPath }}
 
     - name: Package and convert templates
       uses: azure/powershell@v1
