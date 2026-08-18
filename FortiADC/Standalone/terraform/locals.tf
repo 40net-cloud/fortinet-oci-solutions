@@ -5,24 +5,30 @@ locals {
 
   listings = jsondecode(file("${path.module}/final_listings.json"))
 
+  normalized_license_type     = upper(trimspace(var.license_type))
+  normalized_fortiadc_version = trimspace(var.fortiadc_version)
+
   fortiadc_packages = flatten([
     for listing in local.listings : [
       for package in lookup(listing, "packages", []) : {
-        license_type = upper(try(package.license_type, ""))
-        version      = try(package.resource_version, "")
-        listing_id   = try(package.listing_id, null)
+        listing_name     = lower(trimspace(listing.name))
+        license_type     = upper(try(package.package_info._pricing._type, ""))
+        version          = try(package.package_info._app_catalog_listing_resource_version, "")
+        image_id         = try(package.package_info._image_id, null)
+        listing_id       = try(package.package_info._app_catalog_listing_id, null)
+        resource_version = try(package.package_info._app_catalog_listing_resource_version, null)
       }
       if lower(trimspace(listing.name)) == "fortinet fortiadc application delivery controller"
     ]
   ])
 
-  matched_packages = [
-    for package in local.fortiadc_packages : package
-    if package.license_type == upper(trimspace(var.license_type)) &&
-    package.version == trimspace(var.fortiadc_version)
-  ]
-
-  matched_package = length(local.matched_packages) == 1 ? one(local.matched_packages) : null
+  matched_package = try(
+    one([
+      for pkg in local.fortiadc_packages : pkg
+      if pkg.license_type == local.normalized_license_type && pkg.version == local.normalized_fortiadc_version
+    ]),
+    null
+  )
 
   selected_vcn_id          = local.use_existing_vcn ? var.vcn_id : oci_core_vcn.fortiadc[0].id
   selected_front_subnet_id = local.use_existing_network ? var.frontend_subnet_id : oci_core_subnet.frontend[0].id
