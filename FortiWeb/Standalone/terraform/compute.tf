@@ -29,7 +29,7 @@ resource "oci_core_instance" "vm-a" {
     display_name     = "vm-a-mgmt"
     assign_public_ip = true
     hostname_label   = "fwbmgmt"
-    private_ip       = var.mgmt_private_ip
+    private_ip       = trimspace(var.mgmt_private_ip) != "" ? trimspace(var.mgmt_private_ip) : null
   }
 
   launch_options {
@@ -70,7 +70,7 @@ resource "oci_core_private_ip" "trust_private_ip" {
   vnic_id        = oci_core_vnic_attachment.vnic_attach_trust_a[0].vnic_id
   display_name   = "trust_ip"
   hostname_label = "trust"
-  ip_address     = var.trust_private_ip
+  ip_address     = trimspace(var.trust_private_ip) != "" ? trimspace(var.trust_private_ip) : null
 }
 
 resource "oci_core_volume" "vm_volume_a" {

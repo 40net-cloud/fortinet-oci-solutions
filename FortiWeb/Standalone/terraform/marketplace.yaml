@@ -531,16 +531,16 @@ variables:
   mgmt_private_ip:
     type: string
     title: Management Private IP
-    description: Private IP assigned to the FortiWeb management interface
-    required: true
-    default: 10.0.1.10
+    description: Optional private IP for the FortiWeb management interface. Leave blank for automatic OCI allocation.
+    required: false
+    default: ""
 
   trust_private_ip:
     type: string
     title: Trust Private IP
-    description: Private IP assigned to the FortiWeb trust interface
-    required: true
-    default: 10.0.2.10
+    description: Optional private IP for the FortiWeb trust interface. Leave blank for automatic OCI allocation.
+    required: false
+    default: ""
 
   mgmt_subnet_gateway:
     type: string

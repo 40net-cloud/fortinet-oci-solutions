@@ -247,15 +247,25 @@ variable "trust_routetable_display_name_existing" {
 # IP addresses and gateways
 ############################
 variable "mgmt_private_ip" {
-  description = "Private IP for FortiWeb management/public interface"
+  description = "Optional private IP for FortiWeb management/public interface; leave blank for OCI automatic allocation"
   type        = string
-  default     = "10.0.1.10"
+  default     = ""
+
+  validation {
+    condition = trimspace(var.mgmt_private_ip) == "" || (can(cidrhost("${trimspace(var.mgmt_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.mgmt_private_ip))))
+    error_message = "mgmt_private_ip must be a valid IPv4 address without leading zeros in any octet, for example 10.1.0.10."
+  }
 }
 
 variable "trust_private_ip" {
-  description = "Private IP for FortiWeb trust interface"
+  description = "Optional private IP for FortiWeb trust interface; leave blank for OCI automatic allocation"
   type        = string
-  default     = "10.0.2.10"
+  default     = ""
+
+  validation {
+    condition = trimspace(var.trust_private_ip) == "" || (can(cidrhost("${trimspace(var.trust_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.trust_private_ip))))
+    error_message = "trust_private_ip must be a valid IPv4 address without leading zeros in any octet, for example 10.0.2.10."
+  }
 }
 
 variable "mgmt_subnet_gateway" {
