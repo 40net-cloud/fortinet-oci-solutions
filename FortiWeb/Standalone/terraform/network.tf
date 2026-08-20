@@ -53,7 +53,7 @@ resource "oci_core_route_table" "trust_route_table" {
 }
 
 resource "oci_core_route_table" "management_route_table_existing" {
-  count          = local.use_existing_network ? 1 : 0
+  count          = 0
   compartment_id = var.compartment_ocid
   vcn_id         = var.vcn_id
   display_name   = var.management_routetable_display_name_existing
@@ -66,7 +66,7 @@ resource "oci_core_route_table" "management_route_table_existing" {
 }
 
 resource "oci_core_route_table" "trust_route_table_existing" {
-  count          = local.use_existing_network ? 1 : 0
+  count          = 0
   compartment_id = var.compartment_ocid
   vcn_id         = var.vcn_id
   display_name   = var.trust_routetable_display_name_existing
