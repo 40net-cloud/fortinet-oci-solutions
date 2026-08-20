@@ -59,8 +59,6 @@ variableGroups:
     variables:
       - mgmt_private_ip
       - trust_private_ip
-      - mgmt_subnet_gateway
-      - trust_subnet_gateway
       - volume_size
 
 variables:
@@ -541,20 +539,6 @@ variables:
     description: Optional private IP for the FortiWeb trust interface. Leave blank for automatic OCI allocation.
     required: false
     default: ""
-
-  mgmt_subnet_gateway:
-    type: string
-    title: Management Subnet Gateway
-    description: Gateway for the management subnet
-    required: true
-    default: 10.0.1.1
-
-  trust_subnet_gateway:
-    type: string
-    title: Trust Subnet Gateway
-    description: Gateway for the trust subnet
-    required: true
-    default: 10.0.2.1
 
   volume_size:
     type: integer

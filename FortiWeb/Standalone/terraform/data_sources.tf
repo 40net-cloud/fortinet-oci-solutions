@@ -7,6 +7,16 @@ data "oci_core_vcn" "existing" {
   vcn_id = var.vcn_id
 }
 
+data "oci_core_subnet" "management_existing" {
+  count     = local.use_existing_network ? 1 : 0
+  subnet_id = var.management_subnet_id
+}
+
+data "oci_core_subnet" "trust_existing" {
+  count     = local.use_existing_network ? 1 : 0
+  subnet_id = var.trust_subnet_id
+}
+
 data "oci_core_app_catalog_listing_resource_version" "fortiweb" {
   count = local.matched_package != null ? 1 : 0
 

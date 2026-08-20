@@ -268,18 +268,6 @@ variable "trust_private_ip" {
   }
 }
 
-variable "mgmt_subnet_gateway" {
-  description = "Management subnet gateway"
-  type        = string
-  default     = "10.0.1.1"
-}
-
-variable "trust_subnet_gateway" {
-  description = "Trust subnet gateway"
-  type        = string
-  default     = "10.0.2.1"
-}
-
 variable "volume_size" {
   description = "Data volume size in GB"
   type        = number

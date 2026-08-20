@@ -22,3 +22,13 @@ output "fortiweb_default_username" {
   description = "Default FortiWeb admin username."
   value       = "admin"
 }
+
+output "management_subnet_gateway" {
+  description = "First usable IP address of the selected management subnet."
+  value       = local.management_subnet_gateway
+}
+
+output "trust_subnet_gateway" {
+  description = "First usable IP address of the selected trust subnet."
+  value       = local.trust_subnet_gateway
+}
