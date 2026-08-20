@@ -15,7 +15,7 @@ resource "terraform_data" "validate_network" {
         (
           local.use_existing_vcn &&
           trimspace(var.vcn_id) != "" &&
-          trimspace(var.existing_igw_ocid) != "" &&
+          length(data.oci_core_internet_gateways.existing[0].gateways) == 1 &&
           (
             (!local.use_existing_network && trimspace(var.management_subnet_cidr_block) != "" && trimspace(var.trust_subnet_cidr_block) != "") ||
             (local.use_existing_network && trimspace(var.management_subnet_id) != "" && trimspace(var.trust_subnet_id) != "")

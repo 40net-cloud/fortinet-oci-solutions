@@ -7,6 +7,7 @@ locals {
   trust_subnet_cidr         = local.use_existing_network ? data.oci_core_subnet.trust_existing[0].cidr_block : var.trust_subnet_cidr_block
   management_subnet_gateway = cidrhost(local.management_subnet_cidr, 1)
   trust_subnet_gateway      = cidrhost(local.trust_subnet_cidr, 1)
+  existing_igw_ocid         = local.use_existing_vcn && length(data.oci_core_internet_gateways.existing[0].gateways) == 1 ? data.oci_core_internet_gateways.existing[0].gateways[0].id : null
 
   listings = jsondecode(file("${path.module}/final_listings.json"))
 

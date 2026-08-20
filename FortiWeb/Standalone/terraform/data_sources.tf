@@ -7,6 +7,17 @@ data "oci_core_vcn" "existing" {
   vcn_id = var.vcn_id
 }
 
+data "oci_core_internet_gateways" "existing" {
+  count          = local.use_existing_vcn ? 1 : 0
+  compartment_id = var.compartment_ocid
+  vcn_id         = var.vcn_id
+
+  filter {
+    name   = "lifecycle_state"
+    values = ["AVAILABLE"]
+  }
+}
+
 data "oci_core_subnet" "management_existing" {
   count     = local.use_existing_network ? 1 : 0
   subnet_id = var.management_subnet_id

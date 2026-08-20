@@ -38,7 +38,6 @@ variableGroups:
     variables:
       - network_strategy
       - vcn_id
-      - existing_igw_ocid
       - vcn_display_name
       - vcn_cidr_block
       - vcn_dns_label
@@ -281,23 +280,6 @@ variables:
     required: true
     title: Select Existing VCN
     description: Existing Virtual Cloud Network to use for the FortiWeb deployment.
-
-  existing_igw_ocid:
-    visible:
-      or:
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Create New Subnets
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Subnets
-    type: oci:core:internetgateway:id
-    dependsOn:
-      vcnId: ${vcn_id}
-      compartmentId: ${compartment_ocid}
-    required: true
-    title: Select Existing Internet Gateway
-    description: Existing Internet Gateway attached to the selected VCN.
 
   vcn_display_name:
     visible:
