@@ -61,7 +61,7 @@ resource "oci_core_route_table" "management_route_table_existing" {
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_vcn.existing[0].default_route_table_id
+    network_entity_id = var.existing_igw_ocid
   }
 }
 
@@ -74,7 +74,7 @@ resource "oci_core_route_table" "trust_route_table_existing" {
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_vcn.existing[0].default_route_table_id
+    network_entity_id = var.existing_igw_ocid
   }
 }
 

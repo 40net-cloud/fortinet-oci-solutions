@@ -38,6 +38,7 @@ variableGroups:
     variables:
       - network_strategy
       - vcn_id
+      - existing_igw_ocid
       - vcn_display_name
       - vcn_cidr_block
       - vcn_dns_label

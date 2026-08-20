@@ -147,6 +147,12 @@ variable "vcn_id" {
   default     = ""
 }
 
+variable "existing_igw_ocid" {
+  description = "Existing Internet Gateway OCID for an existing VCN"
+  type        = string
+  default     = ""
+}
+
 variable "vcn_display_name" {
   description = "VCN display name"
   type        = string
