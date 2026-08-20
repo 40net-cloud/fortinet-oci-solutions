@@ -252,7 +252,7 @@ variable "mgmt_private_ip" {
   default     = ""
 
   validation {
-    condition = trimspace(var.mgmt_private_ip) == "" || (can(cidrhost("${trimspace(var.mgmt_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.mgmt_private_ip))))
+    condition     = trimspace(var.mgmt_private_ip) == "" || (can(cidrhost("${trimspace(var.mgmt_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.mgmt_private_ip))))
     error_message = "mgmt_private_ip must be a valid IPv4 address without leading zeros in any octet, for example 10.1.0.10."
   }
 }
@@ -263,7 +263,7 @@ variable "trust_private_ip" {
   default     = ""
 
   validation {
-    condition = trimspace(var.trust_private_ip) == "" || (can(cidrhost("${trimspace(var.trust_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.trust_private_ip))))
+    condition     = trimspace(var.trust_private_ip) == "" || (can(cidrhost("${trimspace(var.trust_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.trust_private_ip))))
     error_message = "trust_private_ip must be a valid IPv4 address without leading zeros in any octet, for example 10.0.2.10."
   }
 }
