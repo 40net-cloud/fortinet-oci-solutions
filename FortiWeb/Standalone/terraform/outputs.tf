@@ -32,3 +32,13 @@ output "trust_subnet_gateway" {
   description = "First usable IP address of the selected trust subnet."
   value       = local.trust_subnet_gateway
 }
+
+output "management_route_table_id" {
+  description = "Route table associated with the management subnet."
+  value       = local.management_route_table_id
+}
+
+output "trust_route_table_id" {
+  description = "Route table associated with the trust subnet."
+  value       = local.trust_route_table_id
+}
