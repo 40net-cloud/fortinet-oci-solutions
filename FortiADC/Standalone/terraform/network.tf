@@ -8,7 +8,7 @@ resource "oci_core_vcn" "fortiadc" {
 }
 
 resource "oci_core_internet_gateway" "fortiadc" {
-  count = local.use_existing_network ? 0 : 1
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   vcn_id         = local.selected_vcn_id
@@ -17,7 +17,7 @@ resource "oci_core_internet_gateway" "fortiadc" {
 }
 
 resource "oci_core_route_table" "frontend" {
-  count = local.create_new_vcn || (local.use_existing_vcn && !local.use_existing_network) ? 1 : 0
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   vcn_id         = local.selected_vcn_id
@@ -26,12 +26,12 @@ resource "oci_core_route_table" "frontend" {
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = local.selected_igw_id
+    network_entity_id = oci_core_internet_gateway.fortiadc[0].id
   }
 }
 
 resource "oci_core_route_table" "backend" {
-  count = local.create_new_vcn || (local.use_existing_vcn && !local.use_existing_network) ? 1 : 0
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   vcn_id         = local.selected_vcn_id
@@ -39,7 +39,7 @@ resource "oci_core_route_table" "backend" {
 }
 
 resource "oci_core_security_list" "frontend" {
-  count = local.create_new_vcn || (local.use_existing_vcn && !local.use_existing_network) ? 1 : 0
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   vcn_id         = local.selected_vcn_id
@@ -47,7 +47,7 @@ resource "oci_core_security_list" "frontend" {
 }
 
 resource "oci_core_security_list" "backend" {
-  count = local.create_new_vcn || (local.use_existing_vcn && !local.use_existing_network) ? 1 : 0
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   vcn_id         = local.selected_vcn_id
@@ -55,7 +55,7 @@ resource "oci_core_security_list" "backend" {
 }
 
 resource "oci_core_subnet" "frontend" {
-  count = local.create_new_vcn || (local.use_existing_vcn && !local.use_existing_network) ? 1 : 0
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id             = var.compartment_ocid
   vcn_id                     = local.selected_vcn_id
@@ -68,7 +68,7 @@ resource "oci_core_subnet" "frontend" {
 }
 
 resource "oci_core_subnet" "backend" {
-  count = local.create_new_vcn || (local.use_existing_vcn && !local.use_existing_network) ? 1 : 0
+  count = local.create_new_vcn ? 1 : 0
 
   compartment_id             = var.compartment_ocid
   vcn_id                     = local.selected_vcn_id
@@ -145,7 +145,7 @@ resource "oci_core_network_security_group_security_rule" "backend_ingress" {
   network_security_group_id = oci_core_network_security_group.backend.id
   direction                 = "INGRESS"
   protocol                  = "all"
-  source                    = var.backend_subnet_cidr
+  source                    = local.selected_backend_cidr
 }
 
 resource "oci_core_network_security_group_security_rule" "backend_egress" {

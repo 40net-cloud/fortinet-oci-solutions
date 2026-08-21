@@ -78,17 +78,16 @@ variable "mp_subscription_enabled" {
 }
 
 variable "network_strategy" {
-  description = "Create a new VCN, reuse an existing VCN with new subnets, or reuse both an existing VCN and subnets."
+  description = "Create a new VCN and subnets or use an existing VCN and subnets."
   type        = string
   default     = "Create New VCN and Subnets"
 
   validation {
     condition = contains([
       "Create New VCN and Subnets",
-      "Use Existing VCN and Create New Subnets",
       "Use Existing VCN and Subnets"
     ], var.network_strategy)
-    error_message = "Choose one of: Create New VCN and Subnets, Use Existing VCN and Create New Subnets, or Use Existing VCN and Subnets."
+    error_message = "Choose either Create New VCN and Subnets or Use Existing VCN and Subnets."
   }
 }
 
@@ -106,12 +105,6 @@ variable "frontend_subnet_id" {
 
 variable "backend_subnet_id" {
   description = "Existing port2/backend subnet OCID. Required when using existing networking."
-  type        = string
-  default     = ""
-}
-
-variable "internet_gateway_id" {
-  description = "Existing Internet Gateway OCID. Required when using an existing VCN."
   type        = string
   default     = ""
 }
@@ -156,9 +149,14 @@ variable "backend_subnet_cidr" {
 }
 
 variable "frontend_private_ip" {
-  description = "Static private IP assigned to port1."
+  description = "Optional private IP assigned to port1. Leave blank for OCI automatic allocation."
   type        = string
-  default     = "10.0.1.10"
+  default     = ""
+
+  validation {
+    condition     = trimspace(var.frontend_private_ip) == "" || (can(cidrhost("${trimspace(var.frontend_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.frontend_private_ip))))
+    error_message = "frontend_private_ip must be a valid IPv4 address without leading zeros in any octet."
+  }
 }
 
 variable "backend_private_ip" {

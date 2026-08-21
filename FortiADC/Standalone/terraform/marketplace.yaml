@@ -27,7 +27,6 @@ variableGroups:
     variables:
       - network_strategy
       - vcn_id
-      - internet_gateway_id
       - vcn_display_name
       - vcn_cidr
       - frontend_subnet_id
@@ -138,7 +137,6 @@ variables:
     default: Create New VCN and Subnets
     enum:
       - Create New VCN and Subnets
-      - Use Existing VCN and Create New Subnets
       - Use Existing VCN and Subnets
     title: Network strategy
 
@@ -149,29 +147,9 @@ variables:
     dependsOn:
       compartmentId: ${compartment_ocid}
     visible:
-      or:
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Create New Subnets
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Subnets
-
-  internet_gateway_id:
-    type: oci:core:internetgateway:id
-    required: true
-    title: Existing Internet Gateway
-    dependsOn:
-      compartmentId: ${compartment_ocid}
-      vcnId: ${vcn_id}
-    visible:
-      or:
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Create New Subnets
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Subnets
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
 
   vcn_display_name:
     type: string
@@ -211,13 +189,9 @@ variables:
     default: 10.0.1.0/24
     title: Port1/frontend subnet CIDR
     visible:
-      or:
-        - eq:
-            - ${network_strategy}
-            - Create New VCN and Subnets
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Create New Subnets
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
 
   backend_subnet_id:
     type: oci:core:subnet:id
@@ -237,18 +211,14 @@ variables:
     default: 10.0.2.0/24
     title: Port2/backend subnet CIDR
     visible:
-      or:
-        - eq:
-            - ${network_strategy}
-            - Create New VCN and Subnets
-        - eq:
-            - ${network_strategy}
-            - Use Existing VCN and Create New Subnets
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
 
   frontend_private_ip:
     type: string
-    required: true
-    default: 10.0.1.10
+    required: false
+    default: ""
     title: Port1 private IP
 
   backend_private_ip:

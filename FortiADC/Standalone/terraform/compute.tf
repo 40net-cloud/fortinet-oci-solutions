@@ -16,7 +16,7 @@ resource "oci_core_instance" "fortiadc" {
     display_name     = "${var.vm_display_name}-port1"
     assign_public_ip = var.assign_public_ip
     hostname_label   = "fortiadc"
-    private_ip       = var.frontend_private_ip
+    private_ip       = trimspace(var.frontend_private_ip) != "" ? trimspace(var.frontend_private_ip) : null
     nsg_ids          = [oci_core_network_security_group.frontend.id]
   }
 
