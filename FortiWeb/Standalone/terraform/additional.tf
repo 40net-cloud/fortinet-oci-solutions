@@ -24,7 +24,7 @@ resource "terraform_data" "validate_network" {
               trimspace(var.management_subnet_id) != "" &&
               trimspace(var.trust_subnet_id) != "" &&
               local.management_route_table_id != null &&
-              local.trust_route_table_id != null)
+            local.trust_route_table_id != null)
           )
         )
       )
