@@ -15,20 +15,13 @@ resource "terraform_data" "validate_network" {
         (
           local.use_existing_vcn &&
           trimspace(var.vcn_id) != "" &&
-          (
-            (!local.use_existing_network &&
-              length(data.oci_core_internet_gateways.existing[0].gateways) == 1 &&
-              trimspace(var.management_subnet_cidr_block) != "" &&
-            trimspace(var.trust_subnet_cidr_block) != "") ||
-            (local.use_existing_network &&
-              trimspace(var.management_subnet_id) != "" &&
-              trimspace(var.trust_subnet_id) != "" &&
-              local.management_route_table_id != null &&
-            local.trust_route_table_id != null)
-          )
+          trimspace(var.management_subnet_id) != "" &&
+          trimspace(var.trust_subnet_id) != "" &&
+          local.management_route_table_id != null &&
+          local.trust_route_table_id != null
         )
       )
-      error_message = "Set a valid network strategy: create a new VCN/subnets, reuse a VCN with new subnets, or reuse both an existing VCN and existing subnets."
+      error_message = "Choose either Create New VCN and Subnets, or provide an existing VCN, management subnet, and trust subnet."
     }
   }
 }

@@ -1,6 +1,6 @@
 locals {
   create_new_vcn       = var.network_strategy == "Create New VCN and Subnets"
-  use_existing_vcn     = var.network_strategy == "Use Existing VCN and Create New Subnets" || var.network_strategy == "Use Existing VCN and Subnets"
+  use_existing_vcn     = var.network_strategy == "Use Existing VCN and Subnets"
   use_existing_network = var.network_strategy == "Use Existing VCN and Subnets"
 
   management_subnet_cidr    = local.use_existing_network ? data.oci_core_subnet.management_existing[0].cidr_block : var.management_subnet_cidr_block
@@ -9,7 +9,6 @@ locals {
   trust_subnet_gateway      = cidrhost(local.trust_subnet_cidr, 1)
   management_route_table_id = local.use_existing_network ? data.oci_core_subnet.management_existing[0].route_table_id : null
   trust_route_table_id      = local.use_existing_network ? data.oci_core_subnet.trust_existing[0].route_table_id : null
-  existing_igw_ocid         = local.use_existing_vcn && length(data.oci_core_internet_gateways.existing[0].gateways) == 1 ? data.oci_core_internet_gateways.existing[0].gateways[0].id : null
 
   listings = jsondecode(file("${path.module}/final_listings.json"))
 

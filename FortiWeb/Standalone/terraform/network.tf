@@ -52,32 +52,6 @@ resource "oci_core_route_table" "trust_route_table" {
   }
 }
 
-resource "oci_core_route_table" "management_route_table_existing" {
-  count          = 0
-  compartment_id = var.compartment_ocid
-  vcn_id         = var.vcn_id
-  display_name   = var.management_routetable_display_name_existing
-
-  route_rules {
-    destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = local.existing_igw_ocid
-  }
-}
-
-resource "oci_core_route_table" "trust_route_table_existing" {
-  count          = 0
-  compartment_id = var.compartment_ocid
-  vcn_id         = var.vcn_id
-  display_name   = var.trust_routetable_display_name_existing
-
-  route_rules {
-    destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = local.existing_igw_ocid
-  }
-}
-
 resource "oci_core_security_list" "allow_all_security" {
   compartment_id = var.compartment_ocid
   vcn_id         = local.use_existing_network ? var.vcn_id : oci_core_vcn.hub[0].id

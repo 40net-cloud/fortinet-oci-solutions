@@ -127,17 +127,16 @@ variable "instance_launch_options_network_type" {
 # Network configuration
 ############################
 variable "network_strategy" {
-  description = "Create a VCN, reuse a VCN with new subnets, or reuse both the VCN and subnets"
+  description = "Create a new network or reuse an existing VCN and its subnets"
   type        = string
   default     = "Create New VCN and Subnets"
 
   validation {
     condition = contains([
       "Create New VCN and Subnets",
-      "Use Existing VCN and Create New Subnets",
       "Use Existing VCN and Subnets"
     ], var.network_strategy)
-    error_message = "network_strategy must be one of: Create New VCN and Subnets, Use Existing VCN and Create New Subnets, Use Existing VCN and Subnets."
+    error_message = "network_strategy must be Create New VCN and Subnets or Use Existing VCN and Subnets."
   }
 }
 
@@ -223,18 +222,6 @@ variable "trust_routetable_display_name" {
   description = "Trust route table display name"
   type        = string
   default     = "Trust-Route-Table"
-}
-
-variable "management_routetable_display_name_existing" {
-  description = "Management route table name for existing network"
-  type        = string
-  default     = "Management-Route-Table-Existing"
-}
-
-variable "trust_routetable_display_name_existing" {
-  description = "Trust route table name for existing network"
-  type        = string
-  default     = "Trust-Route-Table-Existing"
 }
 
 ############################
