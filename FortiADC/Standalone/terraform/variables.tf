@@ -165,11 +165,8 @@ variable "backend_private_ip" {
   default     = "10.0.2.10"
 
   validation {
-    condition = (
-      (!local.create_new_vcn && trimspace(var.backend_private_ip) == "") ||
-      (trimspace(var.backend_private_ip) != "" && can(cidrhost("${trimspace(var.backend_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.backend_private_ip))))
-    )
-    error_message = "backend_private_ip must be a valid IPv4 address for new networks, or blank for automatic allocation when using existing subnets."
+    condition     = trimspace(var.backend_private_ip) == "" || (can(cidrhost("${trimspace(var.backend_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.backend_private_ip))))
+    error_message = "backend_private_ip must be a valid IPv4 address without leading zeros in any octet, or blank for automatic allocation."
   }
 }
 
