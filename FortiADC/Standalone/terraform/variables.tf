@@ -160,9 +160,17 @@ variable "frontend_private_ip" {
 }
 
 variable "backend_private_ip" {
-  description = "Static private IP assigned to port2."
+  description = "Private IP assigned to port2. Required for new networks; leave blank for automatic OCI allocation when using existing subnets."
   type        = string
   default     = "10.0.2.10"
+
+  validation {
+    condition = (
+      (!local.create_new_vcn && trimspace(var.backend_private_ip) == "") ||
+      (trimspace(var.backend_private_ip) != "" && can(cidrhost("${trimspace(var.backend_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.backend_private_ip))))
+    )
+    error_message = "backend_private_ip must be a valid IPv4 address for new networks, or blank for automatic allocation when using existing subnets."
+  }
 }
 
 variable "assign_public_ip" {

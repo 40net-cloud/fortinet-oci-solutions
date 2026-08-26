@@ -46,7 +46,7 @@ resource "oci_core_vnic_attachment" "backend" {
     display_name           = "${var.vm_display_name}-port2"
     assign_public_ip       = false
     skip_source_dest_check = true
-    private_ip             = var.backend_private_ip
+    private_ip             = trimspace(var.backend_private_ip) != "" ? trimspace(var.backend_private_ip) : null
     nsg_ids                = [oci_core_network_security_group.backend.id]
   }
 }

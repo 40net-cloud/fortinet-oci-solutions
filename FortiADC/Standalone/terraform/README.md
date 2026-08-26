@@ -117,7 +117,7 @@ terraform output -raw initial_password
 
 Change the password immediately, then upload and activate your FortiADC BYOL license through the FortiADC interface. Licensing can trigger a reboot.
 
-The bootstrap configuration leaves `port1` on DHCP so it retains OCI's primary-VNIC address and default gateway. It assigns the configured static `backend_private_ip` to `port2` and enables ping on that interface.
+The bootstrap configuration leaves `port1` on DHCP so it retains OCI's primary-VNIC address and default gateway. It assigns `backend_private_ip` to `port2` when provided; for existing-subnet deployments, leave it blank to let OCI allocate the address automatically. Ping is enabled on that interface.
 
 ## Outputs
 
