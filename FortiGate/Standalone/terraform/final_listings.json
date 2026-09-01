@@ -11,10 +11,1041 @@
             {
                 "listing_id": "ocid1.mktpublisting.oc1.iad.amaaaaaactshpiyazoq6zxkqnbzvt6m54n3vtsa34rrvrqldrpolzzfhcizq",
                 "package_type": "IMAGE",
+                "package_version": "2.6.0",
+                "pricing": "null",
+                "regions": "null",
+                "resource_id": "ocid1.mktpublistingrevisionpackage.oc1.iad.amaaaaaactshpiyakjm6bjnfpc7hdarm74yewjpp34tkiw3qwczbrpaw6r5q",
+                "package_info": {
+                    "swagger_types": {
+                        "description": "str",
+                        "listing_id": "str",
+                        "version": "str",
+                        "package_type": "str",
+                        "pricing": "PricingModel",
+                        "resource_id": "str",
+                        "time_created": "datetime",
+                        "operating_system": "OperatingSystem",
+                        "regions": "list[Region]",
+                        "app_catalog_listing_id": "str",
+                        "app_catalog_listing_resource_version": "str",
+                        "image_id": "str"
+                    },
+                    "attribute_map": {
+                        "description": "description",
+                        "listing_id": "listingId",
+                        "version": "version",
+                        "package_type": "packageType",
+                        "pricing": "pricing",
+                        "resource_id": "resourceId",
+                        "time_created": "timeCreated",
+                        "operating_system": "operatingSystem",
+                        "regions": "regions",
+                        "app_catalog_listing_id": "appCatalogListingId",
+                        "app_catalog_listing_resource_version": "appCatalogListingResourceVersion",
+                        "image_id": "imageId"
+                    },
+                    "_description": "",
+                    "_listing_id": "ocid1.mktpublisting.oc1.iad.amaaaaaactshpiyazoq6zxkqnbzvt6m54n3vtsa34rrvrqldrpolzzfhcizq",
+                    "_version": "2.6.0",
+                    "_package_type": "IMAGE",
+                    "_pricing": {
+                        "swagger_types": {
+                            "type": "str",
+                            "pay_go_strategy": "str",
+                            "currency": "str",
+                            "rate": "float",
+                            "international_market_price": "InternationalMarketPrice"
+                        },
+                        "attribute_map": {
+                            "type": "type",
+                            "pay_go_strategy": "payGoStrategy",
+                            "currency": "currency",
+                            "rate": "rate",
+                            "international_market_price": "internationalMarketPrice"
+                        },
+                        "_type": "BYOL",
+                        "_pay_go_strategy": null,
+                        "_currency": null,
+                        "_rate": null,
+                        "_international_market_price": null
+                    },
+                    "_resource_id": "ocid1.mktpublistingrevisionpackage.oc1.iad.amaaaaaactshpiyakjm6bjnfpc7hdarm74yewjpp34tkiw3qwczbrpaw6r5q",
+                    "_time_created": "2026-08-19T15:08:56.063000+00:00",
+                    "_operating_system": null,
+                    "_regions": [
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "phx",
+                            "_code": "phx",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "iad",
+                            "_code": "iad",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-frankfurt-1",
+                            "_code": "eu-frankfurt-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "uk-london-1",
+                            "_code": "uk-london-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ca-toronto-1",
+                            "_code": "ca-toronto-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-tokyo-1",
+                            "_code": "ap-tokyo-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-seoul-1",
+                            "_code": "ap-seoul-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-mumbai-1",
+                            "_code": "ap-mumbai-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "sa-saopaulo-1",
+                            "_code": "sa-saopaulo-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-zurich-1",
+                            "_code": "eu-zurich-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-sydney-1",
+                            "_code": "ap-sydney-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-amsterdam-1",
+                            "_code": "eu-amsterdam-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "me-jeddah-1",
+                            "_code": "me-jeddah-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-osaka-1",
+                            "_code": "ap-osaka-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-melbourne-1",
+                            "_code": "ap-melbourne-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ca-montreal-1",
+                            "_code": "ca-montreal-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-hyderabad-1",
+                            "_code": "ap-hyderabad-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-chuncheon-1",
+                            "_code": "ap-chuncheon-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "uk-cardiff-1",
+                            "_code": "uk-cardiff-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanjose-1",
+                            "_code": "us-sanjose-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "me-dubai-1",
+                            "_code": "me-dubai-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-singapore-1",
+                            "_code": "ap-singapore-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "me-abudhabi-1",
+                            "_code": "me-abudhabi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "sa-santiago-1",
+                            "_code": "sa-santiago-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "sa-vinhedo-1",
+                            "_code": "sa-vinhedo-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-milan-1",
+                            "_code": "eu-milan-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-stockholm-1",
+                            "_code": "eu-stockholm-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-marseille-1",
+                            "_code": "eu-marseille-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-johannesburg-1",
+                            "_code": "af-johannesburg-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "il-jerusalem-1",
+                            "_code": "il-jerusalem-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-paris-1",
+                            "_code": "eu-paris-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "mx-queretaro-1",
+                            "_code": "mx-queretaro-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-madrid-1",
+                            "_code": "eu-madrid-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-chicago-1",
+                            "_code": "us-chicago-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "me-neom-1",
+                            "_code": "me-neom-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-kragujevac-1",
+                            "_code": "eu-kragujevac-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "mx-monterrey-1",
+                            "_code": "mx-monterrey-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "sa-valparaiso-1",
+                            "_code": "sa-valparaiso-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "sa-bogota-1",
+                            "_code": "sa-bogota-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-casablanca-1",
+                            "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-batam-1",
+                            "_code": "ap-batam-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-chennai-1",
+                            "_code": "ap-chennai-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-delhi-1",
+                            "_code": "ap-delhi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-kulai-1",
+                            "_code": "ap-kulai-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-kulai-2",
+                            "_code": "ap-kulai-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "ap-singapore-2",
+                            "_code": "ap-singapore-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-dublin-3",
+                            "_code": "eu-dublin-3",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-madrid-3",
+                            "_code": "eu-madrid-3",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "eu-turin-1",
+                            "_code": "eu-turin-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "me-riyadh-1",
+                            "_code": "me-riyadh-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "sa-riodejaneiro-2",
+                            "_code": "sa-riodejaneiro-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-abilene-1",
+                            "_code": "us-abilene-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-boardman-1",
+                            "_code": "us-boardman-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-columbus-1",
+                            "_code": "us-columbus-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-dallas-1",
+                            "_code": "us-dallas-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-desmoines-1",
+                            "_code": "us-desmoines-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-lenexa-1",
+                            "_code": "us-lenexa-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-quincy-1",
+                            "_code": "us-quincy-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-saltlake-1",
+                            "_code": "us-saltlake-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-saltlake-2",
+                            "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-shawnee-1",
+                            "_code": "us-shawnee-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-tukwila-4",
+                            "_code": "us-tukwila-4",
+                            "_countries": []
+                        }
+                    ],
+                    "_app_catalog_listing_id": "ocid1.appcataloglisting.oc1..aaaaaaaa7ozszalb4srtcgjti7sq3zqyr5c6gi7rywxhw45y3fbc4jug52iq",
+                    "_app_catalog_listing_resource_version": "2.6.0",
+                    "_image_id": "ocid1.image.oc1..aaaaaaaalm3j7gxezw6qvhgjforyq65dempjvjtl4kjblueeplfxi3v6oqwq"
+                }
+            },
+            {
+                "listing_id": "ocid1.mktpublisting.oc1.iad.amaaaaaactshpiyazoq6zxkqnbzvt6m54n3vtsa34rrvrqldrpolzzfhcizq",
+                "package_type": "IMAGE",
                 "package_version": "2.3.0",
                 "pricing": "null",
                 "regions": "null",
-                "resource_id": "ocid1.mktpublistingrevisionpackage.oc1.iad.amaaaaaactshpiyah3kkr6ps7mvnpye6yusrysw5a6ntfj6wcspycaohyifa",
+                "resource_id": "ocid1.mktpublistingrevisionpackage.oc1.iad.amaaaaaairogfkqab7bvngymnhl2vye4giclnjizuz76iedvrl72fteua33a",
                 "package_info": {
                     "swagger_types": {
                         "description": "str",
@@ -69,7 +1100,7 @@
                         "_rate": null,
                         "_international_market_price": null
                     },
-                    "_resource_id": "ocid1.mktpublistingrevisionpackage.oc1.iad.amaaaaaactshpiyah3kkr6ps7mvnpye6yusrysw5a6ntfj6wcspycaohyifa",
+                    "_resource_id": "ocid1.mktpublistingrevisionpackage.oc1.iad.amaaaaaairogfkqab7bvngymnhl2vye4giclnjizuz76iedvrl72fteua33a",
                     "_time_created": "2025-11-19T07:58:15.783000+00:00",
                     "_operating_system": null,
                     "_regions": [
@@ -684,6 +1715,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -971,6 +2017,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -12013,6 +13074,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -12300,6 +13376,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -13014,6 +14105,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -13301,6 +14407,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -14022,6 +15143,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -15065,6 +16201,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -16082,6 +17233,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -17125,6 +18291,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -18142,6 +19323,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -19191,6 +20387,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -19478,6 +20689,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -20206,6 +21432,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -20493,6 +21734,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -21221,6 +22477,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -21508,6 +22779,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -22236,6 +23522,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -22523,6 +23824,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -23251,6 +24567,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -23538,6 +24869,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -65908,6 +67254,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -66195,6 +67556,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -66923,6 +68299,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -67210,6 +68601,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -67938,6 +69344,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -68225,6 +69646,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -68953,6 +70389,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -69240,6 +70691,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -69968,6 +71434,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -70255,6 +71736,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -70983,6 +72479,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -71270,6 +72781,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -71998,6 +73524,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -72285,6 +73826,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -73013,6 +74569,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -73300,6 +74871,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -74028,6 +75614,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -74315,6 +75916,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -75043,6 +76659,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -75330,6 +76961,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -76058,6 +77704,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -76345,6 +78006,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -77073,6 +78749,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -77360,6 +79051,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -78088,6 +79794,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -78375,6 +80096,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -110407,6 +112143,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -110694,6 +112445,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -111408,6 +113174,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -111695,6 +113476,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -135115,6 +136911,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -136118,6 +137929,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -151803,6 +153629,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -152820,6 +154661,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -153863,6 +155719,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -154880,6 +156751,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -155923,6 +157809,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -156940,6 +158841,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -157989,6 +159905,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -158276,6 +160207,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -159004,6 +160950,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -159291,6 +161252,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -160019,6 +161995,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -160306,6 +162297,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -161034,6 +163040,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -161321,6 +163342,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -162041,6 +164077,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -162328,6 +164379,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -163042,6 +165108,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -163329,6 +165410,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -164043,6 +166139,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -164330,6 +166441,21 @@
                             },
                             "_name": "us-saltlake-2",
                             "_code": "us-saltlake-2",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "us-sanantonio-1",
+                            "_code": "us-sanantonio-1",
                             "_countries": []
                         },
                         {
@@ -165037,6 +167163,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -166066,6 +168207,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -167069,6 +169225,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
@@ -168098,6 +170269,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -169114,6 +171300,21 @@
                                 "code": "code",
                                 "countries": "countries"
                             },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
                             "_name": "ap-batam-1",
                             "_code": "ap-batam-1",
                             "_countries": []
@@ -170117,6 +172318,21 @@
                             },
                             "_name": "af-casablanca-1",
                             "_code": "af-casablanca-1",
+                            "_countries": []
+                        },
+                        {
+                            "swagger_types": {
+                                "name": "str",
+                                "code": "str",
+                                "countries": "list[Item]"
+                            },
+                            "attribute_map": {
+                                "name": "name",
+                                "code": "code",
+                                "countries": "countries"
+                            },
+                            "_name": "af-nairobi-1",
+                            "_code": "af-nairobi-1",
                             "_countries": []
                         },
                         {
