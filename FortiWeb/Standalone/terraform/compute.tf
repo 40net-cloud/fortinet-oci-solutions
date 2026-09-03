@@ -60,7 +60,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
     skip_source_dest_check = false
   }
   timeouts {
-    delete = "6m"
+    delete = "30m"
   }
 }
 
@@ -86,4 +86,8 @@ resource "oci_core_volume_attachment" "vm_volume_attach_a" {
   attachment_type = "paravirtualized"
   instance_id     = oci_core_instance.vm-a[0].id
   volume_id       = oci_core_volume.vm_volume_a[count.index].id
+
+  timeouts {
+    delete = "30m"
+  }
 }

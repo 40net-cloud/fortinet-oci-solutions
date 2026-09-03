@@ -49,4 +49,8 @@ resource "oci_core_vnic_attachment" "backend" {
     private_ip             = trimspace(var.backend_private_ip) != "" ? trimspace(var.backend_private_ip) : null
     nsg_ids                = [oci_core_network_security_group.backend.id]
   }
+
+  timeouts {
+    delete = "30m"
+  }
 }
