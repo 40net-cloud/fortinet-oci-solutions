@@ -246,9 +246,9 @@ variables:
   backend_private_ip:
     type: string
     required: false
-    default: ""
+    default: 10.0.2.10
     title: Backend Private IP
-    description: Private IP for the FortiADC backend interface. Required for new networks; leave blank for automatic OCI allocation when using existing subnets.
+    description: Private IP for the FortiADC backend interface. Use an unused address inside the backend subnet. When using existing subnets, clear this value to allow automatic OCI allocation.
 
   assign_public_ip:
     type: boolean
