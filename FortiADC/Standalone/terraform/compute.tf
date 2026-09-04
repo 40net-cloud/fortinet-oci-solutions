@@ -51,7 +51,7 @@ resource "oci_core_vnic_attachment" "backend" {
   }
 
   timeouts {
-    delete = "30m"
+    delete = "60m"
   }
 }
 
