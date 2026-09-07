@@ -25,31 +25,27 @@ The Terraform configuration creates or uses the following resources:
 | Resource | Behavior |
 | --- | --- |
 | FortiWeb-VM | One OCI Compute instance created from a matching FortiWeb Marketplace image |
-| Management VNIC | Attached to the management subnet as the FortiWeb administrative interface |
-| Trust VNIC | Attached to the trust subnet for backend or internal traffic handling |
+| Primary VNIC | Attached to the management subnet for all FortiWeb traffic |
 | Public IP on management interface | Assigned for administration access when using the default public management model |
 | Additional storage | One OCI Block Volume attached to the instance |
 | VCN | Created when `network_strategy` is `Create New VCN and Subnets`; otherwise an existing VCN is used |
-| Management subnet | Created or supplied for the admin interface |
-| Trust subnet | Created or supplied for internal/inbound traffic segmentation |
+| Management subnet | Created or supplied for all FortiWeb traffic |
 | Internet Gateway | Created when a new VCN is created |
-| Route tables | Default routes for the management and trust subnets |
+| Route table | Default route for the management subnet |
 | Marketplace agreement | Accepted and subscribed when `mp_subscription_enabled` is `true` |
 
 ## Architecture and interface roles
 
-The current template creates a two-subnet layout:
+The current template creates a single-subnet layout:
 
 | FortiWeb interface | OCI resource | Intended role in the template |
 | --- | --- | --- |
-| Management interface | Primary VNIC in the management subnet | Admin access and OCI connectivity |
-| Trust interface | Secondary VNIC in the trust subnet | Internal or application-side segmentation |
+| `port1` management interface | Primary VNIC in the management subnet | Admin, service, and OCI connectivity |
 
 The design is intentionally simple and follows the same single-compartment approach used elsewhere in this repo:
 
 - one compartment is used for all deployed resources
-- one management subnet is created for the public/admin side
-- one trust subnet is created for service-side traffic
+- one management subnet is created for all traffic
 - FortiWeb is deployed directly from the OCI marketplace image without a FortiGate-style bootstrap routine
 
 ## Known limitations
@@ -64,7 +60,7 @@ Recommended hardening:
 
 - restrict admin access to trusted source IPs
 - restrict SSH/HTTPS exposure to approved management ranges
-- validate trust-side access paths before enabling application traffic
+- validate application access paths before enabling application traffic
 - replace broad allow-all rules with service-specific rules
 
 ### Existing network changes
@@ -174,12 +170,10 @@ The deployment exposes the standard OCI and FortiWeb variables, including:
 - `vcn_id`
 - `vcn_cidr_block`
 - `management_subnet_cidr_block`
-- `trust_subnet_cidr_block`
 - `mgmt_private_ip`
-- `trust_private_ip`
 - `volume_size`
 
-The template is designed to use a single compartment for all deployment resources and a simple two-subnet topology.
+The template is designed to use a single compartment for all deployment resources and a simple one-subnet topology.
 
 ## Outputs
 
@@ -187,7 +181,7 @@ This stack exposes key deployment outputs, including:
 
 - the selected marketplace listing information
 - the deployed instance OCID
-- the management subnet and trust subnet IDs
+- the management subnet ID
 - the management public IP or associated endpoint details
 - the selected image resource metadata
 
@@ -200,7 +194,7 @@ After the instance is created:
 1. Get the public management IP from OCI console or Terraform outputs.
 2. Open the FortiWeb management interface over HTTPS.
 3. Log in using the FortiWeb instance credentials supplied by the Marketplace image or the configured admin method.
-4. Complete the initial configuration and validate the service and backend paths.
+4. Complete the initial configuration and validate the service path.
 
 If the instance uses a private-only management design, access through a bastion host or secured management network.
 
@@ -208,7 +202,7 @@ If the instance uses a private-only management design, access through a bastion 
 
 The FortiWeb standalone deployment includes:
 
-- `terraform/compute.tf` — the FortiWeb instance and secondary VNIC configuration
+- `terraform/compute.tf` — the FortiWeb instance and primary VNIC configuration
 - `terraform/network.tf` — VCN, subnets, route tables, and gateway resources
 - `terraform/image_subscription.tf` — OCI Marketplace subscription and listing agreement
 - `terraform/locals.tf` — marketplace selection logic and shape resolution

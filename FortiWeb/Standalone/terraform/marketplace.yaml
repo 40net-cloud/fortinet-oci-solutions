@@ -1,7 +1,7 @@
 # Title shown in Application Information tab.
 title: FortiWeb Standalone Deployment Template
 # Sub Title shown in Application Information tab.
-description: This template deploys a single FortiWeb instance in OCI with a management subnet and a trust subnet.
+description: This template deploys a single FortiWeb instance in OCI using the primary management VNIC for all traffic.
 schemaVersion: 1.1.0
 version: "20260815"
 
@@ -45,17 +45,11 @@ variableGroups:
       - management_subnet_display_name
       - management_subnet_cidr_block
       - management_subnet_dns_label
-      - trust_subnet_id
-      - trust_subnet_display_name
-      - trust_subnet_cidr_block
-      - trust_subnet_dns_label
       - management_routetable_display_name
-      - trust_routetable_display_name
 
   - title: "FortiWeb IP Configuration"
     variables:
       - mgmt_private_ip
-      - trust_private_ip
       - volume_size
 
 variables:
@@ -354,52 +348,6 @@ variables:
     required: true
     default: mgmt
 
-  trust_subnet_id:
-    visible:
-      eq:
-        - ${network_strategy}
-        - Use Existing VCN and Subnets
-    type: oci:core:subnet:id
-    dependsOn:
-      vcnId: ${vcn_id}
-      compartmentId: ${compartment_ocid}
-    required: true
-    title: Select Existing Trust Subnet
-    description: Existing trust subnet to use for the FortiWeb trust interface.
-
-  trust_subnet_display_name:
-    visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
-    type: string
-    title: Trust Subnet Name
-    description: Name of the trust subnet
-    required: true
-    default: trust-subnet
-
-  trust_subnet_cidr_block:
-    visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
-    type: string
-    title: Trust Subnet CIDR
-    description: CIDR for the trust subnet
-    required: true
-    default: 10.0.2.0/24
-
-  trust_subnet_dns_label:
-    visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
-    type: string
-    title: Trust Subnet DNS Label
-    description: DNS label for the trust subnet
-    required: true
-    default: trust
-
   management_routetable_display_name:
     visible:
       eq:
@@ -411,28 +359,10 @@ variables:
     required: true
     default: Management-Route-Table
 
-  trust_routetable_display_name:
-    visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
-    type: string
-    title: Trust Route Table Name
-    description: Display name for the trust route table
-    required: true
-    default: Trust-Route-Table
-
   mgmt_private_ip:
     type: string
     title: Management Private IP
     description: Optional private IP for the FortiWeb management interface. Leave blank for automatic OCI allocation.
-    required: false
-    default: ""
-
-  trust_private_ip:
-    type: string
-    title: Trust Private IP
-    description: Optional private IP for the FortiWeb trust interface. Leave blank for automatic OCI allocation.
     required: false
     default: ""
 

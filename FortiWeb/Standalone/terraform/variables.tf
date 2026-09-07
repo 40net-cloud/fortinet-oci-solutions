@@ -188,40 +188,10 @@ variable "management_subnet_dns_label" {
   default     = "mgmt"
 }
 
-variable "trust_subnet_id" {
-  description = "Trust subnet OCID when reusing an existing VCN"
-  type        = string
-  default     = ""
-}
-
-variable "trust_subnet_display_name" {
-  description = "Trust subnet display name"
-  type        = string
-  default     = "trust-subnet"
-}
-
-variable "trust_subnet_cidr_block" {
-  description = "Trust subnet CIDR block"
-  type        = string
-  default     = "10.0.2.0/24"
-}
-
-variable "trust_subnet_dns_label" {
-  description = "Trust subnet DNS label"
-  type        = string
-  default     = "trust"
-}
-
 variable "management_routetable_display_name" {
   description = "Management route table display name"
   type        = string
   default     = "Management-Route-Table"
-}
-
-variable "trust_routetable_display_name" {
-  description = "Trust route table display name"
-  type        = string
-  default     = "Trust-Route-Table"
 }
 
 ############################
@@ -235,17 +205,6 @@ variable "mgmt_private_ip" {
   validation {
     condition     = trimspace(var.mgmt_private_ip) == "" || (can(cidrhost("${trimspace(var.mgmt_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.mgmt_private_ip))))
     error_message = "mgmt_private_ip must be a valid IPv4 address without leading zeros in any octet, for example 10.1.0.10."
-  }
-}
-
-variable "trust_private_ip" {
-  description = "Optional private IP for FortiWeb trust interface; leave blank for OCI automatic allocation"
-  type        = string
-  default     = ""
-
-  validation {
-    condition     = trimspace(var.trust_private_ip) == "" || (can(cidrhost("${trimspace(var.trust_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.trust_private_ip))))
-    error_message = "trust_private_ip must be a valid IPv4 address without leading zeros in any octet, for example 10.0.2.10."
   }
 }
 

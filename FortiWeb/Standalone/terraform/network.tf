@@ -39,19 +39,6 @@ resource "oci_core_route_table" "management_route_table" {
   }
 }
 
-resource "oci_core_route_table" "trust_route_table" {
-  count          = local.use_existing_network ? 0 : 1
-  compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.hub[count.index].id
-  display_name   = var.trust_routetable_display_name
-
-  route_rules {
-    destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_internet_gateway.igw[count.index].id
-  }
-}
-
 resource "oci_core_security_list" "allow_all_security" {
   compartment_id = var.compartment_ocid
   vcn_id         = local.use_existing_network ? var.vcn_id : oci_core_vcn.hub[0].id
@@ -78,16 +65,4 @@ resource "oci_core_subnet" "management_subnet" {
   dns_label                  = var.management_subnet_dns_label
   security_list_ids          = [oci_core_security_list.allow_all_security.id]
   prohibit_public_ip_on_vnic = false
-}
-
-resource "oci_core_subnet" "trust_subnet" {
-  count                      = local.use_existing_network ? 0 : 1
-  compartment_id             = var.compartment_ocid
-  vcn_id                     = oci_core_vcn.hub[count.index].id
-  cidr_block                 = var.trust_subnet_cidr_block
-  display_name               = var.trust_subnet_display_name
-  route_table_id             = oci_core_route_table.trust_route_table[count.index].id
-  dns_label                  = var.trust_subnet_dns_label
-  security_list_ids          = [oci_core_security_list.allow_all_security.id]
-  prohibit_public_ip_on_vnic = true
 }

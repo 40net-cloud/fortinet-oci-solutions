@@ -47,32 +47,6 @@ resource "oci_core_instance" "vm-a" {
   }
 }
 
-resource "oci_core_vnic_attachment" "vnic_attach_trust_a" {
-  count        = local.matched_package != null ? 1 : 0
-  depends_on   = [oci_core_instance.vm-a]
-  instance_id  = oci_core_instance.vm-a[0].id
-  display_name = "vnic_trust_a"
-
-  create_vnic_details {
-    subnet_id              = local.use_existing_network ? var.trust_subnet_id : oci_core_subnet.trust_subnet[0].id
-    display_name           = "vnic_trust_a"
-    assign_public_ip       = false
-    skip_source_dest_check = false
-  }
-  timeouts {
-    delete = "30m"
-  }
-}
-
-resource "oci_core_private_ip" "trust_private_ip" {
-  count = local.matched_package != null ? 1 : 0
-
-  vnic_id        = oci_core_vnic_attachment.vnic_attach_trust_a[0].vnic_id
-  display_name   = "trust_ip"
-  hostname_label = "trust"
-  ip_address     = trimspace(var.trust_private_ip) != "" ? trimspace(var.trust_private_ip) : null
-}
-
 resource "oci_core_volume" "vm_volume_a" {
   count               = local.matched_package != null ? 1 : 0
   availability_domain = var.availability_domain_name_1 != "" ? var.availability_domain_name_1 : data.oci_identity_availability_domains.ads.availability_domains[0].name

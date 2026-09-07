@@ -16,12 +16,10 @@ resource "terraform_data" "validate_network" {
           local.use_existing_vcn &&
           trimspace(var.vcn_id) != "" &&
           trimspace(var.management_subnet_id) != "" &&
-          trimspace(var.trust_subnet_id) != "" &&
-          local.management_route_table_id != null &&
-          local.trust_route_table_id != null
+          local.management_route_table_id != null
         )
       )
-      error_message = "Choose either Create New VCN and Subnets, or provide an existing VCN, management subnet, and trust subnet."
+      error_message = "Choose either Create New VCN and Subnets, or provide an existing VCN and management subnet."
     }
   }
 }

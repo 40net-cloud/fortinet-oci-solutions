@@ -4,11 +4,8 @@ locals {
   use_existing_network = var.network_strategy == "Use Existing VCN and Subnets"
 
   management_subnet_cidr    = local.use_existing_network ? data.oci_core_subnet.management_existing[0].cidr_block : var.management_subnet_cidr_block
-  trust_subnet_cidr         = local.use_existing_network ? data.oci_core_subnet.trust_existing[0].cidr_block : var.trust_subnet_cidr_block
   management_subnet_gateway = cidrhost(local.management_subnet_cidr, 1)
-  trust_subnet_gateway      = cidrhost(local.trust_subnet_cidr, 1)
   management_route_table_id = local.use_existing_network ? data.oci_core_subnet.management_existing[0].route_table_id : null
-  trust_route_table_id      = local.use_existing_network ? data.oci_core_subnet.trust_existing[0].route_table_id : null
 
   listings = jsondecode(file("${path.module}/final_listings.json"))
 
