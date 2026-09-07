@@ -34,31 +34,3 @@ resource "oci_core_instance" "fortiadc" {
     create = "60m"
   }
 }
-
-resource "oci_core_vnic_attachment" "backend" {
-  count      = length(oci_core_instance.fortiadc)
-  depends_on = [oci_core_instance.fortiadc]
-
-  instance_id  = oci_core_instance.fortiadc[0].id
-  display_name = "${var.vm_display_name}-port2"
-
-  create_vnic_details {
-    subnet_id              = local.selected_back_subnet_id
-    display_name           = "${var.vm_display_name}-port2"
-    assign_public_ip       = false
-    skip_source_dest_check = true
-    nsg_ids                = [oci_core_network_security_group.backend.id]
-  }
-
-  timeouts {
-    delete = "60m"
-  }
-}
-
-resource "oci_core_private_ip" "backend" {
-  count = length(oci_core_vnic_attachment.backend)
-
-  vnic_id      = oci_core_vnic_attachment.backend[0].vnic_id
-  display_name = "${var.vm_display_name}-port2-ip"
-  ip_address   = trimspace(var.backend_private_ip) != "" ? trimspace(var.backend_private_ip) : null
-}

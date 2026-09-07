@@ -103,12 +103,6 @@ variable "frontend_subnet_id" {
   default     = ""
 }
 
-variable "backend_subnet_id" {
-  description = "Existing port2/backend subnet OCID. Required when using existing networking."
-  type        = string
-  default     = ""
-}
-
 variable "vcn_display_name" {
   description = "Name of the VCN created by the template."
   type        = string
@@ -137,17 +131,6 @@ variable "frontend_subnet_cidr" {
   }
 }
 
-variable "backend_subnet_cidr" {
-  description = "CIDR of the private port2/backend subnet. Also used to configure port2."
-  type        = string
-  default     = "10.0.2.0/24"
-
-  validation {
-    condition     = can(cidrhost(var.backend_subnet_cidr, 0))
-    error_message = "backend_subnet_cidr must be a valid IPv4 CIDR."
-  }
-}
-
 variable "frontend_private_ip" {
   description = "Optional private IP assigned to port1. Leave blank for OCI automatic allocation."
   type        = string
@@ -156,17 +139,6 @@ variable "frontend_private_ip" {
   validation {
     condition     = trimspace(var.frontend_private_ip) == "" || (can(cidrhost("${trimspace(var.frontend_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.frontend_private_ip))))
     error_message = "frontend_private_ip must be a valid IPv4 address without leading zeros in any octet."
-  }
-}
-
-variable "backend_private_ip" {
-  description = "Private IP assigned to port2. Required for new networks; leave blank for automatic OCI allocation when using existing subnets."
-  type        = string
-  default     = "10.0.2.10"
-
-  validation {
-    condition     = trimspace(var.backend_private_ip) == "" || (can(cidrhost("${trimspace(var.backend_private_ip)}/32", 0)) && !can(regex("(^|\\.)0[0-9]", trimspace(var.backend_private_ip))))
-    error_message = "backend_private_ip must be a valid IPv4 address without leading zeros in any octet, or blank for automatic allocation."
   }
 }
 

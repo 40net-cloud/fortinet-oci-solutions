@@ -29,11 +29,6 @@ output "frontend_private_ip" {
   value       = try(oci_core_instance.fortiadc[0].private_ip, null)
 }
 
-output "backend_private_ip" {
-  description = "Private IP assigned to port2."
-  value       = var.backend_private_ip
-}
-
 output "selected_marketplace_image_id" {
   description = "Regional Marketplace image OCID selected for FortiADC."
   value       = try(data.oci_core_app_catalog_listing_resource_version.fortiadc[0].listing_resource_id, null)

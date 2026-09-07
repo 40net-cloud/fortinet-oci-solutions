@@ -1,5 +1,5 @@
 title: FortiADC Standalone Deployment Template
-description: This template deploys a single FortiADC instance in OCI with a public frontend interface and a private backend interface.
+description: This template deploys a single FortiADC instance in OCI using the primary port1 VNIC for management and application traffic.
 schemaVersion: 1.1.0
 version: "20260814"
 locale: en
@@ -31,13 +31,10 @@ variableGroups:
       - vcn_cidr
       - frontend_subnet_id
       - frontend_subnet_cidr
-      - backend_subnet_id
-      - backend_subnet_cidr
 
   - title: "FortiADC IP Configuration"
     variables:
       - frontend_private_ip
-      - backend_private_ip
       - assign_public_ip
 
   - title: "FortiADC Access Configuration"
@@ -212,43 +209,12 @@ variables:
         - ${network_strategy}
         - Create New VCN and Subnets
 
-  backend_subnet_id:
-    type: oci:core:subnet:id
-    required: true
-    title: Select Existing Backend Subnet
-    description: Existing backend subnet to use for the FortiADC backend interface.
-    dependsOn:
-      compartmentId: ${compartment_ocid}
-      vcnId: ${vcn_id}
-    visible:
-      eq:
-        - ${network_strategy}
-        - Use Existing VCN and Subnets
-
-  backend_subnet_cidr:
-    type: string
-    required: true
-    default: 10.0.2.0/24
-    title: Backend Subnet CIDR
-    description: CIDR block of the new backend subnet
-    visible:
-      eq:
-        - ${network_strategy}
-        - Create New VCN and Subnets
-
   frontend_private_ip:
     type: string
     required: false
     default: ""
     title: Frontend Private IP
     description: Optional private IP for the FortiADC frontend interface. Leave blank for automatic OCI allocation.
-
-  backend_private_ip:
-    type: string
-    required: false
-    default: 10.0.2.10
-    title: Backend Private IP
-    description: Private IP for the FortiADC backend interface. Use an unused address inside the backend subnet. When using existing subnets, clear this value to allow automatic OCI allocation.
 
   assign_public_ip:
     type: boolean
@@ -295,7 +261,6 @@ outputGroups:
       - management_url
       - management_public_ip
       - frontend_private_ip
-      - backend_private_ip
       - instance_id
 
 outputs:
@@ -312,11 +277,6 @@ outputs:
   frontend_private_ip:
     type: string
     title: Port1 private IP
-    visible: true
-
-  backend_private_ip:
-    type: string
-    title: Port2 private IP
     visible: true
 
   instance_id:

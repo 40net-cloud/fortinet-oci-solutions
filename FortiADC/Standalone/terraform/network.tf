@@ -6,7 +6,6 @@ resource "oci_core_vcn" "fortiadc" {
   display_name   = var.vcn_display_name
   dns_label      = "fortiadc"
 }
-
 resource "oci_core_internet_gateway" "fortiadc" {
   count = local.create_new_vcn ? 1 : 0
 
@@ -30,28 +29,12 @@ resource "oci_core_route_table" "frontend" {
   }
 }
 
-resource "oci_core_route_table" "backend" {
-  count = local.create_new_vcn ? 1 : 0
-
-  compartment_id = var.compartment_ocid
-  vcn_id         = local.selected_vcn_id
-  display_name   = "${var.vm_display_name}-backend-routes"
-}
-
 resource "oci_core_security_list" "frontend" {
   count = local.create_new_vcn ? 1 : 0
 
   compartment_id = var.compartment_ocid
   vcn_id         = local.selected_vcn_id
   display_name   = "${var.vm_display_name}-frontend-empty-security-list"
-}
-
-resource "oci_core_security_list" "backend" {
-  count = local.create_new_vcn ? 1 : 0
-
-  compartment_id = var.compartment_ocid
-  vcn_id         = local.selected_vcn_id
-  display_name   = "${var.vm_display_name}-backend-empty-security-list"
 }
 
 resource "oci_core_subnet" "frontend" {
@@ -65,19 +48,6 @@ resource "oci_core_subnet" "frontend" {
   route_table_id             = oci_core_route_table.frontend[0].id
   security_list_ids          = [oci_core_security_list.frontend[0].id]
   prohibit_public_ip_on_vnic = false
-}
-
-resource "oci_core_subnet" "backend" {
-  count = local.create_new_vcn ? 1 : 0
-
-  compartment_id             = var.compartment_ocid
-  vcn_id                     = local.selected_vcn_id
-  cidr_block                 = var.backend_subnet_cidr
-  display_name               = "${var.vm_display_name}-backend-subnet"
-  dns_label                  = "backend"
-  route_table_id             = oci_core_route_table.backend[0].id
-  security_list_ids          = [oci_core_security_list.backend[0].id]
-  prohibit_public_ip_on_vnic = true
 }
 
 resource "oci_core_network_security_group" "frontend" {
@@ -133,24 +103,4 @@ resource "oci_core_network_security_group_security_rule" "client_traffic" {
       max = var.client_port_max
     }
   }
-}
-
-resource "oci_core_network_security_group" "backend" {
-  compartment_id = var.compartment_ocid
-  vcn_id         = local.selected_vcn_id
-  display_name   = "${var.vm_display_name}-backend-nsg"
-}
-
-resource "oci_core_network_security_group_security_rule" "backend_ingress" {
-  network_security_group_id = oci_core_network_security_group.backend.id
-  direction                 = "INGRESS"
-  protocol                  = "all"
-  source                    = local.selected_backend_cidr
-}
-
-resource "oci_core_network_security_group_security_rule" "backend_egress" {
-  network_security_group_id = oci_core_network_security_group.backend.id
-  direction                 = "EGRESS"
-  protocol                  = "all"
-  destination               = "0.0.0.0/0"
 }

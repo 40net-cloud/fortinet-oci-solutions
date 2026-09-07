@@ -2,7 +2,7 @@
 
 Deploy one standalone FortiADC-VM on Oracle Cloud Infrastructure (OCI) using Terraform and the FortiADC Marketplace image.
 
-This template follows the same OCI deployment model used by the repo’s standalone FortiGate and FortiWeb patterns, but it is tuned specifically for the FortiADC two-interface standalone design.
+This template follows the same OCI deployment model used by the repo’s standalone FortiGate and FortiWeb patterns, but it is tuned for a single-primary-VNIC FortiADC deployment.
 
 ## Contents
 
@@ -25,32 +25,28 @@ The Terraform configuration creates or uses the following resources:
 | Resource | Behavior |
 | --- | --- |
 | FortiADC-VM | One OCI Compute instance created from the matching FortiADC Marketplace image |
-| Management VNIC | Attached to the frontend management subnet as the FortiADC administrative interface |
-| Backend VNIC | Attached to the backend subnet for application traffic handling |
+| Primary VNIC (`port1`) | Attached to the frontend subnet for management and application traffic |
 | Public IP on management interface | Assigned when `assign_public_ip` is enabled |
 | Frontend NSG | Controls management and client ingress access |
-| Backend NSG | Controls application-side traffic |
 | VCN | Created when `network_strategy` is `Create New VCN and Subnets`; otherwise an existing VCN is used |
 | Frontend subnet | Created or supplied for the management and client-facing side |
-| Backend subnet | Created or supplied for the private application side |
+| Frontend subnet | Created or supplied for all FortiADC traffic on `port1` |
 | Internet Gateway | Created when a new VCN is created |
-| Route tables | Default routes for the frontend and backend subnets |
+| Route table | Default route for the frontend subnet |
 | Marketplace agreement | Accepted and subscribed when `mp_subscription_enabled` is `true` |
 
 ## Architecture and interface roles
 
-The current template creates a two-subnet layout:
+The current template creates a single-subnet layout:
 
 | FortiADC interface | OCI resource | Intended role in the template |
 | --- | --- | --- |
-| Frontend / management interface | Primary VNIC in the frontend subnet | Admin access and client-facing connectivity |
-| Backend interface | Secondary VNIC in the backend subnet | Internal or application-side traffic |
+| `port1` | Primary VNIC in the frontend subnet | Management and application connectivity |
 
 The design keeps the deployment simple and consistent with the repo’s standalone OCI patterns:
 
 - one compartment is used for all deployed resources
-- one frontend subnet is created or supplied for management and client traffic
-- one backend subnet is created or supplied for application-side traffic
+- one subnet is created or supplied for all management and application traffic
 - FortiADC is deployed directly from the OCI Marketplace image without a custom bootstrap routine
 
 ## Known limitations
@@ -65,7 +61,7 @@ Recommended hardening:
 
 - restrict management access to trusted source IPs
 - restrict HTTPS and SSH exposure to approved management ranges
-- validate backend access paths before enabling application traffic
+- validate application access paths before enabling application traffic
 - replace broad allow-all rules with service-specific rules
 
 ### Existing network changes
@@ -155,10 +151,9 @@ For an existing network, set:
 network_strategy   = "Use Existing VCN and Subnets"
 vcn_id             = "ocid1.vcn.oc1..."
 frontend_subnet_id = "ocid1.subnet.oc1..."
-backend_subnet_id  = "ocid1.subnet.oc1..."
 ```
 
-The frontend subnet must permit public IP assignment if `assign_public_ip` is `true`. Its route table must provide the required path to an internet gateway. The backend subnet should have routes to the application servers that FortiADC will serve.
+The frontend subnet must permit public IP assignment if `assign_public_ip` is `true`. Its route table must provide the required path to an internet gateway.
 
 ## Input variables
 
@@ -180,16 +175,14 @@ The deployment exposes the standard OCI and FortiADC variables, including:
 - `vcn_id`
 - `vcn_cidr`
 - `frontend_subnet_cidr`
-- `backend_subnet_cidr`
 - `frontend_private_ip`
-- `backend_private_ip`
 - `assign_public_ip`
 - `management_cidr`
 - `client_ingress_cidr`
 - `client_port_min`
 - `client_port_max`
 
-The template is designed to use a single compartment for all deployment resources and a simple two-subnet topology.
+The template is designed to use a single compartment for all deployment resources and a simple one-subnet topology.
 
 ## Outputs
 
@@ -197,7 +190,7 @@ This stack exposes key deployment outputs, including:
 
 - the selected marketplace listing information
 - the deployed instance OCID
-- the frontend and backend subnet IDs
+- the frontend subnet ID
 - the management public IP or associated endpoint details
 - the selected image resource metadata
 - the sensitive initial password output
@@ -211,7 +204,7 @@ After the instance is created:
 1. Get the public management IP from OCI console or Terraform outputs.
 2. Open the FortiADC management interface over HTTPS.
 3. Log in using the initial FortiADC credentials supplied by the Marketplace image or configured admin method.
-4. Complete the initial configuration and validate the frontend and backend paths.
+4. Complete the initial configuration and validate the application path.
 
 If the instance uses a private-only management design, access through a bastion host or secured management network.
 
@@ -219,7 +212,7 @@ If the instance uses a private-only management design, access through a bastion 
 
 The FortiADC standalone deployment includes:
 
-- `terraform/compute.tf` — the FortiADC instance and secondary VNIC configuration
+- `terraform/compute.tf` — the FortiADC instance and primary VNIC configuration
 - `terraform/network.tf` — VCN, subnets, route tables, and gateway resources
 - `terraform/image_subscription.tf` — OCI Marketplace subscription and listing agreement
 - `terraform/locals.tf` — marketplace selection logic and shape resolution

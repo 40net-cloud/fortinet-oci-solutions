@@ -1,9 +1,8 @@
 # FortiADC standalone deployment on OCI
 
-This Terraform stack deploys a single Fortinet FortiADC virtual appliance from Oracle Cloud Marketplace. It follows the two-interface standalone pattern used by the FortiGate standalone template:
+This Terraform stack deploys a single Fortinet FortiADC virtual appliance from Oracle Cloud Marketplace. It uses the primary OCI VNIC only:
 
-- `port1` is the frontend and management interface. It can receive an ephemeral public IP.
-- `port2` is the private backend interface used to reach application servers.
+- `port1` carries management and application traffic. It can receive an ephemeral public IP.
 
 The stack is compatible with OCI Resource Manager and standard Terraform workflows.
 
@@ -34,18 +33,15 @@ Shape availability and Marketplace-image compatibility vary by OCI region and av
 The stack always creates:
 
 - One FortiADC compute instance
-- One secondary VNIC for `port2`
 - A frontend network security group
-- A backend network security group
 - A FortiADC Marketplace agreement and, by default, a subscription
 
 With **Create New VCN and Subnets**, it also creates:
 
 - One VCN
-- One public frontend subnet for `port1`
-- One private backend subnet for `port2`
+- One subnet for `port1`
 - One internet gateway
-- Separate frontend and backend route tables
+- One route table
 
 With **Use Existing VCN and Subnets**, it uses the supplied VCN and subnet OCIDs and does not change their route tables or security lists.
 
@@ -58,8 +54,6 @@ The frontend NSG permits:
 - HTTPS (`443`) and SSH (`22`) from `management_cidr`
 - TCP ports `client_port_min` through `client_port_max` from `client_ingress_cidr`
 - All outbound traffic
-
-The backend NSG permits all traffic from `backend_subnet_cidr` and all outbound traffic. Adjust these rules to match your security requirements.
 
 The default `management_cidr` is `0.0.0.0/0` for initial usability. For production, set it to a trusted administrator address such as `203.0.113.10/32`.
 
@@ -97,10 +91,9 @@ For an existing network, set:
 network_strategy  = "Use Existing VCN and Subnets"
 vcn_id            = "ocid1.vcn.oc1..."
 frontend_subnet_id = "ocid1.subnet.oc1..."
-backend_subnet_id  = "ocid1.subnet.oc1..."
 ```
 
-The frontend subnet must permit public IP assignment if `assign_public_ip` is `true`. Its route table must provide the required path to an internet gateway. The backend subnet should have routes to the application servers that FortiADC will serve.
+The frontend subnet must permit public IP assignment if `assign_public_ip` is `true`. Its route table must provide the required path to an internet gateway.
 
 ## First login and licensing
 
@@ -117,14 +110,13 @@ terraform output -raw initial_password
 
 Change the password immediately, then upload and activate your FortiADC BYOL license through the FortiADC interface. Licensing can trigger a reboot.
 
-The bootstrap configuration leaves `port1` on DHCP so it retains OCI's primary-VNIC address and default gateway. It assigns `backend_private_ip` to `port2` when provided; for existing-subnet deployments, leave it blank to let OCI allocate the address automatically. Ping is enabled on that interface.
+The FortiADC image uses OCI's primary-VNIC address and default gateway on `port1`. Management and application traffic share this interface.
 
 ## Outputs
 
 - `management_url`
 - `management_public_ip`
 - `frontend_private_ip`
-- `backend_private_ip`
 - `instance_id`
 - `initial_password` (sensitive)
 - `selected_marketplace_image_id`
