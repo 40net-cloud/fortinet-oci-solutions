@@ -6,11 +6,10 @@ Network Load Balancer.
 
 ## Network choices
 
-- **Create New VCN** creates a VCN, Internet Gateway, and three regional
-  subnets for the NLB, FortiWeb port1, and FortiWeb port2.
-- **Use Existing VCN and Create New Subnets** reuses a selected VCN and an
-  existing Internet Gateway but creates the three FortiWeb subnets, route
-  tables, and security lists.
+- **Create New VCN and Subnets** creates a VCN, Internet Gateway, and two
+  regional subnets for the NLB and the FortiWeb primary `port1` VNICs.
+- **Use Existing VCN and Subnets** reuses a selected VCN and two existing
+  subnets, one for the NLB and one for both FortiWeb primary VNICs.
 
 The second option intentionally does not reuse existing subnets.
 

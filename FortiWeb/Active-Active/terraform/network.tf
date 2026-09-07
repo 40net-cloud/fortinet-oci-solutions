@@ -1,5 +1,5 @@
 resource "oci_core_vcn" "fortiweb" {
-  count = local.use_existing_vcn ? 0 : 1
+  count = local.create_new_network ? 1 : 0
 
   compartment_id = var.network_compartment_ocid
   cidr_block     = var.vcn_cidr_block
@@ -8,21 +8,26 @@ resource "oci_core_vcn" "fortiweb" {
 }
 
 locals {
-  selected_vcn_id = local.use_existing_vcn ? (
+  selected_vcn_id = local.use_existing_network ? (
     data.oci_core_vcn.existing[0].id
   ) : oci_core_vcn.fortiweb[0].id
 
-  selected_vcn_cidr = local.use_existing_vcn ? (
+  selected_vcn_cidr = local.use_existing_network ? (
     data.oci_core_vcn.existing[0].cidr_block
   ) : var.vcn_cidr_block
 
-  selected_default_dhcp_options_id = local.use_existing_vcn ? (
+  selected_default_dhcp_options_id = local.use_existing_network ? (
     data.oci_core_vcn.existing[0].default_dhcp_options_id
   ) : oci_core_vcn.fortiweb[0].default_dhcp_options_id
+
+  selected_lb_subnet_id        = local.use_existing_network ? var.lb_subnet_id : oci_core_subnet.lb[0].id
+  selected_untrust_subnet_id   = local.use_existing_network ? var.untrust_subnet_id : oci_core_subnet.untrust[0].id
+  selected_untrust_subnet_cidr = local.use_existing_network ? data.oci_core_subnet.untrust_existing[0].cidr_block : var.untrust_subnet_cidr
+  selected_untrust_gateway_ip  = local.use_existing_network ? data.oci_core_subnet.untrust_existing[0].virtual_router_ip : oci_core_subnet.untrust[0].virtual_router_ip
 }
 
 resource "oci_core_internet_gateway" "fortiweb" {
-  count = local.use_existing_vcn ? 0 : 1
+  count = local.create_new_network ? 1 : 0
 
   compartment_id = var.network_compartment_ocid
   display_name   = "${var.prefix}-igw"
@@ -31,12 +36,13 @@ resource "oci_core_internet_gateway" "fortiweb" {
 }
 
 locals {
-  selected_igw_id = local.use_existing_vcn ? (
-    var.existing_igw_ocid
+  selected_igw_id = local.use_existing_network ? (
+    null
   ) : oci_core_internet_gateway.fortiweb[0].id
 }
 
 resource "oci_core_route_table" "lb" {
+  count      = local.create_new_network ? 1 : 0
   depends_on = [terraform_data.validate_network]
 
   compartment_id = var.network_compartment_ocid
@@ -51,6 +57,7 @@ resource "oci_core_route_table" "lb" {
 }
 
 resource "oci_core_route_table" "untrust" {
+  count      = local.create_new_network ? 1 : 0
   depends_on = [terraform_data.validate_network]
 
   compartment_id = var.network_compartment_ocid
@@ -62,14 +69,6 @@ resource "oci_core_route_table" "untrust" {
     destination_type  = "CIDR_BLOCK"
     network_entity_id = local.selected_igw_id
   }
-}
-
-resource "oci_core_route_table" "trust" {
-  depends_on = [terraform_data.validate_network]
-
-  compartment_id = var.network_compartment_ocid
-  vcn_id         = local.selected_vcn_id
-  display_name   = "${var.prefix}-trust-rt"
 }
 
 resource "oci_core_security_list" "lb" {
@@ -138,32 +137,15 @@ resource "oci_core_security_list" "untrust" {
   }
 }
 
-resource "oci_core_security_list" "trust" {
-  compartment_id = var.network_compartment_ocid
-  vcn_id         = local.selected_vcn_id
-  display_name   = "${var.prefix}-trust-security-list"
-
-  egress_security_rules {
-    destination = "0.0.0.0/0"
-    protocol    = "all"
-    stateless   = false
-  }
-
-  ingress_security_rules {
-    protocol  = "all"
-    source    = local.selected_vcn_cidr
-    stateless = false
-  }
-}
-
 resource "oci_core_subnet" "lb" {
+  count      = local.create_new_network ? 1 : 0
   depends_on = [terraform_data.validate_network]
 
   cidr_block                 = var.lb_subnet_cidr
   display_name               = "${var.prefix}-lb-subnet"
   compartment_id             = var.network_compartment_ocid
   vcn_id                     = local.selected_vcn_id
-  route_table_id             = oci_core_route_table.lb.id
+  route_table_id             = oci_core_route_table.lb[0].id
   security_list_ids          = [oci_core_security_list.lb.id]
   dhcp_options_id            = local.selected_default_dhcp_options_id
   dns_label                  = "fwblb"
@@ -171,31 +153,18 @@ resource "oci_core_subnet" "lb" {
 }
 
 resource "oci_core_subnet" "untrust" {
+  count      = local.create_new_network ? 1 : 0
   depends_on = [terraform_data.validate_network]
 
   cidr_block                 = var.untrust_subnet_cidr
   display_name               = "${var.prefix}-untrust-subnet"
   compartment_id             = var.network_compartment_ocid
   vcn_id                     = local.selected_vcn_id
-  route_table_id             = oci_core_route_table.untrust.id
+  route_table_id             = oci_core_route_table.untrust[0].id
   security_list_ids          = [oci_core_security_list.untrust.id]
   dhcp_options_id            = local.selected_default_dhcp_options_id
   dns_label                  = "fwbuntrust"
   prohibit_public_ip_on_vnic = !var.assign_public_ip
-}
-
-resource "oci_core_subnet" "trust" {
-  depends_on = [terraform_data.validate_network]
-
-  cidr_block                 = var.trust_subnet_cidr
-  display_name               = "${var.prefix}-trust-subnet"
-  compartment_id             = var.network_compartment_ocid
-  vcn_id                     = local.selected_vcn_id
-  route_table_id             = oci_core_route_table.trust.id
-  security_list_ids          = [oci_core_security_list.trust.id]
-  dhcp_options_id            = local.selected_default_dhcp_options_id
-  dns_label                  = "fwbtrust"
-  prohibit_public_ip_on_vnic = true
 }
 
 resource "oci_network_load_balancer_network_load_balancer" "external" {
@@ -203,7 +172,7 @@ resource "oci_network_load_balancer_network_load_balancer" "external" {
 
   compartment_id = var.compartment_ocid
   display_name   = "${var.prefix}-public-nlb"
-  subnet_id      = oci_core_subnet.lb.id
+  subnet_id      = local.selected_lb_subnet_id
 
   is_private                     = false
   is_preserve_source_destination = true
@@ -237,8 +206,7 @@ resource "oci_network_load_balancer_backend" "fwba" {
   count = length(oci_network_load_balancer_network_load_balancer.external)
 
   depends_on = [
-    oci_core_instance.fwba,
-    oci_core_vnic_attachment.fwba_trust
+    oci_core_instance.fwba
   ]
 
   backend_set_name         = oci_network_load_balancer_backend_set.external[0].name
@@ -251,8 +219,7 @@ resource "oci_network_load_balancer_backend" "fwbb" {
   count = length(oci_network_load_balancer_network_load_balancer.external)
 
   depends_on = [
-    oci_core_instance.fwbb,
-    oci_core_vnic_attachment.fwbb_trust
+    oci_core_instance.fwbb
   ]
 
   backend_set_name         = oci_network_load_balancer_backend_set.external[0].name

@@ -1,5 +1,5 @@
 title: FortiWeb Active/Active Deployment
-description: Deploy two FortiWeb appliances in active/active high-volume mode behind an OCI Network Load Balancer.
+description: Deploy two FortiWeb appliances in active/active high-volume mode behind an OCI Network Load Balancer using one primary VNIC per appliance.
 schemaVersion: 1.1.0
 version: "20260814"
 locale: en
@@ -40,15 +40,13 @@ variableGroups:
     variables:
       - network_strategy
       - vcn_id
-      - existing_igw_ocid
       - vcn_cidr_block
       - lb_subnet_cidr
       - untrust_subnet_cidr
-      - trust_subnet_cidr
+      - lb_subnet_id
+      - untrust_subnet_id
       - fwba_untrust_ip
       - fwbb_untrust_ip
-      - fwba_trust_ip
-      - fwbb_trust_ip
 
   - title: Access and Load Balancer
     variables:
@@ -250,35 +248,50 @@ variables:
   network_strategy:
     type: enum
     title: Network Strategy
-    description: Create a VCN, or use an existing VCN while creating three new FortiWeb subnets in it.
+    description: Create a new VCN and subnets or use existing VCN and subnets.
     required: true
-    default: Create New VCN
+    default: Create New VCN and Subnets
     enum:
-      - Create New VCN
-      - Use Existing VCN and Create New Subnets
+      - Create New VCN and Subnets
+      - Use Existing VCN and Subnets
 
   vcn_id:
     type: oci:core:vcn:id
     title: Existing VCN
-    description: Existing VCN in which the three new FortiWeb subnets will be created.
+    description: Existing VCN to use for the FortiWeb deployment.
     required: true
     visible:
       eq:
         - ${network_strategy}
-        - Use Existing VCN and Create New Subnets
+        - Use Existing VCN and Subnets
     dependsOn:
       compartmentId: ${network_compartment_ocid}
 
-  existing_igw_ocid:
-    type: string
-    title: Existing Internet Gateway OCID
-    description: OCID of an enabled Internet Gateway already attached to the selected VCN.
+  lb_subnet_id:
+    type: oci:core:subnet:id
+    title: Existing NLB Subnet
+    description: Existing public subnet for the Network Load Balancer.
     required: true
-    default: ""
     visible:
       eq:
         - ${network_strategy}
-        - Use Existing VCN and Create New Subnets
+        - Use Existing VCN and Subnets
+    dependsOn:
+      compartmentId: ${network_compartment_ocid}
+      vcnId: ${vcn_id}
+
+  untrust_subnet_id:
+    type: oci:core:subnet:id
+    title: Existing FortiWeb Subnet
+    description: Existing subnet for both FortiWeb primary port1 VNICs.
+    required: true
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+    dependsOn:
+      compartmentId: ${network_compartment_ocid}
+      vcnId: ${vcn_id}
 
   vcn_cidr_block:
     type: string
@@ -290,7 +303,7 @@ variables:
     visible:
       eq:
         - ${network_strategy}
-        - Create New VCN
+        - Create New VCN and Subnets
 
   lb_subnet_cidr:
     type: string
@@ -306,13 +319,6 @@ variables:
     required: true
     default: 172.16.140.16/28
 
-  trust_subnet_cidr:
-    type: string
-    title: Trusted Subnet CIDR
-    description: CIDR for the new FortiWeb port2 subnet.
-    required: true
-    default: 172.16.140.32/28
-
   fwba_untrust_ip:
     type: string
     title: FortiWeb-A Port1 Private IP
@@ -324,18 +330,6 @@ variables:
     title: FortiWeb-B Port1 Private IP
     required: true
     default: 172.16.140.21
-
-  fwba_trust_ip:
-    type: string
-    title: FortiWeb-A Port2 Private IP
-    required: true
-    default: 172.16.140.40
-
-  fwbb_trust_ip:
-    type: string
-    title: FortiWeb-B Port2 Private IP
-    required: true
-    default: 172.16.140.41
 
   application_ingress_cidr:
     type: string

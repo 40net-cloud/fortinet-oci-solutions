@@ -1,6 +1,16 @@
 data "oci_core_vcn" "existing" {
-  count  = local.use_existing_vcn ? 1 : 0
+  count  = local.use_existing_network ? 1 : 0
   vcn_id = var.vcn_id
+}
+
+data "oci_core_subnet" "lb_existing" {
+  count     = local.use_existing_network ? 1 : 0
+  subnet_id = var.lb_subnet_id
+}
+
+data "oci_core_subnet" "untrust_existing" {
+  count     = local.use_existing_network ? 1 : 0
+  subnet_id = var.untrust_subnet_id
 }
 
 # Resolve the selected package to the image OCID in the deployment region.

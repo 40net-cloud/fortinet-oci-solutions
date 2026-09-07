@@ -17,13 +17,6 @@ config system interface
     set mode dhcp
   next
 end
-config system interface
-  edit port2
-    set type physical
-    set ip ${fwbb_ipaddress_port2} ${trust_mask}
-    set allowaccess ping ssh http https
-  next
-end
 config router static
   edit 1
     set device port1
@@ -35,9 +28,9 @@ config system ha
   set group-id 1
   set group-name fwbaa
   set override enable
-  set tunnel-local ${fwbb_ipaddress_port2}
-  set tunnel-peer ${fwba_ipaddress_port2}
-  set monitor port1 port2
+  set tunnel-local ${fwbb_ipaddress_port1}
+  set tunnel-peer ${fwba_ipaddress_port1}
+  set monitor port1
 end
 
 --==OCI==

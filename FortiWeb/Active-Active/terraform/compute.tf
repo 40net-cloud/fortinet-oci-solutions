@@ -23,7 +23,7 @@ resource "oci_core_instance" "fwba" {
   }
 
   create_vnic_details {
-    subnet_id        = oci_core_subnet.untrust.id
+    subnet_id        = local.selected_untrust_subnet_id
     display_name     = "${var.prefix}-A-port1"
     assign_public_ip = var.assign_public_ip
     hostname_label   = "fwba"
@@ -43,10 +43,9 @@ resource "oci_core_instance" "fwba" {
   metadata = {
     user_data = base64encode(templatefile("${path.module}/customdatafwba.tpl", {
       fwba_vm_name         = "${var.prefix}-A"
-      untrusted_gateway_ip = oci_core_subnet.untrust.virtual_router_ip
-      fwba_ipaddress_port2 = var.fwba_trust_ip
-      fwbb_ipaddress_port2 = var.fwbb_trust_ip
-      trust_mask           = cidrnetmask(var.trust_subnet_cidr)
+      untrusted_gateway_ip = local.selected_untrust_gateway_ip
+      fwba_ipaddress_port1 = var.fwba_untrust_ip
+      fwbb_ipaddress_port1 = var.fwbb_untrust_ip
     }))
   }
 
@@ -80,7 +79,7 @@ resource "oci_core_instance" "fwbb" {
   }
 
   create_vnic_details {
-    subnet_id        = oci_core_subnet.untrust.id
+    subnet_id        = local.selected_untrust_subnet_id
     display_name     = "${var.prefix}-B-port1"
     assign_public_ip = var.assign_public_ip
     hostname_label   = "fwbb"
@@ -100,45 +99,14 @@ resource "oci_core_instance" "fwbb" {
   metadata = {
     user_data = base64encode(templatefile("${path.module}/customdatafwbb.tpl", {
       fwbb_vm_name         = "${var.prefix}-B"
-      untrusted_gateway_ip = oci_core_subnet.untrust.virtual_router_ip
-      fwbb_ipaddress_port2 = var.fwbb_trust_ip
-      fwba_ipaddress_port2 = var.fwba_trust_ip
-      trust_mask           = cidrnetmask(var.trust_subnet_cidr)
+      untrusted_gateway_ip = local.selected_untrust_gateway_ip
+      fwbb_ipaddress_port1 = var.fwbb_untrust_ip
+      fwba_ipaddress_port1 = var.fwba_untrust_ip
     }))
   }
 
   timeouts {
     create = "60m"
-  }
-}
-
-resource "oci_core_vnic_attachment" "fwba_trust" {
-  count = length(oci_core_instance.fwba)
-
-  instance_id  = oci_core_instance.fwba[0].id
-  display_name = "${var.prefix}-A-port2"
-
-  create_vnic_details {
-    subnet_id              = oci_core_subnet.trust.id
-    display_name           = "${var.prefix}-A-port2"
-    assign_public_ip       = false
-    skip_source_dest_check = true
-    private_ip             = var.fwba_trust_ip
-  }
-}
-
-resource "oci_core_vnic_attachment" "fwbb_trust" {
-  count = length(oci_core_instance.fwbb)
-
-  instance_id  = oci_core_instance.fwbb[0].id
-  display_name = "${var.prefix}-B-port2"
-
-  create_vnic_details {
-    subnet_id              = oci_core_subnet.trust.id
-    display_name           = "${var.prefix}-B-port2"
-    assign_public_ip       = false
-    skip_source_dest_check = true
-    private_ip             = var.fwbb_trust_ip
   }
 }
 

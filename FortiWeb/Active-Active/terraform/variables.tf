@@ -147,16 +147,16 @@ variable "mp_subscription_enabled" {
 }
 
 variable "network_strategy" {
-  description = "Create a VCN or create the FortiWeb subnets in an existing VCN."
+  description = "Create a new VCN and subnets or use existing VCN and subnets."
   type        = string
-  default     = "Create New VCN"
+  default     = "Create New VCN and Subnets"
 
   validation {
     condition = contains([
-      "Create New VCN",
-      "Use Existing VCN and Create New Subnets"
+      "Create New VCN and Subnets",
+      "Use Existing VCN and Subnets"
     ], var.network_strategy)
-    error_message = "network_strategy must be Create New VCN or Use Existing VCN and Create New Subnets."
+    error_message = "Choose either Create New VCN and Subnets or Use Existing VCN and Subnets."
   }
 }
 
@@ -166,8 +166,14 @@ variable "vcn_id" {
   default     = ""
 }
 
-variable "existing_igw_ocid" {
-  description = "Internet Gateway OCID attached to the selected existing VCN."
+variable "lb_subnet_id" {
+  description = "Existing public NLB subnet OCID when using an existing network."
+  type        = string
+  default     = ""
+}
+
+variable "untrust_subnet_id" {
+  description = "Existing FortiWeb port1 subnet OCID when using an existing network."
   type        = string
   default     = ""
 }
@@ -205,17 +211,6 @@ variable "untrust_subnet_cidr" {
   }
 }
 
-variable "trust_subnet_cidr" {
-  description = "CIDR for the FortiWeb trusted interfaces."
-  type        = string
-  default     = "172.16.140.32/28"
-
-  validation {
-    condition     = can(cidrnetmask(var.trust_subnet_cidr))
-    error_message = "trust_subnet_cidr must be a valid IPv4 CIDR."
-  }
-}
-
 variable "fwba_untrust_ip" {
   description = "Private IP for FortiWeb-A port1 in the untrusted subnet."
   type        = string
@@ -226,18 +221,6 @@ variable "fwbb_untrust_ip" {
   description = "Private IP for FortiWeb-B port1 in the untrusted subnet."
   type        = string
   default     = "172.16.140.21"
-}
-
-variable "fwba_trust_ip" {
-  description = "Private IP for FortiWeb-A port2 in the trusted subnet."
-  type        = string
-  default     = "172.16.140.40"
-}
-
-variable "fwbb_trust_ip" {
-  description = "Private IP for FortiWeb-B port2 in the trusted subnet."
-  type        = string
-  default     = "172.16.140.41"
 }
 
 variable "application_ingress_cidr" {

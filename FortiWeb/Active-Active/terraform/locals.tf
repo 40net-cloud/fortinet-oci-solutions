@@ -1,5 +1,6 @@
 locals {
-  use_existing_vcn = var.network_strategy == "Use Existing VCN and Create New Subnets"
+  create_new_network   = var.network_strategy == "Create New VCN and Subnets"
+  use_existing_network = var.network_strategy == "Use Existing VCN and Subnets"
 
   listings = jsondecode(file("${path.module}/final_listings.json"))
 
@@ -49,4 +50,5 @@ locals {
     "VM.Standard.E5.Flex",
     "VM.Standard.E6.Flex"
   ])
+
 }
