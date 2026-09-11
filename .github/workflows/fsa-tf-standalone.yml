@@ -1,4 +1,4 @@
-name: '[FSB] TF - Standalone'
+name: '[FSA] TF - Standalone'
 
 env:
   TFPath: FortiSandbox/Standalone/terraform/
@@ -17,7 +17,7 @@ on:
       - 'FortiSandbox/Standalone/terraform/*.yaml'
 
 jobs:
-  OCI-FSB-TF-Standalone:
+  OCI-FSA-TF-Standalone:
     name: 'Terraform FortiSandbox Standalone'
     runs-on: ubuntu-latest
     env:
@@ -100,6 +100,6 @@ jobs:
         repo_token: ${{secrets.GITHUB_TOKEN}}
         file: ./${{ env.ZIPfile }}
         asset_name: ${{ env.ZIPfile }}
-        tag: fsbstandalone
+        tag: fsastandalone
         overwrite: true
         body: "OCI FortiSandbox Standalone"
