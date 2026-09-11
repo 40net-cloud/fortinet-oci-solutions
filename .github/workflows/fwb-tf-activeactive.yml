@@ -1,5 +1,11 @@
 name: '[FWB] TF - Active Active'
 
+env:
+  TFPath: FortiWeb/Active-Active/terraform
+  ZIPfile: FortiWeb_ActiveActive_Terraform.zip
+  TF_IN_AUTOMATION: 'true'
+  TF_INPUT: 'false'
+
 on:
   workflow_dispatch:
     inputs:
@@ -24,12 +30,6 @@ concurrency:
   group: fwb-tf-activeactive-release
   cancel-in-progress: false
 
-env:
-  TFPath: FortiWeb/Active-Active/terraform
-  ZIPfile: FortiWeb_ActiveActive_Terraform.zip
-  TF_IN_AUTOMATION: 'true'
-  TF_INPUT: 'false'
-
 jobs:
   OCI-FWB-TF-ActiveActive:
     name: Terraform FortiWeb Active Active
@@ -48,37 +48,17 @@ jobs:
       OCI_USER_OCID: ${{ secrets.USER_OCID }}
       OCI_FINGERPRINT: ${{ secrets.FINGERPRINT }}
       OCI_REGION: ${{ secrets.REGION }}
-      OCI_PRIVATE_KEY_PATH: ${{ runner.temp }}/fwb-oci-api-key.pem
-      OCI_PRIVATE_KEY_PASSWORD: ${{ secrets.OCI_PRIVATE_KEY_PASSWORD }}
 
       TF_VAR_tenancy_ocid: ${{ secrets.TENANCY_OCID }}
       TF_VAR_compartment_ocid: ${{ secrets.COMPARTMENT_OCID }}
-      TF_VAR_network_compartment_ocid: ${{ secrets.NETWORK_COMPARTMENT_OCID || secrets.COMPARTMENT_OCID }}
+      TF_VAR_network_compartment_ocid: ${{ secrets.COMPARTMENT_OCID }}
       TF_VAR_region: ${{ secrets.REGION }}
       TF_VAR_availability_domain_name_a: ${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}
       # Same-AD placement is supported when an explicit second AD is absent.
       TF_VAR_availability_domain_name_b: ${{ secrets.AVAILABILITY_DOMAIN_NAME_2 || secrets.AVAILABILITY_DOMAIN_NAME_1 }}
       TF_VAR_fault_domain_name_a: ${{ secrets.FAULT_DOMAIN_NAME_1 }}
       TF_VAR_fault_domain_name_b: ${{ secrets.FAULT_DOMAIN_NAME_2 }}
-
-      # Nonempty fallbacks avoid replacing Terraform defaults with empty secrets.
-      TF_VAR_cpu_type: ${{ secrets.CPU_TYPE || 'X64' }}
-      TF_VAR_fortiweb_version: ${{ secrets.FORTIWEB_VERSION || '8.0.3' }}
-      TF_VAR_license_type: ${{ secrets.LICENSE_TYPE || 'BYOL' }}
-      TF_VAR_vm_compute_shape_x64: ${{ secrets.FORTIWEB_COMPUTE_SHAPE || 'VM.Standard.E5.Flex' }}
-      TF_VAR_network_strategy: ${{ inputs.network_strategy || vars.FWB_AA_NETWORK_STRATEGY || 'Create New VCN and Subnets' }}
-
-      # Existing-network mode requires all three OCIDs and both member IPs.
-      TF_VAR_vcn_id: ${{ secrets.VCN_OCID }}
-      TF_VAR_lb_subnet_id: ${{ secrets.LB_SUBNET_OCID }}
-      TF_VAR_untrust_subnet_id: ${{ secrets.UNTRUST_SUBNET_OCID }}
-      TF_VAR_fwba_untrust_ip: ${{ vars.FWB_AA_NODE_A_IP || '172.16.140.20' }}
-      TF_VAR_fwbb_untrust_ip: ${{ vars.FWB_AA_NODE_B_IP || '172.16.140.21' }}
-
-      # Use a coherent Active-Active CIDR set, independent of Standalone VCN_CIDR.
-      TF_VAR_vcn_cidr_block: ${{ vars.FWB_AA_VCN_CIDR || '172.16.140.0/22' }}
-      TF_VAR_lb_subnet_cidr: ${{ vars.FWB_AA_LB_SUBNET_CIDR || '172.16.140.0/28' }}
-      TF_VAR_untrust_subnet_cidr: ${{ vars.FWB_AA_UNTRUST_SUBNET_CIDR || '172.16.140.16/28' }}
+      TF_VAR_network_strategy: ${{ inputs.network_strategy || 'Create New VCN and Subnets' }}
 
     steps:
       - name: Checkout
@@ -93,6 +73,9 @@ jobs:
       - name: Check required inputs and configure OCI credentials
         env:
           OCI_PEM_KEY: ${{ secrets.OCI_PEM_KEY }}
+          TF_VAR_vcn_id: ${{ secrets.VCN_OCID }}
+          TF_VAR_lb_subnet_id: ${{ secrets.LB_SUBNET_OCID }}
+          TF_VAR_untrust_subnet_id: ${{ secrets.UNTRUST_SUBNET_OCID }}
         run: |
           required=(
             OCI_TENANCY_OCID OCI_USER_OCID OCI_FINGERPRINT OCI_REGION OCI_PEM_KEY
@@ -114,6 +97,11 @@ jobs:
             echo '::error::Use different fault domains when both nodes share one availability domain.'
             exit 1
           fi
+          OCI_PRIVATE_KEY_PATH="${RUNNER_TEMP}/fwb-oci-api-key.pem"
+          echo "OCI_PRIVATE_KEY_PATH=${OCI_PRIVATE_KEY_PATH}" >> "$GITHUB_ENV"
+          echo "TF_VAR_vcn_id=${TF_VAR_vcn_id}" >> "$GITHUB_ENV"
+          echo "TF_VAR_lb_subnet_id=${TF_VAR_lb_subnet_id}" >> "$GITHUB_ENV"
+          echo "TF_VAR_untrust_subnet_id=${TF_VAR_untrust_subnet_id}" >> "$GITHUB_ENV"
           umask 077
           printf '%s\n' "$OCI_PEM_KEY" > "$OCI_PRIVATE_KEY_PATH"
 
