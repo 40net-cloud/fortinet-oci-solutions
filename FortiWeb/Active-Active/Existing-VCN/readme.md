@@ -1,72 +1,89 @@
-## 1. Introduction
-This Terraform template deploys a Active/Active High Availability pair of FortiWeb instances accompanied by the required infrastructure.
+# FortiWeb Active/Active Existing-VCN Deployment
 
-## 2. Deployment Overview
+This folder contains the legacy FortiWeb active/active deployment template that reuses an existing OCI VCN and existing subnets instead of creating a new network.
 
-The Template deploys following components:
-- 3 regional subnets into existing VCN
-- 2 FortiWeb-VM instances with 1 vNIC, in **selected** AD, also in **separate Fault Domain (FD)**
-- Flexible Network Load Balancer (NLB) in specific network load balancer subnet
-- Backend Set with health check over TCP/8443 (_can be modified later_)
-- NLB backends pointing FortiWeb port1 IPs
-- NLB listener with ANY protocol setting (_can be modified later_)
-- 2 route tables associated with regional subnets and an NSG
+This pattern is useful when you already have a VCN, internet gateway, and subnet layout that you want the FortiWeb active/active stack to join while retaining your current network design.
 
-### 2.1 Deployment Options
+## Contents
 
-Depending on selected Oracle Cloud region, 1 or more AD (availability domain) can be selected during deployment as follows.
+- [What this template deploys](#what-this-template-deploys)
+- [Architecture and interface roles](#architecture-and-interface-roles)
+- [Prerequisites](#prerequisites)
+- [Deployment methods](#deployment-methods)
+- [Repository files](#repository-files)
+- [Notes](#notes)
 
-- **Dual-AD**: Define different AD variable (e.g. "1" for ad_a and "2" for ad_b)
-- **Single-AD**: Define same AD variable (e.g. "1" for ad_a and "1" for ad_b)
+## What this template deploys
 
-## 3. Deployment Steps
+The Existing-VCN template deploys the following resources:
 
-Before starting deployment, **following values are required**:
-- Availability Domain ID (can be picked as 1, 2 or 3)
-- Existing VCN OCID
-- Existing VCN CIDR block (example: 10.0.0.0/16)
-- Existing Internet Gateway OCID (if there is no IGW, it should be created in advance)
+- two FortiWeb instances in active/active mode
+- a public OCI Network Load Balancer in a designated NLB subnet
+- an existing VCN and existing subnet reuse model
+- FortiWeb primary interfaces attached to the existing untrusted subnet
+- a backend set and listener for active/active traffic distribution
+- additional block storage for each FortiWeb node
 
-One of the two methods below can be used to deploy FortiWeb A/A solution in OCI.
+## Architecture and interface roles
 
-If it is required, 2nd VNIC can be added after deployment is successfully completed. "cloud_init" cannot be used for FortiWeb deployment as of today.
+The older Existing-VCN deployment is designed around a shared network environment in which the FortiWeb nodes are added into an existing VCN structure.
 
-### 3.1 Quick Deployment Using OCI Stacks service
+| FortiWeb interface | OCI resource | Intended role |
+| --- | --- | --- |
+| `port1` | primary VNIC in the existing untrusted subnet | Receives traffic from the NLB and can be used for direct management when public IP assignment is enabled |
+| `lb` subnet | existing public NLB subnet | Publishes the client-facing application endpoint |
+| existing VCN | reused OCI network object | Keeps the deployment aligned with a pre-existing network design |
 
-Following links are prepared to deploy FortiWeb A/A cluster in a specific region. You can select required FortiWeb version to proceed. Since buttons will be re-directing to use OCI Stacks service, user should be already logged into OCI Dashboard.
+The main benefit of this template is that it allows you to integrate the FortiWeb active/active pair into an already designed OCI network without creating additional VCN objects.
 
-##### OCI public regions - BYOL Images (requires FortiWeb license files)
+## Prerequisites
 
-|v6.1.1|v6.3.4|v7.0.4|v7.4.2|
-|:-:|:-:|:-:|:-:|
-|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_ExistingVCN_v6.1.1_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_ExistingVCN_v6.3.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_ExistingVCN_v7.0.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_ExistingVCN_v7.4.2_BYOL.zip)
-<!---
----------------------------------------
-##### OCI DRCC Oman region - BYOL Images (requires FortiWeb license files)
+Before deploying this template, confirm that you have:
 
-|v6.0.2|v6.1.1|v6.3.4|v7.0.4|
-|:-:|:-:|:-:|:-:|
-|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_ExistingVCN_v6.0.2_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_ExistingVCN_v6.1.1_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_ExistingVCN_v6.3.4_BYOL.zip)|[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://oc9.cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FWB_A-A_DRCC_ExistingVCN_v7.0.4_BYOL.zip)
---->
-### 3.2. Manual Deployment Using Terraform CLI
+- a target OCI compartment
+- an existing VCN OCID
+- the existing VCN CIDR and gateway information
+- a chosen availability domain layout for FortiWeb-A and FortiWeb-B
+- a valid FortiWeb Marketplace image and license
+- the required IAM permissions to create the compute, block volume, and load balancer resources
 
-Prerequisite to proceed: Terraform-CLI should be downloaded already. 
+## Deployment methods
 
-1. Download the files in a local folder or clone the repository using command below:</br>
-```
-https://github.com/40net-cloud/fortinet-oci-solutions.git
-```
-2. Navigate to required folder that includes "_.tf_" files. (path: fortinet-oci-solutions > FortiWeb > Active-Active > Existing-VCN)
-3. Edit _terraform.tfvars_ file with required fields (tenancy_ocid, compartment_ocid, region etc.)
-4. Initialize the Terraform using following command
-```
+### Deployment with OCI Resource Manager
+
+The original deployment flow for this variant used OCI Stacks / Resource Manager. For older release bundles, use the region-specific resource manager links that were prepared for the selected FortiWeb version when available.
+
+### Deployment with Terraform CLI
+
+From the `FortiWeb/Active-Active/Existing-VCN` folder:
+
+```bash
 terraform init
-```
-6. Use plan option to double check if there is no error/warning in the code.
-```
 terraform plan
-```
-7. Apply Terraform state.
-```
 terraform apply
 ```
+
+If you use a custom variables file:
+
+```bash
+terraform apply -var-file=terraform.tfvars
+```
+
+## Repository files
+
+This folder contains the legacy active/active components for the Existing-VCN deployment:
+
+- `terraform/fortiweb-a.tf` — FortiWeb-A instance definition
+- `terraform/fortiweb-b.tf` — FortiWeb-B instance definition
+- `terraform/network.tf` — shared network integration and NLB resources
+- `terraform/image_subscription.tf` — Marketplace subscription logic
+- `terraform/variables.tf` — inputs for the deployment
+- `terraform/output.tf` — deployment outputs
+- `terraform/datasources.tf` — data lookups used during provisioning
+- `terraform/customdatafwba.tpl` and `terraform/customdatafwbb.tpl` — instance bootstrap templates
+
+## Notes
+
+- This folder is a legacy deployment path and is best used for existing-network scenarios that require the active/active pair to fit into a current OCI topology.
+- The current recommended active/active implementation is the modern stack in `FortiWeb/Active-Active/terraform`.
+- For the most complete and up-to-date explanation, see the main active/active deployment guide in `FortiWeb/Active-Active/terraform/README.md`.
