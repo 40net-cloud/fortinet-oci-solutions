@@ -51,9 +51,7 @@ Before deploying this template, confirm that you have:
 
 ### Deployment with OCI Resource Manager
 
-| FortiWeb Active/Active (New VCN) |
-| :---: |
-| [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/tf-fwb-activeactive-newvcn.zip) |
+Use the modern combined Active/Active template in `FortiWeb/Active-Active/terraform` instead of this legacy path. The current stack exposes a single `network_strategy` selector so the same deployment can create a new VCN/subnet layout or reuse an existing one.
 
 The original deployment flow for this variant used OCI Stacks / Resource Manager. Use the region-specific stack bundles prepared for the selected FortiWeb version when available.
 

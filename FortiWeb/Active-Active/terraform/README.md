@@ -111,11 +111,11 @@ The template supports the FortiWeb OCI Marketplace licensing model published for
 
 ## Deployment with OCI Resource Manager
 
-| FortiWeb Active/Active (New VCN) | FortiWeb Active/Active (Existing VCN) |
-| :---: | :---: |
-| [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/tf-fwb-activeactive-newvcn.zip) | [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/tf-fwb-activeactive-existingvcn.zip) |
+| FortiWeb Active/Active |
+| :---: |
+| [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/FortiWeb_ActiveActive_Terraform.zip) |
 
-Use the stack in the `FortiWeb/Active-Active/terraform` directory as the deployment package for OCI Resource Manager.
+Use the stack in the `FortiWeb/Active-Active/terraform` directory as the deployment package for OCI Resource Manager. The template exposes a single `network_strategy` choice, so you can deploy either a new VCN/subnet layout or an existing-network layout from the same stack.
 
 To package the stack for Resource Manager, run the following command from this directory:
 
