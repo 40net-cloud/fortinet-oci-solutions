@@ -162,16 +162,16 @@ variables:
     title: FortiWeb Compute Shape
     description: X64 compute shape used for both FortiWeb instances.
     required: true
-    default: VM.Standard.E5.Flex
+    default: VM.Standard.E4.Flex
     enum:
       - VM.Standard2.2
       - VM.Standard2.4
       - VM.Standard2.8
+      - VM.Standard2.16
+      - VM.Standard2.24
       - VM.Standard3.Flex
       - VM.Standard.E4.Flex
-      - VM.Standard.E5.Flex
-      - VM.Standard.E6.Flex
-
+      
   ocpu_count:
     type: enum
     title: OCPUs per FortiWeb Instance
