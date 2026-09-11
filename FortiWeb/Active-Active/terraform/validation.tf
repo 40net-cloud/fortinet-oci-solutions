@@ -47,8 +47,8 @@ resource "terraform_data" "validate_network" {
 
     precondition {
       condition = alltrue([
-        trimspace(var.fwba_untrust_ip) == "" || cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwba_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0),
-        trimspace(var.fwbb_untrust_ip) == "" || cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwbb_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0)
+        trimspace(var.fwba_untrust_ip) == "" ? true : cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwba_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0),
+        trimspace(var.fwbb_untrust_ip) == "" ? true : cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwbb_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0)
       ])
       error_message = "Each FortiWeb port1 IP must belong to the selected FortiWeb subnet CIDR."
     }
