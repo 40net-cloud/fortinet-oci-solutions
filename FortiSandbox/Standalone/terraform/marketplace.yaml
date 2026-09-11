@@ -21,6 +21,8 @@ variableGroups:
       - fortisandbox_version
       - vm_display_name
       - vm_compute_shape
+      - ocpu_count
+      - memory_in_gbs
       - boot_volume_size_in_gbs
 
   - title: "FortiSandbox Network Configuration"
@@ -113,9 +115,54 @@ variables:
     required: true
     default: VM.Standard3.Flex
     enum:
+      - VM.Standard3.Flex
       - VM.Optimized3.Flex
     title: FortiSandbox Compute Shape
     description: OCI compute shape to use for the FortiSandbox instance
+
+  ocpu_count:
+    type: enum
+    required: true
+    default: 4
+    enum:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 24
+    title: OCPUs
+    description: Number of OCPUs for Flex VM shapes
+    visible:
+      or:
+        - eq:
+            - ${vm_compute_shape}
+            - VM.Standard3.Flex
+        - eq:
+            - ${vm_compute_shape}
+            - VM.Optimized3.Flex
+
+  memory_in_gbs:
+    type: enum
+    required: true
+    default: 16
+    enum:
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 384
+    title: Memory (GB)
+    description: Memory for Flex VM shapes
+    visible:
+      or:
+        - eq:
+            - ${vm_compute_shape}
+            - VM.Standard3.Flex
+        - eq:
+            - ${vm_compute_shape}
+            - VM.Optimized3.Flex
 
   boot_volume_size_in_gbs:
     type: integer

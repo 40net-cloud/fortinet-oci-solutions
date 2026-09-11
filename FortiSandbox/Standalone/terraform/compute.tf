@@ -11,6 +11,18 @@ resource "oci_core_instance" "fortisandbox" {
   display_name        = var.vm_display_name
   shape               = var.vm_compute_shape
 
+  dynamic "shape_config" {
+    for_each = contains([
+      "VM.Standard3.Flex",
+      "VM.Optimized3.Flex"
+    ], var.vm_compute_shape) ? [1] : []
+
+    content {
+      ocpus         = var.ocpu_count
+      memory_in_gbs = var.memory_in_gbs
+    }
+  }
+
   create_vnic_details {
     subnet_id        = local.selected_front_subnet_id
     display_name     = "${var.vm_display_name}-port1"

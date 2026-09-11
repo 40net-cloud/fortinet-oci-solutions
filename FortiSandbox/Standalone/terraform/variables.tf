@@ -62,7 +62,29 @@ variable "vm_display_name" {
 variable "vm_compute_shape" {
   description = "OCI x86 VM shape for FortiSandbox."
   type        = string
-  default     = "VM.Standard2.2"
+  default     = "VM.Standard3.Flex"
+}
+
+variable "ocpu_count" {
+  description = "OCPUs for Flex-shape instances."
+  type        = number
+  default     = 4
+
+  validation {
+    condition     = var.ocpu_count >= 1 && var.ocpu_count <= 64 && floor(var.ocpu_count) == var.ocpu_count
+    error_message = "ocpu_count must be a whole number from 1 through 64."
+  }
+}
+
+variable "memory_in_gbs" {
+  description = "Memory in GB for Flex-shape instances."
+  type        = number
+  default     = 16
+
+  validation {
+    condition     = var.memory_in_gbs >= 1 && var.memory_in_gbs <= 1024 && floor(var.memory_in_gbs) == var.memory_in_gbs
+    error_message = "memory_in_gbs must be a whole number from 1 through 1024."
+  }
 }
 
 variable "boot_volume_size_in_gbs" {
