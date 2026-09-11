@@ -1,0 +1,286 @@
+title: FortiSandbox Standalone Deployment Template
+description: This template deploys a single FortiSandbox instance in OCI using the primary port1 VNIC for management and application traffic.
+schemaVersion: 1.1.0
+version: "20260814"
+locale: en
+
+variableGroups:
+  - title: "Hidden Variable Group"
+    visible: false
+    variables:
+      - tenancy_ocid
+      - region
+      - mp_subscription_enabled
+
+  - title: "FortiSandbox Compute Configuration"
+    variables:
+      - compartment_ocid
+      - availability_domain_name
+      - fault_domain_name
+      - license_type
+      - fortisandbox_version
+      - vm_display_name
+      - vm_compute_shape
+      - boot_volume_size_in_gbs
+
+  - title: "FortiSandbox Network Configuration"
+    variables:
+      - network_strategy
+      - vcn_id
+      - vcn_display_name
+      - vcn_cidr
+      - frontend_subnet_id
+      - frontend_subnet_cidr
+
+  - title: "FortiSandbox IP Configuration"
+    variables:
+      - frontend_private_ip
+      - assign_public_ip
+
+  - title: "FortiSandbox Access Configuration"
+    variables:
+      - management_cidr
+      - client_ingress_cidr
+      - client_port_min
+      - client_port_max
+
+variables:
+  tenancy_ocid:
+    type: string
+    required: true
+    title: Tenancy ID
+    description: The Oracle Cloud Identifier (OCID) for your tenancy
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    title: Region
+    description: The OCI region in which to create all resources
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    title: Compartment OCID
+    description: Compartment for compute, network, and Marketplace resources
+
+  availability_domain_name:
+    type: oci:identity:availabilitydomain:name
+    required: true
+    title: Availability Domain
+    description: Availability domain for the FortiSandbox instance
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+
+  fault_domain_name:
+    type: oci:identity:faultdomain:name
+    required: false
+    title: Fault Domain
+    description: Fault domain for the FortiSandbox instance
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      availabilityDomainName: ${availability_domain_name}
+
+  license_type:
+    type: enum
+    required: true
+    default: BYOL
+    enum:
+      - BYOL
+    title: FortiSandbox License Type
+    description: FortiSandbox Marketplace license type. This template supports BYOL only.
+
+  fortisandbox_version:
+    type: enum
+    required: true
+    default: FortiSandbox_5.2.0_GA_BYOL
+    enum:
+      - FortiSandbox_5.2.0_GA_BYOL
+      - FortiSandbox_5.0.6_GA_BYOL
+      - FortiSandbox_5.0.5_GA_BYOL
+      - "FortiSandbox 5.0.2 GA BYOL"
+    title: FortiSandbox Version
+    description: FortiSandbox image version. Keep this list synchronized with final_listings.json.
+
+  vm_display_name:
+    type: string
+    required: true
+    default: FortiSandbox-Standalone
+    title: FortiSandbox Instance Name
+    description: Display name for the FortiSandbox instance
+
+  vm_compute_shape:
+    type: enum
+    required: true
+    default: VM.Standard2.4
+    enum:
+      - VM.Standard1.1
+      - VM.Standard1.2
+      - VM.Standard1.4
+      - VM.Standard1.8
+      - VM.Standard1.16
+      - VM.Standard2.1
+      - VM.Standard2.2
+      - VM.Standard2.4
+      - VM.Standard2.8
+      - VM.Standard2.16
+      - VM.Standard2.24
+    title: FortiSandbox Compute Shape
+    description: OCI compute shape to use for the FortiSandbox instance
+
+  boot_volume_size_in_gbs:
+    type: integer
+    required: true
+    default: 50
+    minimum: 50
+    title: Boot Volume Size (GB)
+    description: Boot volume size for the FortiSandbox instance
+
+  mp_subscription_enabled:
+    type: boolean
+    required: true
+    default: true
+    title: Subscribe to the FortiSandbox Marketplace Listing
+    description: Enables the Oracle Cloud Marketplace subscription for the FortiSandbox image
+
+  network_strategy:
+    type: enum
+    required: true
+    default: Create New VCN and Subnets
+    enum:
+      - Create New VCN and Subnets
+      - Use Existing VCN and Subnets
+    title: Network Strategy
+    description: Whether to create a new VCN and subnets or use an existing VCN and subnets.
+
+  vcn_id:
+    type: oci:core:vcn:id
+    required: true
+    title: Select Existing VCN
+    description: Existing Virtual Cloud Network to use for the FortiSandbox deployment.
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+
+  vcn_display_name:
+    type: string
+    required: true
+    default: FortiSandbox-VCN
+    title: VCN Name
+    description: Name of the new VCN to create
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
+
+  vcn_cidr:
+    type: string
+    required: true
+    default: 10.0.0.0/16
+    title: VCN CIDR Block
+    description: CIDR block of the new VCN
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
+
+  frontend_subnet_id:
+    type: oci:core:subnet:id
+    required: true
+    title: Select Existing Frontend Subnet
+    description: Existing frontend subnet to use for the FortiSandbox management interface.
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      vcnId: ${vcn_id}
+    visible:
+      eq:
+        - ${network_strategy}
+        - Use Existing VCN and Subnets
+
+  frontend_subnet_cidr:
+    type: string
+    required: true
+    default: 10.0.1.0/24
+    title: Frontend Subnet CIDR
+    description: CIDR block of the new frontend subnet
+    visible:
+      eq:
+        - ${network_strategy}
+        - Create New VCN and Subnets
+
+  frontend_private_ip:
+    type: string
+    required: false
+    default: ""
+    title: Frontend Private IP
+    description: Optional private IP for the FortiSandbox frontend interface. Leave blank for automatic OCI allocation.
+
+  assign_public_ip:
+    type: boolean
+    required: true
+    default: true
+    title: Assign Public IP to Frontend Interface
+    description: Assign an ephemeral public IP to the FortiSandbox frontend interface
+
+  management_cidr:
+    type: string
+    required: true
+    default: 0.0.0.0/0
+    title: Management Source CIDR
+    description: Restrict HTTPS and SSH access to a trusted CIDR in production.
+
+  client_ingress_cidr:
+    type: string
+    required: true
+    default: 0.0.0.0/0
+    title: Application Client Source CIDR
+    description: CIDR allowed to reach FortiSandbox application services
+
+  client_port_min:
+    type: integer
+    required: true
+    default: 80
+    minimum: 1
+    maximum: 65535
+    title: First Application TCP Port
+    description: First TCP port allowed for client traffic
+
+  client_port_max:
+    type: integer
+    required: true
+    default: 443
+    minimum: 1
+    maximum: 65535
+    title: Last Application TCP Port
+    description: Last TCP port allowed for client traffic
+
+outputGroups:
+  - title: FortiSandbox connection details
+    outputs:
+      - management_url
+      - management_public_ip
+      - frontend_private_ip
+      - instance_id
+
+outputs:
+  management_url:
+    type: link
+    title: Open FortiSandbox
+    visible: true
+
+  management_public_ip:
+    type: string
+    title: Management public IP
+    visible: true
+
+  frontend_private_ip:
+    type: string
+    title: Port1 private IP
+    visible: true
+
+  instance_id:
+    type: string
+    title: Instance OCID
+    visible: true

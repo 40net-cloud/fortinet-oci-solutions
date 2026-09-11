@@ -2,3 +2,5 @@
 **/.DS_Store
 FortiWeb/Active-Active/terraform/.terraform.lock.hcl
 /FortiWeb/Active-Active/terraform/.terraform
+FortiSandbox/Standalone/terraform/.terraform.lock.hcl
+/FortiSandbox/Standalone/terraform/.terraform
