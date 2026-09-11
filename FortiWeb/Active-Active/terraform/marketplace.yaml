@@ -402,14 +402,16 @@ variables:
   fwba_untrust_ip:
     type: string
     title: FortiWeb-A Port1 Private IP
-    required: true
-    default: 172.16.140.20
+    description: Optional private IP for FortiWeb-A port1 in the untrusted subnet. Leave blank to let OCI assign one automatically.
+    required: false
+    default: ""
 
   fwbb_untrust_ip:
     type: string
     title: FortiWeb-B Port1 Private IP
-    required: true
-    default: 172.16.140.21
+    description: Optional private IP for FortiWeb-B port1 in the untrusted subnet. Leave blank to let OCI assign one automatically.
+    required: false
+    default: ""
 
   application_ingress_cidr:
     type: string

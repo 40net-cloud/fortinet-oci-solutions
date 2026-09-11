@@ -27,7 +27,7 @@ resource "oci_core_instance" "fwba" {
     display_name     = "${var.prefix}-A-port1"
     assign_public_ip = var.assign_public_ip
     hostname_label   = "fwba"
-    private_ip       = var.fwba_untrust_ip
+    private_ip       = var.fwba_untrust_ip != "" ? var.fwba_untrust_ip : null
   }
 
   launch_options {
@@ -83,7 +83,7 @@ resource "oci_core_instance" "fwbb" {
     display_name     = "${var.prefix}-B-port1"
     assign_public_ip = var.assign_public_ip
     hostname_label   = "fwbb"
-    private_ip       = var.fwbb_untrust_ip
+    private_ip       = var.fwbb_untrust_ip != "" ? var.fwbb_untrust_ip : null
   }
 
   launch_options {

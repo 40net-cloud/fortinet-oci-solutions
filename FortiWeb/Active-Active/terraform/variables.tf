@@ -266,15 +266,15 @@ variable "untrust_subnet_cidr" {
 }
 
 variable "fwba_untrust_ip" {
-  description = "Private IP for FortiWeb-A port1 in the untrusted subnet."
+  description = "Optional private IP for FortiWeb-A port1 in the untrusted subnet. Leave empty to let OCI assign one automatically."
   type        = string
-  default     = "172.16.140.20"
+  default     = ""
 }
 
 variable "fwbb_untrust_ip" {
-  description = "Private IP for FortiWeb-B port1 in the untrusted subnet."
+  description = "Optional private IP for FortiWeb-B port1 in the untrusted subnet. Leave empty to let OCI assign one automatically."
   type        = string
-  default     = "172.16.140.21"
+  default     = ""
 }
 
 variable "application_ingress_cidr" {

@@ -47,17 +47,17 @@ resource "terraform_data" "validate_network" {
 
     precondition {
       condition = alltrue([
-        cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwba_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0),
-        cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwbb_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0)
+        trimspace(var.fwba_untrust_ip) == "" || cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwba_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0),
+        trimspace(var.fwbb_untrust_ip) == "" || cidrhost(local.selected_untrust_subnet_cidr, 0) == cidrhost("${var.fwbb_untrust_ip}/${split("/", local.selected_untrust_subnet_cidr)[1]}", 0)
       ])
       error_message = "Each FortiWeb port1 IP must belong to the selected FortiWeb subnet CIDR."
     }
 
     precondition {
       condition = alltrue([
-        var.fwba_untrust_ip != var.fwbb_untrust_ip,
-        !contains([for offset in [0, 1, 2, 3, -1] : cidrhost(local.selected_untrust_subnet_cidr, offset)], var.fwba_untrust_ip),
-        !contains([for offset in [0, 1, 2, 3, -1] : cidrhost(local.selected_untrust_subnet_cidr, offset)], var.fwbb_untrust_ip)
+        trimspace(var.fwba_untrust_ip) == "" || trimspace(var.fwbb_untrust_ip) == "" || var.fwba_untrust_ip != var.fwbb_untrust_ip,
+        trimspace(var.fwba_untrust_ip) == "" || !contains([for offset in [0, 1, 2, 3, -1] : cidrhost(local.selected_untrust_subnet_cidr, offset)], var.fwba_untrust_ip),
+        trimspace(var.fwbb_untrust_ip) == "" || !contains([for offset in [0, 1, 2, 3, -1] : cidrhost(local.selected_untrust_subnet_cidr, offset)], var.fwbb_untrust_ip)
       ])
       error_message = "FortiWeb member IPs must be unique and cannot use OCI-reserved subnet addresses."
     }
