@@ -51,6 +51,10 @@ Before deploying this template, confirm that you have:
 
 ### Deployment with OCI Resource Manager
 
+| FortiWeb Active/Active (Existing VCN) |
+| :---: |
+| [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/40net-cloud/fortinet-oci-solutions/releases/download/fwbactiveactive/tf-fwb-activeactive-existingvcn.zip) |
+
 The original deployment flow for this variant used OCI Stacks / Resource Manager. For older release bundles, use the region-specific resource manager links that were prepared for the selected FortiWeb version when available.
 
 ### Deployment with Terraform CLI

@@ -166,16 +166,52 @@ variable "vcn_id" {
   default     = ""
 }
 
+variable "vcn_display_name" {
+  description = "Display name for the new VCN created when the new-network strategy is selected."
+  type        = string
+  default     = "FortiWeb-Active-Active-VCN"
+}
+
+variable "vcn_dns_label" {
+  description = "DNS label for the new VCN created when the new-network strategy is selected."
+  type        = string
+  default     = "fwbvcn"
+}
+
 variable "lb_subnet_id" {
   description = "Existing public NLB subnet OCID when using an existing network."
   type        = string
   default     = ""
 }
 
+variable "lb_subnet_display_name" {
+  description = "Display name for the new NLB subnet created when the new-network strategy is selected."
+  type        = string
+  default     = "FortiWeb-Active-Active-LB-Subnet"
+}
+
+variable "lb_subnet_dns_label" {
+  description = "DNS label for the new NLB subnet created when the new-network strategy is selected."
+  type        = string
+  default     = "fwblb"
+}
+
 variable "untrust_subnet_id" {
   description = "Existing FortiWeb port1 subnet OCID when using an existing network."
   type        = string
   default     = ""
+}
+
+variable "untrust_subnet_display_name" {
+  description = "Display name for the new FortiWeb untrusted subnet created when the new-network strategy is selected."
+  type        = string
+  default     = "FortiWeb-Active-Active-Untrust-Subnet"
+}
+
+variable "untrust_subnet_dns_label" {
+  description = "DNS label for the new FortiWeb untrusted subnet created when the new-network strategy is selected."
+  type        = string
+  default     = "fwbuntrust"
 }
 
 variable "vcn_cidr_block" {

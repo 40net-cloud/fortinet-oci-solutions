@@ -3,8 +3,8 @@ resource "oci_core_vcn" "fortiweb" {
 
   compartment_id = var.network_compartment_ocid
   cidr_block     = var.vcn_cidr_block
-  display_name   = "${var.prefix}-vcn"
-  dns_label      = "fwbhub"
+  display_name   = var.vcn_display_name
+  dns_label      = var.vcn_dns_label
 }
 
 locals {
@@ -142,13 +142,13 @@ resource "oci_core_subnet" "lb" {
   depends_on = [terraform_data.validate_network]
 
   cidr_block                 = var.lb_subnet_cidr
-  display_name               = "${var.prefix}-lb-subnet"
+  display_name               = var.lb_subnet_display_name
   compartment_id             = var.network_compartment_ocid
   vcn_id                     = local.selected_vcn_id
   route_table_id             = oci_core_route_table.lb[0].id
   security_list_ids          = [oci_core_security_list.lb.id]
   dhcp_options_id            = local.selected_default_dhcp_options_id
-  dns_label                  = "fwblb"
+  dns_label                  = var.lb_subnet_dns_label
   prohibit_public_ip_on_vnic = false
 }
 
@@ -157,13 +157,13 @@ resource "oci_core_subnet" "untrust" {
   depends_on = [terraform_data.validate_network]
 
   cidr_block                 = var.untrust_subnet_cidr
-  display_name               = "${var.prefix}-untrust-subnet"
+  display_name               = var.untrust_subnet_display_name
   compartment_id             = var.network_compartment_ocid
   vcn_id                     = local.selected_vcn_id
   route_table_id             = oci_core_route_table.untrust[0].id
   security_list_ids          = [oci_core_security_list.untrust.id]
   dhcp_options_id            = local.selected_default_dhcp_options_id
-  dns_label                  = "fwbuntrust"
+  dns_label                  = var.untrust_subnet_dns_label
   prohibit_public_ip_on_vnic = !var.assign_public_ip
 }
 
