@@ -212,7 +212,9 @@ resource "oci_network_load_balancer_backend" "fwba" {
   backend_set_name         = oci_network_load_balancer_backend_set.external[0].name
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.external[0].id
   port                     = 0
-  ip_address               = var.fwba_untrust_ip
+
+  ip_address = trimspace(var.fwba_untrust_ip) != "" ? var.fwba_untrust_ip : null
+  target_id  = trimspace(var.fwba_untrust_ip) == "" ? oci_core_instance.fwba[0].id : null
 }
 
 resource "oci_network_load_balancer_backend" "fwbb" {
@@ -225,5 +227,7 @@ resource "oci_network_load_balancer_backend" "fwbb" {
   backend_set_name         = oci_network_load_balancer_backend_set.external[0].name
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.external[0].id
   port                     = 0
-  ip_address               = var.fwbb_untrust_ip
+
+  ip_address = trimspace(var.fwbb_untrust_ip) != "" ? var.fwbb_untrust_ip : null
+  target_id  = trimspace(var.fwbb_untrust_ip) == "" ? oci_core_instance.fwbb[0].id : null
 }
