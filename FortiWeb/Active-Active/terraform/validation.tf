@@ -35,21 +35,14 @@ resource "terraform_data" "validate_network" {
     precondition {
       condition = local.use_existing_network || alltrue([
         tonumber(split("/", var.lb_subnet_cidr)[1]) >= tonumber(split("/", local.selected_vcn_cidr)[1]),
-        tonumber(split("/", var.untrust_subnet_cidr)[1]) >= tonumber(split("/", local.selected_vcn_cidr)[1]),
-        cidrhost(local.selected_vcn_cidr, 0) == cidrhost("${cidrhost(var.lb_subnet_cidr, 0)}/${split("/", local.selected_vcn_cidr)[1]}", 0),
-        cidrhost(local.selected_vcn_cidr, 0) == cidrhost("${cidrhost(var.untrust_subnet_cidr, 0)}/${split("/", local.selected_vcn_cidr)[1]}", 0)
+        tonumber(split("/", var.untrust_subnet_cidr)[1]) >= tonumber(split("/", local.selected_vcn_cidr)[1])
       ])
-      error_message = "The new NLB and FortiWeb subnet CIDRs must be entirely contained in the selected VCN CIDR."
+      error_message = "The new NLB and FortiWeb subnet CIDRs must be at least as specific as the selected VCN CIDR."
     }
 
     precondition {
-      condition = local.use_existing_network || alltrue([
-        !(
-          cidrhost(var.lb_subnet_cidr, 0) == cidrhost("${cidrhost(var.untrust_subnet_cidr, 0)}/${split("/", var.lb_subnet_cidr)[1]}", 0) ||
-          cidrhost(var.untrust_subnet_cidr, 0) == cidrhost("${cidrhost(var.lb_subnet_cidr, 0)}/${split("/", var.untrust_subnet_cidr)[1]}", 0)
-        )
-      ])
-      error_message = "The NLB and FortiWeb subnet CIDRs must not overlap."
+      condition = local.use_existing_network || var.lb_subnet_cidr != var.untrust_subnet_cidr
+      error_message = "The NLB and FortiWeb subnet CIDRs must not be identical."
     }
 
     precondition {
