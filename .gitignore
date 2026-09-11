@@ -1,2 +1,4 @@
 *.code-workspace
 **/.DS_Store
+FortiWeb/Active-Active/terraform/.terraform.lock.hcl
+/FortiWeb/Active-Active/terraform/.terraform

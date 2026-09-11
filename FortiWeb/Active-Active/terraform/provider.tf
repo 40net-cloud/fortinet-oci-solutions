@@ -9,9 +9,10 @@ terraform {
   }
 }
 
-# OCI Resource Manager supplies authentication through its resource principal.
-# For local Terraform runs, the OCI provider uses the normal local OCI CLI
-# configuration unless other provider authentication variables are supplied.
 provider "oci" {
-  region = var.region
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  fingerprint      = var.fingerprint
+  private_key_path = var.private_key_path
+  region           = var.region
 }

@@ -3,6 +3,24 @@ variable "tenancy_ocid" {
   type        = string
 }
 
+variable "user_ocid" {
+  description = "OCI user OCID used for local API-key authentication."
+  type        = string
+  default     = ""
+}
+
+variable "private_key_path" {
+  description = "Path to the OCI API private key used for local API-key authentication."
+  type        = string
+  default     = ""
+}
+
+variable "fingerprint" {
+  description = "OCI API key fingerprint used for local API-key authentication."
+  type        = string
+  default     = ""
+}
+
 variable "compartment_ocid" {
   description = "Compartment in which FortiWeb compute, storage, NLB, and Marketplace subscription resources are created."
   type        = string
