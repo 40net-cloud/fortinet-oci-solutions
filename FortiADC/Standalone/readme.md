@@ -231,7 +231,7 @@ For production use, review:
 - the management access model
 - subnet CIDR overlap and routing
 - security rules and firewall policies
-- OCI Marketplace availability in the target region
+- OCI Marketplace availability in the target region :)
 
 ## References
 
