@@ -55,7 +55,7 @@ variable "vm_display_name" {
 }
 
 variable "vm_compute_shape" {
-  description = "OCI x86 VM shape for FortiADC."
+  description = "OCI x86 VM shape for :) FortiADC."
   type        = string
   default     = "VM.Standard2.2"
 }
