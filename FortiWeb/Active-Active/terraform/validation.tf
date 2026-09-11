@@ -41,7 +41,7 @@ resource "terraform_data" "validate_network" {
     }
 
     precondition {
-      condition = local.use_existing_network || var.lb_subnet_cidr != var.untrust_subnet_cidr
+      condition     = local.use_existing_network || var.lb_subnet_cidr != var.untrust_subnet_cidr
       error_message = "The NLB and FortiWeb subnet CIDRs must not be identical."
     }
 
