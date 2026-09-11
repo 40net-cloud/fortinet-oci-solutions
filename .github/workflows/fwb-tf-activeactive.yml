@@ -1,0 +1,180 @@
+name: '[FWB] TF - Active Active'
+
+on:
+  workflow_dispatch:
+    inputs:
+      network_strategy:
+        description: Network strategy used for the validation plan
+        type: choice
+        default: Create New VCN and Subnets
+        options:
+          - Create New VCN and Subnets
+          - Use Existing VCN and Subnets
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fwb-tf-activeactive.yml'
+      - 'FortiWeb/Active-Active/terraform/**'
+      - '!FortiWeb/Active-Active/terraform/*.zip'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fwb-tf-activeactive-release
+  cancel-in-progress: false
+
+env:
+  TFPath: FortiWeb/Active-Active/terraform
+  ZIPfile: FortiWeb_ActiveActive_Terraform.zip
+  TF_IN_AUTOMATION: 'true'
+  TF_INPUT: 'false'
+
+jobs:
+  OCI-FWB-TF-ActiveActive:
+    name: Terraform FortiWeb Active Active
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: bash
+        working-directory: FortiWeb/Active-Active/terraform
+    env:
+      # Authentication consumed directly by the OCI provider.
+      OCI_AUTH: APIKey
+      OCI_TENANCY_OCID: ${{ secrets.TENANCY_OCID }}
+      OCI_USER_OCID: ${{ secrets.USER_OCID }}
+      OCI_FINGERPRINT: ${{ secrets.FINGERPRINT }}
+      OCI_REGION: ${{ secrets.REGION }}
+      OCI_PRIVATE_KEY_PATH: ${{ runner.temp }}/fwb-oci-api-key.pem
+      OCI_PRIVATE_KEY_PASSWORD: ${{ secrets.OCI_PRIVATE_KEY_PASSWORD }}
+
+      TF_VAR_tenancy_ocid: ${{ secrets.TENANCY_OCID }}
+      TF_VAR_compartment_ocid: ${{ secrets.COMPARTMENT_OCID }}
+      TF_VAR_network_compartment_ocid: ${{ secrets.NETWORK_COMPARTMENT_OCID || secrets.COMPARTMENT_OCID }}
+      TF_VAR_region: ${{ secrets.REGION }}
+      TF_VAR_availability_domain_name_a: ${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}
+      # Same-AD placement is supported when an explicit second AD is absent.
+      TF_VAR_availability_domain_name_b: ${{ secrets.AVAILABILITY_DOMAIN_NAME_2 || secrets.AVAILABILITY_DOMAIN_NAME_1 }}
+      TF_VAR_fault_domain_name_a: ${{ secrets.FAULT_DOMAIN_NAME_1 }}
+      TF_VAR_fault_domain_name_b: ${{ secrets.FAULT_DOMAIN_NAME_2 }}
+
+      # Nonempty fallbacks avoid replacing Terraform defaults with empty secrets.
+      TF_VAR_cpu_type: ${{ secrets.CPU_TYPE || 'X64' }}
+      TF_VAR_fortiweb_version: ${{ secrets.FORTIWEB_VERSION || '8.0.3' }}
+      TF_VAR_license_type: ${{ secrets.LICENSE_TYPE || 'BYOL' }}
+      TF_VAR_vm_compute_shape_x64: ${{ secrets.FORTIWEB_COMPUTE_SHAPE || 'VM.Standard.E5.Flex' }}
+      TF_VAR_network_strategy: ${{ inputs.network_strategy || vars.FWB_AA_NETWORK_STRATEGY || 'Create New VCN and Subnets' }}
+
+      # Existing-network mode requires all three OCIDs and both member IPs.
+      TF_VAR_vcn_id: ${{ secrets.VCN_OCID }}
+      TF_VAR_lb_subnet_id: ${{ secrets.LB_SUBNET_OCID }}
+      TF_VAR_untrust_subnet_id: ${{ secrets.UNTRUST_SUBNET_OCID }}
+      TF_VAR_fwba_untrust_ip: ${{ vars.FWB_AA_NODE_A_IP || '172.16.140.20' }}
+      TF_VAR_fwbb_untrust_ip: ${{ vars.FWB_AA_NODE_B_IP || '172.16.140.21' }}
+
+      # Use a coherent Active-Active CIDR set, independent of Standalone VCN_CIDR.
+      TF_VAR_vcn_cidr_block: ${{ vars.FWB_AA_VCN_CIDR || '172.16.140.0/22' }}
+      TF_VAR_lb_subnet_cidr: ${{ vars.FWB_AA_LB_SUBNET_CIDR || '172.16.140.0/28' }}
+      TF_VAR_untrust_subnet_cidr: ${{ vars.FWB_AA_UNTRUST_SUBNET_CIDR || '172.16.140.16/28' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.15.1'
+          terraform_wrapper: false
+
+      - name: Check required inputs and configure OCI credentials
+        env:
+          OCI_PEM_KEY: ${{ secrets.OCI_PEM_KEY }}
+        run: |
+          required=(
+            OCI_TENANCY_OCID OCI_USER_OCID OCI_FINGERPRINT OCI_REGION OCI_PEM_KEY
+            TF_VAR_compartment_ocid TF_VAR_network_compartment_ocid
+            TF_VAR_availability_domain_name_a TF_VAR_availability_domain_name_b
+            TF_VAR_fault_domain_name_a TF_VAR_fault_domain_name_b
+          )
+          if [[ "$TF_VAR_network_strategy" == 'Use Existing VCN and Subnets' ]]; then
+            required+=(TF_VAR_vcn_id TF_VAR_lb_subnet_id TF_VAR_untrust_subnet_id)
+          fi
+          for name in "${required[@]}"; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing required input: $name"
+              exit 1
+            fi
+          done
+          if [[ "$TF_VAR_availability_domain_name_a" == "$TF_VAR_availability_domain_name_b" &&
+                "$TF_VAR_fault_domain_name_a" == "$TF_VAR_fault_domain_name_b" ]]; then
+            echo '::error::Use different fault domains when both nodes share one availability domain.'
+            exit 1
+          fi
+          umask 077
+          printf '%s\n' "$OCI_PEM_KEY" > "$OCI_PRIVATE_KEY_PATH"
+
+      - name: Terraform Init
+        run: terraform init -input=false -no-color
+
+      - name: Terraform Validation
+        run: terraform validate -no-color
+
+      - name: Terraform Format
+        run: terraform fmt -check -diff
+
+      - name: Terraform Plan
+        timeout-minutes: 15
+        run: terraform plan -input=false -no-color -out="$RUNNER_TEMP/fwb-activeactive.tfplan"
+
+      - name: Save Plan JSON
+        run: |
+          terraform show -json "$RUNNER_TEMP/fwb-activeactive.tfplan" > "$RUNNER_TEMP/fwb-activeactive-plan.json"
+
+      - name: Package Terraform templates
+        working-directory: ${{ github.workspace }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import subprocess
+          import zipfile
+          from pathlib import Path
+
+          root = Path(os.environ['TFPath'])
+          tracked = subprocess.check_output(['git', 'ls-files', '-z', '--', str(root)])
+          # Include only tracked template sources; omit state, plans, tfvars,
+          # provider caches, credentials, and the ZIP already in the source tree.
+          suffixes = {'.tf', '.tpl', '.json', '.yaml', '.yml', '.md'}
+          with zipfile.ZipFile(os.environ['ZIPfile'], 'w', zipfile.ZIP_DEFLATED) as archive:
+              for entry in tracked.decode().split('\0'):
+                  if not entry:
+                      continue
+                  path = Path(entry)
+                  if path.suffix in suffixes and not path.name.endswith('.tfvars.json'):
+                      archive.write(path, path.relative_to(root))
+              lock = root / '.terraform.lock.hcl'
+              if lock.is_file():
+                  archive.write(lock, lock.name)
+          PY
+
+      - name: Upload templates ZIP
+        # Manual runs on feature branches validate/package without replacing the release.
+        if: github.ref == 'refs/heads/main'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./${{ env.ZIPfile }}
+          asset_name: ${{ env.ZIPfile }}
+          tag: fwbactiveactive
+          overwrite: true
+          body: OCI FortiWeb Active Active
+
+      - name: Clean up credentials and plans
+        if: always()
+        run: |
+          rm -f "$OCI_PRIVATE_KEY_PATH" \
+            "$RUNNER_TEMP/fwb-activeactive.tfplan" \
+            "$RUNNER_TEMP/fwb-activeactive-plan.json"
