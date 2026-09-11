@@ -52,12 +52,21 @@ jobs:
       TF_VAR_tenancy_ocid: ${{ secrets.TENANCY_OCID }}
       TF_VAR_compartment_ocid: ${{ secrets.COMPARTMENT_OCID }}
       TF_VAR_network_compartment_ocid: ${{ secrets.COMPARTMENT_OCID }}
+      TF_VAR_user_ocid: ${{ secrets.USER_OCID }}
       TF_VAR_region: ${{ secrets.REGION }}
+      TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
+      TF_VAR_private_key_path: ~/.oci/oci_api_key.pem
+      TF_VAR_vcn_id: ${{ secrets.VCN_OCID }}
+      TF_VAR_vcn_cidr_block: ${{ secrets.VCN_CIDR || '172.16.140.0/22' }}
       TF_VAR_availability_domain_name_a: ${{ secrets.AVAILABILITY_DOMAIN_NAME_1 }}
       # Same-AD placement is supported when an explicit second AD is absent.
       TF_VAR_availability_domain_name_b: ${{ secrets.AVAILABILITY_DOMAIN_NAME_2 || secrets.AVAILABILITY_DOMAIN_NAME_1 }}
       TF_VAR_fault_domain_name_a: ${{ secrets.FAULT_DOMAIN_NAME_1 }}
-      TF_VAR_fault_domain_name_b: ${{ secrets.FAULT_DOMAIN_NAME_2 }}
+      TF_VAR_fault_domain_name_b: ${{ secrets.FAULT_DOMAIN_NAME_2 || secrets.FAULT_DOMAIN_NAME_1 }}
+      TF_VAR_cpu_type: ${{ secrets.CPU_TYPE || 'X64' }}
+      TF_VAR_fortiweb_version: ${{ secrets.FORTIWEB_VERSION || '8.0.3' }}
+      TF_VAR_license_type: ${{ secrets.LICENSE_TYPE || 'BYOL' }}
+      TF_VAR_vm_compute_shape_x64: ${{ secrets.FORTIWEB_COMPUTE_SHAPE || 'VM.Standard.E5.Flex' }}
       TF_VAR_network_strategy: ${{ inputs.network_strategy || 'Create New VCN and Subnets' }}
 
     steps:
@@ -70,22 +79,20 @@ jobs:
           terraform_version: '1.15.1'
           terraform_wrapper: false
 
-      - name: Check required inputs and configure OCI credentials
-        env:
-          OCI_PEM_KEY: ${{ secrets.OCI_PEM_KEY }}
-          TF_VAR_vcn_id: ${{ secrets.VCN_OCID }}
-          TF_VAR_lb_subnet_id: ${{ secrets.LB_SUBNET_OCID }}
-          TF_VAR_untrust_subnet_id: ${{ secrets.UNTRUST_SUBNET_OCID }}
+      - name: Configure OCI credentials
+        run: |
+          mkdir -p ~/.oci
+          echo "${{ secrets.OCI_PEM_KEY }}" > ~/.oci/oci_api_key.pem
+          chmod 600 ~/.oci/oci_api_key.pem
+
+      - name: Check required inputs
         run: |
           required=(
-            OCI_TENANCY_OCID OCI_USER_OCID OCI_FINGERPRINT OCI_REGION OCI_PEM_KEY
-            TF_VAR_compartment_ocid TF_VAR_network_compartment_ocid
+            TF_VAR_tenancy_ocid TF_VAR_compartment_ocid TF_VAR_network_compartment_ocid
+            TF_VAR_user_ocid TF_VAR_region TF_VAR_fingerprint TF_VAR_private_key_path
             TF_VAR_availability_domain_name_a TF_VAR_availability_domain_name_b
             TF_VAR_fault_domain_name_a TF_VAR_fault_domain_name_b
           )
-          if [[ "$TF_VAR_network_strategy" == 'Use Existing VCN and Subnets' ]]; then
-            required+=(TF_VAR_vcn_id TF_VAR_lb_subnet_id TF_VAR_untrust_subnet_id)
-          fi
           for name in "${required[@]}"; do
             if [[ -z "${!name}" ]]; then
               echo "::error::Missing required input: $name"
@@ -97,13 +104,6 @@ jobs:
             echo '::error::Use different fault domains when both nodes share one availability domain.'
             exit 1
           fi
-          OCI_PRIVATE_KEY_PATH="${RUNNER_TEMP}/fwb-oci-api-key.pem"
-          echo "OCI_PRIVATE_KEY_PATH=${OCI_PRIVATE_KEY_PATH}" >> "$GITHUB_ENV"
-          echo "TF_VAR_vcn_id=${TF_VAR_vcn_id}" >> "$GITHUB_ENV"
-          echo "TF_VAR_lb_subnet_id=${TF_VAR_lb_subnet_id}" >> "$GITHUB_ENV"
-          echo "TF_VAR_untrust_subnet_id=${TF_VAR_untrust_subnet_id}" >> "$GITHUB_ENV"
-          umask 077
-          printf '%s\n' "$OCI_PEM_KEY" > "$OCI_PRIVATE_KEY_PATH"
 
       - name: Terraform Init
         run: terraform init -input=false -no-color
